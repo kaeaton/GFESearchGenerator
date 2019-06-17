@@ -1,19 +1,23 @@
 package org.chori.bsg.view;
 
+// import org.chori.bsg.view.searchbox.*;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.prefs.Preferences;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -22,6 +26,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
 
 public class B12xGui extends JFrame {
 
@@ -32,8 +37,7 @@ public class B12xGui extends JFrame {
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
 	
-	// Exons per locus
-	HashMap<String, String> hlaExonTotal = new HashMap();
+	SearchBoxGenerator panelGenerator = new SearchBoxGenerator();
 		
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
@@ -41,18 +45,7 @@ public class B12xGui extends JFrame {
      * Creates new form B12xGUI
      */ 
     public B12xGui() {
-		hlaExonTotal.put("HLA-A", "8");
-		hlaExonTotal.put("HLA-B", "7");
-		hlaExonTotal.put("HLA-C", "8");
-		hlaExonTotal.put("HLA-DPA1", "4");
-		hlaExonTotal.put("HLA-DPB1", "5");
-		hlaExonTotal.put("HLA-DQA1", "4");
-		hlaExonTotal.put("HLA-DQB1", "6");
-		hlaExonTotal.put("HLA-DRB1", "6");
-		hlaExonTotal.put("HLA-DRB3", "6");
-		hlaExonTotal.put("HLA-DRB4", "6");
-		hlaExonTotal.put("HLA-DRB5", "6");
-		hlaExonTotal.put("TEST", "test");
+		
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,18 +54,20 @@ public class B12xGui extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 
+
         initComponents();
     }
 
     private void initComponents() {
 
     	// tabbed pane
-    	// JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
     	parentTabbedPane.setPreferredSize(new Dimension(1000, 600));
 
-    	// HLA GFE tab
+    	// HLA GFE tab. layout? BorderLayout.WEST
     	JPanel hlaGfeTab = new JPanel();
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
+
+    	hlaGfeTab.add(panelGenerator.generateHlaPanel("HLA-C"), BorderLayout.WEST);
 
     	// KIR GFE tab
     	JPanel kirGfeTab = new JPanel();
