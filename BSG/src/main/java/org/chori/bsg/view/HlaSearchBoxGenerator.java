@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 
 
-public class SearchBoxGenerator {
+public class HlaSearchBoxGenerator {
 
 
 
@@ -18,7 +18,7 @@ public class SearchBoxGenerator {
 	// Searchbox source
 	SearchBox searchBox = new SearchBox();
 
-	public SearchBoxGenerator() {
+	public HlaSearchBoxGenerator() {
 		hlaExonTotal.put("HLA-A", 8);
 		hlaExonTotal.put("HLA-B", 7);
 		hlaExonTotal.put("HLA-C", 8);
@@ -41,7 +41,7 @@ public class SearchBoxGenerator {
 		// locus label
 		JLabel locusLabel = new JLabel(locus);
 
-
+		// label, and workshop status & 5'UTR bundles
 		gfeSearchPanel.add(locusLabel, BorderLayout.WEST);
 		gfeSearchPanel.add(generateWBox());
 		gfeSearchPanel.add(generate5PrimeUtr());
@@ -50,22 +50,29 @@ public class SearchBoxGenerator {
 		int locationCounter = 2;
 
 		// add the exon/intron pairs starting at 1 going up to exon total - 1
-		for (int i = 1; i < hlaExonTotal.get(locus); i++){
-			JPanel exonBox = searchBox.assemble(("Exon " + i), locationCounter);
+		for (int i = 1; i < hlaExonTotal.get(locus); i++) {
+			
+			// Add exon bundle
+			JPanel exonBox = searchBox.assemble(("Exon " + i), 
+					String.valueOf(locationCounter));
 			locationCounter++;
 			gfeSearchPanel.add(exonBox);
 
-			JPanel intronBox = searchBox.assemble(("Intron " + i), locationCounter);
+			// add intron bundle
+			JPanel intronBox = searchBox.assemble(("Intron " + i), 
+					String.valueOf(locationCounter));
 			locationCounter++;
 			gfeSearchPanel.add(intronBox);
 
 		}
 
 		// add final exon box. Use hash table to get its ID number
-		JPanel exonBox = searchBox.assemble(("Exon " + hlaExonTotal.get(locus)), locationCounter);
+		JPanel exonBox = searchBox.assemble(("Exon " + hlaExonTotal.get(locus)), 
+				String.valueOf(locationCounter));
 		locationCounter++;
 		gfeSearchPanel.add(exonBox);
 
+		// 3' UTR bundle
 		gfeSearchPanel.add(generate3PrimeUtr(locationCounter));
 
 
@@ -73,21 +80,21 @@ public class SearchBoxGenerator {
 	}
 
 	private JPanel generateWBox() {
-		JPanel wBox = searchBox.assemble("Workshop Status", 1);
+		JPanel wBox = searchBox.assemble("Workshop Status", "00");
 
 		return wBox;
 	}
 
 	private JPanel generate5PrimeUtr() {
-		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", 2);
+		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
 
 		return fivePrimeUtr;
 	}
 
 	private JPanel generate3PrimeUtr(int locationCounter) {
-		JPanel fivePrimeUtr = searchBox.assemble("3' UTR", locationCounter);
+		JPanel threePrimeUtr = searchBox.assemble("3' UTR", String.valueOf(locationCounter));
 
-		return fivePrimeUtr;
+		return threePrimeUtr;
 	}
 
 }

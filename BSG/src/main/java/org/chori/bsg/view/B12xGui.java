@@ -32,12 +32,10 @@ public class B12xGui extends JFrame {
 
 
 	Preferences prefs = Preferences.userNodeForPackage(this.getClass());
-	// TextIcon t1;
- 	// RotatedIcon r1;
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
 	
-	SearchBoxGenerator panelGenerator = new SearchBoxGenerator();
+	HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
 		
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
@@ -67,7 +65,7 @@ public class B12xGui extends JFrame {
     	JPanel hlaGfeTab = new JPanel();
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
 
-    	hlaGfeTab.add(panelGenerator.generateHlaPanel("HLA-C"), BorderLayout.WEST);
+    	hlaGfeTab.add(hlaPanelGenerator.generateHlaPanel("HLA-DRB1"), BorderLayout.WEST);
 
     	// KIR GFE tab
     	JPanel kirGfeTab = new JPanel();
