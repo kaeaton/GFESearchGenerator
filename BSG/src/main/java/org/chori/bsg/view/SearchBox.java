@@ -19,10 +19,18 @@ public class SearchBox extends JPanel{
 
 	public JPanel assemble(String label, String nameNumber){
 
+		/* setting up variables */
 		JPanel featureGroup = new JPanel();
-
 		GroupLayout layout = new GroupLayout(featureGroup);
 		
+		// set number for names:
+		// set name numbers so anything under 10 starts with a 0
+		// this is to make sorting by name work
+		if (nameNumber.length() == 1) {
+			nameNumber = "0" + nameNumber;
+			System.out.println(nameNumber);
+		}
+
 		/* parent group panel */
 		featureGroup.setLayout(layout);
 

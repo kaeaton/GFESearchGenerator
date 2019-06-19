@@ -35,6 +35,9 @@ public class HlaSearchBoxGenerator {
 	}
 
 	public JPanel generateHlaPanel(String locus){
+
+		// layout
+
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
 
@@ -42,7 +45,7 @@ public class HlaSearchBoxGenerator {
 		JLabel locusLabel = new JLabel(locus);
 
 		// label, and workshop status & 5'UTR bundles
-		gfeSearchPanel.add(locusLabel, BorderLayout.WEST);
+		gfeSearchPanel.add(locusLabel);
 		gfeSearchPanel.add(generateWBox());
 		gfeSearchPanel.add(generate5PrimeUtr());
 
