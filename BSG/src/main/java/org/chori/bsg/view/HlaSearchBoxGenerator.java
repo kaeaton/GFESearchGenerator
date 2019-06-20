@@ -2,6 +2,7 @@ package org.chori.bsg.view;
 
 import java.awt.BorderLayout;
 import java.util.HashMap;
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -40,6 +41,8 @@ public class HlaSearchBoxGenerator {
 
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
+		// GroupLayout layout = new GroupLayout(gfeSearchPanel);
+		// gfeSearchPanel.setLayout(layout);
 
 		// locus label
 		JLabel locusLabel = new JLabel(locus);

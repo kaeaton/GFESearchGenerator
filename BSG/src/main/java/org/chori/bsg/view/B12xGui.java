@@ -16,7 +16,9 @@ import java.util.prefs.Preferences;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,8 +37,10 @@ public class B12xGui extends JFrame {
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
 	
+	// the panel generators
 	HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
-		
+	
+	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
     /**
@@ -58,24 +62,57 @@ public class B12xGui extends JFrame {
 
     private void initComponents() {
 
-    	// tabbed pane
+    /* tabbed pane */
     	parentTabbedPane.setPreferredSize(new Dimension(1000, 600));
 
-    	// HLA GFE tab. layout? BorderLayout.WEST
+    /* HLA GFE tab */
     	JPanel hlaGfeTab = new JPanel();
+
+    	// set layout
+		GroupLayout layout = new GroupLayout(hlaGfeTab);
+		hlaGfeTab.setLayout(layout);
+
+    	// add panel to tab pane
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
+    	
+    	// generate the HLA GFE panel
+    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel("HLA-DRB1");
+		
+		// select all checkbox
+    	JCheckBox selectAllCheckBoxes = new JCheckBox();
 
-    	hlaGfeTab.add(hlaPanelGenerator.generateHlaPanel("HLA-DRB1"), BorderLayout.WEST);
+    	// combo box for locus selection
+    	JComboBox whatLocus = new JComboBox();
 
-    	// KIR GFE tab
+		// layout horizontal: all in one group so they stack
+		layout.setHorizontalGroup(
+			layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(selectAllCheckBoxes))
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(whatLocus))
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(currentHlaPanel)));
+
+		// layout vertical: separate groups so they stack
+		layout.setVerticalGroup(
+			layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(selectAllCheckBoxes)
+				.addComponent(whatLocus))
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(currentHlaPanel)));
+
+
+    /* KIR GFE tab */
     	JPanel kirGfeTab = new JPanel();
     	parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
 
-    	// Name Search tab
+    /* Name Search tab */
     	JPanel nameGfeTab = new JPanel();
     	parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
 
-    	// Options tab
+    /* Options tab */
     	JPanel optionsGfeTab = new JPanel();
     	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
