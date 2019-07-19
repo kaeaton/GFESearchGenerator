@@ -6,6 +6,8 @@ package org.chori.bsg.view;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 // import java.awt.FlowLayout;
 import java.awt.Font;
 import java.nio.file.*;
@@ -85,12 +87,17 @@ public class B12xGui extends JFrame {
 		
 		// select all checkbox
     	JCheckBox selectAllCheckBoxes = new JCheckBox();
+    	selectAllCheckBoxes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                SelectCheckboxes.selectAllCB(evt, currentHlaPanel);
+            }
+        });
+    	
 
     	// combo box for locus selection
     	JComboBox whatLocus = new JComboBox();
 		DefaultComboBoxModel hlaDropDownModel = new DefaultComboBoxModel(hlaLoci);
     	whatLocus.setModel(hlaDropDownModel);
-    	// whatLocus.setSize(200,10);
 
 		// layout horizontal: all in one group so they stack
 		layout.setHorizontalGroup(
