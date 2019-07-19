@@ -1,11 +1,15 @@
 package org.chori.bsg.view;
 
-import java.awt.BorderLayout;
+// import java.awt.BorderLayout;
+import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.GroupLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 
 
 
@@ -43,12 +47,11 @@ public class HlaSearchBoxGenerator {
 		JPanel gfeSearchPanel = new JPanel();
 		// GroupLayout layout = new GroupLayout(gfeSearchPanel);
 		// gfeSearchPanel.setLayout(layout);
-
-		// locus label
-		JLabel locusLabel = new JLabel(locus);
+		// layout.setAutoCreateGaps(true);
+		// layout.setAutoCreateContainerGaps(true);
 
 		// label, and workshop status & 5'UTR bundles
-		gfeSearchPanel.add(locusLabel);
+		gfeSearchPanel.add(labelPanel(locus));
 		gfeSearchPanel.add(generateWBox());
 		gfeSearchPanel.add(generate5PrimeUtr());
 
@@ -81,9 +84,62 @@ public class HlaSearchBoxGenerator {
 		// 3' UTR bundle
 		gfeSearchPanel.add(generate3PrimeUtr(locationCounter));
 
+		// gather up the JPanels comprising the gfe array
+		ArrayList<JPanel> subPanels = new ArrayList();
+
+		// Find the text fields and add to array
+        for (Component component : ((JPanel)gfeSearchPanel).getComponents()) {
+            if (component instanceof JPanel){
+                System.out.println(component);
+                subPanels.add((JPanel)component);
+            }
+        }
+
 
 		return gfeSearchPanel;
 	}
+
+	private JPanel labelPanel(String locus) {
+		// check all checkbox
+		JCheckBox selectAllCheckBoxes = new JCheckBox();
+
+		// locus label
+		JLabel locusLabel = new JLabel(locus);
+
+		// sub panel and layout
+		JPanel labelPanel = new JPanel();
+		GroupLayout labelLayout = new GroupLayout(labelPanel);
+		labelPanel.setLayout(labelLayout);
+		labelLayout.setAutoCreateGaps(true);
+		labelLayout.setAutoCreateContainerGaps(true);
+
+		// add checkbox and label
+		labelPanel.add(selectAllCheckBoxes);
+		labelPanel.add(locusLabel);
+
+		/* assembly */
+
+		// layout horizontal: all in one group so they stack
+		labelLayout.setHorizontalGroup(
+			labelLayout.createSequentialGroup()
+				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(selectAllCheckBoxes)
+				.addComponent(locusLabel)));
+				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		// layout vertical: separate groups so they stack
+		labelLayout.setVerticalGroup(
+			labelLayout.createSequentialGroup()
+				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(selectAllCheckBoxes))
+				.addGroup(labelLayout.createParallelGroup() // GroupLayout.Alignment.BASELINE
+				.addComponent(locusLabel))
+				.addGroup(labelLayout.createParallelGroup())); // GroupLayout.Alignment.BASELINE
+				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		return labelPanel;
+	}
+
 
 	private JPanel generateWBox() {
 		JPanel wBox = searchBox.assemble("Workshop Status", "00");

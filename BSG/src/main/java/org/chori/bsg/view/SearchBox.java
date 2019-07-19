@@ -1,6 +1,6 @@
 package org.chori.bsg.view;
 
-import java.awt.BorderLayout;
+// import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -67,9 +67,9 @@ public class SearchBox extends JPanel{
 			layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addComponent(noZero))
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addGroup(layout.createParallelGroup() // GroupLayout.Alignment.BASELINE
 				.addComponent(featureNumber))
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addGroup(layout.createParallelGroup() // GroupLayout.Alignment.BASELINE
 				.addComponent(jLabel)));
 
 		return featureGroup;
