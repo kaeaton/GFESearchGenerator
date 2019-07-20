@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 // import java.awt.FlowLayout;
 import java.awt.Font;
+import java.io.Console;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,15 +85,6 @@ public class B12xGui extends JFrame {
     	
     	// generate the HLA GFE panel
     	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel("HLA-DRB1");
-		
-		// select all checkbox
-    	JCheckBox selectAllCheckBoxes = new JCheckBox();
-    	selectAllCheckBoxes.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                SelectCheckboxes.selectAllCB(evt, currentHlaPanel);
-            }
-        });
-    	
 
     	// combo box for locus selection
     	JComboBox whatLocus = new JComboBox();
@@ -141,6 +133,8 @@ public class B12xGui extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	Console c = System.console();
+            	System.out.println("Hello World");
                 new B12xGui().setVisible(true);
             }
         });

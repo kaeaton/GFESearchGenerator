@@ -30,7 +30,7 @@ public class SelectCheckboxes {
         // Find the check boxes and add to arrayList
         for (Component component : ((JPanel)panelToSearch).getComponents()) {
             if (component instanceof JCheckBox){
-                System.out.println(component);
+                System.out.println("Component: " + component);
                 checkBoxes.add((JCheckBox)component);
             }
         }
@@ -38,7 +38,7 @@ public class SelectCheckboxes {
         return checkBoxes;
 	}
 
-	public static void selectAllCB(ActionEvent evt, JPanel panelToSearch) {
+	public static void selectAllCB(JPanel panelToSearch) {
 		ArrayList<JCheckBox> checkBoxes = selectAllCheckboxes(panelToSearch);
 		System.out.println("HLA select all checkbox event triggered");
 	}

@@ -2,6 +2,8 @@ package org.chori.bsg.view;
 
 // import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.GroupLayout;
@@ -95,7 +97,6 @@ public class HlaSearchBoxGenerator {
             }
         }
 
-
 		return gfeSearchPanel;
 	}
 
@@ -116,6 +117,17 @@ public class HlaSearchBoxGenerator {
 		// add checkbox and label
 		labelPanel.add(selectAllCheckBoxes);
 		labelPanel.add(locusLabel);
+
+		// checkbox listner
+		System.out.println("created check all checkbox");
+
+    	selectAllCheckBoxes.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+                // SelectCheckboxes.selectAllCB(super);
+                System.out.println("Check All listener triggered");
+            }
+        });
 
 		/* assembly */
 
