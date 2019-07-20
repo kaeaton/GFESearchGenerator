@@ -39,6 +39,7 @@ public class SearchBox extends JPanel{
 
 		/* checkbox */
 		JCheckBox noZero = new JCheckBox();
+		HlaSearchBoxGenerator.allCheckboxes.add(noZero);
 
 		/* textbox */
 		JTextField featureNumber = new JTextField();

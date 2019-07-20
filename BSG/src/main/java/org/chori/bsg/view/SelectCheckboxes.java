@@ -13,7 +13,7 @@ public class SelectCheckboxes {
 
 	}
 
-	private static ArrayList<JCheckBox> selectAllCheckboxes(JPanel panelToSearch) {
+	private static ArrayList<JCheckBox> selectAllCheckBoxes(Component panelToSearch) {
 
 		ArrayList<JCheckBox> checkBoxes = new ArrayList();
 		// Component currentPanel = panelToSearch;
@@ -38,8 +38,11 @@ public class SelectCheckboxes {
         return checkBoxes;
 	}
 
-	public static void selectAllCB(JPanel panelToSearch) {
-		ArrayList<JCheckBox> checkBoxes = selectAllCheckboxes(panelToSearch);
+	public static void selectAllCB(Component panelToSearch) {
+		ArrayList<JCheckBox> checkBoxes = selectAllCheckBoxes(panelToSearch);
 		System.out.println("HLA select all checkbox event triggered");
+		for (JCheckBox checkbox:HlaSearchBoxGenerator.allCheckboxes){
+			checkbox.setSelected(HlaSearchBoxGenerator.selectAllCheckBox.isSelected());
+		}
 	}
 }

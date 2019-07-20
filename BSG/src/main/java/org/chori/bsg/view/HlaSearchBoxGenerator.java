@@ -25,6 +25,10 @@ public class HlaSearchBoxGenerator {
 	// Searchbox source
 	SearchBox searchBox = new SearchBox();
 
+	// checkboxes
+	public static JCheckBox selectAllCheckBox;
+	public static ArrayList<JCheckBox> allCheckboxes = new ArrayList();
+
 	public HlaSearchBoxGenerator() {
 		hlaExonTotal.put("HLA-A", 8);
 		hlaExonTotal.put("HLA-B", 7);
@@ -97,12 +101,13 @@ public class HlaSearchBoxGenerator {
             }
         }
 
+        System.out.println(allCheckboxes);
 		return gfeSearchPanel;
 	}
 
 	private JPanel labelPanel(String locus) {
 		// check all checkbox
-		JCheckBox selectAllCheckBoxes = new JCheckBox();
+		selectAllCheckBox = new JCheckBox();
 
 		// locus label
 		JLabel locusLabel = new JLabel(locus);
@@ -115,16 +120,16 @@ public class HlaSearchBoxGenerator {
 		labelLayout.setAutoCreateContainerGaps(true);
 
 		// add checkbox and label
-		labelPanel.add(selectAllCheckBoxes);
+		labelPanel.add(selectAllCheckBox);
 		labelPanel.add(locusLabel);
 
 		// checkbox listner
 		System.out.println("created check all checkbox");
 
-    	selectAllCheckBoxes.addActionListener(new ActionListener() {
+    	selectAllCheckBox.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-                // SelectCheckboxes.selectAllCB(super);
+                SelectCheckboxes.selectAllCB(labelPanel.getParent());
                 System.out.println("Check All listener triggered");
             }
         });
@@ -135,7 +140,7 @@ public class HlaSearchBoxGenerator {
 		labelLayout.setHorizontalGroup(
 			labelLayout.createSequentialGroup()
 				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(selectAllCheckBoxes)
+				.addComponent(selectAllCheckBox)
 				.addComponent(locusLabel)));
 				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
@@ -143,7 +148,7 @@ public class HlaSearchBoxGenerator {
 		labelLayout.setVerticalGroup(
 			labelLayout.createSequentialGroup()
 				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(selectAllCheckBoxes))
+				.addComponent(selectAllCheckBox))
 				.addGroup(labelLayout.createParallelGroup() // GroupLayout.Alignment.BASELINE
 				.addComponent(locusLabel))
 				.addGroup(labelLayout.createParallelGroup())); // GroupLayout.Alignment.BASELINE
