@@ -95,17 +95,6 @@ public class HlaSearchBoxGenerator {
 		// 3' UTR bundle
 		gfeSearchPanel.add(generate3PrimeUtr(locationCounter));
 
-		// gather up the JPanels comprising the gfe array
-		// ArrayList<JPanel> subPanels = new ArrayList();
-
-		// Find the text fields and add to array
-        // for (Component component : ((JPanel)gfeSearchPanel).getComponents()) {
-        //     if (component instanceof JPanel){
-        //         System.out.println(component);
-        //         subPanels.add((JPanel)component);
-        //     }
-        // }
-
         System.out.println("Total checkboxes = " + allCheckboxes.size());
         System.out.println("Total textboxes = " + allTextboxes.size());
 		return gfeSearchPanel;
@@ -135,7 +124,7 @@ public class HlaSearchBoxGenerator {
     	selectAllCheckBox.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-                SelectCheckboxes.selectAllCB(labelPanel.getParent());
+                SelectCheckboxes.selectAllCB();
                 System.out.println("Check All listener triggered");
             }
         });

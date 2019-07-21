@@ -13,7 +13,7 @@ public class SelectCheckboxes {
 
 	}
 
-	public static void selectAllCB(Component panelToSearch) {
+	public static void selectAllCB() {
 		System.out.println("HLA select all checkbox event triggered");
 		for (JCheckBox checkbox:HlaSearchBoxGenerator.allCheckboxes){
 			checkbox.setSelected(HlaSearchBoxGenerator.selectAllCheckBox.isSelected());

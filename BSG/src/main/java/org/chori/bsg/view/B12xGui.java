@@ -41,13 +41,26 @@ public class B12xGui extends JFrame {
 	Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
-	String[] hlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	
 	// the panel generators
 	HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
 	
+	// component generators
+	WhatLocus whatLocusGenerator = new WhatLocus();
+
 	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+
+	// the tabs, added initially so I can make them 
+	// public, static and update them
+    public static JPanel hlaGfeTab = new JPanel();
+	public static JPanel kirGfeTab = new JPanel();
+	public static JPanel nameGfeTab = new JPanel();
+	public static JPanel optionsGfeTab = new JPanel();
+
+	// the holder panels
+	// they're embedded in the layout, with contents to be changed
+	public static JPanel hlaPanel = new JPanel();
 
     /**
      * Creates new form B12xGUI
@@ -72,7 +85,6 @@ public class B12xGui extends JFrame {
     	parentTabbedPane.setPreferredSize(new Dimension(1000, 600));
 
     /* HLA GFE tab */
-    	JPanel hlaGfeTab = new JPanel();
 
     	// set layout
 		GroupLayout layout = new GroupLayout(hlaGfeTab);
@@ -84,12 +96,12 @@ public class B12xGui extends JFrame {
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
     	
     	// generate the HLA GFE panel
-    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel("HLA-DRB1");
+    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(hlaSelectedLocus);
+    	currentHlaPanel.setName("HLA-GFE");
+    	hlaPanel.add(currentHlaPanel);
 
     	// combo box for locus selection
-    	JComboBox whatLocus = new JComboBox();
-		DefaultComboBoxModel hlaDropDownModel = new DefaultComboBoxModel(hlaLoci);
-    	whatLocus.setModel(hlaDropDownModel);
+    	JComboBox whatLocus = whatLocusGenerator.createWhatLocusComboBox("HLA");
 
 		// layout horizontal: all in one group so they stack
 		layout.setHorizontalGroup(
@@ -99,7 +111,7 @@ public class B12xGui extends JFrame {
 				.addComponent(whatLocus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 
 				// .getContainerGap(currentHlaPanel, SwingConstants.WEST, hlaGfeTab)
-				.addComponent(currentHlaPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
+				.addComponent(hlaPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
 
 		// layout vertical: separate groups so they stack
 		layout.setVerticalGroup(
@@ -112,19 +124,17 @@ public class B12xGui extends JFrame {
 				// .addComponent(selectAllCheckBoxes))
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				// .getContainerGap(currentHlaPanel, SwingConstants.NORTH, hlaGfeTab)
-				.addComponent(currentHlaPanel)));
+				.addComponent(hlaPanel)));
 
 
     /* KIR GFE tab */
-    	JPanel kirGfeTab = new JPanel();
+    	
     	parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
 
     /* Name Search tab */
-    	JPanel nameGfeTab = new JPanel();
     	parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
 
     /* Options tab */
-    	JPanel optionsGfeTab = new JPanel();
     	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
 	}
