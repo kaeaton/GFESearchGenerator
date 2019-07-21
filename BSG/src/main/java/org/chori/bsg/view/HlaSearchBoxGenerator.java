@@ -27,7 +27,9 @@ public class HlaSearchBoxGenerator {
 
 	// checkboxes
 	public static JCheckBox selectAllCheckBox;
-	public static ArrayList<JCheckBox> allCheckboxes = new ArrayList();
+	public static ArrayList<JCheckBox> allCheckboxes;
+	public static ArrayList<JTextField> allTextboxes;
+
 
 	public HlaSearchBoxGenerator() {
 		hlaExonTotal.put("HLA-A", 8);
@@ -47,7 +49,10 @@ public class HlaSearchBoxGenerator {
 
 	public JPanel generateHlaPanel(String locus){
 
-		// layout
+		// reinitiate the array lists so they only have 
+		// the current components in them
+		allCheckboxes = new ArrayList();
+		allTextboxes = new ArrayList();
 
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
@@ -91,17 +96,18 @@ public class HlaSearchBoxGenerator {
 		gfeSearchPanel.add(generate3PrimeUtr(locationCounter));
 
 		// gather up the JPanels comprising the gfe array
-		ArrayList<JPanel> subPanels = new ArrayList();
+		// ArrayList<JPanel> subPanels = new ArrayList();
 
 		// Find the text fields and add to array
-        for (Component component : ((JPanel)gfeSearchPanel).getComponents()) {
-            if (component instanceof JPanel){
-                System.out.println(component);
-                subPanels.add((JPanel)component);
-            }
-        }
+        // for (Component component : ((JPanel)gfeSearchPanel).getComponents()) {
+        //     if (component instanceof JPanel){
+        //         System.out.println(component);
+        //         subPanels.add((JPanel)component);
+        //     }
+        // }
 
-        System.out.println(allCheckboxes);
+        System.out.println("Total checkboxes = " + allCheckboxes.size());
+        System.out.println("Total textboxes = " + allTextboxes.size());
 		return gfeSearchPanel;
 	}
 

@@ -44,6 +44,7 @@ public class SearchBox extends JPanel{
 		/* textbox */
 		JTextField featureNumber = new JTextField();
 		featureNumber.setSize(55, 20);
+		HlaSearchBoxGenerator.allTextboxes.add(featureNumber);
 
 		/* label */
 		JLabel jLabel = new JLabel();
