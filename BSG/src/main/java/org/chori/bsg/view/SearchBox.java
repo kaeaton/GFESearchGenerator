@@ -27,7 +27,6 @@ public class SearchBox extends JPanel{
 		// this is to make sorting by name work
 		if (nameNumber.length() == 1) {
 			nameNumber = "0" + nameNumber;
-			System.out.println(nameNumber);
 		}
 
 		/* parent group panel */

@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 // import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.Console;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -85,12 +88,6 @@ public class B12xGui extends JFrame {
 
     /* HLA GFE tab */
 
-    	// set layout
-		GroupLayout layout = new GroupLayout(hlaGfeTab);
-		hlaGfeTab.setLayout(layout);
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-
     	// add panel to tab pane
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
     	
@@ -102,28 +99,25 @@ public class B12xGui extends JFrame {
     	// combo box for locus selection
     	JComboBox whatLocus = whatLocusGenerator.createWhatLocusComboBox("HLA");
 
-		// layout horizontal: all in one group so they stack
-		layout.setHorizontalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				// .getContainerGap(whatLocus, SwingConstants.WEST, hlaGfeTab)
-				.addComponent(whatLocus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    	// label for check all box
+    	JLabel selectAllLabel = new JLabel("Check all");
 
-				// .getContainerGap(currentHlaPanel, SwingConstants.WEST, hlaGfeTab)
-				.addComponent(hlaPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
+    	// layout / add them to the hlaGfeTab
+    	hlaGfeTab.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.insets = new Insets(0,0,10,0);
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;
+		hlaGfeTab.add(whatLocus, c);
 
-		// layout vertical: separate groups so they stack
-		layout.setVerticalGroup(
-			layout.createSequentialGroup()
-				// .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				// .getContainerGap(whatLocus, SwingConstants.NORTH, hlaGfeTab)
-				.addComponent(whatLocus))
-				// .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				// .addComponent(selectAllCheckBoxes))
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				// .getContainerGap(currentHlaPanel, SwingConstants.NORTH, hlaGfeTab)
-				.addComponent(hlaPanel)));
+		c.insets = new Insets(0,0,0,0);
+		c.gridy = 1;
+		hlaGfeTab.add(selectAllLabel, c);
+
+		c.gridy = 2;
+		hlaGfeTab.add(hlaPanel, c);
 
 
     /* KIR GFE tab */

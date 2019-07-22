@@ -1,7 +1,6 @@
 package org.chori.bsg.view;
 
 import java.awt.Color;
-// import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,11 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
-
-
 public class HlaSearchBoxGenerator {
-
-
 
 	// Exons per locus
 	HashMap<String, Integer> hlaExonTotal = new HashMap();
@@ -28,11 +23,12 @@ public class HlaSearchBoxGenerator {
 	// Searchbox source
 	SearchBox searchBox = new SearchBox();
 
-	// checkboxes
+	// select all checkbox
 	public static JCheckBox selectAllCheckBox;
+
+	// component arraylists
 	public static ArrayList<JCheckBox> allCheckboxes;
 	public static ArrayList<JTextField> allTextboxes;
-
 
 	public HlaSearchBoxGenerator() {
 		hlaExonTotal.put("HLA-A", 8);
@@ -46,8 +42,6 @@ public class HlaSearchBoxGenerator {
 		hlaExonTotal.put("HLA-DRB3", 6);
 		hlaExonTotal.put("HLA-DRB4", 6);
 		hlaExonTotal.put("HLA-DRB5", 6);
-
-		
 	}
 
 	public JPanel generateHlaPanel(String locus){
@@ -131,8 +125,6 @@ public class HlaSearchBoxGenerator {
 		JPanel labelPanel = new JPanel();
 		GroupLayout labelLayout = new GroupLayout(labelPanel);
 		labelPanel.setLayout(labelLayout);
-		// labelLayout.setAutoCreateGaps(true);
-		// labelLayout.setAutoCreateContainerGaps(true);
 
 		// add checkbox and label
 		labelPanel.add(selectAllCheckBox);
