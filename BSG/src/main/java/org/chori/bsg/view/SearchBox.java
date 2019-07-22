@@ -1,6 +1,5 @@
 package org.chori.bsg.view;
 
-// import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;

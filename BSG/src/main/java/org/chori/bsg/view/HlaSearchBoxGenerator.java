@@ -1,9 +1,14 @@
 package org.chori.bsg.view;
 
-// import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
+// import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -54,18 +59,27 @@ public class HlaSearchBoxGenerator {
 
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
-		// GroupLayout layout = new GroupLayout(gfeSearchPanel);
-		// gfeSearchPanel.setLayout(layout);
-		// layout.setAutoCreateGaps(true);
-		// layout.setAutoCreateContainerGaps(true);
+		gfeSearchPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 
 		// label, and workshop status & 5'UTR bundles
-		gfeSearchPanel.add(labelPanel(locus));
-		gfeSearchPanel.add(generateWBox());
-		gfeSearchPanel.add(generate5PrimeUtr());
+		c.weightx = 0.5;
+		c.insets = new Insets(6,0,0,0);
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 0;
+		gfeSearchPanel.add(labelPanel(locus), c);
+		
+		c.insets = new Insets(0,0,0,0);
+		c.gridx = 1;
+		gfeSearchPanel.add(generateWBox(), c);
+		
+		c.gridx = 2;
+		gfeSearchPanel.add(generate5PrimeUtr(), c);
 
 		// location counter for names to sort boxes
 		int locationCounter = 2;
+		int gridXCounter = 3;
 
 		// add the exon/intron pairs starting at 1 going up to exon total - 1
 		for (int i = 1; i < hlaExonTotal.get(locus); i++) {
@@ -73,25 +87,32 @@ public class HlaSearchBoxGenerator {
 			// Add exon bundle
 			JPanel exonBox = searchBox.assemble(("Exon " + i), 
 					String.valueOf(locationCounter));
+			c.gridx = gridXCounter;
+			gfeSearchPanel.add(exonBox, c);
 			locationCounter++;
-			gfeSearchPanel.add(exonBox);
+			gridXCounter++;
 
 			// add intron bundle
 			JPanel intronBox = searchBox.assemble(("Intron " + i), 
 					String.valueOf(locationCounter));
+			c.gridx = gridXCounter;
+			gfeSearchPanel.add(intronBox, c);
 			locationCounter++;
-			gfeSearchPanel.add(intronBox);
+			gridXCounter++;
 
 		}
 
 		// add final exon box. Use hash table to get its ID number
 		JPanel exonBox = searchBox.assemble(("Exon " + hlaExonTotal.get(locus)), 
 				String.valueOf(locationCounter));
+		c.gridx = gridXCounter;
+		gfeSearchPanel.add(exonBox, c);
 		locationCounter++;
-		gfeSearchPanel.add(exonBox);
+		gridXCounter++;
 
 		// 3' UTR bundle
-		gfeSearchPanel.add(generate3PrimeUtr(locationCounter));
+		c.gridx = gridXCounter;
+		gfeSearchPanel.add(generate3PrimeUtr(locationCounter), c);
 
         System.out.println("Total checkboxes = " + allCheckboxes.size());
         System.out.println("Total textboxes = " + allTextboxes.size());
@@ -101,6 +122,7 @@ public class HlaSearchBoxGenerator {
 	private JPanel labelPanel(String locus) {
 		// check all checkbox
 		selectAllCheckBox = new JCheckBox();
+		selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 13, 0));
 
 		// locus label
 		JLabel locusLabel = new JLabel(locus);
@@ -109,23 +131,15 @@ public class HlaSearchBoxGenerator {
 		JPanel labelPanel = new JPanel();
 		GroupLayout labelLayout = new GroupLayout(labelPanel);
 		labelPanel.setLayout(labelLayout);
-		labelLayout.setAutoCreateGaps(true);
-		labelLayout.setAutoCreateContainerGaps(true);
+		// labelLayout.setAutoCreateGaps(true);
+		// labelLayout.setAutoCreateContainerGaps(true);
 
 		// add checkbox and label
 		labelPanel.add(selectAllCheckBox);
 		labelPanel.add(locusLabel);
 
 		// checkbox listner
-		// System.out.println("created check all checkbox");
-
-  //   	selectAllCheckBox.addActionListener(new ActionListener() {
-  //   		@Override
-  //           public void actionPerformed(ActionEvent evt) {
-                SelectCheckboxes.selectAllCB(selectAllCheckBox, allCheckboxes);
-        //         System.out.println("Check All listener triggered");
-        //     }
-        // });
+        SelectCheckboxes.selectAllCB(selectAllCheckBox, allCheckboxes);
 
 		/* assembly */
 

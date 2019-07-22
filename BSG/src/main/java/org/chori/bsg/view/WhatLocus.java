@@ -30,7 +30,7 @@ public class WhatLocus {
 		switch(whichComboBox) {
 			case "HLA":
 				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
-				whatLocus.setName("HLA-dropdown");
+				// whatLocus.setName("HLA-dropdown");
 				hlaListener(whatLocus);
 				break;
 			default:
