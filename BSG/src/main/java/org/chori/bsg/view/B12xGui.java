@@ -50,6 +50,8 @@ public class B12xGui extends JFrame {
 	
 	// component generators
 	WhatLocus whatLocusGenerator = new WhatLocus();
+	WhatVersion whatVersionGenerator = new WhatVersion();
+	ResetButton resetButtonGenerator = new ResetButton();
 
 	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -96,11 +98,16 @@ public class B12xGui extends JFrame {
     	currentHlaPanel.setName("HLA-GFE");
     	hlaPanel.add(currentHlaPanel);
 
-    	// combo box for locus selection
-    	JComboBox whatLocus = whatLocusGenerator.createWhatLocusComboBox("HLA");
+    	// buttons
+    	JButton resetButton = resetButtonGenerator.createResetButton("HLA");
 
-    	// label for check all box
+    	// combo boxes for locus and version selection
+    	JComboBox whatLocus = whatLocusGenerator.createWhatLocusComboBox("HLA");
+    	JComboBox whatVersion = whatVersionGenerator.createWhatVersionComboBox("HLA");
+
+    	// labels
     	JLabel selectAllLabel = new JLabel("Check all");
+    	JLabel usageInstructions = new JLabel("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.)  Empty boxes function as wildcards.");
 
     	// layout / add them to the hlaGfeTab
     	hlaGfeTab.setLayout(new GridBagLayout());
@@ -108,17 +115,41 @@ public class B12xGui extends JFrame {
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.insets = new Insets(0,0,10,0);
 		c.weightx = 0.5;
+		
+		// line 0
 		c.gridx = 0;
 		c.gridy = 0;
 		hlaGfeTab.add(whatLocus, c);
+		
+		c.gridx = 1;
+		hlaGfeTab.add(usageInstructions, c);
 
+		// line 1
 		c.insets = new Insets(0,0,0,0);
+		c.gridx = 0;
 		c.gridy = 1;
 		hlaGfeTab.add(selectAllLabel, c);
 
+		// line 2
 		c.gridy = 2;
+		c.gridwidth = 3;
 		hlaGfeTab.add(hlaPanel, c);
 
+		// line 3
+		c.gridwidth = 1;
+		c.gridy = 3;
+		hlaGfeTab.add(resetButton, c);
+
+		c.gridx = 1;
+		hlaGfeTab.add(whatVersion, c);
+
+		// line 4
+		c.gridx = 0;
+		c.gridy = 4;
+
+		// line 5
+
+		// line 6
 
     /* KIR GFE tab */
     	
