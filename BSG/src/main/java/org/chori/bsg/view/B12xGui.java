@@ -75,7 +75,6 @@ public class B12xGui extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 
-
         initComponents();
     }
 
