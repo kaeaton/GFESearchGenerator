@@ -28,6 +28,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
@@ -106,8 +107,12 @@ public class B12xGui extends JFrame {
 
     	// labels
     	JLabel selectAllLabel = new JLabel("Check all");
-    	JLabel usageInstructions = new JLabel("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.)  Empty boxes function as wildcards.");
-    	JLabel checkBoxInstructions = new JLabel("Checking a box will prevent any results containing a zero in that feature. All other notation is permitted.");
+    	// JLabel usageInstructions = new JLabel("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards.");
+    	// JLabel checkBoxInstructions = new JLabel("Checking a box will prevent any results containing a zero in that feature. All other notation is permitted.");
+    	JTextArea usageInstructions = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+    												+ "\nChecking a box will prevent any results containing a zero in that feature.");
+    	usageInstructions.setBackground(hlaPanel.getBackground());
+    	usageInstructions.setEditable(false);
 
     	// layout / add them to the hlaGfeTab
     	hlaGfeTab.setLayout(new GridBagLayout());
@@ -131,7 +136,7 @@ public class B12xGui extends JFrame {
 		hlaGfeTab.add(selectAllLabel, c);
 
 		c.gridx = 1;
-		hlaGfeTab.add(checkBoxInstructions, c);
+		// hlaGfeTab.add(checkBoxInstructions, c);
 
 		// line 2
 		c.gridx = 0;
