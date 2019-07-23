@@ -1,5 +1,10 @@
 package org.chori.bsg.view;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -20,7 +25,8 @@ public class SearchBox extends JPanel{
 
 		/* setting up variables */
 		JPanel featureGroup = new JPanel();
-		GroupLayout layout = new GroupLayout(featureGroup);
+		featureGroup.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
 		// set number for names:
 		// set name numbers so anything under 10 starts with a 0
@@ -29,48 +35,46 @@ public class SearchBox extends JPanel{
 			nameNumber = "0" + nameNumber;
 		}
 
-		/* parent group panel */
-		featureGroup.setLayout(layout);
-
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-
 		/* checkbox */
 		JCheckBox noZero = new JCheckBox();
 		HlaSearchBoxGenerator.allCheckboxes.add(noZero);
 
 		/* textbox */
 		JTextField featureNumber = new JTextField();
-		featureNumber.setSize(55, 20);
+		featureNumber.setColumns(3);
+		featureNumber.setHorizontalAlignment(JTextField.CENTER);
+		featureNumber.setName(nameNumber);
+
+		// special rules for workshop status
+		if (nameNumber.equals("00")) {
+			featureNumber.setColumns(2);
+			featureNumber.setText("w");
+		}
+
 		HlaSearchBoxGenerator.allTextboxes.add(featureNumber);
 
 		/* label */
 		JLabel jLabel = new JLabel();
 
 		// turn the label into an icon, then rotate it
-		t1 = new TextIcon(jLabel, label, TextIcon.Layout.HORIZONTAL);
+		t1 = new TextIcon(jLabel, (" " + label), TextIcon.Layout.HORIZONTAL);
 		r1 = new RotatedIcon(t1, RotatedIcon.Rotate.DOWN);
 		jLabel.setIcon( r1 );
 
 		/* assembly */
 
-		// layout horizontal: all in one group so they stack
-		layout.setHorizontalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-				.addComponent(noZero)
-				.addComponent(featureNumber)
-				.addComponent(jLabel)));
+		c.weightx = 0;
+		c.insets = new Insets(0,0,0,0);
+		c.anchor = GridBagConstraints.NORTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		featureGroup.add(noZero, c);
 
-		// layout vertical: separate groups so they stack
-		layout.setVerticalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(noZero))
-				.addGroup(layout.createParallelGroup() // GroupLayout.Alignment.BASELINE
-				.addComponent(featureNumber))
-				.addGroup(layout.createParallelGroup() // GroupLayout.Alignment.BASELINE
-				.addComponent(jLabel)));
+		c.gridy = 1;
+		featureGroup.add(featureNumber, c);
+
+		c.gridy = 2;
+		featureGroup.add(jLabel, c);
 
 		return featureGroup;
 	}

@@ -42,6 +42,8 @@ public class B12xGui extends JFrame {
 
 
 	Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+	
+	// default locus settings
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
 	
@@ -108,6 +110,7 @@ public class B12xGui extends JFrame {
     	// labels
     	JLabel selectAllLabel = new JLabel("Check all");
     	JLabel usageInstructions = new JLabel("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.)  Empty boxes function as wildcards.");
+    	JLabel checkBoxInstructions = new JLabel("Checking a box will prevent any results containing a zero in that feature. All other notation is permitted.");
 
     	// layout / add them to the hlaGfeTab
     	hlaGfeTab.setLayout(new GridBagLayout());
@@ -130,7 +133,11 @@ public class B12xGui extends JFrame {
 		c.gridy = 1;
 		hlaGfeTab.add(selectAllLabel, c);
 
+		c.gridx = 1;
+		hlaGfeTab.add(checkBoxInstructions, c);
+
 		// line 2
+		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 3;
 		hlaGfeTab.add(hlaPanel, c);
@@ -152,7 +159,6 @@ public class B12xGui extends JFrame {
 		// line 6
 
     /* KIR GFE tab */
-    	
     	parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
 
     /* Name Search tab */

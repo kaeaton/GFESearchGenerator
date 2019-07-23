@@ -57,8 +57,8 @@ public class HlaSearchBoxGenerator {
 		GridBagConstraints c = new GridBagConstraints();
 
 		// label, and workshop status & 5'UTR bundles
-		c.weightx = 0.5;
-		c.insets = new Insets(6,0,0,0);
+		c.weightx = 0;
+		// c.insets = new Insets(0,0,10,0);
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
 		c.gridy = 0;
@@ -68,6 +68,7 @@ public class HlaSearchBoxGenerator {
 		c.gridx = 1;
 		gfeSearchPanel.add(generateWBox(), c);
 		
+		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		gfeSearchPanel.add(generate5PrimeUtr(), c);
 
@@ -116,10 +117,10 @@ public class HlaSearchBoxGenerator {
 	private JPanel labelPanel(String locus) {
 		// check all checkbox
 		selectAllCheckBox = new JCheckBox();
-		selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 13, 0));
+		selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 8, 0));
 
 		// locus label
-		JLabel locusLabel = new JLabel(locus);
+		JLabel locusLabel = new JLabel(locus + "  ");
 
 		// sub panel and layout
 		JPanel labelPanel = new JPanel();
