@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.bsg.view.searchboxes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import org.chori.bsg.view.searchboxes.*;
+
 public class ResetButton { 
 
 	public JButton resetButton = new JButton("Reset search terms");
@@ -25,8 +27,6 @@ public class ResetButton {
 			default:
 				System.out.println("Haven't set up that combobox model yet");
 		}
-
-    	// whatLocus.setModel(comboBoxModel);
 
 		return resetButton;
 	}
@@ -51,15 +51,4 @@ public class ResetButton {
             }
         });
 	}
-
-	// private JPanel findPanel(JPanel whichTab, String whichPanel) {
-	// 	Component selectedPanel = B12xGui.hlaPanel;
-	// 	for (Component component : whichTab.getComponents()) {
- //            if (component.getName().equals(whichPanel)){
- //                selectedPanel = component;
- //                System.out.println("panel: " + selectedPanel);
- //            } 
- //        }
- //        return (JPanel)selectedPanel;
-	// }
 }

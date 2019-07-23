@@ -8,6 +8,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import org.chori.bsg.view.searchboxes.*;
+
 public class WhatLocus { 
 
 	HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();

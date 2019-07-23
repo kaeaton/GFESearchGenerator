@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.bsg.view.searchboxes;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;

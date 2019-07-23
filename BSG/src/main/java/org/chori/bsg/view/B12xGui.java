@@ -1,14 +1,10 @@
 package org.chori.bsg.view;
 
-// import org.chori.bsg.view.searchbox.*;
-
-// import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -37,6 +33,8 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
+
+import org.chori.bsg.view.searchboxes.*;
 
 public class B12xGui extends JFrame {
 
@@ -73,7 +71,6 @@ public class B12xGui extends JFrame {
      * Creates new form B12xGUI
      */ 
     public B12xGui() {
-		
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
