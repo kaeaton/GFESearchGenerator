@@ -1,5 +1,6 @@
 package org.chori.bsg.view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,17 +9,18 @@ import javax.swing.JTextField;
 
 import org.chori.bsg.view.searchboxes.*;
 
-public class ResetButton { 
 
-	public JButton resetButton = new JButton("Reset search terms");
+public class SubmitButton { 
 
-	public ResetButton() {
+	public JButton submitButton = new JButton("Submit");
+
+	public SubmitButton() {
 
 	}
 
-	public JButton createResetButton(String whichTab) {
-		System.out.println("Generating the reset button");
-		
+	public JButton createSubmitButton(String whichTab) {
+		System.out.println("Generating the submit button");
+
 		// who is this reset button for?
 		switch(whichTab) {
 			case "HLA":
@@ -28,11 +30,11 @@ public class ResetButton {
 				System.out.println("Haven't set up that combobox model yet");
 		}
 
-		return resetButton;
+		return submitButton;
 	}
 
 	private void hlaListener() {
-		resetButton.addActionListener(new ActionListener() {
+		submitButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
             	

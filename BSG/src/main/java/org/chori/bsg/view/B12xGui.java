@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -53,6 +54,9 @@ public class B12xGui extends JFrame {
 	WhatLocus whatLocusGenerator = new WhatLocus();
 	WhatVersion whatVersionGenerator = new WhatVersion();
 	ResetButton resetButtonGenerator = new ResetButton();
+	FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
+	CancelButton cancelButtonGenerator = new CancelButton();
+	SubmitButton submitButtonGenerator = new SubmitButton();
 
 	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -75,7 +79,7 @@ public class B12xGui extends JFrame {
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setPreferredSize(new Dimension(1060,640));
+		this.setPreferredSize(new Dimension(1060,740));
 		this.add(parentTabbedPane);
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -86,7 +90,20 @@ public class B12xGui extends JFrame {
     private void initComponents() {
 
     /* tabbed pane */
-    	parentTabbedPane.setPreferredSize(new Dimension(1000, 600));
+    	parentTabbedPane.setPreferredSize(new Dimension(1000, 700));
+
+    /* reusable */
+
+    	// labels HLA and KIR
+    	JLabel selectAllLabel = new JLabel("Check all");
+    	JTextArea usageInstructions = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+    												+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
+    	usageInstructions.setBackground(hlaPanel.getBackground());
+    	usageInstructions.setEditable(false);
+    	usageInstructions.setFocusable(false);
+
+    	// buttons
+    	JButton cancelButton = cancelButtonGenerator.createCancelButton();
 
     /* HLA GFE tab */
 
@@ -98,21 +115,26 @@ public class B12xGui extends JFrame {
     	currentHlaPanel.setName("HLA-GFE");
     	hlaPanel.add(currentHlaPanel);
 
+    	// file format panel
+    	JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
+
+    	// results textarea
+    	JTextArea resultsTextAreaHla = new JTextArea();
+    	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
+    	resultsTextAreaHla.setPreferredSize(new Dimension(950, 250));
+
     	// buttons
-    	JButton resetButton = resetButtonGenerator.createResetButton("HLA");
+    	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
+    	JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
 
     	// combo boxes for locus and version selection
-    	JComboBox whatLocus = whatLocusGenerator.createWhatLocusComboBox("HLA");
-    	JComboBox whatVersion = whatVersionGenerator.createWhatVersionComboBox("HLA");
+    	JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
+    	JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
 
-    	// labels
-    	JLabel selectAllLabel = new JLabel("Check all");
-    	// JLabel usageInstructions = new JLabel("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards.");
-    	// JLabel checkBoxInstructions = new JLabel("Checking a box will prevent any results containing a zero in that feature. All other notation is permitted.");
-    	JTextArea usageInstructions = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
-    												+ "\nChecking a box will prevent any results containing a zero in that feature.");
-    	usageInstructions.setBackground(hlaPanel.getBackground());
-    	usageInstructions.setEditable(false);
+    	// submit/cancel buttons panel
+    	JPanel bottomButtons = new JPanel();
+    	bottomButtons.add(submitButtonHla);
+    	bottomButtons.add(cancelButton);
 
     	// layout / add them to the hlaGfeTab
     	hlaGfeTab.setLayout(new GridBagLayout());
@@ -124,7 +146,7 @@ public class B12xGui extends JFrame {
 		// line 0
 		c.gridx = 0;
 		c.gridy = 0;
-		hlaGfeTab.add(whatLocus, c);
+		hlaGfeTab.add(whatLocusHla, c);
 		
 		c.gridx = 1;
 		hlaGfeTab.add(usageInstructions, c);
@@ -135,30 +157,37 @@ public class B12xGui extends JFrame {
 		c.gridy = 1;
 		hlaGfeTab.add(selectAllLabel, c);
 
-		c.gridx = 1;
-		// hlaGfeTab.add(checkBoxInstructions, c);
-
 		// line 2
-		c.gridx = 0;
 		c.gridy = 2;
-		c.gridwidth = 3;
+		c.gridwidth = 4;
 		hlaGfeTab.add(hlaPanel, c);
 
 		// line 3
 		c.gridwidth = 1;
 		c.gridy = 3;
-		hlaGfeTab.add(resetButton, c);
+		hlaGfeTab.add(resetButtonHla, c);
 
 		c.gridx = 1;
-		hlaGfeTab.add(whatVersion, c);
+		hlaGfeTab.add(whatVersionHla, c);
 
 		// line 4
+		c.anchor = GridBagConstraints.CENTER;
+		c.gridwidth = 4;
 		c.gridx = 0;
 		c.gridy = 4;
+		hlaGfeTab.add(fileFormatHla, c);
 
 		// line 5
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridy = 5;
+		hlaGfeTab.add(resultsScrollPaneHla, c);
 
 		// line 6
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridy = 6;
+		hlaGfeTab.add(bottomButtons, c);
 
     /* KIR GFE tab */
     	parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
