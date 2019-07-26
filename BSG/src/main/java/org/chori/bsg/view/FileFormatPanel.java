@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.prefs.Preferences;
+import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -28,7 +29,8 @@ public class FileFormatPanel {
 		
 		// panel
 		JPanel fileFormatPanel = new JPanel();
-		fileFormatPanel.setPreferredSize(new Dimension(950, 20));
+		fileFormatPanel.setPreferredSize(new Dimension(950, 50));
+		fileFormatPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
 		JPanel filler = new JPanel();
 
 		// radio button group

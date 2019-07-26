@@ -121,7 +121,7 @@ public class B12xGui extends JFrame {
     	// results textarea
     	JTextArea resultsTextAreaHla = new JTextArea();
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
-    	resultsTextAreaHla.setPreferredSize(new Dimension(950, 250));
+    	resultsTextAreaHla.setPreferredSize(new Dimension(950, 300));
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
@@ -163,6 +163,7 @@ public class B12xGui extends JFrame {
 		hlaGfeTab.add(hlaPanel, c);
 
 		// line 3
+		c.anchor = GridBagConstraints.WEST;
 		c.gridwidth = 1;
 		c.gridy = 3;
 		hlaGfeTab.add(resetButtonHla, c);
@@ -178,6 +179,7 @@ public class B12xGui extends JFrame {
 		hlaGfeTab.add(fileFormatHla, c);
 
 		// line 5
+		c.anchor = GridBagConstraints.NORTH;
 		c.weightx = 1;
 		c.weighty = 1;
 		c.gridy = 5;

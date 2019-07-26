@@ -158,7 +158,7 @@ public class HlaSearchBoxGenerator {
 
 
 	private JPanel generateWBox() {
-		JPanel wBox = searchBox.assemble("Workshop Status", "00");
+		JPanel wBox = searchBox.assemble("Workshop Status    ", "00");
 
 		return wBox;
 	}
