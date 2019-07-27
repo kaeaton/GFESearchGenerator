@@ -72,6 +72,9 @@ public class B12xGui extends JFrame {
 	// they're embedded in the layout, with contents to be changed
 	public static JPanel hlaPanel = new JPanel();
 
+	// results text areas
+	public static JTextArea resultsTextAreaHla = new JTextArea();
+
     /**
      * Creates new form B12xGUI
      */ 
@@ -119,9 +122,9 @@ public class B12xGui extends JFrame {
     	JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
 
     	// results textarea
-    	JTextArea resultsTextAreaHla = new JTextArea();
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
     	resultsTextAreaHla.setPreferredSize(new Dimension(950, 300));
+    	resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
