@@ -51,12 +51,12 @@ public class B12xGui extends JFrame {
 	HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
 	
 	// component generators
-	WhatLocus whatLocusGenerator = new WhatLocus();
-	WhatVersion whatVersionGenerator = new WhatVersion();
-	ResetButton resetButtonGenerator = new ResetButton();
-	FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
-	CancelButton cancelButtonGenerator = new CancelButton();
-	SubmitButton submitButtonGenerator = new SubmitButton();
+	private static WhatLocus whatLocusGenerator = new WhatLocus();
+	private static WhatVersion whatVersionGenerator = new WhatVersion();
+	private ResetButton resetButtonGenerator = new ResetButton();
+	private FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
+	private CancelButton cancelButtonGenerator = new CancelButton();
+	private SubmitButton submitButtonGenerator = new SubmitButton();
 
 	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -71,6 +71,11 @@ public class B12xGui extends JFrame {
 	// the holder panels
 	// they're embedded in the layout, with contents to be changed
 	public static JPanel hlaPanel = new JPanel();
+
+	// combo boxes for locus and version selection
+	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
+	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
+
 
 	// results text areas
 	public static JTextArea resultsTextAreaHla = new JTextArea();
@@ -129,10 +134,6 @@ public class B12xGui extends JFrame {
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
     	JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
-
-    	// combo boxes for locus and version selection
-    	JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
-    	JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
 
     	// submit/cancel buttons panel
     	JPanel bottomButtons = new JPanel();

@@ -9,12 +9,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
 import org.chori.bsg.controller.*;
+import org.chori.bsg.view.*;
 import org.chori.bsg.view.searchboxes.*;
 
 
 public class SubmitButton { 
 
-	// builder class instantiation
+	// class instantiations
 	public BuildRegex buildRegex = new BuildRegex();
 
 	// the button
@@ -48,15 +49,15 @@ public class SubmitButton {
             	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
             	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
 
-            	String regex = buildRegex.assembleRegex("HLA", allCheckBoxes, allTextFields);
-            	// set the textfields back to empty
-            	// for (JTextField textField:allTextFields){
-					
-					// textField.setText("");
+            	// what locus?
+            	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 
-					// special rule for workshop status
-					// if(textField.getName().equals("00")) textField.setText("w");
-				// }
+            	// build me some Regex
+            	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
+            											allCheckBoxes, allTextFields);
+            
+            	// search the data
+
             }
         });
 	}
