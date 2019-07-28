@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 public class FileFormatPanel { 
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-	public JRadioButton csvButton = new JRadioButton("CSV");
-	public JRadioButton tsvButton = new JRadioButton("TSV");
-	public JRadioButton prettyButton = new JRadioButton("Pretty");
-    public JCheckBox saveToFileCheckBox = new JCheckBox("Save to file");
+	public static JRadioButton csvButton = new JRadioButton("CSV");
+	public static JRadioButton tsvButton = new JRadioButton("TSV");
+	public static JRadioButton prettyButton = new JRadioButton("Pretty");
+    public static JCheckBox saveToFileCheckBox = new JCheckBox("Save to file");
 
 	public FileFormatPanel() {
 

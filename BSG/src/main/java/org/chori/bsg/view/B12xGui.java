@@ -41,22 +41,22 @@ import org.chori.bsg.view.searchboxes.*;
 public class B12xGui extends JFrame {
 
 
-	Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	
 	// default locus settings
 	String hlaSelectedLocus = "HLA-A";
 	String kirSelectedLocus = "KIR2DL4";
 	
 	// the panel generators
-	HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
+	private HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
 	
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
 	private static WhatVersion whatVersionGenerator = new WhatVersion();
-	private ResetButton resetButtonGenerator = new ResetButton();
-	private FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
-	private CancelButton cancelButtonGenerator = new CancelButton();
-	private SubmitButton submitButtonGenerator = new SubmitButton();
+	private static ResetButton resetButtonGenerator = new ResetButton();
+	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
+	private static CancelButton cancelButtonGenerator = new CancelButton();
+	private static SubmitButton submitButtonGenerator = new SubmitButton();
 
 	// need this to add at initialization
 	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -76,6 +76,8 @@ public class B12xGui extends JFrame {
 	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
 	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
 
+	// file format panels
+	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
 
 	// results text areas
 	public static JTextArea resultsTextAreaHla = new JTextArea();
@@ -123,9 +125,7 @@ public class B12xGui extends JFrame {
     	currentHlaPanel.setName("HLA-GFE");
     	hlaPanel.add(currentHlaPanel);
 
-    	// file format panel
-    	JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
-
+    	
     	// results textarea
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
     	resultsTextAreaHla.setPreferredSize(new Dimension(950, 300));

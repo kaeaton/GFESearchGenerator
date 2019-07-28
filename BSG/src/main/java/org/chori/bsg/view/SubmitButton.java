@@ -1,11 +1,15 @@
 package org.chori.bsg.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.chori.bsg.controller.*;
@@ -49,8 +53,12 @@ public class SubmitButton {
             	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
             	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
 
-            	// what locus?
+            	// what locus, version, and format?
             	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+            	String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
+            	String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
+            	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
+            	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
             	// build me some Regex
             	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
@@ -60,5 +68,30 @@ public class SubmitButton {
 
             }
         });
+	}
+
+	private String dataFormatFinder(JPanel fileFormatPanel){
+		// Find the text fields and add to array
+        for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
+            if (component instanceof JRadioButton){
+            	System.out.println("Testing dataFormatFinder");
+            	if (((JRadioButton)component).isSelected()) {
+					return ((JRadioButton)component).getText();
+				}
+            }
+        }
+        System.out.println("Didn't find a Data format");
+        return null;
+	}
+
+	private Boolean printToFileFinder(JPanel fileFormatPanel){
+		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
+            if (component instanceof JCheckBox){
+            	System.out.println("Testing printToFileFinder");
+
+            	return ((JCheckBox)component).isSelected();
+            }
+        }
+		return false;
 	}
 }

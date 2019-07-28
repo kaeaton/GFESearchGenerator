@@ -21,7 +21,7 @@ public class BuildRegex {
 		String regex = new String("^");
 
 		// quick diagnostic test: are the lists the same size?
-		if(checkBoxes.size() == textFields.size()) {
+		if(checkBoxes.size() != textFields.size()) {
 			B12xGui.resultsTextAreaHla.append("There's a problem with the Arraylists in BuildRegex.");
 			B12xGui.resultsTextAreaHla.append(" (They're not the same length.)");
 			B12xGui.resultsTextAreaHla.append(System.lineSeparator());
