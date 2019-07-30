@@ -21,6 +21,8 @@ public class SubmitButton {
 
 	// class instantiations
 	public BuildRegex buildRegex = new BuildRegex();
+	public BuildReportingSearchString buildRSS = new BuildReportingSearchString();
+	public SearchData searchData = new SearchData();
 
 	// the button
 	public JButton submitButton = new JButton("Submit");
@@ -63,18 +65,17 @@ public class SubmitButton {
             	// build me some Regex
             	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
             											allCheckBoxes, allTextFields);
-            
+            	String reportingSS = buildRSS.assembleReportingSearchString("HLA", whatLocus, 
+            											allCheckBoxes, allTextFields);
             	// search the data
-
+            	// dataSearch
             }
         });
 	}
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
-		// Find the text fields and add to array
         for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
             if (component instanceof JRadioButton){
-            	System.out.println("Testing dataFormatFinder");
             	if (((JRadioButton)component).isSelected()) {
 					return ((JRadioButton)component).getText();
 				}
@@ -87,8 +88,6 @@ public class SubmitButton {
 	private Boolean printToFileFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
             if (component instanceof JCheckBox){
-            	System.out.println("Testing printToFileFinder");
-
             	return ((JCheckBox)component).isSelected();
             }
         }
