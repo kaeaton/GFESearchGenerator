@@ -23,6 +23,7 @@ public class SubmitButton {
 	public BuildRegex buildRegex = new BuildRegex();
 	public BuildReportingSearchString buildRSS = new BuildReportingSearchString();
 	public SearchData searchData = new SearchData();
+	public Headers header = new Headers();
 
 	// the button
 	public JButton submitButton = new JButton("Submit");
@@ -67,6 +68,12 @@ public class SubmitButton {
             											allCheckBoxes, allTextFields);
             	String reportingSS = buildRSS.assembleReportingSearchString("HLA", whatLocus, 
             											allCheckBoxes, allTextFields);
+            	
+            	// clear the results window
+            	B12xGui.resultsTextAreaHla.setText("");
+            	
+            	// print headers
+            	header.printHeaders("HLA", reportingSS, whatVersion, whatLocus);
             	// search the data
             	// dataSearch
             }
