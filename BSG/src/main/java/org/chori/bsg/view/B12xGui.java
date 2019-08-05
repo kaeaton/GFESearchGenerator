@@ -1,40 +1,21 @@
 package org.chori.bsg.view;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.io.Console;
-import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.prefs.Preferences;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.event.DocumentListener;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.text.Document;
 
 import org.chori.bsg.view.searchboxes.*;
 
@@ -59,7 +40,7 @@ public class B12xGui extends JFrame {
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
 
 	// need this to add at initialization
-	JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+	public JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
 	// the tabs, added initially so I can make them 
 	// public, static and update them
@@ -124,7 +105,6 @@ public class B12xGui extends JFrame {
     	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(hlaSelectedLocus);
     	currentHlaPanel.setName("HLA-GFE");
     	hlaPanel.add(currentHlaPanel);
-
     	
     	// results textarea
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
@@ -210,8 +190,6 @@ public class B12xGui extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	Console c = System.console();
-            	System.out.println("Hello World");
                 new B12xGui().setVisible(true);
             }
         });

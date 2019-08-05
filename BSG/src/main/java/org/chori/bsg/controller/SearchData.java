@@ -1,5 +1,8 @@
 package org.chori.bsg.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,8 +18,8 @@ public class SearchData {
 
 	}
 
-	// public void searchThroughData(String locus, File file, String regex, String searchString) throws IOException {
-        // try {
+	public void searchThroughData(File file, String regex, String dataType) throws IOException {
+        try {
             
     //         String line,
     //                csvSplitBy = ",",
@@ -26,24 +29,13 @@ public class SearchData {
     //         boolean hlaWriteToFileChecked = prefs.getBoolean("BSG_HLA_SAVE_FILE", false);        
             
     //         System.out.println(locus);
-    //         System.out.println("Made it to DataIO: " + regex);
+    //         System.out.println("Made it to SearchData: " + regex);
             
     //         // Read the File
     //         BufferedReader br = new BufferedReader(new FileReader(file));
     //         String fileDate = br.readLine();
     //         String version = br.readLine();
             
-    //         // Headers
-    //         B12xGUI.neo4jResults.append("File generated at: " + timeStamp);
-    //         B12xGUI.neo4jResults.append(System.lineSeparator());
-    //         B12xGUI.neo4jResults.append("Data source: http://neo4j.b12x.org - ");
-    //         B12xGUI.neo4jResults.append(locus + " data downloaded: " + fileDate);
-    //         B12xGUI.neo4jResults.append(System.lineSeparator());
-    //         B12xGUI.neo4jResults.append("Search parameters: " + searchString);
-    //         B12xGUI.neo4jResults.append(System.lineSeparator());
-    //         B12xGUI.neo4jResults.append("IMGT/HLA Database Version " + version);
-    //         B12xGUI.neo4jResults.append(System.lineSeparator());
-
     //         // Write the data
     //         int i = 0;
     //         while ((line = br.readLine()) != null) {
@@ -85,9 +77,9 @@ public class SearchData {
     //             WriteFile fileWriter = new WriteFile();
     //             fileWriter.writeToFile(locus, version, "HLA", dataType);
 				
-    //         }
-    //     } catch (Exception ex) {
-    //         System.out.println(ex); 
-    //     }
-    // }
+            // }
+        } catch (Exception ex) {
+            System.out.println(ex); 
+        }
+    }
 }

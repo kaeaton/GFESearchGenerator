@@ -1,9 +1,7 @@
 package org.chori.bsg.controller;
 
-
-import javax.swing.JTextArea;
 import java.time.LocalDateTime;
-
+import javax.swing.JTextArea;
 
 import org.chori.bsg.view.*;
 

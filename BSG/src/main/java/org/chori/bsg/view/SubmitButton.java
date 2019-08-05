@@ -71,10 +71,12 @@ public class SubmitButton {
             	
             	// clear the results window
             	B12xGui.resultsTextAreaHla.setText("");
-            	
+
             	// print headers
             	header.printHeaders("HLA", reportingSS, whatVersion, whatLocus);
+            	
             	// search the data
+            	
             	// dataSearch
             }
         });
