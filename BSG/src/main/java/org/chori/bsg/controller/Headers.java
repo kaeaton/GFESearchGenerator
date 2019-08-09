@@ -9,7 +9,7 @@ public class Headers {
 
 	private JTextArea writeToMe = new JTextArea();
 	private String database = "";
-	private String placeholder = "Direct URL";
+	private String placeholder = "placeholder";
 
 	public Headers() {
 

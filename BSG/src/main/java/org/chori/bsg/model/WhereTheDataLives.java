@@ -24,24 +24,47 @@ public class WhereTheDataLives {
 
 	public WhereTheDataLives() { }
 
+	// will be set in options
 	public void setRawDataPath(String rawDataFileFolder) {
 		prefs.put("BSG_RAW_DATA", rawDataFileFolder);
 	}
 
+	// will be set in options
 	public void setResultsDataPath(String resultsFileFolder) {
 		prefs.put("BSG_RESULTS_DATA", resultsFileFolder);
 	}
 
-	public void storeRawData(String locus, String version, String fileType) {
-		File filePath = new File(rawDataPath);
+	// create file to store raw data
+	public File storeRawData(String locus, String version) {
+		String file = rawDataPath + "GFE_" + locus + "_" + version
+						+ "_download.csv";
+		File dataFile = new File(rawDataPath);
+		// if (!path.toFile().exists())
+  //       {
+  //           System.out.println("The file does not exist.");
+  //           path.toFile().getParentFile().mkdirs();
+  //           path.toFile().createNewFile();
+  //           dataUpdate();
+  //       }
+        return dataFile;
 	} 
 
-	public File getRawData(String locus, String version, String fileType) {
-		
-		File filePath = new File(rawDataPath);
-		return filePath;
+	// get the data file
+	public File getRawData(String locus, String version) {
+		String specificFile = rawDataPath + "3.34.0" + System.getProperty("file.separator") + "neo4j_" + locus + "_" + version
+								+ "_download.csv";
+		File file = new File(specificFile);
+		if(file.exists()) {
+			System.out.println("Found the raw data file");
+			return file;
+		}
+		System.out.println("Didn't find the raw data file.");
+		System.out.println("looking for the file at " + specificFile);
+
+		return null;
 	}
 
+	// create the file to store results
 	public void storeResultsData() {
 
 	}

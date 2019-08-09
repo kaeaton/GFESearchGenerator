@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
@@ -13,17 +14,19 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.chori.bsg.controller.*;
-import org.chori.bsg.view.*;
+import org.chori.bsg.model.*;
 import org.chori.bsg.view.searchboxes.*;
 
 
 public class SubmitButton { 
 
 	// class instantiations
-	public BuildRegex buildRegex = new BuildRegex();
-	public BuildReportingSearchString buildRSS = new BuildReportingSearchString();
-	public SearchData searchData = new SearchData();
-	public Headers header = new Headers();
+	private BuildRegex buildRegex = new BuildRegex();
+	private BuildReportingSearchString buildRSS = new BuildReportingSearchString();
+	private SearchData searchData = new SearchData();
+	private Headers header = new Headers();
+	private WhereTheDataLives rawData = new WhereTheDataLives();
+
 
 	// the button
 	public JButton submitButton = new JButton("Submit");
@@ -63,6 +66,8 @@ public class SubmitButton {
             	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
             	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
+            	// where's the data file?
+            	File data = rawData.getRawData(whatLocus, "3.34.0");
             	// build me some Regex
             	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
             											allCheckBoxes, allTextFields);
@@ -72,11 +77,11 @@ public class SubmitButton {
             	// clear the results window
             	B12xGui.resultsTextAreaHla.setText("");
 
-            	// print headers
-            	header.printHeaders("HLA", reportingSS, whatVersion, whatLocus);
+            	// print headers                        whatVersion
+            	header.printHeaders("HLA", reportingSS, "3.34.0", whatLocus);
             	
             	// search the data
-            	
+            	searchData.searchThroughData(data, regex, dataFormat);
             	// dataSearch
             }
         });
