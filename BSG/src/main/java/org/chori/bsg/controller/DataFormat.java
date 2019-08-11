@@ -33,11 +33,11 @@ public class DataFormat
         whichTextArea.get(type).append(System.lineSeparator());
     }
     
-    public void prettyFormat(String line, String type)
-	{
-        String[] gfeAllele = line.split(",");
-        whichTextArea.get(type).append(String.format("%-30s", gfeAllele[1]));
-        whichTextArea.get(type).append(gfeAllele[0]);
-        whichTextArea.get(type).append(System.lineSeparator());
-    }
+ //    public void prettyFormat(String line, String type)
+	// {
+ //        String[] gfeAllele = line.split(",");
+ //        whichTextArea.get(type).append(String.format("%-30s", gfeAllele[0]));
+ //        whichTextArea.get(type).append(gfeAllele[1]);
+ //        whichTextArea.get(type).append(System.lineSeparator());
+ //    }
 }

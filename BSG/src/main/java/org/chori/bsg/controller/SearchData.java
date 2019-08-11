@@ -26,7 +26,7 @@ public class SearchData {
 
 	}
 
-	public void searchThroughData(File file, String regex, String dataType) {
+	public void searchThroughData(File file, String regex, String dataType, String whichTab) {
         
 
         try {
@@ -57,14 +57,13 @@ public class SearchData {
                 if (gfeAlleles[1].matches(regex)){
                     switch (dataType){
                         case "CSV":
-                            dataFormat.csvFormat(line, "HLA");
+                            dataFormat.csvFormat(line, whichTab);
                             break;
                         case "TSV":
-                            dataFormat.tsvFormat(line, "HLA");
+                            dataFormat.tsvFormat(line, whichTab);
                             break;
-                        case "txt":
-                            dataFormat.prettyFormat(line, "HLA");
-                            break;
+                        default:
+                        	System.out.println("SearchData is looking for a format that isn't listed.");
                     }
                     
                     i++;

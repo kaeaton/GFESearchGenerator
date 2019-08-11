@@ -81,7 +81,15 @@ public class SubmitButton {
             	header.printHeaders("HLA", reportingSS, "3.34.0", whatLocus);
             	
             	// search the data
-            	searchData.searchThroughData(data, regex, dataFormat);
+            	if (!dataFormat.equals("Pretty")) {
+	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
+            	} else {
+            		PrettyData prettyData = new PrettyData();
+            		prettyData.searchThroughData(data, regex, "HLA");
+            	}
+
+
+
             	// dataSearch
             }
         });

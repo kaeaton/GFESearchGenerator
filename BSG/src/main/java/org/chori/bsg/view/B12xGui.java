@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
@@ -108,8 +109,9 @@ public class B12xGui extends JFrame {
     	
     	// results textarea
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
-    	resultsTextAreaHla.setPreferredSize(new Dimension(950, 300));
     	resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
+    	// resultsTextAreaHla.setEditable(false);
+    	resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
