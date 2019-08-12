@@ -12,7 +12,8 @@ import org.chori.bsg.view.B12xGui;
 public class DataFormat 
 {
 	static HashMap<String, JTextArea> whichTextArea = new HashMap();
-    
+    private int gfe = 1;
+
     public DataFormat()
 	{
         this.whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
@@ -22,22 +23,26 @@ public class DataFormat
     public void csvFormat(String line, String type)
 	{
         String[] gfeAllele = line.split(",");
-        whichTextArea.get(type).append(gfeAllele[1]+ "," + gfeAllele[0]);
+
+        // which side is the GFE? (Old files use names as key, new ones gfe)
+        // we want the side that doesn't contain the asterisk.
+        if(gfeAllele[1].contains("*")) { gfe = 0; }
+
+        // print to appropriate screen
+        whichTextArea.get(type).append(gfeAllele[1 - gfe]+ "," + gfeAllele[gfe]);
         whichTextArea.get(type).append(System.lineSeparator());
     }
     
     public void tsvFormat(String line, String type)
 	{
         String[] gfeAllele = line.split(",");
-        whichTextArea.get(type).append(gfeAllele[1]+ "\t" + gfeAllele[0]);
+
+        // which side is the GFE? (Old files use names as key, new ones gfe)
+        // we want the side that doesn't contain the asterisk.
+        if(gfeAllele[1].contains("*")) { gfe = 0; }
+
+        // print to appropriate screen
+        whichTextArea.get(type).append(gfeAllele[1 - gfe]+ "\t" + gfeAllele[gfe]);
         whichTextArea.get(type).append(System.lineSeparator());
     }
-    
- //    public void prettyFormat(String line, String type)
-	// {
- //        String[] gfeAllele = line.split(",");
- //        whichTextArea.get(type).append(String.format("%-30s", gfeAllele[0]));
- //        whichTextArea.get(type).append(gfeAllele[1]);
- //        whichTextArea.get(type).append(System.lineSeparator());
- //    }
 }
