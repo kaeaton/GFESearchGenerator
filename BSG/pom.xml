@@ -33,6 +33,11 @@
       <artifactId>jackson-databind</artifactId>
       <version>[2.9.8,)</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.8.1</version>
+    </dependency>
   </dependencies>
   
   <!-- <parent> </parent> -->
@@ -69,14 +74,14 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.4</version>
           <configuration>
+            <archive>
+              <manifest>
+                <mainClass>org.chori.bsg.view.B12xGui</mainClass>
+              </manifest>
+            </archive>
             <descriptorRefs>
               <descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
-            <archive>
-              <manifest>
-                <mainClass>org.chori.bsg.view.B12xGUI</mainClass>
-              </manifest>
-            </archive>
           </configuration>
           <executions>
             <execution>
@@ -93,7 +98,44 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
+  <executions>
+    <execution>
+      <id>copy-resources</id>
+      <phase>validate</phase>
+      <goals>
+        <goal>copy-resources</goal>
+      </goals>
+      <configuration>
+        <outputDirectory>${basedir}/src/main/java/org/chori/bsg</outputDirectory>
+        <resources>
+          <resource>
+            <directory>resources</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+      </configuration>
+    </execution>
+  </executions>
         </plugin>
+  <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-dependency-plugin</artifactId>
+  <executions>
+    <execution>
+      <id>copy-dependencies</id>
+      <phase>prepare-package</phase>
+      <goals>
+        <goal>copy-dependencies</goal>
+      </goals>
+      <configuration>
+        <outputDirectory>${project.build.directory}/bsg/lib</outputDirectory>
+        <overWriteReleases>false</overWriteReleases>
+        <overWriteSnapshots>false</overWriteSnapshots>
+        <overWriteIfNewer>true</overWriteIfNewer>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
@@ -116,6 +158,9 @@
                 <classpathPrefix>lib/</classpathPrefix>
                 <mainClass>org.chori.bsg.view.B12xGui</mainClass>
               </manifest>
+    <manifestEntries>
+      <Class-Path>.</Class-Path>
+    </manifestEntries>
             </archive>
           </configuration>
         </plugin>

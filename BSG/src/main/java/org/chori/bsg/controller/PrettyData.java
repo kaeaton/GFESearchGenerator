@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import javax.swing.JTextArea;
@@ -15,7 +16,8 @@ import org.chori.bsg.view.*;
 public class PrettyData {
 
 	private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
-	private HashMap<String, String> datamatches = new HashMap();
+	private HashMap<String, String> dataMatches = new HashMap();
+	private LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
 
 	public PrettyData() {
 		this.whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
@@ -52,7 +54,7 @@ public class PrettyData {
 			if (gfeAlleles[gfe].matches(regex)){
 
 				// put gfe and name in holding hashmap for later printing
-				datamatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+				dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 
 				flag = true;
 			}
@@ -73,6 +75,7 @@ public class PrettyData {
 				j++;
 			}
 
+			
 			// parse the gfe spacing for each matching line
 			while ((line = br.readLine()) != null) {
 
@@ -83,12 +86,14 @@ public class PrettyData {
 				if (gfeAlleles[gfe].matches(regex)){
 					
 					// put gfe and name in holding hashmap for later printing
-					datamatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+					dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 
 					// split the gfe along the dashes
 					splitGfe = gfeAlleles[gfe].split("-");
 					int k = 0;
 
+					// if a feature String is longer than the length listed 
+					// in the spacing array, replace that length with the new one
 					for(String splitUpGfe:splitGfe) {
 						if (splitUpGfe.length() > spacingList[k]) {
 							spacingList[k] = splitUpGfe.length();
@@ -99,20 +104,27 @@ public class PrettyData {
 				}
 			}
 
+			// sort the dataMatches hashmap before printing
+			SortData sorting = new SortData();
+			sortedDataMatches = sorting.sortTheData(dataMatches);
+
 			// Write the data to the appropriate text area
 			int m = 0;
-			for (Map.Entry me:datamatches.entrySet()) {
+			for (Map.Entry me:dataMatches.entrySet()) {
+				
+			// for (Map.Entry me:sortedDataMatches.entrySet()) {
 				// System.out.println("Key: " + me.getKey() + " & Value: " + me.getValue());
 				
 				// print allele name
 				printToMe.append(String.format("%-25s", me.getValue()));
 
-				// cycle through gfe's individual features
+				// cycle through gfe's individual features, 
+				// print with appropriate lengths
 				int n = 0;
 				splitGfe = ((String)me.getKey()).split("-");
 				for (String gfeFeature:splitGfe) {
 					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature));
-					if(n < (spacingList.length - 1)) { printToMe.append(" - "); }
+					if(n < (spacingList.length - 1)) { printToMe.append("-"); }
 					n++;
 				}
 		        printToMe.append(System.lineSeparator());
