@@ -80,7 +80,7 @@ public class SubmitButton {
             	// print headers                        whatVersion
             	header.printHeaders("HLA", reportingSS, "3.34.0", whatLocus);
             	
-            	// search the data
+            	// search the data & print to screen
             	if (!dataFormat.equals("Pretty")) {
 	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
             	} else {

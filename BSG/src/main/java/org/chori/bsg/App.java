@@ -3,6 +3,8 @@ package org.chori.bsg;
 /**
  * Hello world!
  *
+ * Compile to single jar: mvn clean compile assembly:single
+ *
  */
 public class App 
 {

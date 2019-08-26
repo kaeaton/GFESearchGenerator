@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
 import javax.swing.JTextArea;
 
 import org.chori.bsg.model.*;
@@ -110,11 +109,8 @@ public class PrettyData {
 
 			// Write the data to the appropriate text area
 			int m = 0;
-			for (Map.Entry me:dataMatches.entrySet()) {
-				
-			// for (Map.Entry me:sortedDataMatches.entrySet()) {
-				// System.out.println("Key: " + me.getKey() + " & Value: " + me.getValue());
-				
+			for (Map.Entry me:sortedDataMatches.entrySet()) {
+
 				// print allele name
 				printToMe.append(String.format("%-25s", me.getValue()));
 
