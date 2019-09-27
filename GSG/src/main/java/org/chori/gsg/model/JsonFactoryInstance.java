@@ -1,4 +1,4 @@
-package org.chori.bsg.model;
+package org.chori.gsg.model;
 
 import com.fasterxml.jackson.core.JsonFactory;
 

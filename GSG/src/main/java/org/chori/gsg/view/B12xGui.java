@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.gsg.view;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -18,7 +18,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-import org.chori.bsg.view.searchboxes.*;
+import org.chori.gsg.view.searchboxes.*;
 
 public class B12xGui extends JFrame {
 

@@ -1,9 +1,9 @@
-package org.chori.bsg.controller;
+package org.chori.gsg.controller;
 
 import java.time.LocalDateTime;
 import javax.swing.JTextArea;
 
-import org.chori.bsg.view.*;
+import org.chori.gsg.view.*;
 
 public class Headers {
 

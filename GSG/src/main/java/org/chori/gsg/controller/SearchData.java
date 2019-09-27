@@ -1,4 +1,4 @@
-package org.chori.bsg.controller;
+package org.chori.gsg.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,8 +17,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.chori.bsg.model.*;
-import org.chori.bsg.view.*;
+import org.chori.gsg.model.*;
+import org.chori.gsg.view.*;
 
 public class SearchData {
 

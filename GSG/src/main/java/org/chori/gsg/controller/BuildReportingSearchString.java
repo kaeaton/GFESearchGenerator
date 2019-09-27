@@ -1,4 +1,4 @@
-package org.chori.bsg.controller;
+package org.chori.gsg.controller;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -7,7 +7,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.chori.bsg.view.*;
+import org.chori.gsg.view.*;
 
 public class BuildReportingSearchString {
 

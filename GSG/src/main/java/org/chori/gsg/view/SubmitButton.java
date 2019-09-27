@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.gsg.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.chori.bsg.controller.*;
-import org.chori.bsg.model.*;
-import org.chori.bsg.view.searchboxes.*;
+import org.chori.gsg.controller.*;
+import org.chori.gsg.model.*;
+import org.chori.gsg.view.searchboxes.*;
 
 
 public class SubmitButton { 

@@ -1,4 +1,4 @@
-package org.chori.bsg.view.searchboxes;
+package org.chori.gsg.view.searchboxes;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

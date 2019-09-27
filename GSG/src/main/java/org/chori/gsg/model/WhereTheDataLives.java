@@ -1,10 +1,10 @@
-package org.chori.bsg.model;
+package org.chori.gsg.model;
 
 import java.io.File;
 import java.nio.file.*;
 import java.util.prefs.Preferences;
 
-import org.chori.bsg.view.B12xGui;
+import org.chori.gsg.view.B12xGui;
 
 
 public class WhereTheDataLives {

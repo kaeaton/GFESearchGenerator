@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.gsg.view;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import org.chori.bsg.view.searchboxes.*;
+import org.chori.gsg.view.searchboxes.*;
 
 public class WhatLocus { 
 

@@ -1,4 +1,4 @@
-package org.chori.bsg.view;
+package org.chori.gsg.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

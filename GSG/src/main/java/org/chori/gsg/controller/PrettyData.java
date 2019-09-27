@@ -1,4 +1,4 @@
-package org.chori.bsg.controller;
+package org.chori.gsg.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.JTextArea;
 
-import org.chori.bsg.model.*;
-import org.chori.bsg.view.*;
+import org.chori.gsg.model.*;
+import org.chori.gsg.view.*;
 
 public class PrettyData {
 
@@ -118,7 +118,7 @@ public class PrettyData {
 
 			// Pretty data header
 			printToMe.append(String.format("%-25s", "Allele Name"));
-			printToMe.append(String.format("%-7s", "Locus"));
+			printToMe.append(String.format("%6s", "Locus "));
 			printToMe.append(String.format("5' "));
 			printToMe.append(String.format("E1 "));
 			printToMe.append(String.format("I1 "));
@@ -149,7 +149,7 @@ public class PrettyData {
 				hlaIdentifier = splitGfe[1].split("w");
 
 				// add the w back in (removed when split)
-				printToMe.append(hlaIdentifier[0] + "w ");
+				printToMe.append(String.format("%6s", hlaIdentifier[0] + "w "));
 
 				// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
 				splitGfe[0] = hlaIdentifier[1];

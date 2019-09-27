@@ -1,4 +1,4 @@
-package org.chori.bsg.controller;
+package org.chori.gsg.controller;
 
 import java.util.Collections;
 import java.util.Comparator;
