@@ -27,6 +27,7 @@ public class PrettyData {
 			
 			String line;
 			int[] spacingList = new int[18];
+			String[] hlaIdentifier = new String[2];
 			JTextArea printToMe = whichTextArea.get(whichTab);
 
 			System.out.println("Made it to SearchData: " + regex);
@@ -62,13 +63,21 @@ public class PrettyData {
 			String[] splitGfe = gfeAlleles[gfe].split("-");
 			spacingList = new int[splitGfe.length];
 
+			// split the first entry of the split GFE to break apart w and 3' UTR
+			hlaIdentifier = splitGfe[1].split("w");
+
+			// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
+			// splitGfe[0] = hlaIdentifier[1];
+			System.out.println(splitGfe[0]);
+			System.out.println(hlaIdentifier[1]);
+
 			int j = 0;
 
 			// cycle through the separated GFE. If the original GFE was a match 
-			// use value.length in spacingList, otherwise use 1 to populate it.
+			// use value.length in spacingList, otherwise use 2 to populate it.
 			for(String splitUpGfe:splitGfe) {
 
-				spacingList[j] = 1;
+				spacingList[j] = 2;
 				if (flag) { spacingList[j] = splitUpGfe.length(); }
 				
 				j++;
@@ -107,8 +116,25 @@ public class PrettyData {
 			SortData sorting = new SortData();
 			sortedDataMatches = sorting.sortTheData(dataMatches);
 
+			// Pretty data header
+			printToMe.append(String.format("%-25s", "Allele Name"));
+			printToMe.append(String.format("%-7s", "Locus"));
+			printToMe.append(String.format("5' "));
+			printToMe.append(String.format("E1 "));
+			printToMe.append(String.format("I1 "));
+			printToMe.append(String.format("E2"));
+			printToMe.append(System.lineSeparator());
+
+
+	// need to figure out spacing for header and assorted breakdown.
+	// maybe put into linked array list and insert as needed?
+			
+			// printToMe.append();
+			// printToMe.append(System.lineSeparator());
+
 			// Write the data to the appropriate text area
 			int m = 0;
+			int n = 0;
 			for (Map.Entry me:sortedDataMatches.entrySet()) {
 
 				// print allele name
@@ -116,11 +142,24 @@ public class PrettyData {
 
 				// cycle through gfe's individual features, 
 				// print with appropriate lengths
-				int n = 0;
+				n = 0;
 				splitGfe = ((String)me.getKey()).split("-");
+
+				// split the first entry of the split GFE to break apart w and 3' UTR
+				hlaIdentifier = splitGfe[1].split("w");
+
+				// add the w back in (removed when split)
+				printToMe.append(hlaIdentifier[0] + "w ");
+
+				// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
+				splitGfe[0] = hlaIdentifier[1];
+
+				// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
+				// n++;
+
 				for (String gfeFeature:splitGfe) {
 					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature));
-					if(n < (spacingList.length - 1)) { printToMe.append("-"); }
+					if(n < (spacingList.length - 1)) { printToMe.append(" "); }
 					n++;
 				}
 		        printToMe.append(System.lineSeparator());
@@ -146,6 +185,7 @@ public class PrettyData {
 			// }
 		} catch (Exception ex) {
 			System.out.println(ex); 
+			ex.printStackTrace();
 		}
 	}
 }

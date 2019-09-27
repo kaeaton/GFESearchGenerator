@@ -1,0 +1,23 @@
+HLA_CSV_SELECTED			Boolean: HLA CSV radiobutton
+HLA_TSV_SELECTED			Boolean: HLA TSV radiobutton
+HLA_PRETTY_SELECTED			Boolean: HLA TXT radiobutton
+
+KIR_CSV_SELECTED			Boolean: KIR CSV radiobutton
+KIR_TSV_SELECTED			Boolean: KIR TSV radiobutton
+KIR_PRETTY_SELECTED			Boolean: KIR TXT radiobutton
+
+NAME_CSV_SELECTED			Boolean: NAME CSV radiobutton
+NAME_TSV_SELECTED			Boolean: NAME TSV radiobutton
+NAME_PRETTY_SELECTED		Boolean: NAME TXT radiobutton
+
+BSG_HLA_SAVE_FILE			Boolean: Save results to file, HLA tab
+BSG_KIR_SAVE_FILE			Boolean: Save results to file, KIR tab
+BSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
+
+BSG_OPEN_TAB				Int: which tab was last in focus
+
+BSG_RAW_DATA				String: where to store the raw data files
+BSG_RESULTS_DATA			String: where to store the results files
+
+mvn clean compile assembly:single
+java -jar target/BSG-1.0-SNAPSHOT-jar-with-dependencies.jar 

@@ -66,8 +66,9 @@ public class SubmitButton {
             	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
             	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-            	// where's the data file?
+            	// where's the data file?                 whatVersion
             	File data = rawData.getRawData(whatLocus, "3.34.0");
+
             	// build me some Regex
             	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
             											allCheckBoxes, allTextFields);
