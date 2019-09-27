@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- The Basics -->
-  <groupId>org.chori.bsg</groupId>
-  <artifactId>BSG</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <groupId>org.chori.gsg</groupId>
+  <artifactId>GSG</artifactId>
+  <version>4.0</version>
 
   <packaging>jar</packaging>
 
@@ -57,7 +57,7 @@
   <!-- Build Settings -->
   <build>
     <sourceDirectory>
-      ${basedir}/src/main/java/org/chori/bsg
+      ${basedir}/src/main/java/org/chori/gsg
     </sourceDirectory>
     
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -76,7 +76,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>org.chori.bsg.view.B12xGui</mainClass>
+                <mainClass>org.chori.gsg.view.B12xGui</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>
@@ -106,7 +106,7 @@
         <goal>copy-resources</goal>
       </goals>
       <configuration>
-        <outputDirectory>${basedir}/src/main/java/org/chori/bsg</outputDirectory>
+        <outputDirectory>${basedir}/src/main/java/org/chori/gsg</outputDirectory>
         <resources>
           <resource>
             <directory>resources</directory>
@@ -128,7 +128,7 @@
         <goal>copy-dependencies</goal>
       </goals>
       <configuration>
-        <outputDirectory>${project.build.directory}/bsg/lib</outputDirectory>
+        <outputDirectory>${project.build.directory}/gsg/lib</outputDirectory>
         <overWriteReleases>false</overWriteReleases>
         <overWriteSnapshots>false</overWriteSnapshots>
         <overWriteIfNewer>true</overWriteIfNewer>
@@ -156,7 +156,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>org.chori.bsg.view.B12xGui</mainClass>
+                <mainClass>org.chori.gsg.view.B12xGui</mainClass>
               </manifest>
     <manifestEntries>
       <Class-Path>.</Class-Path>
@@ -186,7 +186,7 @@
   </build>
 
   <!-- More Project Information -->
-  <name>BSG</name>
+  <name>GSG</name>
   <url>http://www.chori.org</url>
 
   <!-- Environment Settings -->

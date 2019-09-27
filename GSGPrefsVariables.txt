@@ -20,4 +20,4 @@ BSG_RAW_DATA				String: where to store the raw data files
 BSG_RESULTS_DATA			String: where to store the results files
 
 mvn clean compile assembly:single
-java -jar target/BSG-1.0-SNAPSHOT-jar-with-dependencies.jar 
+java -jar target/GSG-4.0-jar-with-dependencies.jar
