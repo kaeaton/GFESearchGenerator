@@ -29,6 +29,10 @@ public class WhereTheDataLives {
 		prefs.put("BSG_RAW_DATA", rawDataFileFolder);
 	}
 
+	public String getRawDataPath() {
+		return prefs.get("BSG_RAW_DATA", defaultRawDataPath);
+	}
+
 	// will be set in options
 	public void setResultsDataPath(String resultsFileFolder) {
 		prefs.put("BSG_RESULTS_DATA", resultsFileFolder);

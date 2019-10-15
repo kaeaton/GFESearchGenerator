@@ -21,3 +21,4 @@ BSG_RESULTS_DATA			String: where to store the results files
 
 mvn clean compile assembly:single
 java -jar target/GSG-4.0-jar-with-dependencies.jar
+

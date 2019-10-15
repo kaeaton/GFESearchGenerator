@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.chori.gsg.view.searchboxes.*;
 
@@ -53,16 +54,20 @@ public class B12xGui extends JFrame {
 	// the holder panels
 	// they're embedded in the layout, with contents to be changed
 	public static JPanel hlaPanel = new JPanel();
+	public static JPanel namePanel = new JPanel();
 
 	// combo boxes for locus and version selection
 	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
 	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
-
+	public static JComboBox whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME");
+	public static JComboBox whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
+	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
 
 	// results text areas
 	public static JTextArea resultsTextAreaHla = new JTextArea();
+	public static JTextArea resultsTextAreaName = new JTextArea();
 
     /**
      * Creates new form B12xGUI
@@ -110,8 +115,9 @@ public class B12xGui extends JFrame {
     	// results textarea
     	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
     	resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
-    	// resultsTextAreaHla.setEditable(false);
     	resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
+    	// resultsTextAreaHla.setEditable(false);
+
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
@@ -182,6 +188,81 @@ public class B12xGui extends JFrame {
 
     /* Name Search tab */
     	parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
+    	
+    	// generate the HLA GFE panel
+    	JTextField nameSearchBox = new JTextField("", 20);
+    	// currentHlaPanel.setName("NAME");
+    	namePanel.add(nameSearchBox);
+    	
+    	// results textarea
+    	JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
+    	resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
+    	resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
+    	// resultsTextAreaHla.setEditable(false);
+
+    	// buttons
+    	JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
+    	JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
+
+    	// submit/cancel buttons panel
+    	// JPanel bottomButtons = new JPanel();
+    	// bottomButtons.add(submitButtonName);
+    	// bottomButtons.add(cancelButton);
+
+    	// layout / add them to the hlaGfeTab
+    	nameGfeTab.setLayout(new GridBagLayout());
+		GridBagConstraints e = new GridBagConstraints();
+		e.anchor = GridBagConstraints.NORTHWEST;
+		e.insets = new Insets(0,0,10,0);
+		e.weightx = 0.5;
+		
+		// line 0
+		e.gridx = 0;
+		e.gridy = 0;
+		nameGfeTab.add(whatLocusName, e);
+		
+		// e.gridx = 1;
+		// nameGfeTab.add(usageInstructions, e);
+
+		// line 1
+		// e.insets = new Insets(0,0,0,0);
+		// e.gridx = 0;
+		// e.gridy = 1;
+		// nameGfeTab.add(selectAllLabel, e);
+
+		// line 2
+		e.gridy = 2;
+		e.gridwidth = 4;
+		nameGfeTab.add(namePanel, e);
+
+		// line 3
+		e.anchor = GridBagConstraints.WEST;
+		e.gridwidth = 1;
+		e.gridy = 3;
+		nameGfeTab.add(resetButtonName, e);
+
+		e.gridx = 1;
+		nameGfeTab.add(whatVersionName, e);
+
+		// line 4
+		e.anchor = GridBagConstraints.CENTER;
+		e.gridwidth = 4;
+		e.gridx = 0;
+		e.gridy = 4;
+		nameGfeTab.add(fileFormatName, e);
+
+		// line 5
+		e.anchor = GridBagConstraints.NORTH;
+		e.weightx = 1;
+		e.weighty = 1;
+		e.gridy = 5;
+		nameGfeTab.add(resultsScrollPaneName, e);
+
+		// line 6
+		e.weightx = 0;
+		e.weighty = 0;
+		e.gridy = 6;
+		nameGfeTab.add(bottomButtons, e);
 
     /* Options tab */
     	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");

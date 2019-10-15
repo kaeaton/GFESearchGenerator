@@ -43,6 +43,9 @@ public class SubmitButton {
 			case "HLA":
 				hlaListener();
 				break;
+            case "NAME":
+                nameListener();
+                break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
 		}
@@ -95,6 +98,15 @@ public class SubmitButton {
             }
         });
 	}
+
+    private void nameListener() {
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+
+            }
+        });
+    }
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
         for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
