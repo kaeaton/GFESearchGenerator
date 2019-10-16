@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JTextArea;
 
@@ -14,12 +17,27 @@ import org.chori.gsg.view.*;
 
 public class PrettyData {
 
+	// Exons per locus
+	private static HashMap<String, Integer> hlaExonTotal = new HashMap();
 	private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
 	private HashMap<String, String> dataMatches = new HashMap();
 	private LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
 
 	public PrettyData() {
-		this.whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+		whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
+
+		hlaExonTotal.put("A", 8);
+		hlaExonTotal.put("B", 7);
+		hlaExonTotal.put("C", 8);
+		hlaExonTotal.put("DPA1", 4);
+		hlaExonTotal.put("DPB1", 5);
+		hlaExonTotal.put("DQA1", 4);
+		hlaExonTotal.put("DQB1", 6);
+		hlaExonTotal.put("DRB1", 6);
+		hlaExonTotal.put("DRB3", 6);
+		hlaExonTotal.put("DRB4", 6);
+		hlaExonTotal.put("DRB5", 6);
 	}
 
 	public void searchThroughData(File file, String regex, String whichTab) {
@@ -60,25 +78,34 @@ public class PrettyData {
 			}
 				
 			// split the gfe along the dashes
-			String[] splitGfe = gfeAlleles[gfe].split("-");
-			spacingList = new int[splitGfe.length];
+			String[] protoSplitGfe = gfeAlleles[gfe].split("-");
+			spacingList = new int[protoSplitGfe.length - 1];
 
 			// split the first entry of the split GFE to break apart w and 3' UTR
-			hlaIdentifier = splitGfe[1].split("w");
+			hlaIdentifier = protoSplitGfe[1].split("w");
 
 			// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
-			// splitGfe[0] = hlaIdentifier[1];
-			System.out.println(splitGfe[0]);
-			System.out.println(hlaIdentifier[1]);
+			protoSplitGfe[0] = hlaIdentifier[1];
+			// System.out.println(splitGfe[0]);
+			// System.out.println(hlaIdentifier[1]);
+			// System.out.println(splitGfe[1]);
+
+			// copy to new arrayList to remove protoSplitGfe[1]
+			LinkedList<String> splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
+			splitGfe.remove(1);
+
+			System.out.println(splitGfe.get(1));
+
 
 			int j = 0;
-
 			// cycle through the separated GFE. If the original GFE was a match 
-			// use value.length in spacingList, otherwise use 2 to populate it.
+			// use value.length in spacingList, otherwise use 3 to populate it.
 			for(String splitUpGfe:splitGfe) {
 
-				spacingList[j] = 2;
-				if (flag) { spacingList[j] = splitUpGfe.length(); }
+				spacingList[j] = 3;
+
+				if (flag && splitUpGfe.length() >= 3) 
+					spacingList[j] = (splitUpGfe.length() + 1);
 				
 				j++;
 			}
@@ -97,7 +124,11 @@ public class PrettyData {
 					dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 
 					// split the gfe along the dashes
-					splitGfe = gfeAlleles[gfe].split("-");
+					protoSplitGfe = gfeAlleles[gfe].split("-");
+					// copy to new arrayList to remove protoSplitGfe[1]
+					splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
+					splitGfe.remove(1);
+
 					int k = 0;
 
 					// if a feature String is longer than the length listed 
@@ -117,24 +148,16 @@ public class PrettyData {
 			sortedDataMatches = sorting.sortTheData(dataMatches);
 
 			// Pretty data header
-			printToMe.append(String.format("%-25s", "Allele Name"));
-			printToMe.append(String.format("%6s", "Locus "));
-			printToMe.append(String.format("5' "));
-			printToMe.append(String.format("E1 "));
-			printToMe.append(String.format("I1 "));
-			printToMe.append(String.format("E2"));
-			printToMe.append(System.lineSeparator());
-
+			printHeader(hlaIdentifier[0], spacingList, printToMe);
 
 	// need to figure out spacing for header and assorted breakdown.
 	// maybe put into linked array list and insert as needed?
-			
-			// printToMe.append();
-			// printToMe.append(System.lineSeparator());
+
 
 			// Write the data to the appropriate text area
 			int m = 0;
 			int n = 0;
+			// int o = 0;
 			for (Map.Entry me:sortedDataMatches.entrySet()) {
 
 				// print allele name
@@ -143,23 +166,28 @@ public class PrettyData {
 				// cycle through gfe's individual features, 
 				// print with appropriate lengths
 				n = 0;
-				splitGfe = ((String)me.getKey()).split("-");
-
+				protoSplitGfe = ((String)me.getKey()).split("-");
+				splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
+				// splitGfe.remove(1);
 				// split the first entry of the split GFE to break apart w and 3' UTR
-				hlaIdentifier = splitGfe[1].split("w");
+				hlaIdentifier = splitGfe.get(1).split("w");
 
 				// add the w back in (removed when split)
 				printToMe.append(String.format("%6s", hlaIdentifier[0] + "w "));
 
 				// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
-				splitGfe[0] = hlaIdentifier[1];
+				splitGfe.set(0, hlaIdentifier[1]);
+				splitGfe.remove(1);
+				// splitGfe.remove(2);
 
 				// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
 				// n++;
 
 				for (String gfeFeature:splitGfe) {
-					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature));
-					if(n < (spacingList.length - 1)) { printToMe.append(" "); }
+					
+					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature) + " ");
+					// if(n < (spacingList.length - 1)) 
+					// 	{ printToMe.append(" "); }
 					n++;
 				}
 		        printToMe.append(System.lineSeparator());
@@ -187,5 +215,25 @@ public class PrettyData {
 			System.out.println(ex); 
 			ex.printStackTrace();
 		}
+	}
+
+	private void printHeader(String locus, int[] spacingList, JTextArea printToMe) {
+		int j = 1;
+
+		printToMe.append(String.format("%-25s", "Allele Name"));
+		printToMe.append(String.format("%6s", "Locus "));
+		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'") + " ");
+		j++;
+
+		for(int i = 1; i < hlaExonTotal.get(locus); i++) {
+			printToMe.append(String.format("%-" + spacingList[j] + "s", ("E" + i)) + " ");
+			j++;
+			printToMe.append(String.format("%-" + spacingList[j] + "s", ("I" + i)) + " ");
+			j++;
+		}
+		
+		printToMe.append(String.format("%-" + spacingList[j] + "s", ("E" + hlaExonTotal.get(locus))) + " ");
+		printToMe.append(String.format("3'"));
+		printToMe.append(System.lineSeparator());
 	}
 }
