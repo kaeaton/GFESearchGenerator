@@ -29,7 +29,7 @@ public class SubmitButton {
 
 
 	// the button
-	public JButton submitButton = new JButton("Submit");
+	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() {
 
@@ -37,14 +37,15 @@ public class SubmitButton {
 
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
+        JButton submitButton = new JButton("Submit");
 
 		// who is this reset button for?
 		switch(whichTab) {
 			case "HLA":
-				hlaListener();
+				hlaListener(submitButton);
 				break;
             case "NAME":
-                nameListener();
+                nameListener(submitButton);
                 break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -53,8 +54,8 @@ public class SubmitButton {
 		return submitButton;
 	}
 
-	private void hlaListener() {
-		submitButton.addActionListener(new ActionListener() {
+	private void hlaListener(JButton subButton) {
+		subButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
 
@@ -99,8 +100,8 @@ public class SubmitButton {
         });
 	}
 
-    private void nameListener() {
-        submitButton.addActionListener(new ActionListener() {
+    private void nameListener(JButton subButton) {
+        subButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
 

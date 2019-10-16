@@ -15,16 +15,18 @@ import javax.swing.JPanel;
 public class FileFormatPanel { 
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-	public static JRadioButton csvButton = new JRadioButton("CSV");
-	public static JRadioButton tsvButton = new JRadioButton("TSV");
-	public static JRadioButton prettyButton = new JRadioButton("Pretty");
-    public static JCheckBox saveToFileCheckBox = new JCheckBox("Save to file");
+
 
 	public FileFormatPanel() {
 
 	}
 
 	public JPanel createFileFormatPanel(String whichTab) {
+		JRadioButton csvButton = new JRadioButton("CSV");
+		JRadioButton tsvButton = new JRadioButton("TSV");
+		JRadioButton prettyButton = new JRadioButton("Pretty");
+    	JCheckBox saveToFileCheckBox = new JCheckBox("Save to file");
+
 		System.out.println("Generating the file format panel");
 		
 		// panel
@@ -75,10 +77,20 @@ public class FileFormatPanel {
         		tsvButton.setSelected(prefs.getBoolean("HLA_TSV_SELECTED", false));
         		prettyButton.setSelected(prefs.getBoolean("HLA_PRETTY_SELECTED", false));
         		saveToFileCheckBox.setSelected(prefs.getBoolean("BSG_HLA_SAVE_FILE", false));
-				hlaCsvListener();
-				hlaTsvListener();
-				hlaPrettyListener();
-				saveToFileCheckBoxListener();
+				hlaCsvListener(csvButton, tsvButton, prettyButton);
+				hlaTsvListener(csvButton, tsvButton, prettyButton);
+				hlaPrettyListener(csvButton, tsvButton, prettyButton);
+				hlaSaveToFileCheckBoxListener(saveToFileCheckBox);
+				break;
+			case "NAME":
+        		csvButton.setSelected(prefs.getBoolean("NAME_CSV_SELECTED", true));
+        		tsvButton.setSelected(prefs.getBoolean("NAME_TSV_SELECTED", false));
+        		prettyButton.setSelected(prefs.getBoolean("NAME_PRETTY_SELECTED", false));
+        		saveToFileCheckBox.setSelected(prefs.getBoolean("BSG_NAME_SAVE_FILE", false));
+				nameCsvListener(csvButton, tsvButton, prettyButton);
+				nameTsvListener(csvButton, tsvButton, prettyButton);
+				namePrettyListener(csvButton, tsvButton, prettyButton);
+				nameSaveToFileCheckBoxListener(saveToFileCheckBox);
 				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -88,7 +100,7 @@ public class FileFormatPanel {
 	}
 
 	// separate functions because each tab needs it's own set of prefs
-	private void hlaPrefsFileFormat() {
+	private void hlaPrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		if (csvButton.isSelected()) prefs.putBoolean("HLA_CSV_SELECTED", true);
 		else prefs.putBoolean("HLA_CSV_SELECTED", false);
 		System.out.println("HLA_CSV is selected: " + prefs.getBoolean("HLA_CSV_SELECTED", true));
@@ -102,40 +114,91 @@ public class FileFormatPanel {
 		System.out.println("HLA_PRETTY is selected: " + prefs.getBoolean("HLA_PRETTY_SELECTED", false));
 	}
 
+	private void namePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+		if (csvButton.isSelected()) prefs.putBoolean("NAME_CSV_SELECTED", true);
+		else prefs.putBoolean("NAME_CSV_SELECTED", false);
+		System.out.println("NAME_CSV is selected: " + prefs.getBoolean("NAME_CSV_SELECTED", true));
+	   
+		if (tsvButton.isSelected()) prefs.putBoolean("NAME_TSV_SELECTED", true);
+		else prefs.putBoolean("NAME_TSV_SELECTED", false);
+		System.out.println("NAME_TSV is selected: " + prefs.getBoolean("NAME_TSV_SELECTED", false));
+
+		if (prettyButton.isSelected()) prefs.putBoolean("NAME_PRETTY_SELECTED", true);
+		else prefs.putBoolean("NAME_PRETTY_SELECTED", false);
+		System.out.println("NAME_PRETTY is selected: " + prefs.getBoolean("NAME_PRETTY_SELECTED", false));
+	}
+
 	// separate listeners because Java button groups don't have listeners
 	/* HLA */
-	private void hlaCsvListener() {
+	private void hlaCsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		csvButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat();
+            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void hlaTsvListener() {
+	private void hlaTsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		tsvButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat();
+            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void hlaPrettyListener() {
+	private void hlaPrettyListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		prettyButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat();
+            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void saveToFileCheckBoxListener() {
+	private void hlaSaveToFileCheckBoxListener(JCheckBox saveToFileCheckBox) {
 		saveToFileCheckBox.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
             	prefs.putBoolean("BSG_HLA_SAVE_FILE", saveToFileCheckBox.isSelected());
+            }
+        });
+	}
+
+	/* NAME */
+	private void nameCsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+		csvButton.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	namePrefsFileFormat(csvButton, tsvButton, prettyButton);
+            }
+        });
+	}
+
+	private void nameTsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+		tsvButton.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	namePrefsFileFormat(csvButton, tsvButton, prettyButton);
+            }
+        });
+	}
+
+	private void namePrettyListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+		prettyButton.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	namePrefsFileFormat(csvButton, tsvButton, prettyButton);
+            }
+        });
+	}
+
+	private void nameSaveToFileCheckBoxListener(JCheckBox saveToFileCheckBox) {
+		saveToFileCheckBox.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	prefs.putBoolean("BSG_NAME_SAVE_FILE", saveToFileCheckBox.isSelected());
             }
         });
 	}

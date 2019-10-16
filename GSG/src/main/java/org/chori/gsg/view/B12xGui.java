@@ -89,19 +89,6 @@ public class B12xGui extends JFrame {
     /* tabbed pane */
     	parentTabbedPane.setPreferredSize(new Dimension(1000, 700));
 
-    /* reusable */
-
-    	// labels HLA and KIR
-    	JLabel selectAllLabel = new JLabel("Check all");
-    	JTextArea usageInstructions = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
-    												+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
-    	usageInstructions.setBackground(hlaPanel.getBackground());
-    	usageInstructions.setEditable(false);
-    	usageInstructions.setFocusable(false);
-
-    	// buttons
-    	JButton cancelButton = cancelButtonGenerator.createCancelButton();
-
     /* HLA GFE tab */
 
     	// add panel to tab pane
@@ -118,15 +105,23 @@ public class B12xGui extends JFrame {
     	resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
     	// resultsTextAreaHla.setEditable(false);
 
+		// labels
+    	JLabel selectAllLabelHla = new JLabel("Check all");
+    	JTextArea usageInstructionsHla = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+    												+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
+    	usageInstructionsHla.setBackground(hlaPanel.getBackground());
+    	usageInstructionsHla.setEditable(false);
+    	usageInstructionsHla.setFocusable(false);
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
     	JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
+    	JButton cancelButtonHla = cancelButtonGenerator.createCancelButton();
 
     	// submit/cancel buttons panel
-    	JPanel bottomButtons = new JPanel();
-    	bottomButtons.add(submitButtonHla);
-    	bottomButtons.add(cancelButton);
+    	JPanel bottomButtonsHla = new JPanel();
+    	bottomButtonsHla.add(submitButtonHla);
+    	bottomButtonsHla.add(cancelButtonHla);
 
     	// layout / add them to the hlaGfeTab
     	hlaGfeTab.setLayout(new GridBagLayout());
@@ -141,13 +136,13 @@ public class B12xGui extends JFrame {
 		hlaGfeTab.add(whatLocusHla, c);
 		
 		c.gridx = 1;
-		hlaGfeTab.add(usageInstructions, c);
+		hlaGfeTab.add(usageInstructionsHla, c);
 
 		// line 1
 		c.insets = new Insets(0,0,0,0);
 		c.gridx = 0;
 		c.gridy = 1;
-		hlaGfeTab.add(selectAllLabel, c);
+		hlaGfeTab.add(selectAllLabelHla, c);
 
 		// line 2
 		c.gridy = 2;
@@ -181,10 +176,10 @@ public class B12xGui extends JFrame {
 		c.weightx = 0;
 		c.weighty = 0;
 		c.gridy = 6;
-		hlaGfeTab.add(bottomButtons, c);
+		hlaGfeTab.add(bottomButtonsHla, c);
 
     /* KIR GFE tab */
-    	parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
+    	// parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
 
     /* Name Search tab */
     	parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
@@ -203,11 +198,12 @@ public class B12xGui extends JFrame {
     	// buttons
     	JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
     	JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
+    	JButton cancelButtonName = cancelButtonGenerator.createCancelButton();
 
     	// submit/cancel buttons panel
-    	// JPanel bottomButtons = new JPanel();
-    	// bottomButtons.add(submitButtonName);
-    	// bottomButtons.add(cancelButton);
+    	JPanel bottomButtonsName = new JPanel();
+    	bottomButtonsName.add(submitButtonName);
+    	bottomButtonsName.add(cancelButtonName);
 
     	// layout / add them to the hlaGfeTab
     	nameGfeTab.setLayout(new GridBagLayout());
@@ -262,10 +258,10 @@ public class B12xGui extends JFrame {
 		e.weightx = 0;
 		e.weighty = 0;
 		e.gridy = 6;
-		nameGfeTab.add(bottomButtons, e);
+		nameGfeTab.add(bottomButtonsName, e);
 
     /* Options tab */
-    	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
+    	// parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
 	}
 
