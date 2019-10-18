@@ -44,8 +44,14 @@ public class PrettyData {
 		try {
 			
 			String line;
+			int gfe = 1;
 			int[] spacingList = new int[18];
+			
 			String[] hlaIdentifier = new String[2];
+			String[] protoSplitGfe = new String[2];
+			String[] gfeAlleles = new String[2];
+			LinkedList<String> splitGfe = new LinkedList<>();
+
 			JTextArea printToMe = whichTextArea.get(whichTab);
 
 			System.out.println("Made it to SearchData: " + regex);
@@ -54,68 +60,79 @@ public class PrettyData {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String fileDate = br.readLine();
 			String version = br.readLine();
-			String firstDataLine = br.readLine();
+			// String firstDataLine = br.readLine();
 
 			// use comma as separator
-			String[] gfeAlleles = firstDataLine.split(",");
+			// String[] gfeAlleles = firstDataLine.split(",");
 
 			// which side is the GFE? (Old files use names as key, new ones gfe)
 			// we want the side that doesn't contain the asterisk.
-			int gfe = 1;
-			if(gfeAlleles[1].contains("*")) { gfe = 0; }
-			System.out.println(gfeAlleles[gfe]);
+			// int gfe = 1;
+			// if(gfeAlleles[1].contains("*")) { gfe = 0; }
+			// System.out.println(gfeAlleles[gfe]);
 
-			// flag to know if the first line was a match
+			// // flag to know if the first line was a match
 			boolean flag = false;
 
-			// Run the GFE portion past the regex
-			if (gfeAlleles[gfe].matches(regex)){
-
-				// put gfe and name in holding hashmap for later printing
-				dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-
-				flag = true;
-			}
-				
-			// split the gfe along the dashes
-			String[] protoSplitGfe = gfeAlleles[gfe].split("-");
-			spacingList = new int[protoSplitGfe.length - 1];
-
-			// split the first entry of the split GFE to break apart w and 3' UTR
-			hlaIdentifier = protoSplitGfe[1].split("w");
-
-			// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
-			protoSplitGfe[0] = hlaIdentifier[1];
-			// System.out.println(splitGfe[0]);
-			// System.out.println(hlaIdentifier[1]);
-			// System.out.println(splitGfe[1]);
-
-			// copy to new arrayList to remove protoSplitGfe[1]
-			LinkedList<String> splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
-			splitGfe.remove(1);
-
-			System.out.println(splitGfe.get(1));
-
-
-			int j = 0;
-			// cycle through the separated GFE. If the original GFE was a match 
-			// use value.length in spacingList, otherwise use 3 to populate it.
-			for(String splitUpGfe:splitGfe) {
-
-				spacingList[j] = 3;
-
-				if (flag && splitUpGfe.length() >= 3) 
-					spacingList[j] = (splitUpGfe.length() + 1);
-				
-				j++;
-			}
-
 			
+			// // Run the GFE portion past the regex
+			// if (gfeAlleles[gfe].matches(regex)){
+
+			// 	// put gfe and name in holding hashmap for later printing
+			// 	dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+
+			// 	flag = true;
+			// }
+				
+			// // split the gfe along the dashes
+			// protoSplitGfe = gfeAlleles[gfe].split("-");
+			// spacingList = new int[protoSplitGfe.length - 1];
+
+			// // split the first entry of the split GFE to break apart w and 3' UTR
+			// hlaIdentifier = protoSplitGfe[1].split("w");
+
+			// // for spacing purposes, split off 'HLA-_w', return 3' UTR to array
+			// protoSplitGfe[0] = hlaIdentifier[1];
+			// // System.out.println(splitGfe[0]);
+			// // System.out.println(hlaIdentifier[1]);
+			// // System.out.println(splitGfe[1]);
+
+			// // copy to new arrayList to remove protoSplitGfe[1]
+			// LinkedList<String> splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
+			// splitGfe.remove(1);
+
+			// System.out.println(splitGfe.get(1));
+
+
+			// int j = 0;
+			// // cycle through the separated GFE. If the original GFE was a match 
+			// // use value.length in spacingList, otherwise use 3 to populate it.
+			
+			// for(String splitUpGfe:splitGfe) {
+
+			// 	// spacingList[j] = 3;
+
+			// 	if (flag && spacingList[j] < (splitUpGfe.length() + 1)) 
+			// 		spacingList[j] = (splitUpGfe.length() + 1);
+			// 	j++;
+			// }
+			
+
 			// parse the gfe spacing for each matching line
 			while ((line = br.readLine()) != null) {
 
 				// use comma as separator
 				gfeAlleles = line.split(",");
+
+				// which side is the GFE? (Old files use names as key, new ones gfe)
+				// we want the side that doesn't contain the asterisk.
+				// flag so we only run it once
+				if (!flag) {
+					
+					if(gfeAlleles[1].contains("*")) { gfe = 0; }
+					
+					flag = true;
+				}
 
 				// Run the GFE portion through the parser
 				if (gfeAlleles[gfe].matches(regex)){
@@ -125,6 +142,11 @@ public class PrettyData {
 
 					// split the gfe along the dashes
 					protoSplitGfe = gfeAlleles[gfe].split("-");
+					System.out.println("protoSplitGfe[1]: " + protoSplitGfe[1]);
+
+					spacingList = new int[protoSplitGfe.length - 1];
+					Arrays.fill(spacingList, 3);
+
 					// copy to new arrayList to remove protoSplitGfe[1]
 					splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
 					splitGfe.remove(1);
@@ -134,9 +156,11 @@ public class PrettyData {
 					// if a feature String is longer than the length listed 
 					// in the spacing array, replace that length with the new one
 					for(String splitUpGfe:splitGfe) {
-						if (splitUpGfe.length() > spacingList[k]) {
-							spacingList[k] = splitUpGfe.length();
-						}
+
+						if (spacingList[k] < (splitUpGfe.length() + 1)) 
+							spacingList[k] = (splitUpGfe.length() + 1);
+						// else 
+						// 	spacingList[k] = 3;
 
 						k++;
 					}
@@ -147,8 +171,15 @@ public class PrettyData {
 			SortData sorting = new SortData();
 			sortedDataMatches = sorting.sortTheData(dataMatches);
 
+			System.out.println("splitGfe.get(1): " + splitGfe.get(1));
+			// for(int num:spacingList) {
+			// 	System.out.println("spacingList: " + num);
+			// }
+			// // System.out.println(hlaIdentifier[1]);
+			// // System.out.println(splitGfe[1]);
+			// System.out.println("printToMe: " + printToMe);
 			// Pretty data header
-			printHeader(hlaIdentifier[0], spacingList, printToMe);
+			printHeader(splitGfe.get(0), spacingList, printToMe);
 
 	// need to figure out spacing for header and assorted breakdown.
 	// maybe put into linked array list and insert as needed?
@@ -179,7 +210,7 @@ public class PrettyData {
 				splitGfe.set(0, hlaIdentifier[1]);
 				splitGfe.remove(1);
 				// splitGfe.remove(2);
-
+				System.out.println("splitGfe.get(0): " + splitGfe.get(0));
 				// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
 				// n++;
 
@@ -222,8 +253,8 @@ public class PrettyData {
 
 		printToMe.append(String.format("%-25s", "Allele Name"));
 		printToMe.append(String.format("%6s", "Locus "));
-		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'") + " ");
-		j++;
+		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5' ") + " ");
+		// j++;
 
 		for(int i = 1; i < hlaExonTotal.get(locus); i++) {
 			printToMe.append(String.format("%-" + spacingList[j] + "s", ("E" + i)) + " ");

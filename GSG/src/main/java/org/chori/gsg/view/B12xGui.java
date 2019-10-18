@@ -61,6 +61,7 @@ public class B12xGui extends JFrame {
 	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
 	public static JComboBox whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME");
 	public static JComboBox whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
+	
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
@@ -266,6 +267,15 @@ public class B12xGui extends JFrame {
 	}
 
     public static void main(String args[]) {
+  //   	try {
+		// 	for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		// 		if ("Nimbus".equals(info.getName())) {
+		// 			javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		// 			break;
+		// 		}
+		// 	}
+		// } catch (Exception ex) { System.out.println(ex); }
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

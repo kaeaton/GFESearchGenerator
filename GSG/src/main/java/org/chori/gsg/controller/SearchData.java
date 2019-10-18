@@ -22,14 +22,14 @@ import org.chori.gsg.view.*;
 
 public class SearchData {
 
-    private static HashMap<String, JTextArea> whichTextArea = new HashMap();
+    private static HashMap<String, JTextArea> whichTextArea = new HashMap<>();
 
 	public SearchData() {
-        this.whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
-        // this.whichTextArea.put("KIR", B12xGui.kirNeo4jResults);
+        whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+        whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 	}
 
-	public void searchThroughData(File file, String regex, String dataType, String whichTab) {
+	public void searchThroughData(File file, String regex, String dataFormat, String whichTab) {
 
         int i = 0;
         String line,
@@ -37,7 +37,8 @@ public class SearchData {
         HashMap<String, String> unsortedData = new HashMap();
         LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
         // boolean hlaWriteToFileChecked = prefs.getBoolean("BSG_HLA_SAVE_FILE", false);        
-        JTextArea printToMe = whichTextArea.get(whichTab);
+        JTextArea printToMe = whichTextArea.get("HLA"); //whichTab);
+        System.out.println("print to me: " + printToMe);
         
         System.out.println("Made it to SearchData: " + regex);
             
@@ -84,21 +85,23 @@ public class SearchData {
         // sort the data: passed on with GFE as key
         SortData sorting = new SortData();
         sortedDataMatches = sorting.sortTheData(unsortedData);
-
+        
         // print the sorted data to the appropriate screen 
         for (Map.Entry me:sortedDataMatches.entrySet()) {
 
-            switch (dataType){
+            switch (dataFormat){
                 case "CSV":
-                    System.out.println("Reached CSV in switch in SearchData");
-                    whichTextArea.get(whichTab).append((String)me.getValue()+ "," + (String)me.getKey());
-                    whichTextArea.get(whichTab).append(System.lineSeparator());
+                    // System.out.println("Reached CSV in switch in SearchData");
+                    // whichTextArea.get(whichTab).append("test");
+                    // B12xGui.resultsTextAreaHla.append("Test");
+                    printToMe.append(me.getValue() + "," + me.getKey());
+                    printToMe.append(System.lineSeparator());
                     break;
                 case "TSV":
-                    System.out.println("Reached TSV in switch in SearchData");
-                    // whichTextArea.get(whichTab).append((String)me.getValue()+ "\t" + (String)me.getKey());
-                    printToMe.append("Test");
-                    // whichTextArea.get(whichTab).append(System.lineSeparator());
+                    // System.out.println("Reached TSV in switch in SearchData");
+                    printToMe.append((String)me.getValue()+ "\t" + (String)me.getKey());
+                    // printToMe.append("Test");
+                    printToMe.append(System.lineSeparator());
                     break;
                 default:
                     System.out.println("SearchData is looking for a format that isn't listed.");

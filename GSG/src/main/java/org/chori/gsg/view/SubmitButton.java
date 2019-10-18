@@ -20,10 +20,9 @@ import org.chori.gsg.view.searchboxes.*;
 
 public class SubmitButton { 
 
-	// class instantiations
+	// // class instantiations
 	private BuildRegex buildRegex = new BuildRegex();
 	private BuildReportingSearchString buildRSS = new BuildReportingSearchString();
-	private SearchData searchData = new SearchData();
 	private Headers header = new Headers();
 	private WhereTheDataLives rawData = new WhereTheDataLives();
 
@@ -32,7 +31,13 @@ public class SubmitButton {
 	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() {
-
+        // class instantiations
+        // BuildRegex buildRegex = new BuildRegex();
+        // BuildReportingSearchString buildRSS = new BuildReportingSearchString();
+        // SearchData searchData = new SearchData();
+        // Headers header = new Headers();
+        // WhereTheDataLives rawData = new WhereTheDataLives();
+        // PrettyData prettyData = new PrettyData();
 	}
 
 	public JButton createSubmitButton(String whichTab) {
@@ -87,6 +92,7 @@ public class SubmitButton {
             	
             	// search the data & print to screen
             	if (!dataFormat.equals("Pretty")) {
+                    SearchData searchData = new SearchData();
 	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
             	} else {
             		PrettyData prettyData = new PrettyData();

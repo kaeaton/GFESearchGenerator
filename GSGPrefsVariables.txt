@@ -14,6 +14,9 @@ BSG_HLA_SAVE_FILE			Boolean: Save results to file, HLA tab
 BSG_KIR_SAVE_FILE			Boolean: Save results to file, KIR tab
 BSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
 
+GSG_HLA_LOCUS				int: what locus selected by index, HLA tab
+GSG_NAME_LOCUS_1			int: what locus selected by index, NAME tab
+
 BSG_OPEN_TAB				Int: which tab was last in focus
 
 BSG_RAW_DATA				String: where to store the raw data files
