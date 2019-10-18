@@ -63,45 +63,46 @@ public class SubmitButton {
 		subButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
+                Runnable submit = new Runnable() {
+                    public void run() {
+                    	// the lists of hla components
+                    	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
+                    	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
 
-            	// the lists of hla components
-            	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
-            	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
+                    	// what locus, version, and format?
+                    	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+                    	String whatVersion = "3.34.0"; // B12xGui.whatVersionHla.getSelectedItem().toString();
+                    	String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
+                    	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
+                    	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-            	// what locus, version, and format?
-            	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-            	String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
-            	String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
-            	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
-            	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
+                    	// where's the data file?                 
+                    	File data = rawData.getRawData(whatLocus, whatVersion);
 
-            	// where's the data file?                 whatVersion
-            	File data = rawData.getRawData(whatLocus, "3.34.0");
+                    	// build me some Regex
+                    	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
+                    											allCheckBoxes, allTextFields);
+                    	String reportingSS = buildRSS.assembleReportingSearchString("HLA", whatLocus, 
+                    											allCheckBoxes, allTextFields);
 
-            	// build me some Regex
-            	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
-            											allCheckBoxes, allTextFields);
-            	String reportingSS = buildRSS.assembleReportingSearchString("HLA", whatLocus, 
-            											allCheckBoxes, allTextFields);
-            	
-            	// clear the results window
-            	B12xGui.resultsTextAreaHla.setText("");
+                        // clear results screen
+                        B12xGui.resultsTextAreaHla.setText("");
 
-            	// print headers                        whatVersion
-            	header.printHeaders("HLA", reportingSS, "3.34.0", whatLocus);
-            	
-            	// search the data & print to screen
-            	if (!dataFormat.equals("Pretty")) {
-                    SearchData searchData = new SearchData();
-	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
-            	} else {
-            		PrettyData prettyData = new PrettyData();
-            		prettyData.searchThroughData(data, regex, "HLA");
-            	}
+                    	// print headers
+                    	header.printHeaders("HLA", reportingSS, whatVersion, whatLocus);
+                    	
+                    	// search the data & print to screen
+                    	if (!dataFormat.equals("Pretty")) {
+                            SearchData searchData = new SearchData();
+        	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
+                    	} else {
+                    		PrettyData prettyData = new PrettyData();
+                    		prettyData.searchThroughData(data, regex, "HLA");
+                    	}
+                    }
+                };
+                new Thread(submit).start();
 
-
-
-            	// dataSearch
             }
         });
 	}

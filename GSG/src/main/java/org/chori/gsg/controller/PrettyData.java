@@ -41,87 +41,33 @@ public class PrettyData {
 	}
 
 	public void searchThroughData(File file, String regex, String whichTab) {
+		
+		String line;
+		
+		int gfe = 1;
+		int[] spacingList = new int[18];
+		
+		String[] hlaIdentifier = new String[2];
+		String[] protoSplitGfe = new String[2];
+		String[] gfeAlleles = new String[2];
+
+		LinkedList<String> splitGfe = new LinkedList<>();
+
+		JTextArea printToMe = whichTextArea.get(whichTab);
+
+		System.out.println("Made it to SearchData: " + regex);
+			
 		try {
-			
-			String line;
-			
-			int gfe = 1;
-			int[] spacingList = new int[18];
-			
-			String[] hlaIdentifier = new String[2];
-			String[] protoSplitGfe = new String[2];
-			String[] gfeAlleles = new String[2];
-			// String[] locus = new String;
-			LinkedList<String> splitGfe = new LinkedList<>();
-
-			JTextArea printToMe = whichTextArea.get(whichTab);
-
-			System.out.println("Made it to SearchData: " + regex);
-			
 			// Read the File
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String fileDate = br.readLine();
 			String version = br.readLine();
-			// String firstDataLine = br.readLine();
-
-			// use comma as separator
-			// String[] gfeAlleles = firstDataLine.split(",");
-
-			// which side is the GFE? (Old files use names as key, new ones gfe)
-			// we want the side that doesn't contain the asterisk.
-			// int gfe = 1;
-			// if(gfeAlleles[1].contains("*")) { gfe = 0; }
-			// System.out.println(gfeAlleles[gfe]);
 
 			// flag to turn on gfe identification
 			boolean flag = false;
 
 			// flag to reset the size list
-			boolean listFlag = false;
-
-			
-			// // Run the GFE portion past the regex
-			// if (gfeAlleles[gfe].matches(regex)){
-
-			// 	// put gfe and name in holding hashmap for later printing
-			// 	dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-
-			// 	flag = true;
-			// }
-				
-			// // split the gfe along the dashes
-			// protoSplitGfe = gfeAlleles[gfe].split("-");
-			// spacingList = new int[protoSplitGfe.length - 1];
-
-			// // split the first entry of the split GFE to break apart w and 3' UTR
-			// hlaIdentifier = protoSplitGfe[1].split("w");
-
-			// // for spacing purposes, split off 'HLA-_w', return 3' UTR to array
-			// protoSplitGfe[0] = hlaIdentifier[1];
-			// // System.out.println(splitGfe[0]);
-			// // System.out.println(hlaIdentifier[1]);
-			// // System.out.println(splitGfe[1]);
-
-			// // copy to new arrayList to remove protoSplitGfe[1]
-			// LinkedList<String> splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
-			// splitGfe.remove(1);
-
-			// System.out.println(splitGfe.get(1));
-
-
-			// int j = 0;
-			// // cycle through the separated GFE. If the original GFE was a match 
-			// // use value.length in spacingList, otherwise use 3 to populate it.
-			
-			// for(String splitUpGfe:splitGfe) {
-
-			// 	// spacingList[j] = 3;
-
-			// 	if (flag && spacingList[j] < (splitUpGfe.length() + 1)) 
-			// 		spacingList[j] = (splitUpGfe.length() + 1);
-			// 	j++;
-			// }
-			
+			boolean listFlag = true;
 
 			// parse the gfe spacing for each matching line
 			while ((line = br.readLine()) != null) {
@@ -147,20 +93,25 @@ public class PrettyData {
 
 					// split the gfe along the dashes
 					protoSplitGfe = gfeAlleles[gfe].split("-");
-					System.out.println("protoSplitGfe[1]: " + protoSplitGfe[1]);
+					System.out.println("protoSplitGfe[1]: " 
+						+ protoSplitGfe[1]);
 
 					// replace "HLA" with the actual locus name
 					hlaIdentifier = protoSplitGfe[1].split("w");
 					protoSplitGfe[0] = hlaIdentifier[0];
+					System.out.println("protoSplitGfe[0]: " 
+						+ protoSplitGfe[0]);
+					System.out.println("protoSplitGfe[1]: " 
+						+ protoSplitGfe[1]);
 
 					// reset the list to the appropriate size for the allele
 					// using a flag so it runs only once
 					// has to be within the while loop because I need the 
-					// size from protoSplitGfe
-					if (!listFlag) {
+					// length from protoSplitGfe
+					if (listFlag) {
 						spacingList = new int[protoSplitGfe.length - 1];
 						Arrays.fill(spacingList, 3);
-						listFlag = true;
+						listFlag = false;
 					}
 
 					// copy to new arrayList to remove protoSplitGfe[1]
@@ -173,94 +124,75 @@ public class PrettyData {
 					// in the spacing array, replace that length with the new one
 					for(String splitUpGfe:splitGfe) {
 
-						if (spacingList[k] < (splitUpGfe.length() + 1)) 
-							spacingList[k] = (splitUpGfe.length() + 1);
-						// else 
-						// 	spacingList[k] = 3;
-
+						if (k > 0) {
+							if (spacingList[k] < (splitUpGfe.length() + 1)) 
+								spacingList[k] = (splitUpGfe.length() + 1);
+						}
 						k++;
 					}
 				}
 			}
 
-			// sort the dataMatches hashmap before printing
-			SortData sorting = new SortData();
-			sortedDataMatches = sorting.sortTheData(dataMatches);
-
-			System.out.println("splitGfe.get(0): " + splitGfe.get(0));
-			// for(int num:spacingList) {
-			// 	System.out.println("spacingList: " + num);
-			// }
-			// // System.out.println(hlaIdentifier[1]);
-			// // System.out.println(splitGfe[1]);
-			// System.out.println("printToMe: " + printToMe);
-			// Pretty data header
-			printHeader(splitGfe.get(0), spacingList, printToMe);
-
-	// need to figure out spacing for header and assorted breakdown.
-	// maybe put into linked array list and insert as needed?
-
-
-			// Write the data to the appropriate text area
-			int m = 0;
-			int n = 0;
-			// int o = 0;
-			for (Map.Entry me:sortedDataMatches.entrySet()) {
-
-				// print allele name
-				printToMe.append(String.format("%-25s", me.getValue()));
-
-				// cycle through gfe's individual features, 
-				// print with appropriate lengths
-				n = 0;
-				protoSplitGfe = ((String)me.getKey()).split("-");
-				splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
-				// splitGfe.remove(1);
-				// split the first entry of the split GFE to break apart w and 3' UTR
-				hlaIdentifier = splitGfe.get(1).split("w");
-
-				// add the w back in (removed when split)
-				printToMe.append(String.format("%6s", hlaIdentifier[0] + "w "));
-
-				// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
-				splitGfe.set(0, hlaIdentifier[1]);
-				splitGfe.remove(1);
-				System.out.println("splitGfe.get(0): " + splitGfe.get(0));
-				System.out.println("splitGfe.get(1): " + splitGfe.get(1));
-				// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
-				// n++;
-
-				for (String gfeFeature:splitGfe) {
-					
-					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature) + " ");
-					// if(n < (spacingList.length - 1)) 
-					// 	{ printToMe.append(" "); }
-					n++;
-				}
-		        printToMe.append(System.lineSeparator());
-
-		        m++;
-			}		
-
-			// Footer
-			if (m == 0){
-				B12xGui.resultsTextAreaHla.append("No results found");
-			} else {
-				B12xGui.resultsTextAreaHla.append("Total Results: " + m);
-			}
-
 			// Close the buffer
 			br.close();
 
-			// Write contents of textbox to file
-			// if(hlaWriteToFileChecked){
-			//     WriteFile fileWriter = new WriteFile();
-			//     fileWriter.writeToFile(locus, version, "HLA", dataType);
-				
-			// }
 		} catch (Exception ex) {
-			System.out.println(ex); 
 			ex.printStackTrace();
+		}
+
+		// sort the dataMatches hashmap before printing
+		SortData sorting = new SortData();
+		sortedDataMatches = sorting.sortTheData(dataMatches);
+
+		// Pretty data header
+		printHeader(splitGfe.get(0), spacingList, printToMe);
+
+		// Write the data to the appropriate text area
+		int m = 0;
+		int n = 0;
+		// int o = 0;
+		for (Map.Entry me:sortedDataMatches.entrySet()) {
+
+			// print allele name
+			printToMe.append(String.format("%-25s", me.getValue()));
+
+			// cycle through gfe's individual features, 
+			// print with appropriate lengths
+			n = 0;
+			protoSplitGfe = ((String)me.getKey()).split("-");
+			splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
+			// splitGfe.remove(1);
+			// split the first entry of the split GFE to break apart w and 3' UTR
+			hlaIdentifier = splitGfe.get(1).split("w");
+
+			// add the w back in (removed when split)
+			printToMe.append(String.format("%6s", hlaIdentifier[0] + "w "));
+
+			// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
+			splitGfe.set(0, hlaIdentifier[1]);
+			splitGfe.remove(1);
+			// System.out.println("splitGfe.get(0): " + splitGfe.get(0));
+			// System.out.println("splitGfe.get(1): " + splitGfe.get(1));
+			// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
+			// n++;
+
+			for (String gfeFeature:splitGfe) {
+				
+				printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature) + " ");
+				// if(n < (spacingList.length - 1)) 
+				// 	{ printToMe.append(" "); }
+				n++;
+			}
+	        printToMe.append(System.lineSeparator());
+
+	        m++;
+		}		
+
+		// Footer
+		if (m == 0){
+			B12xGui.resultsTextAreaHla.append("No results found");
+		} else {
+			B12xGui.resultsTextAreaHla.append("Total Results: " + m);
 		}
 	}
 
@@ -269,8 +201,10 @@ public class PrettyData {
 
 		printToMe.append(String.format("%-25s", "Allele Name"));
 		printToMe.append(String.format("%6s", "Locus "));
-		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'"));
-		// j++;
+		if (spacingList[j] == 3)
+			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'") + " ");
+		else
+			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'"));
 
 		for(int i = 1; i < hlaExonTotal.get(locus); i++) {
 			printToMe.append(String.format("%-" + spacingList[j] + "s", ("E" + i)) + " ");

@@ -17,7 +17,14 @@ BSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
 GSG_HLA_LOCUS				int: what locus by index, HLA tab
 GSG_HLA_LOCUS_STRING		String: what locus, HLA tab
 
-GSG_NAME_LOCUS_1			int: what locus selected by index, NAME tab
+GSG_NAME_LOCUS_1			int: what locus 1 by index, NAME tab
+GSG_NAME_LOCUS_STRING_1		String: what locus 1, NAME tab
+
+GSG_NAME_LOCUS_2			int: what locus 2 by index, NAME tab
+GSG_NAME_LOCUS_STRING_2		String: what locus 2, NAME tab
+
+GSG_KIR_LOCUS				int: what locus by index, KIR tab
+GSG_KIR_LOCUS_STRING		String: what locus, KIR tab
 
 BSG_OPEN_TAB				Int: which tab was last in focus
 

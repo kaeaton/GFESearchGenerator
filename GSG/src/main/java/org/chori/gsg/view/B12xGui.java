@@ -28,7 +28,7 @@ public class B12xGui extends JFrame {
 	
 	// default locus settings
 	String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
-	String kirSelectedLocus = "KIR2DL4";
+	String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 	
 	// the panel generators
 	private HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
