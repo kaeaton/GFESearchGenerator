@@ -16,7 +16,7 @@ public class WhatLocus {
 	HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();
 	private final String[] hlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-
+	private String whichLocus = "HLA-A";
 
 	public WhatLocus() {
 
@@ -58,7 +58,8 @@ public class WhatLocus {
 		hlaWhatLocus.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-				JPanel newGfePanel = hlaSBG.generateHlaPanel(hlaWhatLocus.getSelectedItem().toString());
+            	whichLocus = hlaWhatLocus.getSelectedItem().toString();
+				JPanel newGfePanel = hlaSBG.generateHlaPanel(whichLocus);
             	newGfePanel.setName("HLA-GFE");
             	JPanel oldPanel = findPanel(B12xGui.hlaPanel, "HLA-GFE");
             	B12xGui.hlaPanel.remove(oldPanel);
@@ -67,6 +68,7 @@ public class WhatLocus {
                 System.out.println("Which Loci listener triggered");
             	System.out.println("Position: " + hlaWhatLocus.getSelectedIndex());
             	prefs.putInt("GSG_HLA_LOCUS", hlaWhatLocus.getSelectedIndex());
+            	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
             }
         });
 	}

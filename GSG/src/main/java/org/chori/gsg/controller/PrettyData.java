@@ -44,12 +44,14 @@ public class PrettyData {
 		try {
 			
 			String line;
+			
 			int gfe = 1;
 			int[] spacingList = new int[18];
 			
 			String[] hlaIdentifier = new String[2];
 			String[] protoSplitGfe = new String[2];
 			String[] gfeAlleles = new String[2];
+			// String[] locus = new String;
 			LinkedList<String> splitGfe = new LinkedList<>();
 
 			JTextArea printToMe = whichTextArea.get(whichTab);
@@ -71,8 +73,11 @@ public class PrettyData {
 			// if(gfeAlleles[1].contains("*")) { gfe = 0; }
 			// System.out.println(gfeAlleles[gfe]);
 
-			// // flag to know if the first line was a match
+			// flag to turn on gfe identification
 			boolean flag = false;
+
+			// flag to reset the size list
+			boolean listFlag = false;
 
 			
 			// // Run the GFE portion past the regex
@@ -144,8 +149,19 @@ public class PrettyData {
 					protoSplitGfe = gfeAlleles[gfe].split("-");
 					System.out.println("protoSplitGfe[1]: " + protoSplitGfe[1]);
 
-					spacingList = new int[protoSplitGfe.length - 1];
-					Arrays.fill(spacingList, 3);
+					// replace "HLA" with the actual locus name
+					hlaIdentifier = protoSplitGfe[1].split("w");
+					protoSplitGfe[0] = hlaIdentifier[0];
+
+					// reset the list to the appropriate size for the allele
+					// using a flag so it runs only once
+					// has to be within the while loop because I need the 
+					// size from protoSplitGfe
+					if (!listFlag) {
+						spacingList = new int[protoSplitGfe.length - 1];
+						Arrays.fill(spacingList, 3);
+						listFlag = true;
+					}
 
 					// copy to new arrayList to remove protoSplitGfe[1]
 					splitGfe = new LinkedList<>(Arrays.asList(protoSplitGfe));
@@ -171,7 +187,7 @@ public class PrettyData {
 			SortData sorting = new SortData();
 			sortedDataMatches = sorting.sortTheData(dataMatches);
 
-			System.out.println("splitGfe.get(1): " + splitGfe.get(1));
+			System.out.println("splitGfe.get(0): " + splitGfe.get(0));
 			// for(int num:spacingList) {
 			// 	System.out.println("spacingList: " + num);
 			// }
@@ -209,8 +225,8 @@ public class PrettyData {
 				// for spacing purposes, split off 'HLA-_w', return 3' UTR to array
 				splitGfe.set(0, hlaIdentifier[1]);
 				splitGfe.remove(1);
-				// splitGfe.remove(2);
 				System.out.println("splitGfe.get(0): " + splitGfe.get(0));
+				System.out.println("splitGfe.get(1): " + splitGfe.get(1));
 				// printToMe.append(String.format("%-" + spacingList[n] + "s", hlaIdentifier[1]));
 				// n++;
 
@@ -253,7 +269,7 @@ public class PrettyData {
 
 		printToMe.append(String.format("%-25s", "Allele Name"));
 		printToMe.append(String.format("%6s", "Locus "));
-		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5' ") + " ");
+		printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'"));
 		// j++;
 
 		for(int i = 1; i < hlaExonTotal.get(locus); i++) {

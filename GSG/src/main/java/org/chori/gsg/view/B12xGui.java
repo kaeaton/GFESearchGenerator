@@ -27,7 +27,7 @@ public class B12xGui extends JFrame {
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	
 	// default locus settings
-	String hlaSelectedLocus = "HLA-A";
+	String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
 	String kirSelectedLocus = "KIR2DL4";
 	
 	// the panel generators
