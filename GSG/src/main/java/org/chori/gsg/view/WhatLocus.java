@@ -38,15 +38,15 @@ public class WhatLocus {
 				whatLocus.setSelectedIndex(prefs.getInt("GSG_HLA_LOCUS", 0));
 				hlaListener(whatLocus);
 				break;
-			case "NAME":
+			case "NAME1":
 				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
 				whatLocus.setModel(comboBoxModel);
 				whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
 				// whatLocus.setName("HLA-dropdown");
-				// hlaListener(whatLocus);
+				nameListener(whatLocus);
 				break;
 			default:
-				System.out.println("Haven't set up that combobox model yet");
+				System.out.println("Locus: Haven't set up that combobox model yet");
 		}
 
     	// whatLocus.setModel(comboBoxModel);
@@ -66,9 +66,20 @@ public class WhatLocus {
             	B12xGui.hlaPanel.add(newGfePanel).revalidate();
             	B12xGui.hlaPanel.repaint();
                 System.out.println("Which Loci listener triggered");
-            	System.out.println("Position: " + hlaWhatLocus.getSelectedIndex());
             	prefs.putInt("GSG_HLA_LOCUS", hlaWhatLocus.getSelectedIndex());
             	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
+            }
+        });
+	}
+
+	private void nameListener(JComboBox nameWhatLocus) {
+		nameWhatLocus.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	whichLocus = nameWhatLocus.getSelectedItem().toString();
+                System.out.println("Which Loci listener triggered");
+            	prefs.putInt("GSG_NAME_LOCUS_1", nameWhatLocus.getSelectedIndex());
+            	prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
             }
         });
 	}

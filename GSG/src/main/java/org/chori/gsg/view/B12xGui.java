@@ -262,7 +262,17 @@ public class B12xGui extends JFrame {
 		nameGfeTab.add(bottomButtonsName, e);
 
     /* Options tab */
-    	// parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
+    	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
+
+    /* Get and set open tab */
+    	parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
+    	
+		parentTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				// jTabbedPaneStateChanged(evt);
+				prefs.putInt("GSG_OPEN_TAB", parentTabbedPane.getSelectedIndex());
+			}
+		});
 
 	}
 

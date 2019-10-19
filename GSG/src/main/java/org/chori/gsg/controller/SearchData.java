@@ -56,25 +56,49 @@ public class SearchData {
             int gfe = 1;
             if(gfeAlleles[1].contains("*")) { gfe = 0; }
 
+            switch(whichTab) {
+                case "HLA":
+                    if (gfeAlleles[gfe].matches(regex)){
+                            
+                        // if the first data line matches the regex, add to hashmap
+                        unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+                        i++;
+                    }
             
-            if (gfeAlleles[gfe].matches(regex)){
-                    
-                // if the first data line matches the regex, add to hashmap
-                unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-                i++;
-            }
-
+                    // screen the rest of the data
+                    while ((line = br.readLine()) != null) {
+                        
+                        // use comma as separator
+                        gfeAlleles = line.split(",");
+                        if (gfeAlleles[gfe].matches(regex)){
+                            
+                            unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+                            i++;
+                        }
+                    }
+                    break;
+                case "NAME":
+                    if (gfeAlleles[1 - gfe].matches(regex)){
+                            
+                        // if the first data line matches the regex, add to hashmap
+                        unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+                        i++;
+                    }
             
-            // screen the rest of the data
-            while ((line = br.readLine()) != null) {
-                
-                // use comma as separator
-                gfeAlleles = line.split(",");
-                if (gfeAlleles[gfe].matches(regex)){
-                    
-                    unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-                    i++;
-                }
+                    // screen the rest of the data
+                    while ((line = br.readLine()) != null) {
+                        
+                        // use comma as separator
+                        gfeAlleles = line.split(",");
+                        if (gfeAlleles[1 - gfe].matches(regex)){
+                            
+                            unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
+                            i++;
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("I don't know how to process the data");
             }
 
             // Close the buffer

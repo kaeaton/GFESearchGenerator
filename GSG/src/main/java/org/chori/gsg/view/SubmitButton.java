@@ -65,6 +65,7 @@ public class SubmitButton {
             public void actionPerformed(ActionEvent evt) {
                 Runnable submit = new Runnable() {
                     public void run() {
+
                     	// the lists of hla components
                     	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
                     	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
@@ -111,7 +112,15 @@ public class SubmitButton {
         subButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                Runnable submit = new Runnable() {
+                    public void run() {
 
+
+
+                        
+                    }
+                };
+                new Thread(submit).start();
             }
         });
     }
