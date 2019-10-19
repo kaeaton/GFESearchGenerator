@@ -124,10 +124,10 @@ public class PrettyData {
 					// in the spacing array, replace that length with the new one
 					for(String splitUpGfe:splitGfe) {
 
-						if (k > 0) {
-							if (spacingList[k] < (splitUpGfe.length() + 1)) 
-								spacingList[k] = (splitUpGfe.length() + 1);
-						}
+						// if (k > 0) {
+							if (spacingList[k] < splitUpGfe.length()) // + 1)) 
+								spacingList[k] = splitUpGfe.length(); //+ 1);
+						// }
 						k++;
 					}
 				}
@@ -197,14 +197,16 @@ public class PrettyData {
 	}
 
 	private void printHeader(String locus, int[] spacingList, JTextArea printToMe) {
-		int j = 1;
+		int j = 0;
 
 		printToMe.append(String.format("%-25s", "Allele Name"));
 		printToMe.append(String.format("%6s", "Locus "));
-		if (spacingList[j] == 3)
+		if (spacingList[j] >= 3)
 			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'") + " ");
 		else
 			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'"));
+
+		j++;
 
 		for(int i = 1; i < hlaExonTotal.get(locus); i++) {
 			printToMe.append(String.format("%-" + spacingList[j] + "s", ("E" + i)) + " ");

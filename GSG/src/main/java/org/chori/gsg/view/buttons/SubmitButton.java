@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.view.buttons;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.*;
 
 
 public class SubmitButton { 
@@ -72,7 +73,7 @@ public class SubmitButton {
 
                     	// what locus, version, and format?
                     	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-                    	String whatVersion = "3.34.0"; // B12xGui.whatVersionHla.getSelectedItem().toString();
+                    	String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString(); //"3.34.0"; // 
                     	String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
                     	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
                     	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
@@ -117,7 +118,7 @@ public class SubmitButton {
 
 
 
-                        
+
                     }
                 };
                 new Thread(submit).start();

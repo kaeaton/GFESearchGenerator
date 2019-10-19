@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.*;
 
 public class WhatLocus { 
 

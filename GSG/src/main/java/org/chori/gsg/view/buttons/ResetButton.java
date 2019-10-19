@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.view.buttons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.*;
 
 public class ResetButton { 
 

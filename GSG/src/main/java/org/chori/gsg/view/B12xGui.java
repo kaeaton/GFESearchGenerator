@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.dropdowns.*;
+import org.chori.gsg.view.buttons.*;
 
 public class B12xGui extends JFrame {
 
@@ -266,7 +268,7 @@ public class B12xGui extends JFrame {
 
     /* Get and set open tab */
     	parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
-    	
+
 		parentTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
 				// jTabbedPaneStateChanged(evt);

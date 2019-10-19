@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.view.dropdowns;
 
 // import com.fasterxml.jackson.core.JsonFactory;
 // import java.io.BufferedReader;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.view.*;
 
 public class VersionModel {
 
@@ -57,7 +58,7 @@ public class VersionModel {
 		}
 
 		// sort the versions
-		Collections.sort(versions);
+		Collections.sort(versions, Collections.reverseOrder());
 
 		return versions;
 	}
