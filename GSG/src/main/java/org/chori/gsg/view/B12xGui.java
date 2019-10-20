@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.prefs.Preferences;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,6 +32,7 @@ public class B12xGui extends JFrame {
 	
 	// default locus settings
 	String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
+	String nameSelectedLocus = prefs.get("GSG_NAME_VERSION_1", "HLA-A");
 	String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 	
 	// the panel generators
@@ -42,6 +45,7 @@ public class B12xGui extends JFrame {
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
 	private static CancelButton cancelButtonGenerator = new CancelButton();
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
+	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 
 	// need this to add at initialization
 	public JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -59,10 +63,10 @@ public class B12xGui extends JFrame {
 	public static JPanel namePanel = new JPanel();
 
 	// combo boxes for locus and version selection
-	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA");
 	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
-	public static JComboBox whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME");
+	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA", whatVersionHla.getSelectedItem().toString());
 	public static JComboBox whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
+	public static JComboBox whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 	
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
@@ -98,7 +102,7 @@ public class B12xGui extends JFrame {
     	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
     	
     	// generate the HLA GFE panel
-    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(hlaSelectedLocus);
+    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
     	currentHlaPanel.setName("HLA-GFE");
     	hlaPanel.add(currentHlaPanel);
     	
@@ -115,10 +119,6 @@ public class B12xGui extends JFrame {
     	usageInstructionsHla.setBackground(hlaPanel.getBackground());
     	usageInstructionsHla.setEditable(false);
     	usageInstructionsHla.setFocusable(false);
-
-    	// dropdown names for later identification
-    	whatLocusHla.setName("hlaLocus");
-    	whatVersionHla.setName("hlaVersion");
 
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
@@ -270,12 +270,35 @@ public class B12xGui extends JFrame {
     /* Options tab */
     	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
+    	// local data only option/can java ping for internet access?
+
+    	// buttons
+    	JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
+    	JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
+
+    	// layout / add them to the hlaGfeTab
+    	optionsGfeTab.setLayout(new GridBagLayout());
+		GridBagConstraints f = new GridBagConstraints();
+		f.anchor = GridBagConstraints.NORTHWEST;
+		f.insets = new Insets(0,0,10,0);
+		f.weightx = 0.5;
+		
+		// line 0
+		f.gridx = 0;
+		f.gridy = 0;
+		optionsGfeTab.add(resetPrefsButton, f);
+
+		// line 6
+		f.weightx = 0;
+		f.weighty = 0;
+		f.gridy = 6;
+		optionsGfeTab.add(cancelButtonOptions, f);
+
     /* Get and set open tab */
     	parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
 
-		parentTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
-				// jTabbedPaneStateChanged(evt);
+		parentTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent evt) {
 				prefs.putInt("GSG_OPEN_TAB", parentTabbedPane.getSelectedIndex());
 			}
 		});

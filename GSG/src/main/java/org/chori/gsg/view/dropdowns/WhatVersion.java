@@ -8,8 +8,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-
 import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.*;
 
 public class WhatVersion { 
@@ -35,7 +35,7 @@ public class WhatVersion {
 				comboBoxModel = vm.versions();
 				whatVersion.setModel(comboBoxModel);
 
-				System.out.println(vm.localVersionData());
+				// System.out.println(vm.localVersionData());
 				whatVersion.setSelectedIndex(prefs.getInt("GSG_HLA_VERSION", 0));
 				// whatLocus.setName("HLA-dropdown");
 				hlaListener(whatVersion);
@@ -65,9 +65,10 @@ public class WhatVersion {
             	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
             	// if legacy version, update loci model to show available loci
-            	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+            	// String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
             	LocusModel locusModel = new LocusModel();
-            	B12xGui.whatLocusHla.setModel(locusModel.loci("HLA"));
+            	B12xGui.whatLocusHla.setModel(locusModel.loci(whichVersion));
+            	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 
             	// grab the new available default locus and update the GUI accordingly
             	whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();

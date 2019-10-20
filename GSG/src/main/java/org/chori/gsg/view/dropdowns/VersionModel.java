@@ -22,46 +22,64 @@ public class VersionModel {
 
 	public VersionModel() {	}
 
-	/* what versions do we have? */
-	public ArrayList<String> localVersionData() {
-		ArrayList<String> versions = new ArrayList<>();
-		
-		// find the BSGData folder
-		WhereTheDataLives wtdl = new WhereTheDataLives();
-		String rawDataPath = wtdl.getRawDataPath();
+	private LocalData localData = new LocalData();
+	private InternetAccess internet = new InternetAccess();
 
-		// read the BSGData folder
-		File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
-		System.out.println(Arrays.toString(directories));
-		
-		// get the folders for various versions
-		int pathLength = rawDataPath.length();
-		System.out.println("Path length: " + pathLength);
+	public DefaultComboBoxModel versions() { //String versionType) {
 
-		int dirLength;
-		String dir;
-		String versionNumber;
-		
-		for (File directory:directories) {
-			// get directory length
-			dirLength = directory.toString().length();
-			dir = directory.toString();
-			
-			// get version number off the end
-			versionNumber = dir.substring(pathLength, dirLength);
-			System.out.println("subpath: " + versionNumber);
-			
-			// add to list if not KIR ("2.7.0")
-			if(!versionNumber.equals("2.7.0")) {
-				versions.add(versionNumber);
-			}
+		ArrayList<String> localVersions = localData.localVersionData();
+		DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+		if (internet.tester()) {
+
 		}
 
-		// sort the versions
-		Collections.sort(versions, Collections.reverseOrder());
-
-		return versions;
+		// return a model available for them
+		model = new DefaultComboBoxModel(localVersions.toArray());
+		return model;
 	}
+
+
+	// /* what versions do we have? */
+	// public ArrayList<String> localVersionData() {
+	// 	ArrayList<String> versions = new ArrayList<>();
+		
+	// 	// find the BSGData folder
+	// 	WhereTheDataLives wtdl = new WhereTheDataLives();
+	// 	String rawDataPath = wtdl.getRawDataPath();
+
+	// 	// read the BSGData folder
+	// 	File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
+	// 	System.out.println(Arrays.toString(directories));
+		
+	// 	// get the folders for various versions
+	// 	int pathLength = rawDataPath.length();
+	// 	System.out.println("Path length: " + pathLength);
+
+	// 	int dirLength;
+	// 	String dir;
+	// 	String versionNumber;
+		
+	// 	for (File directory:directories) {
+	// 		// get directory length
+	// 		dirLength = directory.toString().length();
+	// 		dir = directory.toString();
+			
+	// 		// get version number off the end
+	// 		versionNumber = dir.substring(pathLength, dirLength);
+	// 		System.out.println("subpath: " + versionNumber);
+			
+	// 		// add to list if not KIR ("2.7.0")
+	// 		if(!versionNumber.equals("2.7.0")) {
+	// 			versions.add(versionNumber);
+	// 		}
+	// 	}
+
+	// 	// sort the versions
+	// 	Collections.sort(versions, Collections.reverseOrder());
+
+	// 	return versions;
+	// }
 
 	// public static String[] getVersionData(String versionType) throws IOException {
 	// 	Path versionPath = Paths.get(Neo4j.dataFilesPath 
@@ -111,17 +129,17 @@ public class VersionModel {
 	// 	return versions;
 	// }
 	
-	public DefaultComboBoxModel versions() { //String versionType) {
+	// public DefaultComboBoxModel versions() { //String versionType) {
 
-		ArrayList<String> versions = localVersionData();
-		DefaultComboBoxModel model = new DefaultComboBoxModel();
+	// 	ArrayList<String> versions = localVersionData();
+	// 	DefaultComboBoxModel model = new DefaultComboBoxModel();
 		
 		// String[] versionData = getVersionData(versionType);
 		
 	// 	// is there a data file to read from?
 	// 	if (versionData != null) 
 	// 	{
-			model = new DefaultComboBoxModel(versions.toArray());
+			// model = new DefaultComboBoxModel(versions.toArray());
 	// 	}
 		
 	// 	// no? create one
@@ -135,8 +153,8 @@ public class VersionModel {
 
 	// 	}
 		
-		return model;
-	}
+	// 	return model;
+	// }
 	
 	// public static DefaultComboBoxModel comparisonVersions(String versionType) {
 	// 	ArrayList<String> versions;
