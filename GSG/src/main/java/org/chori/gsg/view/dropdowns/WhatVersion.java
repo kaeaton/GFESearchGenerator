@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
 
 import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.*;
@@ -62,11 +64,27 @@ public class WhatVersion {
             	prefs.putInt("GSG_HLA_VERSION", hlaWhatVersion.getSelectedIndex());
             	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
-            	// testing Locus Model
+            	// if legacy version, update loci model to show available loci
             	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
             	LocusModel locusModel = new LocusModel();
-            	locusModel.fileLength(whichLocus, whichVersion);
-            	locusModel.getLocalDataFiles("HLA");
+            	B12xGui.whatLocusHla.setModel(locusModel.loci("HLA"));
+
+            	// grab the new available default locus and update the GUI accordingly
+            	whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+				HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();
+				JPanel newGfePanel = hlaSBG.generateHlaPanel(whichLocus);
+            	newGfePanel.setName("HLA-GFE");
+
+            	// borrow the find panel method from WhatLocus
+            	WhatLocus whatLocus = new WhatLocus();
+            	JPanel oldPanel = whatLocus.findPanel(B12xGui.hlaPanel, "HLA-GFE");
+            	B12xGui.hlaPanel.remove(oldPanel);
+            	B12xGui.hlaPanel.add(newGfePanel).revalidate();
+            	B12xGui.hlaPanel.repaint();
+
+            	// update the preferences
+            	prefs.putInt("GSG_HLA_LOCUS", B12xGui.whatLocusHla.getSelectedIndex());
+            	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
             }
         });
 	}

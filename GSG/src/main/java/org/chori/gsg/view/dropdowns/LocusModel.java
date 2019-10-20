@@ -21,7 +21,18 @@ public class LocusModel {
 
 	public LocusModel() { }
 
-	public ArrayList<String> getLocalDataFiles(String whichTab) {
+	public DefaultComboBoxModel loci(String whichTab) {
+
+		// figure out what datafiles are available for selected version
+		ArrayList<String> availableLoci = getLocalDataFiles(whichTab);
+		DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+		// return a model available for them
+		model = new DefaultComboBoxModel(availableLoci.toArray());
+		return model;
+	}
+
+	private ArrayList<String> getLocalDataFiles(String whichTab) {
 		ArrayList<String> availableLoci = new ArrayList<>();
 		
 		// find the BSGData folder
@@ -43,7 +54,7 @@ public class LocusModel {
 
 		// read the BSGData folder
 		File[] files = new File(rawDataPath).listFiles();
-		System.out.println(Arrays.toString(files));
+		// System.out.println(Arrays.toString(files));
 		
 		// // get the folders for various versions
 		int pathLength = (rawDataPath.length() + 7);
@@ -61,13 +72,16 @@ public class LocusModel {
 			
 			// get locus out of file name
 			protoLocus = file.substring(pathLength, filePathLength);
-			System.out.println("subpath: " + protoLocus);
+			// System.out.println("subpath: " + protoLocus);
+
+			// get file suffix, if csv, extract locus name
 			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
 			if (fileSuffix.compareTo("csv") == 0) {
 				locus = protoLocus.substring(0, protoLocus.length() - 20);
 				System.out.println("locus name: " + locus);
 			}
 
+			// check file length, is it more than just a header line?
 			if (fileLength(locus, version))
 				availableLoci.add(locus);
 		}
@@ -82,7 +96,7 @@ public class LocusModel {
 
 	// sometimes files have nothing but a header in them
 	// makes sure the file is big enough to actually contain data
-	public boolean fileLength(String whatLocus, String whatVersion) {
+	private boolean fileLength(String whatLocus, String whatVersion) {
 		//
 		File data = rawData.getRawData(whatLocus, whatVersion);
 		if (data != null) {

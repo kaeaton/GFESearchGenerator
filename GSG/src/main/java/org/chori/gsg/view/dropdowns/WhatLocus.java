@@ -85,7 +85,7 @@ public class WhatLocus {
         });
 	}
 
-	private JPanel findPanel(JPanel whichTab, String whichPanel) {
+	public JPanel findPanel(JPanel whichTab, String whichPanel) {
 		Component selectedPanel = B12xGui.hlaPanel;
 		for (Component component : whichTab.getComponents()) {
             if (component.getName().equals(whichPanel)){
