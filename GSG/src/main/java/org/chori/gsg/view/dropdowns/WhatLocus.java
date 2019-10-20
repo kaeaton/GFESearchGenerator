@@ -15,7 +15,7 @@ import org.chori.gsg.view.*;
 public class WhatLocus { 
 
 	HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();
-	private final String[] hlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
+	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private String whichLocus = "HLA-A";
 
@@ -34,13 +34,13 @@ public class WhatLocus {
 		// who is this combobox for?
 		switch(whichComboBox) {
 			case "HLA":
-				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
+				comboBoxModel = new DefaultComboBoxModel(fullHlaLoci);
 				whatLocus.setModel(comboBoxModel);
 				whatLocus.setSelectedIndex(prefs.getInt("GSG_HLA_LOCUS", 0));
 				hlaListener(whatLocus);
 				break;
 			case "NAME1":
-				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
+				comboBoxModel = new DefaultComboBoxModel(fullHlaLoci);
 				whatLocus.setModel(comboBoxModel);
 				whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
 				// whatLocus.setName("HLA-dropdown");

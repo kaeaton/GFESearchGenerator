@@ -66,6 +66,7 @@ public class WhatVersion {
             	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
             	LocusModel locusModel = new LocusModel();
             	locusModel.fileLength(whichLocus, whichVersion);
+            	locusModel.getLocalDataFiles("HLA");
             }
         });
 	}

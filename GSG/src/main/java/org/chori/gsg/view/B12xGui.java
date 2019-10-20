@@ -116,6 +116,10 @@ public class B12xGui extends JFrame {
     	usageInstructionsHla.setEditable(false);
     	usageInstructionsHla.setFocusable(false);
 
+    	// dropdown names for later identification
+    	whatLocusHla.setName("hlaLocus");
+    	whatVersionHla.setName("hlaVersion");
+
     	// buttons
     	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
     	JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");

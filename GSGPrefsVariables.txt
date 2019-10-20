@@ -16,7 +16,7 @@ BSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
 
 GSG_HLA_LOCUS				int: what locus by index, HLA tab
 GSG_HLA_LOCUS_STRING		String: what locus, HLA tab
-GSG_HLA_VERSION				int: what version by index, hla tab
+GSG_HLA_VERSION				int: what version by index, HLA tab
 
 GSG_NAME_LOCUS_1			int: what locus 1 by index, NAME tab
 GSG_NAME_LOCUS_STRING_1		String: what locus 1, NAME tab

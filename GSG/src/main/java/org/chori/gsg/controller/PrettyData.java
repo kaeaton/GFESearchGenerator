@@ -99,10 +99,10 @@ public class PrettyData {
 					// replace "HLA" with the actual locus name
 					hlaIdentifier = protoSplitGfe[1].split("w");
 					protoSplitGfe[0] = hlaIdentifier[0];
-					System.out.println("protoSplitGfe[0]: " 
-						+ protoSplitGfe[0]);
-					System.out.println("protoSplitGfe[1]: " 
-						+ protoSplitGfe[1]);
+					// System.out.println("protoSplitGfe[0]: " 
+					// 	+ protoSplitGfe[0]);
+					// System.out.println("protoSplitGfe[1]: " 
+					// 	+ protoSplitGfe[1]);
 
 					// reset the list to the appropriate size for the allele
 					// using a flag so it runs only once

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.view.*;
@@ -20,50 +21,80 @@ public class LocusModel {
 
 	public LocusModel() { }
 
-	// public ArrayList<String> localDataFiles() {
-	// 	ArrayList<String> versions = new ArrayList<>();
+	public ArrayList<String> getLocalDataFiles(String whichTab) {
+		ArrayList<String> availableLoci = new ArrayList<>();
 		
-	// 	// find the BSGData folder
-	// 	WhereTheDataLives wtdl = new WhereTheDataLives();
-	// 	String rawDataPath = wtdl.getRawDataPath();
+		// find the BSGData folder
+		String rawDataPath = rawData.getRawDataPath();
+		String version = "";
 
-	// 	// read the BSGData folder
-	// 	File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
-	// 	System.out.println(Arrays.toString(directories));
-		
-	// 	// get the folders for various versions
-	// 	int pathLength = rawDataPath.length();
-	// 	System.out.println("Path length: " + pathLength);
+		// get which version
+		switch(whichTab) {
+			case "HLA":
+				version = B12xGui.whatVersionHla.getSelectedItem().toString();
+				System.out.println("Locus Model selected version (HLA): " + version);
+				rawDataPath = rawDataPath + version;
+				System.out.println("Locus Model file path (HLA): " + rawDataPath);
+				break;
+			default:
+				System.out.println("LocusModel: haven't set up that version reader yet");
+		}
 
-	// 	int dirLength;
-	// 	String dir;
-	// 	String versionNumber;
+
+		// read the BSGData folder
+		File[] files = new File(rawDataPath).listFiles();
+		System.out.println(Arrays.toString(files));
 		
-	// 	for (File directory:directories) {
-	// 		// get directory length
-	// 		dirLength = directory.toString().length();
-	// 		dir = directory.toString();
+		// // get the folders for various versions
+		int pathLength = (rawDataPath.length() + 7);
+		// System.out.println("Path length: " + pathLength);
+
+		int filePathLength;
+		String file;
+		String protoLocus;
+		String locus = "";
+		
+		for (File aFile:files) {
+			// get file path length
+			filePathLength = aFile.toString().length();
+			file = aFile.toString();
 			
-	// 		// get version number off the end
-	// 		versionNumber = dir.substring(pathLength, dirLength);
-	// 		System.out.println("subpath: " + versionNumber);
-			
-	// 		// add to list if not KIR ("2.7.0")
-	// 		if(!versionNumber.equals("2.7.0")) {
-	// 			versions.add(versionNumber);
-	// 		}
-	// 	}
+			// get locus out of file name
+			protoLocus = file.substring(pathLength, filePathLength);
+			System.out.println("subpath: " + protoLocus);
+			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
+			if (fileSuffix.compareTo("csv") == 0) {
+				locus = protoLocus.substring(0, protoLocus.length() - 20);
+				System.out.println("locus name: " + locus);
+			}
 
-	// 	// sort the versions
-	// 	Collections.sort(versions, Collections.reverseOrder());
+			if (fileLength(locus, version))
+				availableLoci.add(locus);
+		}
 
-	// 	return versions;
-	// }
+		// sort the loci
+		Collections.sort(availableLoci);
 
-	public void fileLength(String whatLocus, String whatVersion) {
+		System.out.println(availableLoci.toString());
+
+		return availableLoci;
+	}
+
+	// sometimes files have nothing but a header in them
+	// makes sure the file is big enough to actually contain data
+	public boolean fileLength(String whatLocus, String whatVersion) {
+		//
 		File data = rawData.getRawData(whatLocus, whatVersion);
-		long fileLength = data.length();
-		System.out.println("File length of " + whatVersion 
-			+ ", " + whatLocus + ": " + fileLength);
+		if (data != null) {
+			long fileLength = data.length();
+			System.out.println("File length of " + whatVersion 
+				+ ", " + whatLocus + ": " + fileLength);
+		
+			// check that file is longer than just a header
+			if(data.length() > 100)
+				return true;
+		}
+
+		return false;
 	}
 }

@@ -63,7 +63,7 @@ public class WhereTheDataLives {
 			return file;
 		}
 		System.out.println("Didn't find the raw data file.");
-		System.out.println("looking for the file at " + specificFile);
+		// System.out.println("looking for the file at " + specificFile);
 
 		return null;
 	}
