@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 // import org.chori.bsg.model;
 import org.chori.gsg.view.*;
 
-public class BuildRegex {
-	public BuildRegex() {
+public class BuildGfeRegex {
+	public BuildGfeRegex() {
 
 	}
 

@@ -18,8 +18,8 @@ public class WhereTheDataLives {
 	private final String defaultRawDataPath = (defaultBasePath + System.getProperty("file.separator")
 				+ "BSGData" + System.getProperty("file.separator"));
 
-	private String basePath = prefs.get("BSG_RESULTS_DATA", defaultBasePath);
-	private String rawDataPath = prefs.get("BSG_RAW_DATA", defaultRawDataPath);
+	private String basePath = prefs.get("GSG_RESULTS_DATA", defaultBasePath);
+	private String rawDataPath = prefs.get("GSG_RAW_DATA", defaultRawDataPath);
 
 
 	public WhereTheDataLives() { }
@@ -36,6 +36,10 @@ public class WhereTheDataLives {
 	// will be set in options
 	public void setResultsDataPath(String resultsFileFolder) {
 		prefs.put("GSG_RESULTS_DATA", resultsFileFolder);
+	}
+
+	public String getResultsDataPath() {
+		return prefs.get("GSG_RESULTS_DATA", defaultBasePath);
 	}
 
 	// create file to store raw data

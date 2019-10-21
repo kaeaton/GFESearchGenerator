@@ -23,10 +23,10 @@ import org.chori.gsg.view.*;
 public class SubmitButton { 
 
 	// // class instantiations
-	private BuildRegex buildRegex = new BuildRegex();
+	private BuildGfeRegex buildGfeRegex = new BuildGfeRegex();
 	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
 	private Headers header = new Headers();
-	private WhereTheDataLives rawData = new WhereTheDataLives();
+	private WhereTheDataLives wtdl = new WhereTheDataLives();
 
     private HashMap<String, String> dataSources = new HashMap<>();
 
@@ -76,10 +76,10 @@ public class SubmitButton {
                     	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
                     	// where's the data file?                 
-                    	File data = rawData.getRawData(whatLocus, whatVersion);
+                    	File data = wtdl.getRawData(whatLocus, whatVersion);
 
                     	// build me some Regex
-                    	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
+                    	String regex = buildGfeRegex.assembleRegex("HLA", whatLocus, 
                     											allCheckBoxes, allTextFields);
                     	String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
                     											allCheckBoxes, allTextFields);
@@ -91,13 +91,18 @@ public class SubmitButton {
                     	header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
                     	
                     	// search the data & print to screen
-                    	if (!dataFormat.equals("Pretty")) {
-                            SearchData searchData = new SearchData();
-        	            	searchData.searchThroughData(data, regex, dataFormat, "HLA");
+                    	if (dataFormat.equals("Pretty")) {
+                            PrettyData prettyData = new PrettyData();
+                            prettyData.searchThroughData(data, regex, "HLA");
                     	} else {
-                    		PrettyData prettyData = new PrettyData();
-                    		prettyData.searchThroughData(data, regex, "HLA");
+                    		SearchData searchData = new SearchData();
+                            searchData.searchThroughData(data, regex, dataFormat, "HLA");
                     	}
+
+                        if (printToFile) {
+                            WriteToFile writeToFile = new WriteToFile();
+                            writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
+                        }
                     }
                 };
                 new Thread(submit).start();
