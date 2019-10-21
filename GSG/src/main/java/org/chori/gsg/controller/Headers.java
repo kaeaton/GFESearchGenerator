@@ -15,8 +15,8 @@ public class Headers {
 
 	}
 
-	public void printHeaders(String whichTab, String reportingSearchString,
-							 String version, String locus) {
+	public void printHeaders(String whichTab, String headerSearchString,
+							 String version, String locus, String dataSource) {
 
 		// where are we printing the headers?
 		switch(whichTab) {
@@ -32,10 +32,10 @@ public class Headers {
 
 		writeToMe.append("File generated at: " + timeStamp);
 		writeToMe.append(System.lineSeparator());
-		writeToMe.append("Data source: " + placeholder);
+		writeToMe.append("Data source: " + dataSource);
 		writeToMe.append(" - " + locus);
 		writeToMe.append(System.lineSeparator());
-		writeToMe.append("Search parameters: " + reportingSearchString);
+		writeToMe.append("Search parameters: " + headerSearchString);
 		writeToMe.append(System.lineSeparator());
 		writeToMe.append(database + "Version " + version);
 		writeToMe.append(System.lineSeparator());

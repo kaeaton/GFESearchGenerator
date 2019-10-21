@@ -9,16 +9,16 @@ import javax.swing.JTextField;
 
 import org.chori.gsg.view.*;
 
-public class BuildReportingSearchString {
+public class BuildHeaderSearchString {
 
 	// this creates a text version of the search string to be included in the
 	// results so users can see what they were looking for/at.
 	// * is a wildcard, x is a wildcard without 0.
-	public BuildReportingSearchString() {
+	public BuildHeaderSearchString() {
 
 	}
 
-	public String assembleReportingSearchString(String whichTab, String whichLocus,
+	public String assembleHeaderSearchString(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
 								ArrayList<JTextField> textFields) {
 		String searchString = new String("");

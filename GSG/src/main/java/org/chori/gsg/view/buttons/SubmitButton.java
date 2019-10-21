@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,23 +24,19 @@ public class SubmitButton {
 
 	// // class instantiations
 	private BuildRegex buildRegex = new BuildRegex();
-	private BuildReportingSearchString buildRSS = new BuildReportingSearchString();
+	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
 	private Headers header = new Headers();
 	private WhereTheDataLives rawData = new WhereTheDataLives();
+
+    private HashMap<String, String> dataSources = new HashMap<>();
 
 
 	// the button
 	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() {
-        // class instantiations
-        // BuildRegex buildRegex = new BuildRegex();
-        // BuildReportingSearchString buildRSS = new BuildReportingSearchString();
-        // SearchData searchData = new SearchData();
-        // Headers header = new Headers();
-        // WhereTheDataLives rawData = new WhereTheDataLives();
-        // PrettyData prettyData = new PrettyData();
-	}
+        dataSources.put("neo4j", "http://neo4j.b12x.org");	
+    }
 
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
@@ -84,14 +81,14 @@ public class SubmitButton {
                     	// build me some Regex
                     	String regex = buildRegex.assembleRegex("HLA", whatLocus, 
                     											allCheckBoxes, allTextFields);
-                    	String reportingSS = buildRSS.assembleReportingSearchString("HLA", whatLocus, 
+                    	String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
                     											allCheckBoxes, allTextFields);
 
                         // clear results screen
                         B12xGui.resultsTextAreaHla.setText("");
 
                     	// print headers
-                    	header.printHeaders("HLA", reportingSS, whatVersion, whatLocus);
+                    	header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
                     	
                     	// search the data & print to screen
                     	if (!dataFormat.equals("Pretty")) {
