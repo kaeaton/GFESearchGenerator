@@ -52,7 +52,7 @@ public class B12xGui extends JFrame {
 
 	// the tabs, added initially so I can make them 
 	// public, static and update them
-    public static JPanel hlaGfeTab = new JPanel();
+	public static JPanel hlaGfeTab = new JPanel();
 	public static JPanel kirGfeTab = new JPanel();
 	public static JPanel nameGfeTab = new JPanel();
 	public static JPanel optionsGfeTab = new JPanel();
@@ -76,10 +76,12 @@ public class B12xGui extends JFrame {
 	public static JTextArea resultsTextAreaHla = new JTextArea();
 	public static JTextArea resultsTextAreaName = new JTextArea();
 
-    /**
-     * Creates new form B12xGUI
-     */ 
-    public B12xGui() {
+	// search box for name search
+	public static JTextField nameSearchBox = new JTextField("", 20);
+	/**
+	 * Creates new form B12xGUI
+	 */ 
+	public B12xGui() {
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,50 +90,50 @@ public class B12xGui extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 
-        initComponents();
-    }
+		initComponents();
+	}
 
-    private void initComponents() {
+	private void initComponents() {
 
-    /* tabbed pane */
-    	parentTabbedPane.setPreferredSize(new Dimension(1000, 700));
+	/* tabbed pane */
+		parentTabbedPane.setPreferredSize(new Dimension(1000, 700));
 
-    /* HLA GFE tab */
+	/* HLA GFE tab */
 
-    	// add panel to tab pane
-    	parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
-    	
-    	// generate the HLA GFE panel
-    	JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
-    	currentHlaPanel.setName("HLA-GFE");
-    	hlaPanel.add(currentHlaPanel);
-    	
-    	// results textarea
-    	JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
-    	resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
-    	resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
-    	// resultsTextAreaHla.setEditable(false);
+		// add panel to tab pane
+		parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
+		
+		// generate the HLA GFE panel
+		JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
+		currentHlaPanel.setName("HLA-GFE");
+		hlaPanel.add(currentHlaPanel);
+		
+		// results textarea
+		JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
+		resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
+		resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
+		// resultsTextAreaHla.setEditable(false);
 
 		// labels
-    	JLabel selectAllLabelHla = new JLabel("Check all");
-    	JTextArea usageInstructionsHla = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
-    												+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
-    	usageInstructionsHla.setBackground(hlaPanel.getBackground());
-    	usageInstructionsHla.setEditable(false);
-    	usageInstructionsHla.setFocusable(false);
+		JLabel selectAllLabelHla = new JLabel("Check all");
+		JTextArea usageInstructionsHla = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+													+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
+		usageInstructionsHla.setBackground(hlaPanel.getBackground());
+		usageInstructionsHla.setEditable(false);
+		usageInstructionsHla.setFocusable(false);
 
-    	// buttons
-    	JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
-    	JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
-    	JButton cancelButtonHla = cancelButtonGenerator.createCancelButton();
+		// buttons
+		JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
+		JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
+		JButton cancelButtonHla = cancelButtonGenerator.createCancelButton();
 
-    	// submit/cancel buttons panel
-    	JPanel bottomButtonsHla = new JPanel();
-    	bottomButtonsHla.add(submitButtonHla);
-    	bottomButtonsHla.add(cancelButtonHla);
+		// submit/cancel buttons panel
+		JPanel bottomButtonsHla = new JPanel();
+		bottomButtonsHla.add(submitButtonHla);
+		bottomButtonsHla.add(cancelButtonHla);
 
-    	// layout / add them to the hlaGfeTab
-    	hlaGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the hlaGfeTab
+		hlaGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.insets = new Insets(0,0,10,0);
@@ -185,35 +187,35 @@ public class B12xGui extends JFrame {
 		c.gridy = 6;
 		hlaGfeTab.add(bottomButtonsHla, c);
 
-    /* KIR GFE tab */
-    	// parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
+	/* KIR GFE tab */
+		// parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
 
-    /* Name Search tab */
-    	parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
-    	
-    	// generate the HLA GFE panel
-    	JTextField nameSearchBox = new JTextField("", 20);
-    	// currentHlaPanel.setName("NAME");
-    	namePanel.add(nameSearchBox);
-    	
-    	// results textarea
-    	JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
-    	resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
-    	resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
-    	// resultsTextAreaHla.setEditable(false);
+	/* Name Search tab */
+		parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
+		
+		// generate the HLA GFE panel
+		
+		// currentHlaPanel.setName("NAME");
+		namePanel.add(nameSearchBox);
+		
+		// results textarea
+		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
+		resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
+		resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
+		// resultsTextAreaHla.setEditable(false);
 
-    	// buttons
-    	JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
-    	JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
-    	JButton cancelButtonName = cancelButtonGenerator.createCancelButton();
+		// buttons
+		JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
+		JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
+		JButton cancelButtonName = cancelButtonGenerator.createCancelButton();
 
-    	// submit/cancel buttons panel
-    	JPanel bottomButtonsName = new JPanel();
-    	bottomButtonsName.add(submitButtonName);
-    	bottomButtonsName.add(cancelButtonName);
+		// submit/cancel buttons panel
+		JPanel bottomButtonsName = new JPanel();
+		bottomButtonsName.add(submitButtonName);
+		bottomButtonsName.add(cancelButtonName);
 
-    	// layout / add them to the hlaGfeTab
-    	nameGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the hlaGfeTab
+		nameGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints e = new GridBagConstraints();
 		e.anchor = GridBagConstraints.NORTHWEST;
 		e.insets = new Insets(0,0,10,0);
@@ -267,17 +269,17 @@ public class B12xGui extends JFrame {
 		e.gridy = 6;
 		nameGfeTab.add(bottomButtonsName, e);
 
-    /* Options tab */
-    	parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
+	/* Options tab */
+		parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
-    	// local data only option/can java ping for internet access?
+		// local data only option/can java ping for internet access?
 
-    	// buttons
-    	JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
-    	JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
+		// buttons
+		JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
+		JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
 
-    	// layout / add them to the hlaGfeTab
-    	optionsGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the hlaGfeTab
+		optionsGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints f = new GridBagConstraints();
 		f.anchor = GridBagConstraints.NORTHWEST;
 		f.insets = new Insets(0,0,10,0);
@@ -294,8 +296,8 @@ public class B12xGui extends JFrame {
 		f.gridy = 6;
 		optionsGfeTab.add(cancelButtonOptions, f);
 
-    /* Get and set open tab */
-    	parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
+	/* Get and set open tab */
+		parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
 
 		parentTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent evt) {
@@ -305,7 +307,7 @@ public class B12xGui extends JFrame {
 
 	}
 
-    public static void main(String args[]) {
+	public static void main(String args[]) {
   //   	try {
 		// 	for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		// 		if ("Nimbus".equals(info.getName())) {
@@ -314,12 +316,12 @@ public class B12xGui extends JFrame {
 		// 		}
 		// 	}
 		// } catch (Exception ex) { System.out.println(ex); }
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new B12xGui().setVisible(true);
-            }
-        });
-    }
+		
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new B12xGui().setVisible(true);
+			}
+		});
+	}
 }

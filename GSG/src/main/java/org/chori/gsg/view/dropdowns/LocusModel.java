@@ -17,7 +17,7 @@ import org.chori.gsg.view.*;
 public class LocusModel {
 
 	// class instantiations
-	private WhereTheDataLives rawData = new WhereTheDataLives();
+	// private WhereTheDataLives wtdl = new WhereTheDataLives();
 	private LocalData localData = new LocalData();
 
 	public LocusModel() { }
@@ -38,7 +38,7 @@ public class LocusModel {
 // 		ArrayList<String> availableLoci = new ArrayList<>();
 		
 // 		// find the BSGData folder
-// 		String rawDataPath = rawData.getRawDataPath();
+// 		String rawDataPath = wtdl.getRawDataPath();
 // 		String version = "";
 
 // 		// get which version

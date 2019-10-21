@@ -24,6 +24,10 @@ public class Headers {
 				writeToMe = B12xGui.resultsTextAreaHla;
 				database = "IMGT/HLA Database ";
 				break;
+			case "NAME":
+				writeToMe = B12xGui.resultsTextAreaName;
+				database = "IMGT/HLA Database ";
+				break;
 			default:
 				System.out.println("Haven't set up that tab yet");
 		}

@@ -50,63 +50,70 @@ public class WhatLocus {
 				}
 				hlaListener(whatLocus);
 				break;
-			case "NAME1":
-				whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
-				// whatLocus.setName("HLA-dropdown");
+			case "NAME":
+				try {
+					whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
+				} catch (Exception ex) {
+					// if the pref exceeds the length of the model list, 
+					// set selected index to 0
+					System.out.println("Name whatLocus set selected index: " + ex);
+					prefs.putInt("GSG_NAME_LOCUS_1", 0);
+					whatLocus.setSelectedIndex(0);
+				}
 				nameListener(whatLocus);
 				break;
 			default:
 				System.out.println("Locus: Haven't set up that combobox model yet");
 		}
 
-    	// whatLocus.setModel(comboBoxModel);
+		// whatLocus.setModel(comboBoxModel);
 
 		return whatLocus;
 	}
 
 	private void hlaListener(JComboBox hlaWhatLocus) {
 		hlaWhatLocus.addActionListener(new ActionListener() {
-    		@Override
-            public void actionPerformed(ActionEvent evt) {
-            	whichLocus = hlaWhatLocus.getSelectedItem().toString();
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				whichLocus = hlaWhatLocus.getSelectedItem().toString();
 				setNewHlaPanel(whichLocus);
-                System.out.println("Which Loci listener triggered");
-            	prefs.putInt("GSG_HLA_LOCUS", hlaWhatLocus.getSelectedIndex());
-            	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
-            }
-        });
+				System.out.println("Which Locus listener triggered");
+				prefs.putInt("GSG_HLA_LOCUS", hlaWhatLocus.getSelectedIndex());
+				prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
+			}
+		});
 	}
 
 	private void nameListener(JComboBox nameWhatLocus) {
 		nameWhatLocus.addActionListener(new ActionListener() {
-    		@Override
-            public void actionPerformed(ActionEvent evt) {
-            	whichLocus = nameWhatLocus.getSelectedItem().toString();
-                System.out.println("Which Loci listener triggered");
-            	prefs.putInt("GSG_NAME_LOCUS_1", nameWhatLocus.getSelectedIndex());
-            	prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				whichLocus = nameWhatLocus.getSelectedItem().toString();
+				System.out.println("Which Locus name listener triggered");
+				prefs.putInt("GSG_NAME_LOCUS_1", nameWhatLocus.getSelectedIndex());
+				prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
+			}
+		});
 	}
 
 	public JPanel findPanel(JPanel whichTab, String whichPanel) {
 		Component selectedPanel = B12xGui.hlaPanel;
 		for (Component component : whichTab.getComponents()) {
-            if (component.getName().equals(whichPanel)){
-                selectedPanel = component;
-                System.out.println("panel: " + selectedPanel);
-            } 
-        }
-        return (JPanel)selectedPanel;
+			if (component.getName().equals(whichPanel)){
+				selectedPanel = component;
+				System.out.println("panel: " + selectedPanel);
+			} 
+		}
+		return (JPanel)selectedPanel;
 	}
 
 	public void setNewHlaPanel(String locus) {
 		System.out.println("Triggered setNewHlaPanel");
 		JPanel newGfePanel = hlaSBG.generateHlaPanel(locus);
-    	newGfePanel.setName("HLA-GFE");
-    	JPanel oldPanel = findPanel(B12xGui.hlaPanel, "HLA-GFE");
-    	B12xGui.hlaPanel.remove(oldPanel);
-    	B12xGui.hlaPanel.add(newGfePanel).revalidate();
-    	B12xGui.hlaPanel.repaint();
+		newGfePanel.setName("HLA-GFE");
+		JPanel oldPanel = findPanel(B12xGui.hlaPanel, "HLA-GFE");
+		B12xGui.hlaPanel.remove(oldPanel);
+		B12xGui.hlaPanel.add(newGfePanel).revalidate();
+		B12xGui.hlaPanel.repaint();
 	}
 }

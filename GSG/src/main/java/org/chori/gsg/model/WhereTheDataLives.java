@@ -12,8 +12,8 @@ public class WhereTheDataLives {
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
-                + System.getProperty("file.separator") + "Documents"
-                + System.getProperty("file.separator") + "BSG");
+				+ System.getProperty("file.separator") + "Documents"
+				+ System.getProperty("file.separator") + "BSG");
 
 	private final String defaultRawDataPath = (defaultBasePath + System.getProperty("file.separator")
 				+ "BSGData" + System.getProperty("file.separator"));
@@ -54,7 +54,7 @@ public class WhereTheDataLives {
   //           path.toFile().createNewFile();
   //           dataUpdate();
   //       }
-        return dataFile;
+		return dataFile;
 	} 
 
 	// get the data file

@@ -30,70 +30,70 @@ import org.chori.gsg.model.neo4j.*;
 import org.chori.gsg.view.*;
 
 public class IncomingJsonData {
-    
-    private JsonFactoryInstance getFactory = JsonFactoryInstance.getInstance();
-    private JsonFactory factory = getFactory.factory;
+	
+	private JsonFactoryInstance getFactory = JsonFactoryInstance.getInstance();
+	private JsonFactory factory = getFactory.factory;
 
-    public IncomingJsonData() {
+	public IncomingJsonData() {
 
-    }
-    
-    public void parseResponse(String locus, String version, 
-            InputStream httpResult) throws IOException 
-    {
-        try 
-        {
-            WhereTheDataLives wtdl = new WhereTheDataLives();
-            String dataFilesPath = wtdl.getRawDataPath();
-            File gfeRaw = new File(dataFilesPath
-                    + version + System.getProperty("file.separator") 
-                    + "neo4j_" + locus + "_" + version 
-                    + "_Download.csv");
-            gfeRaw.createNewFile();
+	}
+	
+	public void parseResponse(String locus, String version, 
+			InputStream httpResult) throws IOException 
+	{
+		try 
+		{
+			WhereTheDataLives wtdl = new WhereTheDataLives();
+			String dataFilesPath = wtdl.getRawDataPath();
+			File gfeRaw = new File(dataFilesPath
+					+ version + System.getProperty("file.separator") 
+					+ "neo4j_" + locus + "_" + version 
+					+ "_Download.csv");
+			gfeRaw.createNewFile();
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
-            
-            LocalDate date = LocalDate.now();
-            writer.write(date.toString() + System.lineSeparator());
-            writer.write(version + System.lineSeparator());
+			BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
+			
+			LocalDate date = LocalDate.now();
+			writer.write(date.toString() + System.lineSeparator());
+			writer.write(version + System.lineSeparator());
 
-            
-            HashMap<String, String> neo4jPairs = new HashMap<String, String>();
-            
-            JsonParser parser = factory.createParser(httpResult);
-            
-            // continue parsing the token until the end of input is reached
-            while (!parser.isClosed()) 
-            {
-                // get the token
-                JsonToken token = parser.nextToken();
+			
+			HashMap<String, String> neo4jPairs = new HashMap<String, String>();
+			
+			JsonParser parser = factory.createParser(httpResult);
+			
+			// continue parsing the token until the end of input is reached
+			while (!parser.isClosed()) 
+			{
+				// get the token
+				JsonToken token = parser.nextToken();
 
-                // if its the last token then we are done
-                if (token == null) break;
+				// if its the last token then we are done
+				if (token == null) break;
   
-                // we want to look for a field that says data
-                if (JsonToken.FIELD_NAME.equals(token) && "data".equals(parser.getCurrentName())) 
-                {
-                    // we are entering the datasets now. The first token should be
-                    // start of array
-                    token = parser.nextToken();
+				// we want to look for a field that says data
+				if (JsonToken.FIELD_NAME.equals(token) && "data".equals(parser.getCurrentName())) 
+				{
+					// we are entering the datasets now. The first token should be
+					// start of array
+					token = parser.nextToken();
 
-                    // we are now looking for a field that says "row". We
-                    // continue looking till we find all such fields. This is
-                    // probably not a best way to parse this json, but this will
-                    // suffice for this example.
-                    while (true) 
-                    {
-                        token = parser.nextToken();
-                        if (token == null) break;
-                        
-                        if (JsonToken.FIELD_NAME.equals(token) && "row".equals(parser.getCurrentName())) 
-                        {
-                            token = parser.nextToken();
-                            token = parser.nextToken();
-                            String value = parser.getText();
-                            token = parser.nextToken();
-                            String key = parser.getText();
+					// we are now looking for a field that says "row". We
+					// continue looking till we find all such fields. This is
+					// probably not a best way to parse this json, but this will
+					// suffice for this example.
+					while (true) 
+					{
+						token = parser.nextToken();
+						if (token == null) break;
+						
+						if (JsonToken.FIELD_NAME.equals(token) && "row".equals(parser.getCurrentName())) 
+						{
+							token = parser.nextToken();
+							token = parser.nextToken();
+							String value = parser.getText();
+							token = parser.nextToken();
+							String key = parser.getText();
 							
 							// test for duplicate key (GFE)
 							if(neo4jPairs.containsKey(key)) {
@@ -105,41 +105,41 @@ public class IncomingJsonData {
 									javax.swing.JOptionPane.ERROR_MESSAGE);
 							}
 							System.out.println(key + " " + value);
-                            neo4jPairs.put(key, value);
-                        }
-                    }
-                }
-            }
-            parser.close();
+							neo4jPairs.put(key, value);
+						}
+					}
+				}
+			}
+			parser.close();
 			
 			// sort the Hashmap
 			System.out.println("Calling the sort");
-            SortData sortData = new SortData();
+			SortData sortData = new SortData();
 			LinkedHashMap<String, String> sortedNeo4jHlaPairs = sortData.sortTheData(neo4jPairs);
 			
 			// write sorted hashmap to file
-            for(Map.Entry m:sortedNeo4jHlaPairs.entrySet())
-            {  
-                writer.write(m.getKey() + "," + m.getValue()
-                        + System.lineSeparator());  
-            }  
-            writer.close();
-            
-            // Debugging tools
-            // Write raw data to file to see structure
+			for(Map.Entry m:sortedNeo4jHlaPairs.entrySet())
+			{  
+				writer.write(m.getKey() + "," + m.getValue()
+						+ System.lineSeparator());  
+			}  
+			writer.close();
+			
+			// Debugging tools
+			// Write raw data to file to see structure
 //            ObjectMapper mapper = new ObjectMapper();
 //            Object json = mapper.readValue(httpResult, Object.class);
 //            File neo4jRaw = new File(Neo4j.dataFilesPath 
 //                    + version + System.getProperty("file.separator")
 //                    + "neo4jRaw" + locus + "Data.json");
 //            mapper.writerWithDefaultPrettyPrinter().writeValue(neo4jRaw, json);  
-            
-        } catch (Exception ex) 
-        {
-            System.out.println(ex);
-        }
-    }
-    
+			
+		} catch (Exception ex) 
+		{
+			System.out.println(ex);
+		}
+	}
+	
    //  public void parseKirResponse(String locus, String version, 
    //          InputStream httpResult, JsonFactory factory) throws IOException 
    //  {
@@ -152,15 +152,15 @@ public class IncomingJsonData {
    //          neo4jRaw.createNewFile();
 
    //          BufferedWriter writer = new BufferedWriter(new FileWriter(neo4jRaw));
-            
+			
    //          LocalDate date = LocalDate.now();
    //          writer.write(date.toString() + System.lineSeparator());
    //          writer.write(version + System.lineSeparator());
 
    //          HashMap<String, String> neo4jKirPairs = new HashMap();
-            
+			
    //          JsonParser parser = factory.createParser(httpResult);
-            
+			
    //          // continue parsing the token until the end of input is reached
    //          while (!parser.isClosed()) 
    //          {
@@ -170,7 +170,7 @@ public class IncomingJsonData {
    //              // if its the last token then we are done
    //              if (token == null)
    //                  break;
-                
+				
    //              // we want to look for a field that says data
    //              if (JsonToken.FIELD_NAME.equals(token) && "data".equals(parser.getCurrentName())) 
    //              {
@@ -223,22 +223,22 @@ public class IncomingJsonData {
    //                      + System.lineSeparator());  
    //          }  
    //          writer.close();
-            
-            // Debugging tools
-            // Write raw data to file to see structure
+			
+			// Debugging tools
+			// Write raw data to file to see structure
 //            ObjectMapper mapper = new ObjectMapper();
 //            Object json = mapper.readValue(httpResult, Object.class);
 //            File neo4jRaw = new File(Neo4j.dataFilesPath 
 //                    + version + System.getProperty("file.separator")
 //                    + "neo4jRaw" + locus + "Data.json");
 //            mapper.writerWithDefaultPrettyPrinter().writeValue(neo4jRaw, json);  
-            
-    //     } catch (Exception ex) 
-    //     {
-    //         System.out.println(ex);
-    //     }
-    // }
-    
+			
+	//     } catch (Exception ex) 
+	//     {
+	//         System.out.println(ex);
+	//     }
+	// }
+	
 	// function to sort hashmap by values
 // 	private HashMap<String, String> sortMapByValue (HashMap<String, String> incomingData)
 // 	{
@@ -328,75 +328,75 @@ public class IncomingJsonData {
 // 		return sortedData;
 // 	}
 	
-    public ArrayList<String> parseVersion(InputStream httpResult, 
-            String versionType) throws IOException 
-    {
-        ArrayList<String> versions = new ArrayList<>();
-        System.out.println(versions.toString());
+	public ArrayList<String> parseVersion(InputStream httpResult, 
+			String versionType) throws IOException 
+	{
+		ArrayList<String> versions = new ArrayList<>();
+		System.out.println(versions.toString());
 
-        try 
-        {
-            // reading raw data and extracting the version string
-            // open the json parser
-            JsonParser parser = factory.createParser(httpResult);
-            System.out.println("Taken the input string and opened the Version parser");
-            
-            // continue parsing the token till the end of input is reached
-            while (!parser.isClosed()) 
-            {
-                // get the token
-                JsonToken token = parser.nextToken();
+		try 
+		{
+			// reading raw data and extracting the version string
+			// open the json parser
+			JsonParser parser = factory.createParser(httpResult);
+			System.out.println("Taken the input string and opened the Version parser");
+			
+			// continue parsing the token till the end of input is reached
+			while (!parser.isClosed()) 
+			{
+				// get the token
+				JsonToken token = parser.nextToken();
 
-                while (true) 
-                {
-                    token = parser.nextToken();
-                    if (token == null) break;
-                    
-                    // we want to look for a key field that says row
-                    if (JsonToken.FIELD_NAME.equals(token) 
-                            && "row".equals(parser.getCurrentName())) 
-                    {
+				while (true) 
+				{
+					token = parser.nextToken();
+					if (token == null) break;
+					
+					// we want to look for a key field that says row
+					if (JsonToken.FIELD_NAME.equals(token) 
+							&& "row".equals(parser.getCurrentName())) 
+					{
 //                    if (JsonToken.VALUE_STRING.equals(token) 
 //                            && "row".equals(parser.getText())) {
-                        token = parser.nextToken();
-                        token = parser.nextToken();
-                        versions.add(parser.getText());
-                        System.out.println(versions.toString());
+						token = parser.nextToken();
+						token = parser.nextToken();
+						versions.add(parser.getText());
+						System.out.println(versions.toString());
 
-                    }
-                }
-            }
-            
-            // close the json parser
-            parser.close();
-            
-            // Debugging tools
-            // Write raw data to file to see structure
+					}
+				}
+			}
+			
+			// close the json parser
+			parser.close();
+			
+			// Debugging tools
+			// Write raw data to file to see structure
 //            ObjectMapper mapper = new ObjectMapper();
 //            Object json = mapper.readValue(httpResult, Object.class);
 //            File neo4jRaw = new File(GlobalVariables.dataFilesPath() 
 //                    + "neo4jRawVersionData.json");
 //            mapper.writerWithDefaultPrettyPrinter().writeValue(neo4jRaw, json);  
 
-            // Write extracted data to file to make sure we're pulling the correct data.
-            // File neo4jVersionRaw = new File(Neo4j.dataFilesPath 
-            //         + "neo4j_" + versionType + "_version.txt");
-            // neo4jVersionRaw.createNewFile();
+			// Write extracted data to file to make sure we're pulling the correct data.
+			// File neo4jVersionRaw = new File(Neo4j.dataFilesPath 
+			//         + "neo4j_" + versionType + "_version.txt");
+			// neo4jVersionRaw.createNewFile();
 
-    //         BufferedWriter writer = new BufferedWriter(new FileWriter(neo4jVersionRaw));
-            
-    //         LocalDate date = LocalDate.now();
-    //         writer.write(date.toString() + System.lineSeparator());
-    //         for(int i = 0; i < versions.size(); i++)
-    //         {
-    //             writer.write(versions.get(i) + ",");
-    //         }
-    //         writer.close();
+	//         BufferedWriter writer = new BufferedWriter(new FileWriter(neo4jVersionRaw));
+			
+	//         LocalDate date = LocalDate.now();
+	//         writer.write(date.toString() + System.lineSeparator());
+	//         for(int i = 0; i < versions.size(); i++)
+	//         {
+	//             writer.write(versions.get(i) + ",");
+	//         }
+	//         writer.close();
 
-        } catch (Exception ex) 
-        {
-            System.out.println(ex);
-        }
-        return versions;
-    }
+		} catch (Exception ex) 
+		{
+			System.out.println(ex);
+		}
+		return versions;
+	}
 }

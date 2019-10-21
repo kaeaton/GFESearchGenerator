@@ -23,33 +23,33 @@ import org.chori.gsg.view.*;
 public class SubmitButton { 
 
 	// // class instantiations
-	private BuildGfeRegex buildGfeRegex = new BuildGfeRegex();
+	private BuildRegex buildRegex = new BuildRegex();
 	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
 	private Headers header = new Headers();
 	private WhereTheDataLives wtdl = new WhereTheDataLives();
 
-    private HashMap<String, String> dataSources = new HashMap<>();
+	private HashMap<String, String> dataSources = new HashMap<>();
 
 
 	// the button
 	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() {
-        dataSources.put("neo4j", "http://neo4j.b12x.org");	
-    }
+		dataSources.put("neo4j", "http://neo4j.b12x.org");	
+	}
 
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
-        JButton submitButton = new JButton("Submit");
+		JButton submitButton = new JButton("Submit");
 
 		// who is this reset button for?
 		switch(whichTab) {
 			case "HLA":
 				hlaListener(submitButton);
 				break;
-            case "NAME":
-                nameListener(submitButton);
-                break;
+			case "NAME":
+				nameListener(submitButton);
+				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
 		}
@@ -59,93 +59,126 @@ public class SubmitButton {
 
 	private void hlaListener(JButton subButton) {
 		subButton.addActionListener(new ActionListener() {
-    		@Override
-            public void actionPerformed(ActionEvent evt) {
-                Runnable submit = new Runnable() {
-                    public void run() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				Runnable submit = new Runnable() {
+					public void run() {
 
-                    	// the lists of hla components
-                    	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
-                    	ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
+						// the lists of hla components
+						ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
+						ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
 
-                    	// what locus, version, and format?
-                    	String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-                    	String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString(); //"3.34.0"; // 
-                    	String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
-                    	Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
-                    	System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
+						// what locus, version, and format?
+						String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+						String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString(); //"3.34.0"; // 
+						String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
+						Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
+						System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-                    	// where's the data file?                 
-                    	File data = wtdl.getRawData(whatLocus, whatVersion);
+						// where's the data file?                 
+						File data = wtdl.getRawData(whatLocus, whatVersion);
 
-                    	// build me some Regex
-                    	String regex = buildGfeRegex.assembleRegex("HLA", whatLocus, 
-                    											allCheckBoxes, allTextFields);
-                    	String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
-                    											allCheckBoxes, allTextFields);
+						// build me some Regex
+						String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
+																allCheckBoxes, allTextFields);
+						String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
+																allCheckBoxes, allTextFields);
 
-                        // clear results screen
-                        B12xGui.resultsTextAreaHla.setText("");
+						// clear results screen
+						B12xGui.resultsTextAreaHla.setText("");
 
-                    	// print headers
-                    	header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
-                    	
-                    	// search the data & print to screen
-                    	if (dataFormat.equals("Pretty")) {
-                            PrettyData prettyData = new PrettyData();
-                            prettyData.searchThroughData(data, regex, "HLA");
-                    	} else {
-                    		SearchData searchData = new SearchData();
-                            searchData.searchThroughData(data, regex, dataFormat, "HLA");
-                    	}
+						// print headers
+						header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
+						
+						// search the data & print to screen
+						if (dataFormat.equals("Pretty")) {
+							PrettyData prettyData = new PrettyData();
+							prettyData.searchThroughData(data, regex, "HLA");
+						} else {
+							SearchData searchData = new SearchData();
+							searchData.searchThroughData(data, regex, dataFormat, "HLA");
+						}
 
-                        if (printToFile) {
-                            WriteToFile writeToFile = new WriteToFile();
-                            writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
-                        }
-                    }
-                };
-                new Thread(submit).start();
+						if (printToFile) {
+							WriteToFile writeToFile = new WriteToFile();
+							writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
+						}
+					}
+				};
+				new Thread(submit).start();
 
-            }
-        });
+			}
+		});
 	}
 
-    private void nameListener(JButton subButton) {
-        subButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                Runnable submit = new Runnable() {
-                    public void run() {
+	private void nameListener(JButton subButton) {
+		subButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				Runnable submit = new Runnable() {
+					public void run() {
 
+						// what locus, version, and format?
+						String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+						String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
+						String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
+						Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
+						System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
+						// where's the data file?                 
+						File data = wtdl.getRawData(whatLocus, whatVersion);
 
+						// build me some Regex
+						String searchTerm = B12xGui.nameSearchBox.getText();
+						
+						System.out.println("Name Search Term: " + searchTerm);
+						String regex = buildRegex.assembleNameRegex(searchTerm);
+						
+						// clear results screen
+						B12xGui.resultsTextAreaName.setText("");
 
-                    }
-                };
-                new Thread(submit).start();
-            }
-        });
-    }
+						// print headers
+						header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
+						
+						// search the data & print to screen
+						if (dataFormat.equals("Pretty")) {
+							PrettyData prettyData = new PrettyData();
+							prettyData.searchThroughData(data, regex, "NAME");
+						} else {
+							SearchData searchData = new SearchData();
+							searchData.searchThroughData(data, regex, dataFormat, "NAME");
+						}
+
+						if (printToFile) {
+							WriteToFile writeToFile = new WriteToFile();
+							writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
+						}
+
+					}
+				};
+				new Thread(submit).start();
+			}
+		});
+	}
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
-        for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
-            if (component instanceof JRadioButton){
-            	if (((JRadioButton)component).isSelected()) {
+		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
+			if (component instanceof JRadioButton){
+				if (((JRadioButton)component).isSelected()) {
 					return ((JRadioButton)component).getText();
 				}
-            }
-        }
-        System.out.println("Didn't find a Data format");
-        return null;
+			}
+		}
+		System.out.println("Didn't find a Data format");
+		return null;
 	}
 
 	private Boolean printToFileFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
-            if (component instanceof JCheckBox){
-            	return ((JCheckBox)component).isSelected();
-            }
-        }
+			if (component instanceof JCheckBox){
+				return ((JCheckBox)component).isSelected();
+			}
+		}
 		return false;
 	}
 }

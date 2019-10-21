@@ -42,6 +42,10 @@ public class WhatVersion {
 				break;
 			case "NAME":
 				comboBoxModel = vm.versions();
+				whatVersion.setModel(comboBoxModel);
+				whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION_1", 0));
+
+				nameListener(whatVersion);
 				break;
 			case "NAME2":
 				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
@@ -78,6 +82,29 @@ public class WhatVersion {
             	// update the preferences
             	prefs.putInt("GSG_HLA_LOCUS", B12xGui.whatLocusHla.getSelectedIndex());
             	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
+            }
+        });
+	}
+
+	private void nameListener(JComboBox nameWhatVersion) {
+		nameWhatVersion.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	String whichVersion = nameWhatVersion.getSelectedItem().toString();
+                System.out.println("Which name version listener triggered");
+            	prefs.putInt("GSG_NAME_VERSION_1", nameWhatVersion.getSelectedIndex());
+            	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
+
+            	// if local version, update loci model to show available loci
+            	LocusModel locusModel = new LocusModel();
+            	B12xGui.whatLocusName.setModel(locusModel.loci(whichVersion));
+
+            	// grab the new available default locus
+            	// String whichLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+
+            	// update the preferences
+            	prefs.putInt("GSG_NAME_LOCUS_1", B12xGui.whatLocusName.getSelectedIndex());
+            	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
             }
         });
 	}
