@@ -1,5 +1,6 @@
 package org.chori.gsg.controller;
 
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,7 +69,7 @@ public class BuildRegex {
 		
 		System.out.println("Made it to assembleNameRegex");
 
-		String regex = "^.+";
+		StringBuilder regex = new StringBuilder("^.+");
 		String asterisk = "(\\*)";
 
 		// Create a pattern from regex 
@@ -79,11 +80,14 @@ public class BuildRegex {
 
 		if (matcher.lookingAt()) {
 			System.out.println("BuildRegex: assembleNameRegex: asterisk found");
-			regex = matcher.replaceAll("\\" + "\\*" );
-			System.out.println("Asterisk replacement: " + temp);
+			regex.append("\\");
+			regex = regex.append(matcher.replaceAll("\\*"));
+			System.out.println("Asterisk replacement: " + regex);
+		} else {
+			regex = regex.append(searchString);
 		}
 
-		return regex;
+		return regex.toString();
 	}
 }
 
