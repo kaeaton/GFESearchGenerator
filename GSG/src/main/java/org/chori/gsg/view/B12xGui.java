@@ -48,7 +48,7 @@ public class B12xGui extends JFrame {
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 
 	// need this to add at initialization
-	public JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+	public static JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
 	// the tabs, added initially so I can make them 
 	// public, static and update them

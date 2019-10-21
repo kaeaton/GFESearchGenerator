@@ -48,7 +48,6 @@ public class WhatLocus {
 					prefs.putInt("GSG_HLA_LOCUS", 0);
 					whatLocus.setSelectedIndex(0);
 				}
-				// setNewHlaPanel(whatLocus.getSelectedItem().toString());
 				hlaListener(whatLocus);
 				break;
 			case "NAME1":

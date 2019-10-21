@@ -1,4 +1,4 @@
-package org.chori.gsg.model;
+package org.chori.gsg.model.processJson;
 
 import com.fasterxml.jackson.core.JsonFactory;
 

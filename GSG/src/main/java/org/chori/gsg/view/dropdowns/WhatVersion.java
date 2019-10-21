@@ -64,24 +64,16 @@ public class WhatVersion {
             	prefs.putInt("GSG_HLA_VERSION", hlaWhatVersion.getSelectedIndex());
             	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
-            	// if legacy version, update loci model to show available loci
-            	// String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+            	// if local version, update loci model to show available loci
             	LocusModel locusModel = new LocusModel();
             	B12xGui.whatLocusHla.setModel(locusModel.loci(whichVersion));
+
+            	// grab the new available default locus
             	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 
-            	// grab the new available default locus and update the GUI accordingly
-            	whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-				HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();
-				JPanel newGfePanel = hlaSBG.generateHlaPanel(whichLocus);
-            	newGfePanel.setName("HLA-GFE");
-
-            	// borrow the find panel method from WhatLocus
+            	// borrow the set new panel method from WhatLocus
             	WhatLocus whatLocus = new WhatLocus();
-            	JPanel oldPanel = whatLocus.findPanel(B12xGui.hlaPanel, "HLA-GFE");
-            	B12xGui.hlaPanel.remove(oldPanel);
-            	B12xGui.hlaPanel.add(newGfePanel).revalidate();
-            	B12xGui.hlaPanel.repaint();
+            	whatLocus.setNewHlaPanel(whichLocus);
 
             	// update the preferences
             	prefs.putInt("GSG_HLA_LOCUS", B12xGui.whatLocusHla.getSelectedIndex());
