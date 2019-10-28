@@ -112,10 +112,7 @@ public class SubmitButton {
 		});
 	}
 
-	// public Action nameListener = new AbstractAction() {
-	public ActionListener nameListener = //{//JButton subButton) {
-		// subButton.addActionListener(new ActionListener() {
-		new ActionListener() {
+	public ActionListener nameListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				Runnable submit = new Runnable() {
