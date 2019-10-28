@@ -45,11 +45,10 @@ public class SubmitButton {
 		// who is this reset button for?
 		switch(whichTab) {
 			case "HLA":
-				hlaListener(submitButton);
+				submitButton.addActionListener(hlaListener);
 				break;
 			case "NAME":
-				// nameListener(submitButton);
-				submitButton.addActionListener( nameListener );
+				submitButton.addActionListener(nameListener);
 				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -58,108 +57,105 @@ public class SubmitButton {
 		return submitButton;
 	}
 
-	private void hlaListener(JButton subButton) {
-		subButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				Runnable submit = new Runnable() {
-					public void run() {
+	public ActionListener hlaListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Runnable submit = new Runnable() {
+				public void run() {
 
-						// the lists of hla components
-						ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
-						ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
+					// the lists of hla components
+					ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
+					ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
 
-						// what locus, version, and format?
-						String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-						String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString(); //"3.34.0"; // 
-						String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
-						Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
-						System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
+					// what locus, version, and format?
+					String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+					String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString(); //"3.34.0"; // 
+					String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
+					Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
+					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-						// where's the data file?                 
-						File data = wtdl.getRawData(whatLocus, whatVersion);
+					// where's the data file?                 
+					File data = wtdl.getRawData(whatLocus, whatVersion);
 
-						// build me some Regex
-						String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
-																allCheckBoxes, allTextFields);
-						String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
-																allCheckBoxes, allTextFields);
+					// build me some Regex
+					String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
+															allCheckBoxes, allTextFields);
+					String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
+															allCheckBoxes, allTextFields);
 
-						// clear results screen
-						B12xGui.resultsTextAreaHla.setText("");
+					// clear results screen
+					B12xGui.resultsTextAreaHla.setText("");
 
-						// print headers
-						header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
-						
-						// search the data & print to screen
-						if (dataFormat.equals("Pretty")) {
-							PrettyData prettyData = new PrettyData();
-							prettyData.searchThroughData(data, regex, "HLA");
-						} else {
-							SearchData searchData = new SearchData();
-							searchData.searchThroughData(data, regex, dataFormat, "HLA");
-						}
-
-						if (printToFile) {
-							WriteToFile writeToFile = new WriteToFile();
-							writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
-						}
+					// print headers
+					header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
+					
+					// search the data & print to screen
+					if (dataFormat.equals("Pretty")) {
+						PrettyData prettyData = new PrettyData();
+						prettyData.searchThroughData(data, regex, "HLA");
+					} else {
+						SearchData searchData = new SearchData();
+						searchData.searchThroughData(data, regex, dataFormat, "HLA");
 					}
-				};
-				new Thread(submit).start();
 
-			}
-		});
-	}
+					if (printToFile) {
+						WriteToFile writeToFile = new WriteToFile();
+						writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
+					}
+				}
+			};
+			new Thread(submit).start();
+
+		}
+	};
 
 	public ActionListener nameListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				Runnable submit = new Runnable() {
-					public void run() {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Runnable submit = new Runnable() {
+				public void run() {
 
-						// what locus, version, and format?
-						String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
-						String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
-						String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
-						Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
-						System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
+					// what locus, version, and format?
+					String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+					String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
+					String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
+					Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
+					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-						// where's the data file?                 
-						File data = wtdl.getRawData(whatLocus, whatVersion);
+					// where's the data file?                 
+					File data = wtdl.getRawData(whatLocus, whatVersion);
 
-						// build me some Regex
-						String searchTerm = B12xGui.nameSearchBox.getText();
-						
-						System.out.println("Name Search Term: " + searchTerm);
-						String regex = buildRegex.assembleNameRegex(searchTerm);
-						
-						// clear results screen
-						B12xGui.resultsTextAreaName.setText("");
+					// build me some Regex
+					String searchTerm = B12xGui.nameSearchBox.getText();
+					
+					System.out.println("Name Search Term: " + searchTerm);
+					String regex = buildRegex.assembleNameRegex(searchTerm);
+					
+					// clear results screen
+					B12xGui.resultsTextAreaName.setText("");
 
-						// print headers
-						header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
-						
-						// search the data & print to screen
-						if (dataFormat.equals("Pretty")) {
-							PrettyData prettyData = new PrettyData();
-							prettyData.searchThroughData(data, regex, "NAME");
-						} else {
-							SearchData searchData = new SearchData();
-							searchData.searchThroughData(data, regex, dataFormat, "NAME");
-						}
-
-						if (printToFile) {
-							WriteToFile writeToFile = new WriteToFile();
-							writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
-						}
-
+					// print headers
+					header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
+					
+					// search the data & print to screen
+					if (dataFormat.equals("Pretty")) {
+						PrettyData prettyData = new PrettyData();
+						prettyData.searchThroughData(data, regex, "NAME");
+					} else {
+						SearchData searchData = new SearchData();
+						searchData.searchThroughData(data, regex, dataFormat, "NAME");
 					}
-				};
-				new Thread(submit).start();
-			}
-		};
-	// }
+
+					if (printToFile) {
+						WriteToFile writeToFile = new WriteToFile();
+						writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
+					}
+
+				}
+			};
+			new Thread(submit).start();
+		}
+	};
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
