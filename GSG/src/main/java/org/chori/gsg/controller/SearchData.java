@@ -145,9 +145,9 @@ public class SearchData {
 
 		// Footer
 		if (i == 0){
-			B12xGui.resultsTextAreaHla.append("No results found");
+			printToMe.append("No results found");
 		} else {
-			B12xGui.resultsTextAreaHla.append("Total Results: " + i);
+			printToMe.append("Total Results: " + i);
 		}
 
 

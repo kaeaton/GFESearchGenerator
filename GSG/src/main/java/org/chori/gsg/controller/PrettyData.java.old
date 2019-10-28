@@ -42,10 +42,10 @@ public class PrettyData {
 	}
 
 	public void searchThroughData(File file, String regex, String whichTab) {
+		
 		String line;
 		
 		int gfe = 1;
-
 		int[] spacingList = new int[18];
 		
 		String[] hlaIdentifier = new String[2];
@@ -56,24 +56,22 @@ public class PrettyData {
 
 		JTextArea printToMe = whichTextArea.get(whichTab);
 
-		boolean idGfeFlag = true;
-		boolean listFlag = true;
-		boolean matchFlag = false;
-
 		System.out.println("Made it to SearchData: " + regex);
-
-
+			
 		try {
 			// Read the File
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			br.readLine(); // 1st line: filedate
-			br.readLine(); // 2nd line: version
+			String fileDate = br.readLine();
+			String version = br.readLine();
+
+			// flag to turn on gfe identification
+			boolean flag = false;
+
+			// flag to reset the size list
+			boolean listFlag = true;
 
 			// parse the gfe spacing for each matching line
 			while ((line = br.readLine()) != null) {
-
-				// reset the match flag
-				matchFlag = false;
 
 				// use comma as separator
 				gfeAlleles = line.split(",");
@@ -81,44 +79,18 @@ public class PrettyData {
 				// which side is the GFE? (Old files use names as key, new ones gfe)
 				// we want the side that doesn't contain the asterisk.
 				// flag so we only run it once
-				if (idGfeFlag) {
+				if (!flag) {
 					
-					if(gfeAlleles[1].contains("*"))
-						gfe = 0;
-
-					idGfeFlag = false;
+					if(gfeAlleles[1].contains("*")) { gfe = 0; }
+					
+					flag = true;
 				}
 
-				switch(whichTab) {
-					case "HLA":
-						if (gfeAlleles[gfe].matches(regex)){
-								
-							// put gfe and name in holding hashmap for later printing
-							dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-							matchFlag = true;
-						}
-						break;
-
-					case "NAME":
-						// Create a pattern from regex 
-						Pattern pattern = Pattern.compile(regex);
-
-						// Create a matcher for the input String 
-						Matcher matcher = pattern.matcher(gfeAlleles[1 - gfe]);
-
-						if (matcher.lookingAt()){
-
-							// put gfe and name in holding hashmap for later printing
-							dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-							matchFlag = true;
-						}
-						break;
-
-					default:
-						System.out.println("Pretty data doesn't know how to process this data");
-				}
-
-				if (matchFlag){
+				// Run the GFE portion through the parser
+				if (gfeAlleles[gfe].matches(regex)){
+					
+					// put gfe and name in holding hashmap for later printing
+					dataMatches.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 
 					// split the gfe along the dashes
 					protoSplitGfe = gfeAlleles[gfe].split("-");
@@ -214,9 +186,9 @@ public class PrettyData {
 
 		// Footer
 		if (m == 0){
-			printToMe.append("No results found");
+			B12xGui.resultsTextAreaHla.append("No results found");
 		} else {
-			printToMe.append("Total Results: " + m);
+			B12xGui.resultsTextAreaHla.append("Total Results: " + m);
 		}
 	}
 
@@ -244,6 +216,3 @@ public class PrettyData {
 		printToMe.append(System.lineSeparator());
 	}
 }
-
-
-
