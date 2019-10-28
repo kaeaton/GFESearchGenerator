@@ -48,7 +48,8 @@ public class SubmitButton {
 				hlaListener(submitButton);
 				break;
 			case "NAME":
-				nameListener(submitButton);
+				// nameListener(submitButton);
+				submitButton.addActionListener( nameListener );
 				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -111,8 +112,10 @@ public class SubmitButton {
 		});
 	}
 
-	private void nameListener(JButton subButton) {
-		subButton.addActionListener(new ActionListener() {
+	// public Action nameListener = new AbstractAction() {
+	public ActionListener nameListener = //{//JButton subButton) {
+		// subButton.addActionListener(new ActionListener() {
+		new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				Runnable submit = new Runnable() {
@@ -158,8 +161,8 @@ public class SubmitButton {
 				};
 				new Thread(submit).start();
 			}
-		});
-	}
+		};
+	// }
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {

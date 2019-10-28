@@ -197,6 +197,7 @@ public class B12xGui extends JFrame {
 		
 		// currentHlaPanel.setName("NAME");
 		namePanel.add(nameSearchBox);
+		nameSearchBox.addActionListener(submitButtonGenerator.nameListener);
 		
 		// results textarea
 		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
@@ -244,9 +245,9 @@ public class B12xGui extends JFrame {
 		e.anchor = GridBagConstraints.WEST;
 		e.gridwidth = 1;
 		e.gridy = 3;
-		nameGfeTab.add(resetButtonName, e);
+		// nameGfeTab.add(resetButtonName, e);
 
-		e.gridx = 1;
+		// e.gridx = 1;
 		nameGfeTab.add(whatVersionName, e);
 
 		// line 4

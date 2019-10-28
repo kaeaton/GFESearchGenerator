@@ -133,7 +133,7 @@ public class PrettyData {
 					// has to be within the while loop because I need the 
 					// length from protoSplitGfe
 					if (listFlag) {
-						spacingList = new int[protoSplitGfe.length - 1];
+						spacingList = new int[protoSplitGfe.length];
 						Arrays.fill(spacingList, 3);
 						listFlag = false;
 					}
