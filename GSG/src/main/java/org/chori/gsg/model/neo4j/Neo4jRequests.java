@@ -14,7 +14,7 @@ public class Neo4jRequests {
 
 	public Neo4jRequests() { }
 
-	public String formNeo4jRequest(String locus, String version) throws IOException 
+	public String formNeo4jRequest(String type, String locus, String version) throws IOException 
 	{
 		try 
 		{
@@ -24,9 +24,8 @@ public class Neo4jRequests {
 			// String requestType = LocusNameParser.hlaOrKir(locus);
 			
 			// hla
-			if(locus.equals("HLA"))
-			{
-//              request string: MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = "locus" AND r.imgt_release = "version" RETURN n.name, g.name
+			if(type.equals("HLA")) {
+			// request string: MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = "locus" AND r.imgt_release = "version" RETURN n.name, g.name
 
 				request = ("MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) " +
 							"WHERE n.locus = " + quote + locus + quote + " " +
@@ -35,9 +34,8 @@ public class Neo4jRequests {
 			}
 			
 			// kir
-			else if(locus.equals("KIR"))
-			{
-//          request string MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) WHERE r.imgt_release = "2.7.0" RETURN n.name, g.name
+			else if(locus.equals("KIR")) {
+			// request string MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) WHERE r.imgt_release = "2.7.0" RETURN n.name, g.name
 				 
 			request = ("MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) " +
 						"WHERE r.imgt_release = " + quote + version + quote +
@@ -52,7 +50,7 @@ public class Neo4jRequests {
 			
 			// generate the json request
 			GenerateJson generateJson = new GenerateJson();
-			return generateJson.jsonGenerator(request);
+			return generateJson.neo4jJsonGenerator(request);
 		   
 		} catch (Exception ex) 
 		{

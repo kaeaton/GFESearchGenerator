@@ -46,6 +46,7 @@ public class B12xGui extends JFrame {
 	private static CancelButton cancelButtonGenerator = new CancelButton();
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
+	private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
 
 	// need this to add at initialization
 	public static JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -276,6 +277,7 @@ public class B12xGui extends JFrame {
 		// local data only option/can java ping for internet access?
 
 		// buttons
+		JButton bulkDownloadButton = bulkDownloadButtonGenerator.createBulkDownloadButton();
 		JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
 		JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
 
@@ -289,13 +291,19 @@ public class B12xGui extends JFrame {
 		// line 0
 		f.gridx = 0;
 		f.gridy = 0;
+		optionsGfeTab.add(bulkDownloadButton, f);
+
+		// line 1
+		f.gridy = 1;
 		optionsGfeTab.add(resetPrefsButton, f);
+
 
 		// line 6
 		f.weightx = 0;
 		f.weighty = 0;
 		f.gridy = 6;
 		optionsGfeTab.add(cancelButtonOptions, f);
+
 
 	/* Get and set open tab */
 		parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));

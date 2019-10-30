@@ -17,7 +17,7 @@ public class WhatVersion {
 	private final String[] hlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 
-	public WhatVersion() {	}
+	public WhatVersion() { }
 
 	public JComboBox createWhatVersionComboBox(String whichTab) {
 		System.out.println("Generating the which version combo box");
@@ -50,6 +50,9 @@ public class WhatVersion {
 			case "NAME2":
 				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
 				break;
+			case "BULK":
+				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
+
 			default:
 				System.out.println("Version: Haven't set up that combobox model yet");
 		}

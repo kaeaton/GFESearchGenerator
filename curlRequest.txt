@@ -1,0 +1,9 @@
+curl --request POST \                                                            
+  --url http://neo4j.b12x.org/db/data/transaction/commit \
+  --header 'authorization: Basic bmVvNGo6Z2ZlZGI=' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{"statements":[{"statement":"MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = \"HLA-A\" AND r.imgt_release = \"3.37.0\" RETURN n.name, g.name"}]}' \
+  > gfe.3370.json
+
+curl -H "authorization: Basic bmVvNGo6Z2ZlZGI=" -H "cache-control: no-cache" -H "Content-Type: application/json" -X POST -d '{"statements":[{"statement":"MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = \"HLA-A\" AND r.imgt_release = \"3.37.0\" RETURN n.name, g.name"}]}' http://neo4j.b12x.org/db/data/transaction/commit

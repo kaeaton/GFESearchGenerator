@@ -16,7 +16,7 @@ public class GenerateJson {
 		
 	}
 	
-	public String jsonGenerator(String request)
+	public String neo4jJsonGenerator(String request)
 	{
 		StringWriter writer = new StringWriter();
 		

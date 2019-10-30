@@ -16,7 +16,7 @@ public class BuildRegex {
 
 	}
 
-	public String assembleGfeRegex(String whichTab, String whichLocus,
+	public String assembleHlaGfeRegex(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
 								ArrayList<JTextField> textFields) {
 		String regex = new String("^");
@@ -65,7 +65,7 @@ public class BuildRegex {
 		return regex;
 	}
 
-	public String assembleNameRegex(String searchString) {
+	public String assembleHlaNameRegex(String searchString) {
 		
 		System.out.println("Made it to assembleNameRegex");
 

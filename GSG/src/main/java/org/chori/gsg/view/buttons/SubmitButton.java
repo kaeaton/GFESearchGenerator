@@ -78,9 +78,9 @@ public class SubmitButton {
 					File data = wtdl.getRawData(whatLocus, whatVersion);
 
 					// build me some Regex
-					String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
+					String regex = buildRegex.assembleHlaGfeRegex("HLA", whatLocus, 
 															allCheckBoxes, allTextFields);
-					String headerSS = buildHSS.assembleHeaderSearchString("HLA", whatLocus, 
+					String headerSS = buildHSS.assembleHlaHeaderSearchString("HLA", whatLocus, 
 															allCheckBoxes, allTextFields);
 
 					// clear results screen
@@ -129,7 +129,7 @@ public class SubmitButton {
 					String searchTerm = B12xGui.nameSearchBox.getText();
 					
 					System.out.println("Name Search Term: " + searchTerm);
-					String regex = buildRegex.assembleNameRegex(searchTerm);
+					String regex = buildRegex.assembleHlaNameRegex(searchTerm);
 					
 					// clear results screen
 					B12xGui.resultsTextAreaName.setText("");

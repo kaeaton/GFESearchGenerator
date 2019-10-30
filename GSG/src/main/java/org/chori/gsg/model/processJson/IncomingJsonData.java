@@ -4,14 +4,17 @@ package org.chori.gsg.model.processJson;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationConfig;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,18 +41,24 @@ public class IncomingJsonData {
 
 	}
 	
-	public void parseResponse(String locus, String version, 
-			InputStream httpResult) throws IOException 
-	{
-		try 
-		{
+	public void parseNeo4jResponse(String locus, String version, 
+			InputStream httpResult) throws IOException {
+		// putting in try/catch cuts off the beginning and end
+		// of the InputStream, no idea why
+		// try 
+		// {
 			WhereTheDataLives wtdl = new WhereTheDataLives();
 			String dataFilesPath = wtdl.getRawDataPath();
 			File gfeRaw = new File(dataFilesPath
 					+ version + System.getProperty("file.separator") 
 					+ "neo4j_" + locus + "_" + version 
 					+ "_Download.csv");
-			gfeRaw.createNewFile();
+
+			if (!gfeRaw.exists()) {
+				System.out.println("The file does not exist.");
+                gfeRaw.getParentFile().mkdirs();
+                gfeRaw.createNewFile();
+            }
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
 			
@@ -57,14 +66,12 @@ public class IncomingJsonData {
 			writer.write(date.toString() + System.lineSeparator());
 			writer.write(version + System.lineSeparator());
 
-			
 			HashMap<String, String> neo4jPairs = new HashMap<String, String>();
 			
 			JsonParser parser = factory.createParser(httpResult);
 			
 			// continue parsing the token until the end of input is reached
-			while (!parser.isClosed()) 
-			{
+			while (!parser.isClosed()) {
 				// get the token
 				JsonToken token = parser.nextToken();
 
@@ -82,13 +89,11 @@ public class IncomingJsonData {
 					// continue looking till we find all such fields. This is
 					// probably not a best way to parse this json, but this will
 					// suffice for this example.
-					while (true) 
-					{
+					while (true) {
 						token = parser.nextToken();
 						if (token == null) break;
 						
-						if (JsonToken.FIELD_NAME.equals(token) && "row".equals(parser.getCurrentName())) 
-						{
+						if (JsonToken.FIELD_NAME.equals(token) && "row".equals(parser.getCurrentName())) {
 							token = parser.nextToken();
 							token = parser.nextToken();
 							String value = parser.getText();
@@ -112,32 +117,37 @@ public class IncomingJsonData {
 			}
 			parser.close();
 			
-			// sort the Hashmap
+			// // sort the Hashmap
 			System.out.println("Calling the sort");
 			SortData sortData = new SortData();
 			LinkedHashMap<String, String> sortedNeo4jHlaPairs = sortData.sortTheData(neo4jPairs);
 			
-			// write sorted hashmap to file
-			for(Map.Entry m:sortedNeo4jHlaPairs.entrySet())
-			{  
+			// // write sorted hashmap to file
+			for(Map.Entry m:sortedNeo4jHlaPairs.entrySet()) {  
 				writer.write(m.getKey() + "," + m.getValue()
 						+ System.lineSeparator());  
 			}  
+
+		/* Testing code start */
+				// InputStreamReader isReader = new InputStreamReader(httpResult);
+				// BufferedReader reader = new BufferedReader(isReader);
+				// BufferedReader reader = new BufferedReader(key);
+
+				// StringBuffer sb = new StringBuffer();
+				// String str;
+			 //    while((str = reader.readLine())!= null){
+				//     sb.append(str);
+			 //    }
+				// writer.write(sb.toString()); 
+				// writer.close();
+
+			// }
+		// }
+		/* Testing code end */
+
 			writer.close();
-			
-			// Debugging tools
-			// Write raw data to file to see structure
-//            ObjectMapper mapper = new ObjectMapper();
-//            Object json = mapper.readValue(httpResult, Object.class);
-//            File neo4jRaw = new File(Neo4j.dataFilesPath 
-//                    + version + System.getProperty("file.separator")
-//                    + "neo4jRaw" + locus + "Data.json");
-//            mapper.writerWithDefaultPrettyPrinter().writeValue(neo4jRaw, json);  
-			
-		} catch (Exception ex) 
-		{
-			System.out.println(ex);
-		}
+
+		// } catch (Exception ex) { System.out.println(ex); }
 	}
 	
    //  public void parseKirResponse(String locus, String version, 
@@ -338,59 +348,69 @@ public class IncomingJsonData {
 		{
 			// reading raw data and extracting the version string
 			// open the json parser
-			JsonParser parser = factory.createParser(httpResult);
-			System.out.println("Taken the input string and opened the Version parser");
+// 			JsonParser parser = factory.createParser(httpResult);
+// 			System.out.println("Taken the input string and opened the Version parser");
 			
-			// continue parsing the token till the end of input is reached
-			while (!parser.isClosed()) 
-			{
-				// get the token
-				JsonToken token = parser.nextToken();
+// 			// continue parsing the token till the end of input is reached
+// 			while (!parser.isClosed()) 
+// 			{
+// 				// get the token
+// 				JsonToken token = parser.nextToken();
 
-				while (true) 
-				{
-					token = parser.nextToken();
-					if (token == null) break;
+// 				while (true) 
+// 				{
+// 					token = parser.nextToken();
+// 					if (token == null) break;
 					
-					// we want to look for a key field that says row
-					if (JsonToken.FIELD_NAME.equals(token) 
-							&& "row".equals(parser.getCurrentName())) 
-					{
-//                    if (JsonToken.VALUE_STRING.equals(token) 
-//                            && "row".equals(parser.getText())) {
-						token = parser.nextToken();
-						token = parser.nextToken();
-						versions.add(parser.getText());
-						System.out.println(versions.toString());
+// 					// we want to look for a key field that says row
+// 					if (JsonToken.FIELD_NAME.equals(token) 
+// 							&& "row".equals(parser.getCurrentName())) 
+// 					{
+// //                    if (JsonToken.VALUE_STRING.equals(token) 
+// //                            && "row".equals(parser.getText())) {
+// 						token = parser.nextToken();
+// 						token = parser.nextToken();
+// 						versions.add(parser.getText());
+// 						System.out.println(versions.toString());
 
-					}
-				}
-			}
+// 					}
+// 				}
+// 			}
 			
-			// close the json parser
-			parser.close();
+// 			// close the json parser
+// 			parser.close();
 			
-			// Debugging tools
-			// Write raw data to file to see structure
-//            ObjectMapper mapper = new ObjectMapper();
-//            Object json = mapper.readValue(httpResult, Object.class);
-//            File neo4jRaw = new File(GlobalVariables.dataFilesPath() 
-//                    + "neo4jRawVersionData.json");
-//            mapper.writerWithDefaultPrettyPrinter().writeValue(neo4jRaw, json);  
+			/* Testing code start */
+				WhereTheDataLives wtdl = new WhereTheDataLives();
+				String dataFilesPath = wtdl.getRawDataPath();
+				File gfeRaw = new File(dataFilesPath
+						// + version + System.getProperty("file.separator") 
+						+ "neo4j_version_data" 
+						+ "_Download.csv");
 
-			// Write extracted data to file to make sure we're pulling the correct data.
-			// File neo4jVersionRaw = new File(Neo4j.dataFilesPath 
-			//         + "neo4j_" + versionType + "_version.txt");
-			// neo4jVersionRaw.createNewFile();
+				if (!gfeRaw.exists()) {
+					System.out.println("The file does not exist.");
+	                gfeRaw.getParentFile().mkdirs();
+	                gfeRaw.createNewFile();
+	            }
 
-	//         BufferedWriter writer = new BufferedWriter(new FileWriter(neo4jVersionRaw));
+				BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
+				
+				LocalDate date = LocalDate.now();
+				writer.write(date.toString() + System.lineSeparator());
+				// writer.write(version + System.lineSeparator());
+				InputStreamReader isReader = new InputStreamReader(httpResult);
+				BufferedReader reader = new BufferedReader(isReader);
+				StringBuffer sb = new StringBuffer();
+				String str;
+			    while((str = reader.readLine())!= null){
+				    sb.append(str);
+			    }
+				writer.write(sb.toString()); 
+			// }
+	
+		/* Testing code end */
 			
-	//         LocalDate date = LocalDate.now();
-	//         writer.write(date.toString() + System.lineSeparator());
-	//         for(int i = 0; i < versions.size(); i++)
-	//         {
-	//             writer.write(versions.get(i) + ",");
-	//         }
 	//         writer.close();
 
 		} catch (Exception ex) 

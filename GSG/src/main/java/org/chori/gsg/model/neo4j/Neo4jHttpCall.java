@@ -18,22 +18,24 @@ public class Neo4jHttpCall {
        
     public InputStream makeCall(String versionType, String params) throws IOException {
         final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
-		final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
+		// final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
 			  
 		// which URL do we use?
-		URL neo4jURL = versionType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
+		// URL neo4jURL = versionType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
 		
 		try {
             // Open connection
-			HttpURLConnection connection = (HttpURLConnection) neo4jURL.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) neo4jHlaURL.openConnection();
           
             // Setup the connection
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod("GET");
+            // connection.setRequestMethod("POST");
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("X-Stream", "true");
+            // connection.setRequestProperty("cache-control", "no-cache");
             connection.setRequestProperty("Authorization",***REMOVED***);
             
             // Send our request

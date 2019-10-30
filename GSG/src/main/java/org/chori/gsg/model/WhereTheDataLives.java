@@ -13,10 +13,10 @@ public class WhereTheDataLives {
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
 				+ System.getProperty("file.separator") + "Documents"
-				+ System.getProperty("file.separator") + "BSG");
+				+ System.getProperty("file.separator") + "GSG");
 
 	private final String defaultRawDataPath = (defaultBasePath + System.getProperty("file.separator")
-				+ "BSGData" + System.getProperty("file.separator"));
+				+ "GSGData" + System.getProperty("file.separator"));
 
 	private String basePath = prefs.get("GSG_RESULTS_DATA", defaultBasePath);
 	private String rawDataPath = prefs.get("GSG_RAW_DATA", defaultRawDataPath);
