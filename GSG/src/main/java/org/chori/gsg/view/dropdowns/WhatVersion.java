@@ -27,7 +27,6 @@ public class WhatVersion {
 		// instantiate combobox and its model
 		JComboBox whatVersion = new JComboBox();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
-		// JPanel newlayout = new JPanel();
 
 		// who is this combobox for?
 		switch(whichTab) {

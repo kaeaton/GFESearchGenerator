@@ -19,14 +19,15 @@ public class CurrentReleaseData {
 	private String version = "3.36.0";
 	private ArrayList<String> versions = new ArrayList<>();
 
-	Neo4jHttpCall httpCall = new Neo4jHttpCall();
-	IncomingJsonData parser = new IncomingJsonData();
+	// class instantiations
+	private Neo4jHttpCall httpCall = new Neo4jHttpCall();
+	private IncomingJsonData parser = new IncomingJsonData();
 
 	public CurrentReleaseData() { }
 
 	public void getCurrentVersions(String type) {
 		try {
-			// determine the most recent version
+			// to determine the most recent version:
 			// create the request and send it
 			Neo4jVersionRequest whatVersion = new Neo4jVersionRequest();
 			InputStream incomingVersionData = httpCall

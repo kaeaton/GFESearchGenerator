@@ -46,8 +46,6 @@ public class IncomingJsonData {
 			WhereTheDataLives wtdl = new WhereTheDataLives();
 			String gfeRawPath = wtdl.storeRawData("HLA", locus, version);
 
-			// String dataFilesPath = wtdl.getRawDataPath();
-			// File gfeRaw = new File(dataFilesPath
 			File gfeRaw = new File(gfeRawPath);
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
@@ -119,7 +117,17 @@ public class IncomingJsonData {
 						+ System.lineSeparator());  
 			}  
 
+			writer.close();
+
+		} catch (Exception ex) { System.out.println(ex); }
+	}
+
 		/* Testing code start */
+		// writes raw data to file (it will be labeled csv,
+		// but it's actually straight text)
+		// to use comment out everything after BufferedWriter (line 51, not inclusive)
+		// through to this (line 123, inclusive)
+
 		// 		InputStreamReader isReader = new InputStreamReader(httpResult);
 		// 		BufferedReader reader = new BufferedReader(isReader);
 		// 		BufferedReader reader = new BufferedReader(key);
@@ -132,14 +140,10 @@ public class IncomingJsonData {
 		// 		writer.write(sb.toString()); 
 		// 		writer.close();
 
-		// 	}
+		// 	} catch (Exception ex) { System.out.println(ex); }
 		// }
 		/* Testing code end */
 
-			writer.close();
-
-		} catch (Exception ex) { System.out.println(ex); }
-	}
 	
    //  public void parseKirResponse(String locus, String version, 
    //          InputStream httpResult, JsonFactory factory) throws IOException 
@@ -279,6 +283,10 @@ public class IncomingJsonData {
 			}
 			
 			/* Testing code start */
+			// writes raw data to a text file labeled csv, but is 
+			// really straight text.
+			// To use comment out everything from the JSON parser (inclusive)
+			// to the bracket directly above (inclusive)
 
 			// 	WhereTheDataLives wtdl = new WhereTheDataLives();
 			// 	String dataFilesPath = wtdl.getRawDataPath();

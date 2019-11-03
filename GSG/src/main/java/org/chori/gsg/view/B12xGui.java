@@ -100,11 +100,6 @@ public class B12xGui extends JFrame {
 		} catch (Exception ex) { 
 			System.exit(0);
 		}
-	/**
-	 * Creates new form B12xGUI
-	 */ 
-	// public B12xGui() {
-
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

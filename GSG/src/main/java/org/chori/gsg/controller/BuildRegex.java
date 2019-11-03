@@ -19,9 +19,11 @@ public class BuildRegex {
 	public String assembleHlaGfeRegex(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
 								ArrayList<JTextField> textFields) {
+		// start the regex
 		String regex = new String("^");
 
-		// quick diagnostic test: are the lists the same size?
+		// quick diagnostic test: 
+		// are the checkbox and textfield lists the same size?
 		if(checkBoxes.size() != textFields.size()) {
 			B12xGui.resultsTextAreaHla.append("There's a problem with the Arraylists in BuildRegex.");
 			B12xGui.resultsTextAreaHla.append(" (They're not the same length.)");
@@ -35,7 +37,6 @@ public class BuildRegex {
 		// add the workshop status. Right now it has to be "w".
 		if (textFields.get(0).getText().isEmpty()){
 			regex = regex.concat("w");
-			// searchString = searchString.concat("w");}
 		} else {
 			regex = regex.concat(textFields.get(0).getText());
 		}
@@ -43,14 +44,21 @@ public class BuildRegex {
 		// For each textfield add regex or specified term to currentRegex
 		for (int i = 1; i < textFields.size(); i++){
 
+			// textfield empty, no checkbox
 			if ((textFields.get(i).getText().isEmpty()) && !(checkBoxes.get(i).isSelected())) {
+
+				// accepts any integer
 				regex = regex.concat("(\\d+)-");
-				// searchString = searchString.concat( "*-");
+
+			// textfield empty, but checkbox selected
 			} else if ((textFields.get(i).getText().isEmpty()) && (checkBoxes.get(i).isSelected())) {
+
+				// either a single digit from 1 - 9 or 2 - 6 total digits that can contain 0
 				regex = regex.concat("([1-9]{1}|\\d{2,6})-");
+
+			// whatever is entered in the textfield
 			} else {
 				regex = regex.concat(textFields.get(i).getText() + "-");
-				// searchString = searchString.concat(typeFields.get(i).getText() + "-");
 			}
 		}
 
@@ -90,13 +98,3 @@ public class BuildRegex {
 		return regex.toString();
 	}
 }
-
-
-
-
-
-
-
-
-
-
