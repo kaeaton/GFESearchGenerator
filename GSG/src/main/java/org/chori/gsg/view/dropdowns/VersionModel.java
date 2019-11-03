@@ -11,30 +11,48 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 // import java.util.List;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.buttons.*;
+
 
 public class VersionModel {
 
-	public VersionModel() {	}
+	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	// private	static HashMap<Integer, JTextArea> whichTextArea = new HashMap();
 
+
+	public VersionModel() {	
+	}
+
+	// class instantiations
 	private LocalData localData = new LocalData();
 	private InternetAccess internet = new InternetAccess();
+	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
 
-	public DefaultComboBoxModel versions() { //String versionType) {
 
-		ArrayList<String> localVersions = localData.localVersionData();
+	public DefaultComboBoxModel versions() {
+
+		ArrayList<String> localVersions = new ArrayList<>();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-		if (internet.tester()) {
+		localVersions = localData.localVersionData();
 
-		}
+		// // if you have no data and no internet, you're screwed.
+		// if (!internet.tester() && localVersions == null) {
+		// 	resetPrefs.flushPrefs();
+		// 	B12xGui.resultsTextAreaHla.append("You have no internet access nor any data. This will not work.");
+		// 	localVersions = new ArrayList<>();
+		// 	localVersions.add("");
+		// }
 
-		// return a model available for them
 		model = new DefaultComboBoxModel(localVersions.toArray());
 		return model;
 	}

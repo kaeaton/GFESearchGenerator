@@ -20,25 +20,31 @@ public class ResetPrefsButton {
 
 	public JButton createResetPrefsButton() {
 		System.out.println("Generating the preferences reset button");
-		resetPrefsButtonListener();
+		resetPrefsButton.addActionListener(resetPrefsListener);
 
 		return resetPrefsButton;
 	}
 
-	private void resetPrefsButtonListener() {
-		resetPrefsButton.addActionListener(new ActionListener() {
-    		@Override
-            public void actionPerformed(ActionEvent evt) {
-            	try {
-            		System.out.println(prefs.absolutePath());
-	            	System.out.println(prefs.userRoot());
-	            	prefs.clear();
-	            	prefs.flush();
-            		System.out.println(prefs.absolutePath());
-	            	
+	public ActionListener resetPrefsListener = new ActionListener() {
+		@Override
+        public void actionPerformed(ActionEvent evt) {
+        	Runnable resetPrefs = new Runnable() {
+            	public void run() {
+	            	flushPrefs();
+		        }
+		    };
+			new Thread(resetPrefs).start();
+        }
+	};
 
-	            } catch (Exception ex) { System.out.println("Problem finding preferences to reset: " + ex); }
-            }
-        });
+	public void flushPrefs() {
+		try {
+    		System.out.println(prefs.absolutePath());
+        	System.out.println(prefs.userRoot());
+        	prefs.clear();
+        	prefs.flush();
+    		System.out.println(prefs.absolutePath());
+
+        } catch (Exception ex) { System.out.println("Problem finding preferences to reset: " + ex); }
 	}
 }

@@ -21,20 +21,20 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.chori.gsg.model.*;
 import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.buttons.*;
 
 public class B12xGui extends JFrame {
 
-
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
-	
+
 	// default locus settings
-	String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
-	String nameSelectedLocus = prefs.get("GSG_NAME_VERSION_1", "HLA-A");
-	String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
-	
+	private String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
+	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION_1", "HLA-A");
+	private String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
+
 	// the panel generators
 	private HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
 	
@@ -63,26 +63,48 @@ public class B12xGui extends JFrame {
 	public static JPanel hlaPanel = new JPanel();
 	public static JPanel namePanel = new JPanel();
 
+	// results text areas
+	public static JTextArea resultsTextAreaHla = new JTextArea();
+	public static JTextArea resultsTextAreaName = new JTextArea();
+	
 	// combo boxes for locus and version selection
-	public static JComboBox whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
-	public static JComboBox whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA", whatVersionHla.getSelectedItem().toString());
-	public static JComboBox whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
-	public static JComboBox whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
+	public static JComboBox whatVersionHla = new JComboBox();
+	public static JComboBox whatLocusHla = new JComboBox();
+	public static JComboBox whatVersionName = new JComboBox();
+	public static JComboBox whatLocusName = new JComboBox();
 	
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
 
-	// results text areas
-	public static JTextArea resultsTextAreaHla = new JTextArea();
-	public static JTextArea resultsTextAreaName = new JTextArea();
-
 	// search box for name search
 	public static JTextField nameSearchBox = new JTextField("", 20);
+	
+	public B12xGui() {
+		try {
+
+			// error handling: if you have no data and no internet
+			// the program doesn't work
+			InternetAccess internet = new InternetAccess();
+			LocalData localData = new LocalData();
+
+			if(!internet.tester() && localData.localVersionData() == null) {
+				throw new NoInternetOrDataException();
+			}
+
+			whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
+			whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA", whatVersionHla.getSelectedItem().toString());
+			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
+			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
+
+		} catch (Exception ex) { 
+			System.exit(0);
+		}
 	/**
 	 * Creates new form B12xGUI
 	 */ 
-	public B12xGui() {
+	// public B12xGui() {
+
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -317,6 +339,8 @@ public class B12xGui extends JFrame {
 	}
 
 	public static void main(String args[]) {
+
+
   //   	try {
 		// 	for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		// 		if ("Nimbus".equals(info.getName())) {

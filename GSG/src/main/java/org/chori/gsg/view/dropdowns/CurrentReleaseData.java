@@ -16,7 +16,7 @@ public class CurrentReleaseData {
 	private String versionType = "HLA";
 	private String type = "HLA";
 	private String locus = "HLA-DQA1";
-	private String version = "3.37.0";
+	private String version = "3.36.0";
 	private ArrayList<String> versions = new ArrayList<>();
 
 	Neo4jHttpCall httpCall = new Neo4jHttpCall();

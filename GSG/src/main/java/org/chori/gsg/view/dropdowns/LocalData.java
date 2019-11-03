@@ -14,6 +14,7 @@ import org.chori.gsg.view.*;
 public class LocalData {
 
 	private WhereTheDataLives rawData = new WhereTheDataLives();
+	private InternetAccess internet = new InternetAccess();
 
 	public LocalData () { }
 
@@ -37,26 +38,31 @@ public class LocalData {
 		String dir;
 		String versionNumber;
 		
-		for (File directory:directories) {
-			// get directory length
-			dirLength = directory.toString().length();
-			dir = directory.toString();
-			
-			// get version number off the end
-			versionNumber = dir.substring(pathLength, dirLength);
-			ArrayList<String> localDataFiles = getLocalDataFiles(versionNumber);
-			System.out.println("subpath: " + versionNumber);
-			
-			// add to list if not KIR ("2.7.0")
-			if(!versionNumber.equals("2.7.0") && localDataFiles != null) {
-				versions.add(versionNumber);
+		try {
+			for (File directory:directories) {
+				// get directory length
+				dirLength = directory.toString().length();
+				dir = directory.toString();
+				
+				// get version number off the end
+				versionNumber = dir.substring(pathLength, dirLength);
+				ArrayList<String> localDataFiles = getLocalDataFiles(versionNumber);
+				System.out.println("subpath: " + versionNumber);
+				
+				// add to list if not KIR ("2.7.0")
+				if(!versionNumber.equals("2.7.0") && localDataFiles != null) {
+					versions.add(versionNumber);
+				}
 			}
-		}
+		} catch(Exception ex) { System.out.println("LocalData: " + ex + " (Probably no folder found)"); }
 
 		// sort the versions
-		Collections.sort(versions, Collections.reverseOrder());
+		if(!versions.isEmpty()) {
+			Collections.sort(versions, Collections.reverseOrder());
 
-		return versions;
+			return versions;
+		}
+		return null;
 	}
 
 	/* what data files are there? */
@@ -80,6 +86,12 @@ public class LocalData {
 		String file;
 		String protoLocus;
 		String locus = "";
+
+		// if you have no data and no internet, you're screwed.
+		if (!internet.tester() && files == null) {
+			availableLoci.add("");
+			return availableLoci;
+		}
 		
 		for (File aFile:files) {
 

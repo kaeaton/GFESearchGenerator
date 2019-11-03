@@ -43,18 +43,22 @@ public class WhereTheDataLives {
 	}
 
 	// create file to store raw data
-	public File storeRawData(String locus, String version) {
-		String file = rawDataPath + "GFE_" + locus + "_" + version
-						+ "_download.csv";
-		File dataFile = new File(rawDataPath);
-		// if (!path.toFile().exists())
-  //       {
-  //           System.out.println("The file does not exist.");
-  //           path.toFile().getParentFile().mkdirs();
-  //           path.toFile().createNewFile();
-  //           dataUpdate();
-  //       }
-		return dataFile;
+	public String storeRawData(String type, String locus, String version) {
+		String path = (rawDataPath 
+				+ version + System.getProperty("file.separator")//);
+				+ "neo4j_" + locus + "_" + version
+				+ "_Download.csv");
+		Path rawDataPath = Paths.get(path);
+		// File dataFile = new File(rawDataPath);
+		try {
+			if (!rawDataPath.toFile().exists())
+            {
+                System.out.println("The file does not exist.");
+                rawDataPath.toFile().getParentFile().mkdirs();
+                // path.toFile().createNewFile();
+            }
+	    } catch (Exception ex) { System.out.println("Error creating file structure: " + ex); }
+		return path;
 	} 
 
 	// get the data file
