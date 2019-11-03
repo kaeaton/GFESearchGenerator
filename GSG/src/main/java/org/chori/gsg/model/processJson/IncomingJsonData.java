@@ -5,9 +5,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationConfig;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,8 +40,7 @@ public class IncomingJsonData {
 	
 	public void parseNeo4jResponse(String locus, String version, 
 			InputStream httpResult) throws IOException {
-		// putting in try/catch cuts off the beginning and end
-		// of the InputStream, no idea why
+
 		try 
 		{
 			WhereTheDataLives wtdl = new WhereTheDataLives();
@@ -54,28 +49,22 @@ public class IncomingJsonData {
 			// String dataFilesPath = wtdl.getRawDataPath();
 			// File gfeRaw = new File(dataFilesPath
 			File gfeRaw = new File(gfeRawPath);
-					// + version + System.getProperty("file.separator") 
-					// + "neo4j_" + locus + "_" + version 
-					// + "_Download.csv");
-
-			// if (!gfeRaw.exists()) {
-			// // 	// System.out.println("The file does not exist.");
-   // //  //             gfeRaw.getParentFile().mkdirs();
-   //              Files.write(Paths.get(gfeRawPath), gfeRaw.createNewFile());
-   //          }
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
 			
+			// write a date stamp and version number at the top of the file
 			LocalDate date = LocalDate.now();
 			writer.write(date.toString() + System.lineSeparator());
 			writer.write(version + System.lineSeparator());
 
+			// hashmap to hold downloaded pairs before sorting
 			HashMap<String, String> neo4jPairs = new HashMap<String, String>();
 			
 			JsonParser parser = factory.createParser(httpResult);
 			
 			// continue parsing the token until the end of input is reached
 			while (!parser.isClosed()) {
+
 				// get the token
 				JsonToken token = parser.nextToken();
 
@@ -83,16 +72,14 @@ public class IncomingJsonData {
 				if (token == null) break;
   
 				// we want to look for a field that says data
-				if (JsonToken.FIELD_NAME.equals(token) && "data".equals(parser.getCurrentName())) 
-				{
+				if (JsonToken.FIELD_NAME.equals(token) && "data".equals(parser.getCurrentName())) {
+
 					// we are entering the datasets now. The first token should be
 					// start of array
 					token = parser.nextToken();
 
 					// we are now looking for a field that says "row". We
-					// continue looking till we find all such fields. This is
-					// probably not a best way to parse this json, but this will
-					// suffice for this example.
+					// continue looking till we find all such fields.
 					while (true) {
 						token = parser.nextToken();
 						if (token == null) break;
@@ -104,7 +91,7 @@ public class IncomingJsonData {
 							token = parser.nextToken();
 							String key = parser.getText();
 							
-							// test for duplicate key (GFE)
+							// test for duplicate key (GFE) (Unlikely, but just in case)
 							if(neo4jPairs.containsKey(key)) {
 								System.out.println("Duplicate gfe key found: " + key);
 							
@@ -121,31 +108,31 @@ public class IncomingJsonData {
 			}
 			parser.close();
 			
-			// // sort the Hashmap
+			// sort the Hashmap
 			System.out.println("Calling the sort");
 			SortData sortData = new SortData();
 			LinkedHashMap<String, String> sortedNeo4jHlaPairs = sortData.sortTheData(neo4jPairs);
 			
-			// // write sorted hashmap to file
+			// write sorted hashmap to file
 			for(Map.Entry m:sortedNeo4jHlaPairs.entrySet()) {  
 				writer.write(m.getKey() + "," + m.getValue()
 						+ System.lineSeparator());  
 			}  
 
 		/* Testing code start */
-				// InputStreamReader isReader = new InputStreamReader(httpResult);
-				// BufferedReader reader = new BufferedReader(isReader);
-				// BufferedReader reader = new BufferedReader(key);
+		// 		InputStreamReader isReader = new InputStreamReader(httpResult);
+		// 		BufferedReader reader = new BufferedReader(isReader);
+		// 		BufferedReader reader = new BufferedReader(key);
 
-				// StringBuffer sb = new StringBuffer();
-				// String str;
-			 //    while((str = reader.readLine())!= null){
-				//     sb.append(str);
-			 //    }
-				// writer.write(sb.toString()); 
-				// writer.close();
+		// 		StringBuffer sb = new StringBuffer();
+		// 		String str;
+		// 		while((str = reader.readLine())!= null){
+		// 			sb.append(str);
+		// 		}
+		// 		writer.write(sb.toString()); 
+		// 		writer.close();
 
-			// }
+		// 	}
 		// }
 		/* Testing code end */
 
@@ -291,46 +278,39 @@ public class IncomingJsonData {
 				}
 			}
 			
-// 			// close the json parser
-// 			parser.close();
-			
 			/* Testing code start */
-				// WhereTheDataLives wtdl = new WhereTheDataLives();
-				// String dataFilesPath = wtdl.getRawDataPath();
-				// File gfeRaw = new File(dataFilesPath
-				// 		// + version + System.getProperty("file.separator") 
-				// 		+ "neo4j_version_data" 
-				// 		+ "_Download.csv");
 
-				// if (!gfeRaw.exists()) {
-				// 	System.out.println("The file does not exist.");
-	   //              gfeRaw.getParentFile().mkdirs();
-	   //              gfeRaw.createNewFile();
-	   //          }
+			// 	WhereTheDataLives wtdl = new WhereTheDataLives();
+			// 	String dataFilesPath = wtdl.getRawDataPath();
+			// 	File gfeRaw = new File(dataFilesPath
+			// 			// + version + System.getProperty("file.separator") 
+			// 			+ "neo4j_version_data" 
+			// 			+ "_Download.csv");
 
-				// BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
+			// 	if (!gfeRaw.exists()) {
+			// 		System.out.println("The file does not exist.");
+				// 	gfeRaw.getParentFile().mkdirs();
+				// 	gfeRaw.createNewFile();
+				// }
+
+			// 	BufferedWriter writer = new BufferedWriter(new FileWriter(gfeRaw));
 				
-				// LocalDate date = LocalDate.now();
-				// writer.write(date.toString() + System.lineSeparator());
-				// // writer.write(version + System.lineSeparator());
-				// InputStreamReader isReader = new InputStreamReader(httpResult);
-				// BufferedReader reader = new BufferedReader(isReader);
-				// StringBuffer sb = new StringBuffer();
-				// String str;
-			 //    while((str = reader.readLine())!= null){
-				//     sb.append(str);
-			 //    }
-				// writer.write(sb.toString()); 
+			// 	LocalDate date = LocalDate.now();
+			// 	writer.write(date.toString() + System.lineSeparator());
+			// 	InputStreamReader isReader = new InputStreamReader(httpResult);
+			// 	BufferedReader reader = new BufferedReader(isReader);
+			// 	StringBuffer sb = new StringBuffer();
+			// 	String str;
+			//     while((str = reader.readLine())!= null){
+			// 	    sb.append(str);
+			//     }
+			// 	writer.write(sb.toString()); 
 			// }
 	
-		/* Testing code end */
-			
-	//         writer.close();
+			/* Testing code end */
 
-		} catch (Exception ex) 
-		{
-			System.out.println(ex);
-		}
+		} catch (Exception ex) { System.out.println(ex); }
+
 		return versions;
 	}
 }

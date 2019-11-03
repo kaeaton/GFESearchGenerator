@@ -45,14 +45,6 @@ public class VersionModel {
 
 		localVersions = localData.localVersionData();
 
-		// // if you have no data and no internet, you're screwed.
-		// if (!internet.tester() && localVersions == null) {
-		// 	resetPrefs.flushPrefs();
-		// 	B12xGui.resultsTextAreaHla.append("You have no internet access nor any data. This will not work.");
-		// 	localVersions = new ArrayList<>();
-		// 	localVersions.add("");
-		// }
-
 		model = new DefaultComboBoxModel(localVersions.toArray());
 		return model;
 	}

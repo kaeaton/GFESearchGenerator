@@ -44,12 +44,18 @@ public class WhereTheDataLives {
 
 	// create file to store raw data
 	public String storeRawData(String type, String locus, String version) {
+
+		// where the file is going to live and
+		// what the file is going to be called
 		String path = (rawDataPath 
-				+ version + System.getProperty("file.separator")//);
+				+ version + System.getProperty("file.separator")
 				+ "neo4j_" + locus + "_" + version
 				+ "_Download.csv");
+
+		// turn it from string to a path
 		Path rawDataPath = Paths.get(path);
-		// File dataFile = new File(rawDataPath);
+
+		// if the path don't exist, make it
 		try {
 			if (!rawDataPath.toFile().exists())
             {
@@ -58,6 +64,10 @@ public class WhereTheDataLives {
                 // path.toFile().createNewFile();
             }
 	    } catch (Exception ex) { System.out.println("Error creating file structure: " + ex); }
+
+	    // return the string of the now existing path
+	    // (the IncomingJsonData class will make the actual file
+	    //  out of the provided string)
 		return path;
 	} 
 

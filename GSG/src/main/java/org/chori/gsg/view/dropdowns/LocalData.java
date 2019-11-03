@@ -138,7 +138,7 @@ public class LocalData {
 			System.out.println("File length of " + whatVersion 
 				+ ", " + whatLocus + ": " + fileLength);
 		
-			// check that file is longer than just a header
+			// (a header is about 18 bytes. This is giving a bit of a cushion)
 			if(data.length() > 100)
 				return true;
 		}

@@ -60,7 +60,7 @@ public class SortData {
 
 			// add zeros
             for(int i = 0; i < separated.length; i++) { 
-				String paddedString = StringUtils.leftPad(separated[i], 4, "0");
+				String paddedString = StringUtils.leftPad(separated[i], 5, "0");
 				reassembledString = (reassembledString + paddedString + ":");
 			}
 
@@ -70,7 +70,7 @@ public class SortData {
 
 		// get a list of values from intermediateDataStore
 		List<Map.Entry<String, String> > sortedList = 
-               new LinkedList<Map.Entry<String, String> >(intermediateDataStore.entrySet());
+               new LinkedList<Map.Entry<String, String> > (intermediateDataStore.entrySet());
     	System.out.println("Reached Sort the data");
 
 		// Sort the list 
