@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-// import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
@@ -36,16 +36,25 @@ public class VersionModel {
 	private LocalData localData = new LocalData();
 	private InternetAccess internet = new InternetAccess();
 	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
+	private CurrentReleaseData crd = new CurrentReleaseData();
 
 
 	public DefaultComboBoxModel versions() {
-
+		String[] onlineVersions = new String[];
 		ArrayList<String> localVersions = new ArrayList<>();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
+		Set<String> versionSet = new LinkedHashSet<String>();
 
 		localVersions = localData.localVersionData();
+		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null).split(",");
 
-		model = new DefaultComboBoxModel(localVersions.toArray());
+		if(onlineVersions == null)
+
+
+		versionSet.add(localVersions);
+		versionSet.add(onlineVersions);
+
+		model = new DefaultComboBoxModel(versionSet.toArray());
 		return model;
 	}
 
