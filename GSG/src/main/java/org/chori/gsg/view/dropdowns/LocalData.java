@@ -87,10 +87,9 @@ public class LocalData {
 		String protoLocus;
 		String locus = "";
 
-		// if you have no data and no internet, you're screwed.
-		if (!internet.tester() && files == null) {
-			availableLoci.add("");
-			return availableLoci;
+		// if you have no data
+		if (files == null) {
+			return null;
 		}
 		
 		for (File aFile:files) {
@@ -107,7 +106,7 @@ public class LocalData {
 			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
 			if (fileSuffix.compareTo("csv") == 0) {
 				locus = protoLocus.substring(0, protoLocus.length() - 20);
-				System.out.println("locus name: " + locus);
+				// System.out.println("locus name: " + locus);
 			}
 
 			// check file length, is it more than just a header line?
@@ -135,8 +134,8 @@ public class LocalData {
 		File data = rawData.getRawData(whatLocus, whatVersion);
 		if (data != null) {
 			long fileLength = data.length();
-			System.out.println("File length of " + whatVersion 
-				+ ", " + whatLocus + ": " + fileLength);
+			// System.out.println("File length of " + whatVersion 
+				// + ", " + whatLocus + ": " + fileLength);
 		
 			// (a header is about 18 bytes. This is giving a bit of a cushion)
 			if(data.length() > 100)

@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -18,21 +19,54 @@ public class LocusModel {
 
 	// class instantiations
 	// private WhereTheDataLives wtdl = new WhereTheDataLives();
+	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
+
+	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private InternetAccess internet = new InternetAccess();
 	private LocalData localData = new LocalData();
 
 	public LocusModel() { }
 
 	public DefaultComboBoxModel loci(String version) {
+		ArrayList<String> availableLoci = new ArrayList<>();
 
-		// figure out what datafiles are available for selected version
-		ArrayList<String> availableLoci = localData.getLocalDataFiles(version);
+		// what versions are available online?
+		if(onlineVersion(version)) {
+			ArrayList<String> allLoci = new ArrayList<>(Arrays.asList(fullHlaLoci));
+			availableLoci = allLoci;
+		} else {
+			// figure out what datafiles are available for selected version
+			availableLoci = localData.getLocalDataFiles(version);
+		}
+
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 
 		// return a model available for them
 		model = new DefaultComboBoxModel(availableLoci.toArray());
 		return model;
 	}
+
+	private Boolean onlineVersion(String version) {
+
+		String onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		String [] parsedOnlineVersions = new String[3];
+
+		if(onlineVersions != null)
+			parsedOnlineVersions = onlineVersions.split(", ");
+
+		// if the version matches a version available online
+		try {
+			for(int i = 0; i < parsedOnlineVersions.length; i++)
+				if (parsedOnlineVersions[i].compareTo(version) == 0)
+					return true;
+
+		} catch (Exception ex) { return false; }
+
+		return false;
+	}
+
 }
+
 
 // 	public ArrayList<String> getLocalDataFiles(String whichTab) {
 // 		ArrayList<String> availableLoci = new ArrayList<>();

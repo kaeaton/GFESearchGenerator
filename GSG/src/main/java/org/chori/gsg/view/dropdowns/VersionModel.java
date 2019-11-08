@@ -2,18 +2,24 @@ package org.chori.gsg.view.dropdowns;
 
 // import com.fasterxml.jackson.core.JsonFactory;
 // import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileReader;
 // import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 // import java.net.URL;
+import java.nio.charset.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.prefs.Preferences;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
@@ -40,24 +46,55 @@ public class VersionModel {
 
 
 	public DefaultComboBoxModel versions() {
-		String[] onlineVersions = new String[];
+		String onlineVersions = "";
+		String[] parsedOnlineVersions = new String[3];
 		ArrayList<String> localVersions = new ArrayList<>();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
-		Set<String> versionSet = new LinkedHashSet<String>();
+		Set<String> versionSet = new HashSet<String>();
 
 		localVersions = localData.localVersionData();
-		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null).split(",");
+		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 
-		if(onlineVersions == null)
+		// if online versions equals null, and you have internet
+		// download the current versions
+		if(onlineVersions == null && internet.tester()) {
+			crd.getCurrentVersions("HLA");
+			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		}
+
+		// if you have online versions, parse them
+		// it's an array read as a string, so remove the brackets
+		// split on the commas, add to an ArrayList.
+		if(onlineVersions != null) {
+			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
+			System.out.println("online versions array: " + onlineVersions);
+			parsedOnlineVersions = onlineVersions.split(", ");
+			ArrayList<String> onlineVersionsList = new ArrayList<String>(Arrays.asList(parsedOnlineVersions));
+			versionSet.addAll(onlineVersionsList);
+		}
+		if (localVersions != null)
+			versionSet.addAll(localVersions);
+
+		// if(onlineVersions == null)
 
 
-		versionSet.add(localVersions);
-		versionSet.add(onlineVersions);
+		
+		// versionSet.addAll(onlineVersions);
 
 		model = new DefaultComboBoxModel(versionSet.toArray());
 		return model;
 	}
 
+	// private String[] convertStringToArray(String incomingString) {
+
+	//     // serialize string to hex
+	//     String incomingString = new String(Hex.encodeHex(out.toByteArray()));
+	//     System.out.println(yourString);
+
+	//     // deserialize string which allows it to be read as an array
+	//     ByteArrayInputStream in = new ByteArrayInputStream(Hex.decodeHex(yourString.toCharArray()));
+	//     String[] currentVerions = Arrays.toString((String[]) new ObjectInputStream(in).readObject());
+	// }
 
 	// /* what versions do we have? */
 	// public ArrayList<String> localVersionData() {
