@@ -202,7 +202,11 @@ public class PrettyData {
 
 			for (String gfeFeature:splitGfe) {
 				
-				printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature) + " ");
+				if((hlaIdentifier[0].compareTo("A") == 0 && n == 0) || (hlaIdentifier[0].compareTo("B") == 0 && n == 0) || (hlaIdentifier[0].compareTo("C") == 0 && n == 0)) {
+					printToMe.append(String.format("%-5s", gfeFeature) + " ");
+				} else {
+					printToMe.append(String.format("%-" + spacingList[n] + "s", gfeFeature) + " ");
+				}
 				// if(n < (spacingList.length - 1)) 
 				// 	{ printToMe.append(" "); }
 				n++;
@@ -225,7 +229,9 @@ public class PrettyData {
 
 		printToMe.append(String.format("%-25s", "Allele Name"));
 		printToMe.append(String.format("%6s", "Locus "));
-		if (spacingList[j] >= 3)
+		if(locus.compareTo("A") == 0 || locus.compareTo("B") == 0 || locus.compareTo("C") == 0)
+			printToMe.append(String.format(("%-6s"), "5'"));
+		else if (spacingList[j] >= 3)
 			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'") + " ");
 		else
 			printToMe.append(String.format(("%-" + spacingList[j] + "s"), "5'"));
