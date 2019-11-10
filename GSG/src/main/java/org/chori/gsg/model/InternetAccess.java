@@ -5,6 +5,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.chori.gsg.view.*;
+
+
 public class InternetAccess {
 	public InternetAccess() { }
 
@@ -13,10 +16,10 @@ public class InternetAccess {
 			URL url = new URL("http://www.google.com");
 			URLConnection connection = url.openConnection();
 			connection.connect();
-			System.out.println("Internet is connected");
+			System.out.println("InternetAccess.tester: Internet is connected");
 			return true;
-		} catch (MalformedURLException e) { System.out.println("Internet is not connected");
-		} catch (IOException e) { System.out.println("Internet is not connected"); }
+		} catch (MalformedURLException e) { System.out.println("InternetAccess.tester: Internet is not connected");
+		} catch (IOException e) { System.out.println("InternetAccess.tester: Internet is not connected"); }
 
 		return false;
 

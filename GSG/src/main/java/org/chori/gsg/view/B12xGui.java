@@ -349,6 +349,13 @@ public class B12xGui extends JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new B12xGui().setVisible(true);
+				
+				InternetAccess internet = new InternetAccess();
+
+				if(!internet.tester()) {
+					resultsTextAreaHla.append("No internet access available, local data only");
+					resultsTextAreaName.append("No internet access available, local data only");
+				}
 			}
 		});
 	}
