@@ -87,6 +87,7 @@ public class SortData {
         	String originalName = toBeSorted.get(aa.getKey());
             sortedData.put(aa.getKey(), originalName); 
         } 
+        System.out.println("Returning the sorted data");
         return sortedData;
 	}
 }

@@ -97,9 +97,12 @@ public class B12xGui extends JFrame {
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 
-		} catch (Exception ex) { 
+		} catch (NoInternetOrDataException ex) { 
 			System.exit(0);
+		} catch (Exception ex) {
+			System.out.println("B12xGui initialization: " + ex);
 		}
+
 
 		// jFrame settings
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,10 +125,14 @@ public class B12xGui extends JFrame {
 		parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
 		
 		// generate the HLA GFE panel
-		JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
-		currentHlaPanel.setName("HLA-GFE");
-		hlaPanel.add(currentHlaPanel);
-		
+		try {
+			System.out.println("Generating the initial hlaPanel using whatLocusHla: " + whatLocusHla.getSelectedItem().toString());
+			JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
+			currentHlaPanel.setName("HLA-GFE");
+			hlaPanel.add(currentHlaPanel);
+		} catch (IllegalArgumentException iex) {
+			PrefProbException ppex = new PrefProbException();
+		}
 		// results textarea
 		JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
 		resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));

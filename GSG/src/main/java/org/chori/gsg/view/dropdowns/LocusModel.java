@@ -31,9 +31,10 @@ public class LocusModel {
 		ArrayList<String> availableLoci = new ArrayList<>();
 
 		// what versions are available online?
-		if(onlineVersion(version)) {
+		if(internet.tester() && onlineVersion(version)) {
 			ArrayList<String> allLoci = new ArrayList<>(Arrays.asList(fullHlaLoci));
 			availableLoci = allLoci;
+			System.out.println("Reached online version for loci in LocusModel");
 		} else {
 			// figure out what datafiles are available for selected version
 			availableLoci = localData.getLocalDataFiles(version);
@@ -42,6 +43,9 @@ public class LocusModel {
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 
 		// return a model available for them
+		System.out.println("LocusModel.loci(): populating new DefaultComboBoxModel with: " + availableLoci.toString());
+		System.out.println("LocusModel.loci(): populating new DefaultComboBoxModel with: " + availableLoci.toArray().toString());
+
 		model = new DefaultComboBoxModel(availableLoci.toArray());
 		return model;
 	}
@@ -52,13 +56,16 @@ public class LocusModel {
 		String [] parsedOnlineVersions = new String[3];
 
 		if(onlineVersions != null)
+			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
 			parsedOnlineVersions = onlineVersions.split(", ");
 
 		// if the version matches a version available online
 		try {
-			for(int i = 0; i < parsedOnlineVersions.length; i++)
-				if (parsedOnlineVersions[i].compareTo(version) == 0)
+			for(int i = 0; i < parsedOnlineVersions.length; i++) {
+				if (parsedOnlineVersions[i].compareTo(version) == 0) {
 					return true;
+				}
+			}
 
 		} catch (Exception ex) { return false; }
 

@@ -65,13 +65,14 @@ public class VersionModel {
 		// if you have online versions, parse them
 		// it's an array read as a string, so remove the brackets
 		// split on the commas, add to an ArrayList.
-		if(onlineVersions != null) {
+		if(onlineVersions != null && internet.tester()) {
 			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
 			System.out.println("online versions array: " + onlineVersions);
 			parsedOnlineVersions = onlineVersions.split(", ");
 			ArrayList<String> onlineVersionsList = new ArrayList<String>(Arrays.asList(parsedOnlineVersions));
 			versionSet.addAll(onlineVersionsList);
 		}
+		
 		if (localVersions != null)
 			versionSet.addAll(localVersions);
 

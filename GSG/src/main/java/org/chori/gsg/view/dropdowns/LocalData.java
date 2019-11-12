@@ -13,7 +13,7 @@ import org.chori.gsg.view.*;
 
 public class LocalData {
 
-	private WhereTheDataLives rawData = new WhereTheDataLives();
+	private WhereTheDataLives wtdl = new WhereTheDataLives();
 	private InternetAccess internet = new InternetAccess();
 
 	public LocalData () { }
@@ -23,7 +23,6 @@ public class LocalData {
 		ArrayList<String> versions = new ArrayList<>();
 		
 		// find the BSGData folder
-		WhereTheDataLives wtdl = new WhereTheDataLives();
 		String rawDataPath = wtdl.getRawDataPath();
 
 		// read the BSGData folder
@@ -50,7 +49,7 @@ public class LocalData {
 				System.out.println("subpath: " + versionNumber);
 				
 				// add to list if not KIR ("2.7.0")
-				if(!versionNumber.equals("2.7.0") && localDataFiles != null) {
+				if(!versionNumber.equals("2.7.0") && localDataFiles.size() != 0) {
 					versions.add(versionNumber);
 				}
 			}
@@ -70,7 +69,7 @@ public class LocalData {
 		ArrayList<String> availableLoci = new ArrayList<>();
 		
 		// find the BSGData folder
-		String rawDataPath = rawData.getRawDataPath();
+		String rawDataPath = wtdl.getRawDataPath();
 		rawDataPath = rawDataPath + version;
 		System.out.println("Locus Model file path: " + rawDataPath);
 
@@ -109,15 +108,15 @@ public class LocalData {
 				// System.out.println("locus name: " + locus);
 			}
 
-			// check file length, is it more than just a header line?
-			if (fileLength(locus, version))
+			// is the file more than just a header line?
+			if (wtdl.fileLength(aFile))
 				availableLoci.add(locus);
 		}
 
 		// sort the loci
 		Collections.sort(availableLoci);
 
-		System.out.println(availableLoci.toString());
+		System.out.println("LocalData.getLocalDataFiles: available loci: " + availableLoci.toString());
 
 		if (!availableLoci.isEmpty())
 			return availableLoci;
@@ -127,21 +126,5 @@ public class LocalData {
 
 
 
-	// sometimes files have nothing but a header in them
-	// makes sure the file is big enough to actually contain data
-	private boolean fileLength(String whatLocus, String whatVersion) {
-		//
-		File data = rawData.getRawData(whatLocus, whatVersion);
-		if (data != null) {
-			long fileLength = data.length();
-			// System.out.println("File length of " + whatVersion 
-				// + ", " + whatLocus + ": " + fileLength);
-		
-			// (a header is about 18 bytes. This is giving a bit of a cushion)
-			if(data.length() > 100)
-				return true;
-		}
-
-		return false;
-	}
+	
 }

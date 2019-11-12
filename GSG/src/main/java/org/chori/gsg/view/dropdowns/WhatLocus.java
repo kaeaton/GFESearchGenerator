@@ -42,11 +42,9 @@ public class WhatLocus {
 					// try using prefs
 					whatLocus.setSelectedIndex(prefs.getInt("GSG_HLA_LOCUS", 0));
 				} catch (Exception ex) { 
-					// if the pref exceeds the length of the model list, 
-					// set selected index to 0
+					// if the pref exceeds the length of the model list, reset prefs
+					PrefProbException ppex = new PrefProbException();
 					System.out.println("HLA whatLocus set selected index: " + ex);
-					prefs.putInt("GSG_HLA_LOCUS", 0);
-					whatLocus.setSelectedIndex(0);
 				}
 				hlaListener(whatLocus);
 				break;
@@ -54,11 +52,9 @@ public class WhatLocus {
 				try {
 					whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
 				} catch (Exception ex) {
-					// if the pref exceeds the length of the model list, 
-					// set selected index to 0
+					// if the pref exceeds the length of the model list, reset prefs 
+					PrefProbException ppex = new PrefProbException();
 					System.out.println("Name whatLocus set selected index: " + ex);
-					prefs.putInt("GSG_NAME_LOCUS_1", 0);
-					whatLocus.setSelectedIndex(0);
 				}
 				nameListener(whatLocus);
 				break;
