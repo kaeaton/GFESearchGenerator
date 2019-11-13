@@ -22,16 +22,16 @@ public class LocalData {
 	public ArrayList<String> localVersionData() {
 		ArrayList<String> versions = new ArrayList<>();
 		
-		// find the BSGData folder
+		// find the GSGData folder
 		String rawDataPath = wtdl.getRawDataPath();
 
-		// read the BSGData folder
+		// read the GSGData folder
 		File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
-		System.out.println(Arrays.toString(directories));
+		System.out.println("What folders are we looking at? " + Arrays.toString(directories));
 		
 		// get the folders for various versions
 		int pathLength = rawDataPath.length();
-		System.out.println("Path length: " + pathLength);
+		// System.out.println("Path length: " + pathLength);
 
 		int dirLength;
 		String dir;
@@ -42,6 +42,7 @@ public class LocalData {
 				// get directory length
 				dirLength = directory.toString().length();
 				dir = directory.toString();
+				System.out.println("We're currently looking at folder: " + dir);
 				
 				// get version number off the end
 				versionNumber = dir.substring(pathLength, dirLength);
@@ -49,7 +50,7 @@ public class LocalData {
 				System.out.println("subpath: " + versionNumber);
 				
 				// add to list if not KIR ("2.7.0")
-				if(!versionNumber.equals("2.7.0") && localDataFiles.size() != 0) {
+				if(!versionNumber.equals("2.7.0") && localDataFiles != null) {
 					versions.add(versionNumber);
 				}
 			}
@@ -71,11 +72,11 @@ public class LocalData {
 		// find the BSGData folder
 		String rawDataPath = wtdl.getRawDataPath();
 		rawDataPath = rawDataPath + version;
-		System.out.println("Locus Model file path: " + rawDataPath);
+		// System.out.println("Locus Model file path: " + rawDataPath);
 
 		// read the BSGData folder
 		File[] files = new File(rawDataPath).listFiles();
-		// System.out.println(Arrays.toString(files));
+		System.out.println("LocalData.getLocalDataFiles(): Printing out the files array: " + Arrays.toString(files));
 		 
 		// get the folders for various versions
 		int pathLength = (rawDataPath.length() + 7);
@@ -101,22 +102,19 @@ public class LocalData {
 			protoLocus = file.substring(pathLength, filePathLength);
 			// System.out.println("subpath: " + protoLocus);
 
-			// get file suffix, if csv, extract locus name
+			// get file suffix, if csv, and more than just a header, extract locus name
 			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
-			if (fileSuffix.compareTo("csv") == 0) {
+			if (fileSuffix.compareTo("csv") == 0 && wtdl.fileLength(aFile)) {
 				locus = protoLocus.substring(0, protoLocus.length() - 20);
+				availableLoci.add(locus);
 				// System.out.println("locus name: " + locus);
 			}
-
-			// is the file more than just a header line?
-			if (wtdl.fileLength(aFile))
-				availableLoci.add(locus);
 		}
 
 		// sort the loci
 		Collections.sort(availableLoci);
 
-		System.out.println("LocalData.getLocalDataFiles: available loci: " + availableLoci.toString());
+		// System.out.println("LocalData.getLocalDataFiles: available loci: " + availableLoci.toString());
 
 		if (!availableLoci.isEmpty())
 			return availableLoci;
