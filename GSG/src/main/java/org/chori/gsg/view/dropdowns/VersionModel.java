@@ -86,6 +86,36 @@ public class VersionModel {
 		return model;
 	}
 
+	public DefaultComboBoxModel bulkVersions() {
+
+		DefaultComboBoxModel model = new DefaultComboBoxModel();
+		String onlineVersions = "";
+		String[] parsedOnlineVersions = new String[3];
+
+		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+
+		// if online versions equals null, and you have internet
+		// download the current versions
+		if(onlineVersions == null && internet.tester()) {
+			crd.getCurrentVersions("HLA");
+			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		}
+
+		// if you have online versions, parse them
+		// it's an array read as a string, so remove the brackets
+		// and split on the commas
+		if(onlineVersions != null && internet.tester()) {
+			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
+			System.out.println("online versions array: " + onlineVersions);
+			parsedOnlineVersions = onlineVersions.split(", ");
+		}
+
+		model = new DefaultComboBoxModel(parsedOnlineVersions);
+		return model;
+	}
+
+
+
 	// private String[] convertStringToArray(String incomingString) {
 
 	//     // serialize string to hex

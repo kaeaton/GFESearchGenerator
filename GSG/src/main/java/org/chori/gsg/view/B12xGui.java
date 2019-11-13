@@ -72,6 +72,8 @@ public class B12xGui extends JFrame {
 	public static JComboBox whatLocusHla = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
+	public static JComboBox whatVersionBulk = new JComboBox();
+
 	
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
@@ -96,6 +98,7 @@ public class B12xGui extends JFrame {
 			whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA", whatVersionHla.getSelectedItem().toString());
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
+			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
 
 		} catch (NoInternetOrDataException ex) { 
 			System.exit(0);
@@ -317,7 +320,11 @@ public class B12xGui extends JFrame {
 		f.gridy = 0;
 		optionsGfeTab.add(bulkDownloadButton, f);
 
+		f.gridx = 1;
+		optionsGfeTab.add(whatVersionBulk, f);
+
 		// line 1
+		f.gridx = 0;
 		f.gridy = 1;
 		optionsGfeTab.add(resetPrefsButton, f);
 

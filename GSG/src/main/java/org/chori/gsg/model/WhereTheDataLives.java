@@ -5,12 +5,14 @@ import java.nio.file.*;
 import java.util.prefs.Preferences;
 
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.dropdowns.*;
 
 
 public class WhereTheDataLives {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
+	private CurrentReleaseData crd = new CurrentReleaseData();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
 				+ System.getProperty("file.separator") + "Documents"
@@ -98,6 +100,8 @@ public class WhereTheDataLives {
 				throw new NoInternetException();
 			}
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
+
+		// crd.getRawLocusData();
 
 	}
 

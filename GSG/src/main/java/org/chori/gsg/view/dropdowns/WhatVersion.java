@@ -50,7 +50,9 @@ public class WhatVersion {
 				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
 				break;
 			case "BULK":
-				comboBoxModel = new DefaultComboBoxModel(hlaLoci);
+				comboBoxModel = vm.bulkVersions();
+				whatVersion.setModel(comboBoxModel);
+				break;
 
 			default:
 				System.out.println("Version: Haven't set up that combobox model yet");
