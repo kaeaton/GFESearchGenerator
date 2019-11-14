@@ -85,12 +85,13 @@ public class WhereTheDataLives {
 			return file;
 		} else {
 			storeResultsData("HLA", locus, version);
+			return file;
 		}
-		System.out.println("Didn't find the raw data file.");
+		// System.out.println("Didn't find the raw data file.");
 
 		// System.out.println("looking for the file at " + specificFile);
 
-		return null;
+		// return null;
 	}
 
 	// create the file to store results
