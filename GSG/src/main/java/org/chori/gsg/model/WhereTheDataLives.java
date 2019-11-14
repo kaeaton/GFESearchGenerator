@@ -84,7 +84,7 @@ public class WhereTheDataLives {
 			System.out.println("Found the raw data file");
 			return file;
 		} else {
-			storeResultsData();
+			storeResultsData("HLA", locus, version);
 		}
 		System.out.println("Didn't find the raw data file.");
 
@@ -94,14 +94,16 @@ public class WhereTheDataLives {
 	}
 
 	// create the file to store results
-	public void storeResultsData() {
+	public void storeResultsData(String type, String locus, String version) {
 		try {
 			if(!internet.tester()) {
 				throw new NoInternetException();
 			}
+
+			crd.getRawLocusData(type, locus, version);
+
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 
-		// crd.getRawLocusData();
 
 	}
 
