@@ -337,7 +337,13 @@ public class B12xGui extends JFrame {
 
 
 	/* Get and set open tab */
-		parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
+		try {
+			parentTabbedPane.setSelectedIndex(prefs.getInt("GSG_OPEN_TAB", 0));
+		} catch (IllegalArgumentException iex) { 
+			System.out.println("GUI set selected Index error: " + iex); 
+			PrefProbException ppex = new PrefProbException();
+		}
+
 
 		parentTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent evt) {

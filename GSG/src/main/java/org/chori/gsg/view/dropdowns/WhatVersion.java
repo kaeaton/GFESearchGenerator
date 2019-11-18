@@ -35,14 +35,25 @@ public class WhatVersion {
 				whatVersion.setModel(comboBoxModel);
 
 				// System.out.println(vm.localVersionData());
-				whatVersion.setSelectedIndex(prefs.getInt("GSG_HLA_VERSION", 0));
+				try {
+					whatVersion.setSelectedIndex(prefs.getInt("GSG_HLA_VERSION", 0));
+				} catch (IllegalArgumentException iex) { 
+					System.out.println("HLA whatVersion setSelectedIndex error: " + iex); 
+					PrefProbException ppex = new PrefProbException();
+				}
+		
 				// whatLocus.setName("HLA-dropdown");
 				hlaListener(whatVersion);
 				break;
 			case "NAME":
 				comboBoxModel = vm.versions();
 				whatVersion.setModel(comboBoxModel);
-				whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION_1", 0));
+				try {
+					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION_1", 0));
+				} catch (IllegalArgumentException iex) { 
+					System.out.println("Name whatVersion setSelectedIndex error: " + iex); 
+					PrefProbException ppex = new PrefProbException();
+				}
 
 				nameListener(whatVersion);
 				break;

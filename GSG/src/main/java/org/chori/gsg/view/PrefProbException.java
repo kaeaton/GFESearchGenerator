@@ -12,15 +12,15 @@ public class PrefProbException {
 
 	public PrefProbException () {
 
-		if(optionFrame == null)
-			optionFrame = new JFrame();
+		// if(optionFrame == null)
+		// 	optionFrame = new JFrame();
 
-		optionFrame.setVisible(true);
-		optionFrame.setLocationRelativeTo(null);
-		optionFrame.setAlwaysOnTop(true);
+		// optionFrame.setVisible(true);
+		// optionFrame.setLocationRelativeTo(null);
+		// optionFrame.setAlwaysOnTop(false);
 
 		// final JOptionPane optionPane = new JOptionPane(
-		int reply = JOptionPane.showConfirmDialog(optionFrame,
+		int reply = JOptionPane.showConfirmDialog(null,
 			"There's a good chance your preferences are \npointing to something they shouldn't,\nwould you like to try reseting them?",
 			"Possibly a preferences problem", JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_OPTION);
 

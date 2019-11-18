@@ -11,17 +11,17 @@ public class NoInternetOrDataException extends Exception {
 
 	public NoInternetOrDataException () {
 
-		if(optionFrame == null)
-			optionFrame = new JFrame();
+		// if(optionFrame == null)
+		// 	optionFrame = new JFrame();
 
-		optionFrame.setVisible(true);
-		optionFrame.setLocationRelativeTo(null);
-		optionFrame.setAlwaysOnTop(true);
+		// optionFrame.setVisible(true);
+		// optionFrame.setLocationRelativeTo(null);
+		// optionFrame.setAlwaysOnTop(true);
 
 
 
 		// final JOptionPane optionPane = new JOptionPane(
-		JOptionPane.showMessageDialog(optionFrame,
+		JOptionPane.showMessageDialog(null,
 			"You have no internet and no downloaded data.\nI'm sorry, but this won't work.",
 			"Houston, we have a problem",
 			JOptionPane.ERROR_MESSAGE,

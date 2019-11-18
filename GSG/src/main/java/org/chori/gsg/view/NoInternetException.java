@@ -17,7 +17,7 @@ public class NoInternetException extends Exception {
 		// optionFrame.setAlwaysOnTop(true);
 
 		// final JOptionPane optionPane = new JOptionPane(
-		JOptionPane.showMessageDialog(B12xGui.parentTabbedPane, //optionFrame,
+		JOptionPane.showMessageDialog(null, //B12xGui.parentTabbedPane, //optionFrame,
 			"You have no internet and cannot download data right now",
 			"Houston, we have a problem",
 			JOptionPane.ERROR_MESSAGE);
