@@ -11,10 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.chori.gsg.view.buttons.SubmitButton;
+
 public class SearchBox extends JPanel{ 
 
 	private TextIcon t1;
 	private RotatedIcon r1;
+	private static SubmitButton submitButtonGenerator = new SubmitButton();
 	
 	public SearchBox(){
 		System.out.println("Assembling a regular searchbox");
@@ -44,6 +47,7 @@ public class SearchBox extends JPanel{
 		featureNumber.setColumns(3);
 		featureNumber.setHorizontalAlignment(JTextField.CENTER);
 		featureNumber.setName(nameNumber);
+		featureNumber.addActionListener(submitButtonGenerator.hlaListener);
 
 		// special rules for workshop status
 		if (nameNumber.equals("00")) {
