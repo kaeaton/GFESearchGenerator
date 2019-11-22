@@ -9,7 +9,6 @@ public class GenerateJson {
 	
 	private JsonFactoryInstance getFactory = JsonFactoryInstance.getInstance();
 	private JsonFactory factory = getFactory.factory;
-	// private JsonFactory factory = factorySingleton.getInstance();
 
 	public GenerateJson() 
 	{

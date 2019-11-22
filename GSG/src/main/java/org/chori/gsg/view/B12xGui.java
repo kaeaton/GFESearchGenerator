@@ -56,6 +56,7 @@ public class B12xGui extends JFrame {
 	public static JPanel hlaGfeTab = new JPanel();
 	public static JPanel kirGfeTab = new JPanel();
 	public static JPanel nameGfeTab = new JPanel();
+	public static JPanel featureGfeTab = new JPanel();
 	public static JPanel optionsGfeTab = new JPanel();
 
 	// the holder panels
@@ -66,18 +67,23 @@ public class B12xGui extends JFrame {
 	// results text areas
 	public static JTextArea resultsTextAreaHla = new JTextArea();
 	public static JTextArea resultsTextAreaName = new JTextArea();
+	public static JTextArea resultsTextAreaFeature = new JTextArea();
 	
 	// combo boxes for locus and version selection
 	public static JComboBox whatVersionHla = new JComboBox();
 	public static JComboBox whatLocusHla = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
+	public static JComboBox whatVersionFeature = new JComboBox();
+	public static JComboBox whatLocus1Feature = new JComboBox();
+	public static JComboBox whatLocus2Feature = new JComboBox();
 	public static JComboBox whatVersionBulk = new JComboBox();
 
 	
 	// file format panels
 	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
+	public static JPanel fileFormatFeature = fileFormatPanelGenerator.createFileFormatPanel("FEATURE");
 
 	// search box for name search
 	public static JTextField nameSearchBox = new JTextField("", 20);
@@ -297,6 +303,14 @@ public class B12xGui extends JFrame {
 		e.weighty = 0;
 		e.gridy = 6;
 		nameGfeTab.add(bottomButtonsName, e);
+
+	/* Features tab */
+		parentTabbedPane.addTab("Feature Comparison", null, featureGfeTab, "Feature Comparison tool");
+
+		// results textarea
+		JScrollPane resultsScrollPaneFeature = new JScrollPane(resultsTextAreaFeature);
+		resultsTextAreaFeature.setFont(new Font("Courier New", 0, 13));
+		resultsScrollPaneFeature.setPreferredSize(new Dimension(950, 300));
 
 	/* Options tab */
 		parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");

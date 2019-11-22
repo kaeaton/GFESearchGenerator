@@ -1,0 +1,30 @@
+gfe search per locus & version
+
+MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = "locus" AND r.imgt_release = "version" RETURN n.name, g.name
+
+specific duplicate gfe feature
+results: 
+a.name	fa.name	fa.rank	fa.sequenceId	b.name	fb.sequenceId
+HLA-C*03:04:01:01	EXON	2	42155	HLA-B*46:77	42155
+
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA), (fb:FEATURE)-[hfb:HAS_FEATURE]-(b:IMGT_HLA) where fa.sequence = fb.sequence and fa.name="EXON"and a.locus = "HLA-C" and b.locus = "HLA-B" and fa.rank = "2" and hfa.imgt_release = "3.37.0" and hfb.imgt_release = "3.37.0" and a.name="HLA-C*03:04:01:01" return a.name, fa.name, fa.rank, fa.sequenceId, b.name, fb.sequenceId
+
+available versions
+
+MATCH (n:IMGT_HLA)-[e:HAS_FEATURE]-(feat:FEATURE) RETURN DISTINCT e.imgt_release AS HLA_DB ORDER BY e.imgt_release DESC
+
+Get all variations for a specific locus at a specific feature
+
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA) where fa.name="EXON"and a.locus = "HLA-C" and fa.rank = "2" and hfa.imgt_release = "3.37.0" return a.name, fa.name, fa.rank, fa.sequenceId, fa.sequence
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA), (fb:FEATURE)-[hfb:HAS_FEATURE]-(b:IMGT_HLA) where fa.sequence = fb.sequence and fa.name="EXON"and a.locus = "HLA-C" and b.locus = "HLA-B" and fa.rank = "2" and hfa.imgt_release = "3.37.0" and hfb.imgt_release = "3.37.0" return a.name, fa.name, fa.rank, fa.sequenceId, b.name, fb.sequenceId
+
+Get all shared sequences between two specific loci
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA), (fb:FEATURE)-[hfb:HAS_FEATURE]-(b:IMGT_HLA) where fa.sequenceId = fb.sequenceId and a.locus = "HLA-C" and b.locus = "HLA-B" and hfa.imgt_release = "3.37.0" and hfb.imgt_release = "3.37.0" RETURN fa.sequenceId, a.name, fa.name, fa.rank, b.name, fb.name, fb.rank
+
+Get unique duplicate feature sequenceIds
+
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA), (fb:FEATURE)-[hfb:HAS_FEATURE]-(b:IMGT_HLA) where fa.sequence = fb.sequence and a.locus = "HLA-C" and b.locus = "HLA-B" and hfa.imgt_release = "3.37.0" and hfb.imgt_release = "3.37.0" RETURN DISTINCT fa.sequenceId ORDER BY fa.sequenceId
+
+Get duplicate feature ID specifying the sequence ID
+
+MATCH (fa:FEATURE)-[hfa:HAS_FEATURE]-(a:IMGT_HLA), (fb:FEATURE)-[hfb:HAS_FEATURE]-(b:IMGT_HLA) where fa.sequenceId = fb.sequenceId and a.locus = "HLA-C" and b.locus = "HLA-B" and hfa.imgt_release = "3.37.0" and hfb.imgt_release = "3.37.0" and fa.sequenceId = 42155 RETURN fa.sequenceId, a.name, fa.name, fa.rank, b.name, fb.name, fb.rank

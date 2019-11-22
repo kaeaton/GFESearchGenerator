@@ -46,4 +46,35 @@ public class Headers {
 
 	}
 
+	public void printComparisonHeaders(String whichTab, String headerSearchString,
+							 String version, String locus1, String locus2, String dataSource) {
+
+		// where are we printing the headers?
+		switch(whichTab) {
+			case "NAME2":
+				writeToMe = B12xGui.resultsTextAreaName;
+				database = "IMGT/HLA Database ";
+				break;
+			case "FEATURE":
+				writeToMe = B12xGui.resultsTextAreaFeature;
+				database = "IMGT/HLA Database ";
+				break;
+			default:
+				System.out.println("Haven't set up that tab yet");
+		}
+
+		String timeStamp = LocalDateTime.now().toString();
+
+		writeToMe.append("File generated at: " + timeStamp);
+		writeToMe.append(System.lineSeparator());
+		writeToMe.append("Data source: " + dataSource);
+		writeToMe.append(" - " + locus1 + " & " + locus2);
+		writeToMe.append(System.lineSeparator());
+		writeToMe.append("Search parameters: " + headerSearchString);
+		writeToMe.append(System.lineSeparator());
+		writeToMe.append(database + "Version " + version);
+		writeToMe.append(System.lineSeparator());
+
+	}
+
 }

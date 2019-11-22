@@ -9,8 +9,6 @@ import org.chori.gsg.model.*;
 public class Neo4jRequests {
 
 	private String request;
-	private JsonFactoryInstance getFactory = JsonFactoryInstance.getInstance();
-	private JsonFactory factory = getFactory.factory;
 
 	public Neo4jRequests() { }
 

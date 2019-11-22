@@ -10,14 +10,14 @@ import org.chori.gsg.model.*;
  *
  * @author kaeaton
  */
-public class Neo4jVersionRequest 
+public class Neo4jFeatureRequest 
 {
 	
 	private String request;
 	
-	public Neo4jVersionRequest() { }
+	public Neo4jFeatureRequest() { }
 	
-	public String formNeo4jVersionRequest(String versionType) throws IOException 
+	public String formNeo4jFeatureRequest(String versionType) throws IOException 
 	{
 		try 
 		{
@@ -27,7 +27,7 @@ public class Neo4jVersionRequest
 				request = "MATCH (n:IMGT_HLA)-[e:HAS_FEATURE]-(feat:FEATURE) " 
 						+ "RETURN DISTINCT e.imgt_release AS HLA_DB ORDER BY "
 						+ "e.imgt_release DESC";
-			// request string: MATCH (n:IMGT_HLA)-[e:HAS_FEATURE]-(feat:FEATURE) RETURN DISTINCT e.imgt_release AS HLA_DB ORDER BY e.imgt_release DESC
+			// request string: MATCH (n:IMGT_HLA)-[e:HAS_FEATURE]-(feat:FEATURE) RETURN DISTINCT e.imgt_release AS HLA_DB ORDER BY r.imgt_release DESC
 			} 
 			
 			// kir

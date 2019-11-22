@@ -10,9 +10,14 @@ NAME_CSV_SELECTED			Boolean: NAME CSV radiobutton
 NAME_TSV_SELECTED			Boolean: NAME TSV radiobutton
 NAME_PRETTY_SELECTED		Boolean: NAME TXT radiobutton
 
-BSG_HLA_SAVE_FILE			Boolean: Save results to file, HLA tab
-BSG_KIR_SAVE_FILE			Boolean: Save results to file, KIR tab
-BSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
+FEATURE_CSV_SELECTED		Boolean: FEATURE CSV radiobutton
+FEATURE_TSV_SELECTED		Boolean: FEATURE TSV radiobutton
+FEATURE_PRETTY_SELECTED		Boolean: FEATURE TXT radiobutton
+
+GSG_HLA_SAVE_FILE			Boolean: Save results to file, HLA tab
+GSG_KIR_SAVE_FILE			Boolean: Save results to file, KIR tab
+GSG_NAME_SAVE_FILE			Boolean: Save results to file, NAME tab
+GSG_FEATURE_SAVE_FILE		Boolean: Save results to file, FEATURE tab
 
 GSG_HLA_LOCUS				int: what locus by index, HLA tab
 GSG_HLA_LOCUS_STRING		String: what locus, HLA tab
