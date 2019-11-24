@@ -28,7 +28,7 @@ import org.chori.gsg.view.*;
 
 public class SubmitButton { 
 
-	// // class instantiations
+	// class instantiations
 	private BuildRegex buildRegex = new BuildRegex();
 	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
 	private Headers header = new Headers();
@@ -49,6 +49,7 @@ public class SubmitButton {
 	 * creates a submit button
 	 * 
 	 * @param whichTab which listener is associated with the submit button
+	 * @return a JButton with an associated listener
 	 */
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
@@ -71,7 +72,7 @@ public class SubmitButton {
 
 	/**
 	 * The HLA listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 * 
+	 * @return an ActionListener to be attached to a button, or pressing enter on an hla searchbox
 	 */
 	public ActionListener hlaListener = new ActionListener() {
 		@Override
@@ -127,7 +128,7 @@ public class SubmitButton {
 
 	/**
 	 * The Name listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 * 
+	 * @return an ActionListener to be attached to a button, or pressing enter on the name search searchbox
 	 */
 	public ActionListener nameListener = new ActionListener() {
 		@Override

@@ -10,14 +10,27 @@ import org.chori.gsg.model.processJson.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.view.*;
 
+/**
+ * Opens the connection for the Neo4j Database
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 public class Neo4jHttpCall {
     
     private InputStream incomingData;
     private InternetAccess internetAccess = new InternetAccess();
 
     public Neo4jHttpCall() { }
-       
-    public InputStream makeCall(String versionType, String params) throws IOException {
+    
+    /**
+     * Opens the call to the Neo4j database housing the GFEs
+     * 
+     * @param versionType tells the program which url to use to connect to the appropriate database
+     * @param request The json string submitted to the database to request data
+     * @return a data InputStream containing the response from the Neo4j database
+     */
+    public InputStream makeCall(String versionType, String request) throws IOException {
         final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
 		// final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
 			  
@@ -39,7 +52,7 @@ public class Neo4jHttpCall {
                 
                 // Send our request
                 OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
-                wr.write(params);
+                wr.write(request);
                 wr.flush();
                 
                 // Did we get a response?

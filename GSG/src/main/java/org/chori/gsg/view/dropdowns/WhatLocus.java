@@ -13,6 +13,13 @@ import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.*;
 
+
+/**
+ * Creates the dropdowns to select the locus and listeners for the dropdowns
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 public class WhatLocus { 
 
 	private HlaSearchBoxAssembler hlaSBA = new HlaSearchBoxAssembler();
@@ -25,6 +32,13 @@ public class WhatLocus {
 
 	}
 
+	/**
+	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
+	 * 
+	 * @param whichComboBox tells which ActionListener is assigned to it. Some tabs have more than one.
+	 * @param version which version are we looking at. Local/legacy data may not have all loci available
+	 * @return a JComboBox with an associated listener
+	 */
 	public JComboBox createWhatLocusComboBox(String whichComboBox, String version) {
 		System.out.println("Generating the which locus combo box");
 		
@@ -92,6 +106,13 @@ public class WhatLocus {
 		});
 	}
 
+	/**
+	 * A helper method that allows the program to find the currently displayed search panel
+	 * 
+	 * @param whichTab which tab is should look for the panel in
+	 * @param whichPanel the current panel's name the locus it's for
+	 * @return the currently displayed JPanel
+	 */
 	public JPanel findPanel(JPanel whichTab, String whichPanel) {
 		Component selectedPanel = B12xGui.hlaPanel;
 		for (Component component : whichTab.getComponents()) {
@@ -103,6 +124,11 @@ public class WhatLocus {
 		return (JPanel)selectedPanel;
 	}
 
+	/**
+	 * A helper method that sets the new HLA GFE search panel.
+	 * 
+	 * @param locus what HLA locus should be displayed
+	 */
 	public void setNewHlaPanel(String locus) {
 		System.out.println("Triggered setNewHlaPanel");
 		JPanel newGfePanel = hlaSBA.assembleHlaPanel(locus);

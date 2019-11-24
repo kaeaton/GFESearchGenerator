@@ -14,13 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
+/**
+ * Assembles the search boxes (JTextFields) and checkboxes for the HLA GFE search page
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 public class HlaSearchBoxAssembler {
 
 	// Exons per locus
-	HashMap<String, Integer> hlaExonTotal = new HashMap();
+	private HashMap<String, Integer> hlaExonTotal = new HashMap();
 
 	// Searchbox source
-	SearchBox searchBox = new SearchBox();
+	private SearchBox searchBox = new SearchBox();
 
 	// select all checkbox
 	public static JCheckBox selectAllCheckBox;
@@ -43,6 +49,12 @@ public class HlaSearchBoxAssembler {
 		hlaExonTotal.put("HLA-DRB5", 6);
 	}
 
+	/**
+	 * Assembles the JPanel housing all the JTextFields, JCheckBoxes and JLabels associated with the search panel. Also populates the allCheckboxes and allTextFields ArrayLists
+	 * 
+	 * @param locus what locus panel is being built
+	 * @return the populated JPanel
+	 */
 	public JPanel assembleHlaPanel(String locus){
 
 		// reinitiate the array lists so they only have 

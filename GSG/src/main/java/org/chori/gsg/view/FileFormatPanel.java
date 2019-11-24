@@ -12,6 +12,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPanel;
 
+/**
+ * Assembles the file format panel for selecting what format the data appears in and whether to write it to file
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 public class FileFormatPanel { 
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
@@ -21,6 +27,12 @@ public class FileFormatPanel {
 
 	}
 
+	/**
+	 * Assembles the JPanel housing all the JRadioButtons and the JCheckBox for selecting data format and if a file is saved. All features have an associated listener.
+	 * 
+	 * @param whichTab tells which set of listeners should be attached to the panel features
+	 * @return the populated JPanel
+	 */
 	public JPanel createFileFormatPanel(String whichTab) {
 		JRadioButton csvButton = new JRadioButton("CSV");
 		JRadioButton tsvButton = new JRadioButton("TSV");

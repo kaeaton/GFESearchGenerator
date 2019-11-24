@@ -22,6 +22,7 @@ public class Headers {
 	public Headers() {
 
 	}
+
 	/**
 	 * Prints the headers for single version/single locus processes.
 	 * 
@@ -62,6 +63,16 @@ public class Headers {
 
 	}
 
+	/**
+	 * Prints the headers for multiple locus search processes.
+	 * 
+	 * @param whichTab which tab of the program should they be printed to
+	 * @param headerSearchString human-readable version of the search string
+	 * @param version what version of the database
+	 * @param locus1 locus 1 for comparison
+	 * @param locus2 locus 2 for comparison
+	 * @param dataSource what database the data is coming from
+	 */
 	public void printComparisonHeaders(String whichTab, String headerSearchString,
 							 String version, String locus1, String locus2, String dataSource) {
 
