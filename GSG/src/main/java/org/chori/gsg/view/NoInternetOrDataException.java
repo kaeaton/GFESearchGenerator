@@ -28,7 +28,7 @@ public class NoInternetOrDataException extends Exception {
 			createImageIcon("/StrangeloveRound.png", "How I learned to quit worrying and love the bomb."));
 	}
 
-	/** Returns an ImageIcon, or null if the path was invalid. */
+	/* Returns an ImageIcon, or null if the path was invalid. */
 	protected ImageIcon createImageIcon(String path, String description) {
     	URL imgURL = getClass().getResource(path);
     	if (imgURL != null) {

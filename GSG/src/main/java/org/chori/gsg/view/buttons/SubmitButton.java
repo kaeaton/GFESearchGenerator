@@ -72,7 +72,6 @@ public class SubmitButton {
 
 	/**
 	 * The HLA listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 * @return an ActionListener to be attached to a button, or pressing enter on an hla searchbox
 	 */
 	public ActionListener hlaListener = new ActionListener() {
 		@Override
@@ -128,7 +127,6 @@ public class SubmitButton {
 
 	/**
 	 * The Name listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 * @return an ActionListener to be attached to a button, or pressing enter on the name search searchbox
 	 */
 	public ActionListener nameListener = new ActionListener() {
 		@Override

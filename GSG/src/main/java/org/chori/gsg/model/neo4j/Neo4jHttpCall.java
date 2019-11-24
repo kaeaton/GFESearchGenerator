@@ -28,6 +28,7 @@ public class Neo4jHttpCall {
      * 
      * @param versionType tells the program which url to use to connect to the appropriate database
      * @param request The json string submitted to the database to request data
+     * @throws IOException allows it to report exceptions in the call
      * @return a data InputStream containing the response from the Neo4j database
      */
     public InputStream makeCall(String versionType, String request) throws IOException {
