@@ -5,6 +5,14 @@ import javax.swing.JTextArea;
 
 import org.chori.gsg.view.*;
 
+
+/**
+ * Prints the headers for the search results
+ * 
+ * @author Katrina Eaton
+ * 
+ */
+
 public class Headers {
 
 	private JTextArea writeToMe = new JTextArea();
@@ -14,7 +22,15 @@ public class Headers {
 	public Headers() {
 
 	}
-
+	/**
+	 * Prints the headers for single version/single locus processes.
+	 * 
+	 * @param whichTab which tab of the program should they be printed to
+	 * @param headerSearchString human-readable version of the search string
+	 * @param version what version of the database
+	 * @param locus what locus looked at
+	 * @param dataSource what database the data is coming from
+	 */
 	public void printHeaders(String whichTab, String headerSearchString,
 							 String version, String locus, String dataSource) {
 
