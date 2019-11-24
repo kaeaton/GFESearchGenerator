@@ -15,7 +15,7 @@ import org.chori.gsg.view.*;
 
 public class WhatLocus { 
 
-	private HlaSearchBoxGenerator hlaSBG = new HlaSearchBoxGenerator();
+	private HlaSearchBoxAssembler hlaSBA = new HlaSearchBoxAssembler();
 	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private String whichLocus = "HLA-A";
@@ -105,7 +105,7 @@ public class WhatLocus {
 
 	public void setNewHlaPanel(String locus) {
 		System.out.println("Triggered setNewHlaPanel");
-		JPanel newGfePanel = hlaSBG.generateHlaPanel(locus);
+		JPanel newGfePanel = hlaSBA.assembleHlaPanel(locus);
 		newGfePanel.setName("HLA-GFE");
 		JPanel oldPanel = findPanel(B12xGui.hlaPanel, "HLA-GFE");
 		B12xGui.hlaPanel.remove(oldPanel);

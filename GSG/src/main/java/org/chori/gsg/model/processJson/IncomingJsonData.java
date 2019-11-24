@@ -126,7 +126,7 @@ public class IncomingJsonData {
 		// writes raw data to file (it will be labeled csv,
 		// but it's actually straight text)
 		// to use comment out everything after BufferedWriter (line 51, not inclusive)
-		// through to this (line 123, inclusive)
+		// through to this (inclusive)
 
 		// 		InputStreamReader isReader = new InputStreamReader(httpResult);
 		// 		BufferedReader reader = new BufferedReader(isReader);
@@ -283,8 +283,7 @@ public class IncomingJsonData {
 			}
 			
 			/* Testing code start */
-			// writes raw data to a text file labeled csv, but is 
-			// really straight text.
+			// writes raw data to a text file.
 			// To use comment out everything from the JSON parser (inclusive)
 			// to the bracket directly above (inclusive)
 
@@ -293,7 +292,7 @@ public class IncomingJsonData {
 			// 	File gfeRaw = new File(dataFilesPath
 			// 			// + version + System.getProperty("file.separator") 
 			// 			+ "neo4j_version_data" 
-			// 			+ "_Download.csv");
+			// 			+ "_Download.txt");
 
 			// 	if (!gfeRaw.exists()) {
 			// 		System.out.println("The file does not exist.");

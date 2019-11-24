@@ -40,5 +40,6 @@ GSG_RESULTS_DATA			String: where to store the results files
 GSG_HLA_VERSIONS			String: what versions are currently available to download
 
 mvn clean compile assembly:single
+mvn clean test
 java -jar target/GSG-4.0-jar-with-dependencies.jar
 

@@ -64,8 +64,8 @@ public class SubmitButton {
 				public void run() {
 
 					// the lists of hla components
-					ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
-					ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxGenerator.allCheckboxes;
+					ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
+					ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 
 					// what locus, version, and format?
 					String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();

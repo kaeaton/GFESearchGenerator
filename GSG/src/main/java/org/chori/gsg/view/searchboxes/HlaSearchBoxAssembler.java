@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
-public class HlaSearchBoxGenerator {
+public class HlaSearchBoxAssembler {
 
 	// Exons per locus
 	HashMap<String, Integer> hlaExonTotal = new HashMap();
@@ -29,7 +29,7 @@ public class HlaSearchBoxGenerator {
 	public static ArrayList<JCheckBox> allCheckboxes;
 	public static ArrayList<JTextField> allTextboxes;
 
-	public HlaSearchBoxGenerator() {
+	public HlaSearchBoxAssembler() {
 		hlaExonTotal.put("HLA-A", 8);
 		hlaExonTotal.put("HLA-B", 7);
 		hlaExonTotal.put("HLA-C", 8);
@@ -43,7 +43,7 @@ public class HlaSearchBoxGenerator {
 		hlaExonTotal.put("HLA-DRB5", 6);
 	}
 
-	public JPanel generateHlaPanel(String locus){
+	public JPanel assembleHlaPanel(String locus){
 
 		// reinitiate the array lists so they only have 
 		// the current components in them
@@ -65,11 +65,11 @@ public class HlaSearchBoxGenerator {
 		
 		c.insets = new Insets(0,0,0,0);
 		c.gridx = 1;
-		gfeSearchPanel.add(generateWBox(), c);
+		gfeSearchPanel.add(assembleWBox(), c);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
-		gfeSearchPanel.add(generate5PrimeUtr(), c);
+		gfeSearchPanel.add(assemble5PrimeUtr(), c);
 
 		// location counter for names to sort boxes
 		int locationCounter = 2;
@@ -106,7 +106,7 @@ public class HlaSearchBoxGenerator {
 
 		// 3' UTR bundle
 		c.gridx = gridXCounter;
-		gfeSearchPanel.add(generate3PrimeUtr(locationCounter), c);
+		gfeSearchPanel.add(assemble3PrimeUtr(locationCounter), c);
 
         System.out.println("Total checkboxes = " + allCheckboxes.size());
         System.out.println("Total textboxes = " + allTextboxes.size());
@@ -157,19 +157,19 @@ public class HlaSearchBoxGenerator {
 	}
 
 
-	private JPanel generateWBox() {
+	private JPanel assembleWBox() {
 		JPanel wBox = searchBox.assemble("Workshop Status    ", "00");
 
 		return wBox;
 	}
 
-	private JPanel generate5PrimeUtr() {
+	private JPanel assemble5PrimeUtr() {
 		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
 
 		return fivePrimeUtr;
 	}
 
-	private JPanel generate3PrimeUtr(int locationCounter) {
+	private JPanel assemble3PrimeUtr(int locationCounter) {
 		JPanel threePrimeUtr = searchBox.assemble("3' UTR", String.valueOf(locationCounter));
 
 		return threePrimeUtr;

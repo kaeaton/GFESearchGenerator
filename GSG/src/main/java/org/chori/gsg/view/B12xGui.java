@@ -36,7 +36,7 @@ public class B12xGui extends JFrame {
 	private String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 
 	// the panel generators
-	private HlaSearchBoxGenerator hlaPanelGenerator = new HlaSearchBoxGenerator();
+	private HlaSearchBoxAssembler hlaPanelGenerator = new HlaSearchBoxAssembler();
 	
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
@@ -136,7 +136,7 @@ public class B12xGui extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			System.out.println("Generating the initial hlaPanel using whatLocusHla: " + whatLocusHla.getSelectedItem().toString());
-			JPanel currentHlaPanel = hlaPanelGenerator.generateHlaPanel(whatLocusHla.getSelectedItem().toString());
+			JPanel currentHlaPanel = hlaPanelGenerator.assembleHlaPanel(whatLocusHla.getSelectedItem().toString());
 			currentHlaPanel.setName("HLA-GFE");
 			hlaPanel.add(currentHlaPanel);
 		} catch (IllegalArgumentException iex) {
@@ -226,8 +226,6 @@ public class B12xGui extends JFrame {
 
 	/* Name Search tab */
 		parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
-		
-		// generate the HLA GFE panel
 		
 		// currentHlaPanel.setName("NAME");
 		namePanel.add(nameSearchBox);

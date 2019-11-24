@@ -39,7 +39,7 @@ public class ResetButton {
             public void actionPerformed(ActionEvent evt) {
             	
             	// the list of hla textfields
-            	ArrayList<JTextField> allTextFields = HlaSearchBoxGenerator.allTextboxes;
+            	ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
             	
             	// set the textfields back to empty
             	for (JTextField textField:allTextFields){
