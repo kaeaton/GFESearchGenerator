@@ -19,6 +19,12 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.*;
 
+/**
+ * Generates the assorted search buttons and associated listeners
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 
 public class SubmitButton { 
 
@@ -38,6 +44,12 @@ public class SubmitButton {
 		dataSources.put("neo4j", "http://neo4j.b12x.org");	
 	}
 
+
+	/**
+	 * creates a submit button
+	 * 
+	 * @param whichTab which listener is associated with the submit button
+	 */
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
 		JButton submitButton = new JButton("Submit");
@@ -57,6 +69,10 @@ public class SubmitButton {
 		return submitButton;
 	}
 
+	/**
+	 * The HLA listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
+	 * 
+	 */
 	public ActionListener hlaListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
@@ -109,6 +125,10 @@ public class SubmitButton {
 		}
 	};
 
+	/**
+	 * The Name listener runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
+	 * 
+	 */
 	public ActionListener nameListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
