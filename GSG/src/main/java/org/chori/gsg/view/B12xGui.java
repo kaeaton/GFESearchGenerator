@@ -1,6 +1,5 @@
 package org.chori.gsg.view;
 
-import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -247,7 +246,7 @@ public class B12xGui extends JFrame {
 		bottomButtonsName.add(submitButtonName);
 		bottomButtonsName.add(cancelButtonName);
 
-		// layout / add them to the hlaGfeTab
+		// layout / add them to the nameGfeTab
 		nameGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints e = new GridBagConstraints();
 		e.anchor = GridBagConstraints.NORTHWEST;
@@ -310,6 +309,70 @@ public class B12xGui extends JFrame {
 		resultsTextAreaFeature.setFont(new Font("Courier New", 0, 13));
 		resultsScrollPaneFeature.setPreferredSize(new Dimension(950, 300));
 
+		// buttons
+		JButton submitButtonFeature = submitButtonGenerator.createSubmitButton("FEATURE");
+		JButton cancelButtonFeature = cancelButtonGenerator.createCancelButton();
+
+		// submit/cancel buttons panel
+		JPanel bottomButtonsFeature = new JPanel();
+		bottomButtonsFeature.add(submitButtonFeature);
+		bottomButtonsFeature.add(cancelButtonFeature);
+
+		// layout / add them to the nameGfeTab
+		featureGfeTab.setLayout(new GridBagLayout());
+		GridBagConstraints g = new GridBagConstraints();
+		g.anchor = GridBagConstraints.NORTHWEST;
+		g.insets = new Insets(0,0,10,0);
+		g.weightx = 0.5;
+		
+		// line 0
+		g.gridx = 0;
+		g.gridy = 0;
+		featureGfeTab.add(whatLocus1Feature, g);
+		
+		// g.gridx = 1;
+		// nameGfeTab.add(usageInstructions, g);
+
+		// line 1
+		// g.insets = new Insets(0,0,0,0);
+		// g.gridx = 0;
+		g.gridy = 1;
+		featureGfeTab.add(whatLocus2Feature, g);
+
+		// line 2
+		// g.gridy = 2;
+		// g.gridwidth = 4;
+		// nameGfeTab.add(namePanel, g);
+
+		// line 3
+		g.anchor = GridBagConstraints.WEST;
+		g.gridwidth = 1;
+		g.gridy = 3;
+		// nameGfeTab.add(resetButtonName, g);
+
+		// g.gridx = 1;
+		featureGfeTab.add(whatVersionFeature, g);
+
+		// line 4
+		g.anchor = GridBagConstraints.CENTER;
+		g.gridwidth = 4;
+		g.gridx = 0;
+		g.gridy = 4;
+		featureGfeTab.add(fileFormatFeature, g);
+
+		// line 5
+		g.anchor = GridBagConstraints.NORTH;
+		g.weightx = 1;
+		g.weighty = 1;
+		g.gridy = 5;
+		featureGfeTab.add(resultsScrollPaneFeature, g);
+
+		// line 6
+		g.weightx = 0;
+		g.weighty = 0;
+		g.gridy = 6;
+		featureGfeTab.add(bottomButtonsFeature, g);
+
 	/* Options tab */
 		parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
 
@@ -320,7 +383,7 @@ public class B12xGui extends JFrame {
 		JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
 		JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
 
-		// layout / add them to the hlaGfeTab
+		// layout / add them to the optionsTab
 		optionsGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints f = new GridBagConstraints();
 		f.anchor = GridBagConstraints.NORTHWEST;
