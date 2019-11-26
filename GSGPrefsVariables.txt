@@ -41,5 +41,6 @@ GSG_HLA_VERSIONS			String: what versions are currently available to download
 
 mvn clean compile assembly:single
 mvn clean test
+mvn javadoc:javadoc
 java -jar target/GSG-4.0-jar-with-dependencies.jar
 
