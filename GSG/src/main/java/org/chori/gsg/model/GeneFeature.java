@@ -13,8 +13,8 @@ public class GeneFeature {
 		this.featureName = feat;
 	}
 
-	public void setFeatureName(String featureName, String rank)
-	
+	public void setFeatureName(String featureName, String rank) {}
+
 
 
 }

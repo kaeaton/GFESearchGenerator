@@ -68,13 +68,15 @@ public class Headers {
 	 * 
 	 * @param whichTab which tab of the program should they be printed to
 	 * @param headerSearchString human-readable version of the search string
-	 * @param version what version of the database
+	 * @param version1 version 1 of the database for comparison
+	 * @param version2 version 2 of the database for comparison
 	 * @param locus1 locus 1 for comparison
 	 * @param locus2 locus 2 for comparison
 	 * @param dataSource what database the data is coming from
 	 */
 	public void printComparisonHeaders(String whichTab, String headerSearchString,
-							 String version, String locus1, String locus2, String dataSource) {
+							 String version1, String version2, 
+							 String locus1, String locus2, String dataSource) {
 
 		// where are we printing the headers?
 		switch(whichTab) {
@@ -99,7 +101,7 @@ public class Headers {
 		writeToMe.append(System.lineSeparator());
 		writeToMe.append("Search parameters: " + headerSearchString);
 		writeToMe.append(System.lineSeparator());
-		writeToMe.append(database + "Version " + version);
+		writeToMe.append(database + "Version 1: " + version1  + "Version 2: " + version2);
 		writeToMe.append(System.lineSeparator());
 
 	}

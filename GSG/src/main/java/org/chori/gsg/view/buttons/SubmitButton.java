@@ -63,6 +63,9 @@ public class SubmitButton {
 			case "NAME":
 				submitButton.addActionListener(nameListener);
 				break;
+			case "FEATURE":
+				submitButton.addActionListener(featureListener);
+				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
 		}
@@ -173,6 +176,62 @@ public class SubmitButton {
 				}
 			};
 			new Thread(submit).start();
+		}
+	};
+
+	/**
+	 * Runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
+	 */
+	public ActionListener featureListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Runnable submit = new Runnable() {
+				public void run() {
+
+					// what locus, version, and format?
+					String whatLocus1 = B12xGui.whatLocus1Feature.getSelectedItem().toString();
+					String whatLocus2 = B12xGui.whatLocus2Feature.getSelectedItem().toString();
+					String whatVersion1 = B12xGui.whatVersion1Feature.getSelectedItem().toString(); //"3.34.0"; // 
+					String whatVersion2 = B12xGui.whatVersion2Feature.getSelectedItem().toString(); //"3.34.0"; // 
+					String dataFormat = dataFormatFinder(B12xGui.fileFormatFeature);
+					Boolean printToFile = printToFileFinder(B12xGui.fileFormatFeature);
+					System.out.println(whatLocus1 + ", " + whatVersion1 + ", " 
+										+ whatLocus2 + ", " + whatVersion2 + ", "
+										+ dataFormat + ", " + printToFile);
+
+					// where's the data file?                 
+					// File data = wtdl.getRawData(whatLocus, whatVersion);
+
+					// build me some Regex
+					// String regex = buildRegex.assembleHlaGfeRegex("HLA", whatLocus, 
+					// 										allCheckBoxes, allTextFields);
+					// String headerSS = buildHSS.assembleHlaHeaderSearchString("HLA", whatLocus, 
+					// 										allCheckBoxes, allTextFields);
+
+					// clear results screen
+					B12xGui.resultsTextAreaFeature.setText("");
+
+					// print headers
+					header.printComparisonHeaders("FEATURE", " ", whatVersion1, whatVersion2, 
+									whatLocus1, whatLocus2, dataSources.get("neo4j"));
+					
+					// search the data & print to screen
+					// if (dataFormat.equals("Pretty")) {
+					// 	PrettyData prettyData = new PrettyData();
+					// 	prettyData.searchThroughData(data, regex, "HLA");
+					// } else {
+					// 	SearchData searchData = new SearchData();
+					// 	searchData.searchThroughData(data, regex, dataFormat, "HLA");
+					// }
+
+					if (printToFile) {
+						// WriteToFile writeToFile = new WriteToFile();
+						// writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
+					}
+				}
+			};
+			new Thread(submit).start();
+
 		}
 	};
 

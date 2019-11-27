@@ -17,7 +17,7 @@ public class Neo4jFeatureRequests
 	
 	public Neo4jFeatureRequests() { }
 	
-	public String formNeo4jDuplicateFeatureRequest(String locus1, String locus2, String versionType1, String versionType2) throws IOException 
+	public String formNeo4jDuplicateFeatureRequest(String locus1, String locus2, String version1, String version2, String versionType) throws IOException 
 	{
 		try 
 		{
@@ -45,10 +45,7 @@ public class Neo4jFeatureRequests
 			GenerateJson generateJson = new GenerateJson();
 			return generateJson.neo4jJsonGenerator(request);
 
-		} catch (Exception ex) 
-		{
-			System.out.println(ex);
-		}
+		} catch (Exception ex) { System.out.println("Error generating feature comparison request " + ex); }
 		return null;
 	}
 }

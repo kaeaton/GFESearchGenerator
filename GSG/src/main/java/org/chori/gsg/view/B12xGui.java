@@ -73,7 +73,8 @@ public class B12xGui extends JFrame {
 	public static JComboBox whatLocusHla = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
-	public static JComboBox whatVersionFeature = new JComboBox();
+	public static JComboBox whatVersion1Feature = new JComboBox();
+	public static JComboBox whatVersion2Feature = new JComboBox();
 	public static JComboBox whatLocus1Feature = new JComboBox();
 	public static JComboBox whatLocus2Feature = new JComboBox();
 	public static JComboBox whatVersionBulk = new JComboBox();
@@ -330,14 +331,16 @@ public class B12xGui extends JFrame {
 		g.gridy = 0;
 		featureGfeTab.add(whatLocus1Feature, g);
 		
-		// g.gridx = 1;
-		// nameGfeTab.add(usageInstructions, g);
+		g.gridx = 1;
+		featureGfeTab.add(whatVersion1Feature, g);
 
 		// line 1
-		// g.insets = new Insets(0,0,0,0);
-		// g.gridx = 0;
+		g.gridx = 0;
 		g.gridy = 1;
 		featureGfeTab.add(whatLocus2Feature, g);
+
+		g.gridx = 1;
+		featureGfeTab.add(whatVersion2Feature, g);
 
 		// line 2
 		// g.gridy = 2;
@@ -345,13 +348,13 @@ public class B12xGui extends JFrame {
 		// nameGfeTab.add(namePanel, g);
 
 		// line 3
-		g.anchor = GridBagConstraints.WEST;
-		g.gridwidth = 1;
-		g.gridy = 3;
-		// nameGfeTab.add(resetButtonName, g);
+		// g.anchor = GridBagConstraints.WEST;
+		// g.gridwidth = 1;
+		// g.gridy = 3;
+		// // nameGfeTab.add(resetButtonName, g);
 
-		// g.gridx = 1;
-		featureGfeTab.add(whatVersionFeature, g);
+		// // g.gridx = 1;
+		// featureGfeTab.add(whatVersion1Feature, g);
 
 		// line 4
 		g.anchor = GridBagConstraints.CENTER;
