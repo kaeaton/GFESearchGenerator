@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.exceptions;
 
 import java.net.URL;
 import javax.swing.ImageIcon;

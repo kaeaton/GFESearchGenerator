@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.*;

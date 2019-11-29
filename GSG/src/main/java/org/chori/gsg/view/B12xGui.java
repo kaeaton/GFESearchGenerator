@@ -20,6 +20,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.view.searchboxes.*;
 import org.chori.gsg.view.dropdowns.*;

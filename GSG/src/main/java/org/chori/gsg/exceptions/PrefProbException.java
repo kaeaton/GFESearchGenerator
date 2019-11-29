@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.exceptions;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
