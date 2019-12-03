@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import org.chori.gsg.model.processJson.*;
@@ -21,6 +22,9 @@ public class Neo4jHttpCall {
     private InputStream incomingData;
     private InternetAccess internetAccess = new InternetAccess();
 
+    final String neo4jHlaURL = "http://neo4j.b12x.org/db/data/transaction/commit";
+
+
     public Neo4jHttpCall() { }
     
     /**
@@ -32,13 +36,16 @@ public class Neo4jHttpCall {
      * @return a data InputStream containing the response from the Neo4j database
      */
     public InputStream makeCall(String versionType, String request) throws IOException {
-        final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
+        // final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
 		// final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
 			  
 		// which URL do we use?
 		// URL neo4jURL = versionType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
 		if(internetAccess.tester()) {
     		try {
+
+                final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
+
                 // Open connection
     			HttpURLConnection connection = (HttpURLConnection) neo4jHlaURL.openConnection();
               
@@ -72,5 +79,34 @@ public class Neo4jHttpCall {
             
         }
         return incomingData;
+    }
+
+    private HttpURLConnection createUrlAndOpenConnection() {
+        try {
+
+            URL url = new URL(neo4jHlaURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = addConnectionHeaders(connection);
+
+            return connection;
+        } catch (Exception ex) {
+            System.out.println("createUrlAndOpenConnection error: " + ex);
+        }
+        
+        return null;
+    }
+
+    private HttpURLConnection addConnectionHeaders (HttpURLConnection connection) throws ProtocolException {
+        try {
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("X-Stream", "true");
+            connection.setRequestProperty("Authorization",***REMOVED***);
+        } catch (Exception ex) { System.out.println("Neo4jHttpCall: " + ex); }
+
+        return connection;
     }
 }

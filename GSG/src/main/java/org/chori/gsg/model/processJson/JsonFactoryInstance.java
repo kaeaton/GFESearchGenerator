@@ -24,10 +24,6 @@ public class JsonFactoryInstance {
 	// prevent the class from being instantiated
 	private JsonFactoryInstance() {	}
 
-	/**
-	 * The JsonFactory instance getter method
-	 * @return the JsonFactoryInstance for processing Json
-	 */
 	public static JsonFactoryInstance getInstance(){
 		return instance;
 	}
