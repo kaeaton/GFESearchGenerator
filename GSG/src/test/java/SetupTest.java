@@ -19,9 +19,10 @@ public class SetupTest {
         System.out.println(submissionRequestFactory.assembleSubmissionRequest("FEATURE", "ABO"));
     }
 
- //    @Test
- //    public void canSubmissionRequestSeeHlaDataSources() {
-	// 	SubmissionRequest testHlaNameSubmissionRequest = submissionRequestFactory.assembleSubmissionRequest("NAME", "HLA");
-	// 	System.out.println(testHlaNameSubmissionRequest.getDataSource());
-	// }
+    @Test
+    public void canSubmissionRequestSeeHlaDataSources() {
+		SubmissionRequest testHlaNameSubmissionRequest = submissionRequestFactory.assembleSubmissionRequest("NAME", "HLA");
+		String dataSource = testHlaNameSubmissionRequest.getDataSource();
+		System.out.println(dataSource);
+	}
 }

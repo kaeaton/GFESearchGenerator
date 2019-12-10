@@ -33,4 +33,9 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements HlaDat
 
 	public HlaGfeSubmissionRequest() { }
 
+	@Override
+	public String getDataSource() {
+		return dataSource;
+	}
+
 }

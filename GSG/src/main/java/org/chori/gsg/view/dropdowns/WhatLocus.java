@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.view.dropdowns;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.searchboxes.*;
-import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.*;
 
 

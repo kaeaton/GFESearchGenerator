@@ -29,6 +29,7 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements HlaDa
 
 	public HlaNameSubmissionRequest() { }
 
+	@Override
 	public String getDataSource() {
 		return dataSource;
 	}

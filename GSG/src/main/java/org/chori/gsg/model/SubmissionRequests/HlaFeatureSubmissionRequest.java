@@ -29,4 +29,8 @@ public class HlaFeatureSubmissionRequest extends SubmissionRequest implements Hl
 
 	public HlaFeatureSubmissionRequest() { }
 
+	@Override
+	public String getDataSource() {
+		return dataSource;
+	}
 }

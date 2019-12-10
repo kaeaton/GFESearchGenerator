@@ -18,13 +18,14 @@ public abstract class SubmissionRequest {
 	public String resultsFormat;
 	public Boolean printToFile;
 	public JTextArea textAreaToPrintTo;
+	// public String dataSource;
 
-	private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
-	static {
-		whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
-		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
-		whichTextArea.put("FEATURE", B12xGui.resultsTextAreaFeature);
-	}
+	// private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
+	// static {
+	// 	whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+	// 	whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
+	// 	whichTextArea.put("FEATURE", B12xGui.resultsTextAreaFeature);
+	// }
 
 	// private static HashMap<String, JPanel> whichTabDataFormatPanel = new Hashmap();
 	// static {
@@ -33,7 +34,9 @@ public abstract class SubmissionRequest {
 	// 	whichTabDataFormatPanel.put("FEATURE", B12xGui.fileFormatFeature);
 	// }
 
-
+	// public String getDataSource() {
+	// 	return dataSource;
+	// }
 
 	public SubmissionRequest() {
 		// this.whatTabItsFor = whatTab;
