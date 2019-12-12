@@ -20,6 +20,21 @@ public abstract class SubmissionRequest {
 	public JTextArea textAreaToPrintTo;
 	// public String dataSource;
 
+	public enum DataSource {
+		HLA("http://neo4j.b12x.org"),
+		KIR(null),
+ 		ABO(null);
+
+		private final String dataSource;
+
+		private DataSource(String dataSource) {
+			this.dataSource = dataSource;
+		}
+    
+		public String getDataSource() {
+			return this.dataSource;
+		}
+	}
 	// private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
 	// static {
 	// 	whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);

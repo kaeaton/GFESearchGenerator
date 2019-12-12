@@ -5,7 +5,7 @@ import org.chori.gsg.model.SubmissionRequests.*;
 
 public class SubmissionRequestFactory {
 
-	public static SubmissionRequest assembleSubmissionRequest(String whichTab, String whichGenes) {
+	public static SubmissionRequest assembleSubmissionRequest(String whichGenes, String whichTab) {
 		SubmissionRequest submissionRequest = null;
 
 		switch (whichGenes) {

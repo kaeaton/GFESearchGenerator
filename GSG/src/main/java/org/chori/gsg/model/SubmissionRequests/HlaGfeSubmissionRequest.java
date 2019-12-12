@@ -15,14 +15,14 @@ import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.searchboxes.*;
 
-public class HlaGfeSubmissionRequest extends SubmissionRequest implements HlaDataSources{
+public class HlaGfeSubmissionRequest extends SubmissionRequest{
 
 	// // class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();
 	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
-	// // private String dataSource = "http://neo4j.b12x.org";
+	public String dataSource = DataSource.HLA.getDataSource();
 	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
 	// private ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
@@ -33,9 +33,6 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements HlaDat
 
 	public HlaGfeSubmissionRequest() { }
 
-	@Override
-	public String getDataSource() {
-		return dataSource;
-	}
+	
 
 }

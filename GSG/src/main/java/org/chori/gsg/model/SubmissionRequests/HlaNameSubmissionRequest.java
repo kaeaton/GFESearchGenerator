@@ -13,14 +13,14 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.view.*;
 
-public class HlaNameSubmissionRequest extends SubmissionRequest implements HlaDataSources {
+public class HlaNameSubmissionRequest extends SubmissionRequest{
 
 	// // class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();
 	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
-	// // private String dataSource = "http://neo4j.b12x.org";
+	public String dataSource = DataSource.HLA.getDataSource();
 	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
 
@@ -29,8 +29,5 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements HlaDa
 
 	public HlaNameSubmissionRequest() { }
 
-	@Override
-	public String getDataSource() {
-		return dataSource;
-	}
+	
 }
