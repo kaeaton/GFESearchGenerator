@@ -15,7 +15,7 @@ import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.searchboxes.*;
 
-public class HlaGfeSubmissionRequest extends SubmissionRequest{
+public class HlaGfeSubmissionRequest extends SubmissionRequest implements HlaInterface {
 
 	// // class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();

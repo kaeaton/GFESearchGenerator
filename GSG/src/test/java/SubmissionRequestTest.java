@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.model.SubmissionRequests.*;
 
-public class SetupTest {
+public class SubmissionRequestTest {
  
 
 	SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();

@@ -13,7 +13,7 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.view.*;
 
-public class HlaFeatureSubmissionRequest extends SubmissionRequest{
+public class HlaFeatureSubmissionRequest extends SubmissionRequest implements HlaInterface{
 
 	// // class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();
