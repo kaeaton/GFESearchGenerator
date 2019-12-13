@@ -2,7 +2,7 @@ package org.chori.gsg.model.SubmissionRequestFactory;
 
 import org.chori.gsg.model.SubmissionRequests.*;
 
-public interface HlaInterface {
+public interface LocusInterface {
 
 	public enum DataSource {
 		HLA("http://neo4j.b12x.org"),

@@ -29,13 +29,13 @@ public class SubmissionRequestFactory {
 		case "KIR":
 			switch (whichTab) {
 			case "GFE":
-				// submissionRequest = new HlaGfeSubmissionRequest();
+				submissionRequest = new KirGfeSubmissionRequest();
 				break;
 			case "NAME":
-				// submissionRequest = new HlaNameSubmissionRequest();
+				submissionRequest = new KirNameSubmissionRequest();
 				break;
 			case "FEATURE":
-				// submissionRequest = new HlaFeatureSubmissionRequest();
+				submissionRequest = new KirFeatureSubmissionRequest();
 				break;
 			default:
 				System.out.println("KIR Switch, Submission Request Factory: haven't added that tab yet");

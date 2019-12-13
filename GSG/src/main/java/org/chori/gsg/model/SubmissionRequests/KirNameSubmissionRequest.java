@@ -13,7 +13,7 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.model.SubmissionRequestFactory.*;
 import org.chori.gsg.view.*;
 
-public class HlaNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
+public class KirNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
 	// // class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();
@@ -27,7 +27,7 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 	// private String jsonRegexRequest = "";
 	// private String humanReadableSearchString = "";
 
-	public HlaNameSubmissionRequest() { }
+	public KirNameSubmissionRequest() { }
 
 	
 }

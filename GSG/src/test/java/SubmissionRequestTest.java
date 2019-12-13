@@ -12,7 +12,9 @@ public class SubmissionRequestTest {
 	HlaGfeSubmissionRequest hlaGfeSubReq = new HlaGfeSubmissionRequest();
 	HlaNameSubmissionRequest hlaNameSubReq = new HlaNameSubmissionRequest();
 	HlaFeatureSubmissionRequest hlaFeatureSubReq = new HlaFeatureSubmissionRequest();
-
+	KirGfeSubmissionRequest kirGfeSubReq = new KirGfeSubmissionRequest();
+	KirNameSubmissionRequest kirNameSubReq = new KirNameSubmissionRequest();
+	KirFeatureSubmissionRequest kirFeatureSubReq = new KirFeatureSubmissionRequest();
 
 	@Test
 	public void testSubmissionRequestFactory() {
@@ -24,6 +26,12 @@ public class SubmissionRequestTest {
 						submissionRequestFactory.assembleSubmissionRequest("HLA", "FEATURE").getClass());
 		assertSame("The submission request failures do not match, HLA, ERROR", null,
 						submissionRequestFactory.assembleSubmissionRequest("HLA", "ERROR"));
+		assertSame("The submission request objects do not match, HLA, GFE", kirGfeSubReq.getClass(),
+						submissionRequestFactory.assembleSubmissionRequest("KIR", "GFE").getClass());
+		assertSame("The submission request objects do not match, HLA, NAME", kirNameSubReq.getClass(),
+						submissionRequestFactory.assembleSubmissionRequest("KIR", "NAME").getClass());
+		assertSame("The submission request objects do not match, HLA, FEATURE", kirFeatureSubReq.getClass(),
+						submissionRequestFactory.assembleSubmissionRequest("KIR", "FEATURE").getClass());
 		assertSame("The submission request errors do not match, KIR, ERROR", null,
 						submissionRequestFactory.assembleSubmissionRequest("KIR", "ERROR"));
 		assertSame("The submission request errors do not match, ABO, FEATURE", null,
