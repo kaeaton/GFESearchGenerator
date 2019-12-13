@@ -18,7 +18,7 @@ public class BuildHeaderSearchString {
 
 	}
 
-	public String assembleHlaHeaderSearchString(String whichTab, String whichLocus,
+	public String assembleGfeHeaderSearchString(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
 								ArrayList<JTextField> textFields) {
 		String searchString = new String("");

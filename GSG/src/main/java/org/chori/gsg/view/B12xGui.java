@@ -31,7 +31,7 @@ public class B12xGui extends JFrame {
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
 	// default locus settings
-	private String hlaSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
+	private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
 	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION_1", "HLA-A");
 	private String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 
@@ -53,25 +53,24 @@ public class B12xGui extends JFrame {
 
 	// the tabs, added initially so I can make them 
 	// public, static and update them
-	public static JPanel hlaGfeTab = new JPanel();
-	public static JPanel kirGfeTab = new JPanel();
+	public static JPanel gfeTab = new JPanel();
 	public static JPanel nameGfeTab = new JPanel();
 	public static JPanel featureGfeTab = new JPanel();
 	public static JPanel optionsGfeTab = new JPanel();
 
 	// the holder panels
 	// they're embedded in the layout, with contents to be changed
-	public static JPanel hlaPanel = new JPanel();
+	public static JPanel gfePanel = new JPanel();
 	public static JPanel namePanel = new JPanel();
 
 	// results text areas
-	public static JTextArea resultsTextAreaHla = new JTextArea();
+	public static JTextArea resultsTextAreaGfe = new JTextArea();
 	public static JTextArea resultsTextAreaName = new JTextArea();
 	public static JTextArea resultsTextAreaFeature = new JTextArea();
 	
 	// combo boxes for locus and version selection
-	public static JComboBox whatVersionHla = new JComboBox();
-	public static JComboBox whatLocusHla = new JComboBox();
+	public static JComboBox whatVersionGfe = new JComboBox();
+	public static JComboBox whatLocusGfe = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
 	public static JComboBox whatVersion1Feature = new JComboBox();
@@ -82,7 +81,7 @@ public class B12xGui extends JFrame {
 
 	
 	// file format panels
-	public static JPanel fileFormatHla = fileFormatPanelGenerator.createFileFormatPanel("HLA");
+	public static JPanel fileFormatGfe = fileFormatPanelGenerator.createFileFormatPanel("GFE");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
 	public static JPanel fileFormatFeature = fileFormatPanelGenerator.createFileFormatPanel("FEATURE");
 
@@ -101,8 +100,8 @@ public class B12xGui extends JFrame {
 				throw new NoInternetOrDataException();
 			}
 
-			whatVersionHla = whatVersionGenerator.createWhatVersionComboBox("HLA");
-			whatLocusHla = whatLocusGenerator.createWhatLocusComboBox("HLA", whatVersionHla.getSelectedItem().toString());
+			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE");
+			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString());
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
@@ -132,43 +131,43 @@ public class B12xGui extends JFrame {
 	/* HLA GFE tab */
 
 		// add panel to tab pane
-		parentTabbedPane.addTab("HLA GFE Search", null, hlaGfeTab, "HLA GFE Search tool");
+		parentTabbedPane.addTab("GFE Search", null, gfeTab, "GFE Search tool");
 		
 		// generate the HLA GFE panel
 		try {
-			System.out.println("Generating the initial hlaPanel using whatLocusHla: " + whatLocusHla.getSelectedItem().toString());
-			JPanel currentHlaPanel = hlaPanelGenerator.assembleHlaPanel(whatLocusHla.getSelectedItem().toString());
-			currentHlaPanel.setName("HLA-GFE");
-			hlaPanel.add(currentHlaPanel);
+			System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
+			JPanel currentHlaPanel = hlaPanelGenerator.assembleHlaPanel(whatLocusGfe.getSelectedItem().toString());
+			currentHlaPanel.setName("GFE");
+			gfePanel.add(currentHlaPanel);
 		} catch (IllegalArgumentException iex) {
 			PrefProbException ppex = new PrefProbException();
 		}
 		// results textarea
-		JScrollPane resultsScrollPaneHla = new JScrollPane(resultsTextAreaHla);
-		resultsTextAreaHla.setFont(new Font("Courier New", 0, 13));
-		resultsScrollPaneHla.setPreferredSize(new Dimension(950, 300));
-		// resultsTextAreaHla.setEditable(false);
+		JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
+		resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
+		resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
+		// resultsTextAreaGfe.setEditable(false);
 
 		// labels
-		JLabel selectAllLabelHla = new JLabel("Check all");
-		JTextArea usageInstructionsHla = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+		JLabel selectAllLabelGfe = new JLabel("Check all");
+		JTextArea usageInstructionsGfe = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
 													+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
-		usageInstructionsHla.setBackground(hlaPanel.getBackground());
-		usageInstructionsHla.setEditable(false);
-		usageInstructionsHla.setFocusable(false);
+		usageInstructionsGfe.setBackground(gfePanel.getBackground());
+		usageInstructionsGfe.setEditable(false);
+		usageInstructionsGfe.setFocusable(false);
 
 		// buttons
-		JButton resetButtonHla = resetButtonGenerator.createResetButton("HLA");
-		JButton submitButtonHla = submitButtonGenerator.createSubmitButton("HLA");
-		JButton cancelButtonHla = cancelButtonGenerator.createCancelButton();
+		JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
+		JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
+		JButton cancelButtonGfe = cancelButtonGenerator.createCancelButton();
 
 		// submit/cancel buttons panel
-		JPanel bottomButtonsHla = new JPanel();
-		bottomButtonsHla.add(submitButtonHla);
-		bottomButtonsHla.add(cancelButtonHla);
+		JPanel bottomButtonsGfe = new JPanel();
+		bottomButtonsGfe.add(submitButtonGfe);
+		bottomButtonsGfe.add(cancelButtonGfe);
 
-		// layout / add them to the hlaGfeTab
-		hlaGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the gfeTab
+		gfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.insets = new Insets(0,0,10,0);
@@ -177,56 +176,53 @@ public class B12xGui extends JFrame {
 		// line 0
 		c.gridx = 0;
 		c.gridy = 0;
-		hlaGfeTab.add(whatLocusHla, c);
+		gfeTab.add(whatLocusGfe, c);
 		
 		c.gridx = 1;
-		hlaGfeTab.add(usageInstructionsHla, c);
+		gfeTab.add(usageInstructionsGfe, c);
 
 		// line 1
 		c.insets = new Insets(0,0,0,0);
 		c.gridx = 0;
 		c.gridy = 1;
-		hlaGfeTab.add(selectAllLabelHla, c);
+		gfeTab.add(selectAllLabelGfe, c);
 
 		// line 2
 		c.gridy = 2;
 		c.gridwidth = 4;
-		hlaGfeTab.add(hlaPanel, c);
+		gfeTab.add(gfePanel, c);
 
 		// line 3
 		c.anchor = GridBagConstraints.WEST;
 		c.gridwidth = 1;
 		c.gridy = 3;
-		hlaGfeTab.add(resetButtonHla, c);
+		gfeTab.add(resetButtonGfe, c);
 
 		c.gridx = 1;
-		hlaGfeTab.add(whatVersionHla, c);
+		gfeTab.add(whatVersionGfe, c);
 
 		// line 4
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridwidth = 4;
 		c.gridx = 0;
 		c.gridy = 4;
-		hlaGfeTab.add(fileFormatHla, c);
+		gfeTab.add(fileFormatGfe, c);
 
 		// line 5
 		c.anchor = GridBagConstraints.NORTH;
 		c.weightx = 1;
 		c.weighty = 1;
 		c.gridy = 5;
-		hlaGfeTab.add(resultsScrollPaneHla, c);
+		gfeTab.add(resultsScrollPaneGfe, c);
 
 		// line 6
 		c.weightx = 0;
 		c.weighty = 0;
 		c.gridy = 6;
-		hlaGfeTab.add(bottomButtonsHla, c);
-
-	/* KIR GFE tab */
-		// parentTabbedPane.addTab("KIR GFE Search", null, kirGfeTab, "KIR GFE Search tool");
+		gfeTab.add(bottomButtonsGfe, c);
 
 	/* Name Search tab */
-		parentTabbedPane.addTab("Name Search", null, nameGfeTab, "HLA Name Search tool");
+		parentTabbedPane.addTab("Name Search", null, nameGfeTab, "Name Search tool");
 		
 		// currentHlaPanel.setName("NAME");
 		namePanel.add(nameSearchBox);
@@ -236,7 +232,7 @@ public class B12xGui extends JFrame {
 		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
 		resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
 		resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
-		// resultsTextAreaHla.setEditable(false);
+		// resultsTextAreaGfe.setEditable(false);
 
 		// buttons
 		JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
@@ -423,7 +419,6 @@ public class B12xGui extends JFrame {
 			PrefProbException ppex = new PrefProbException();
 		}
 
-
 		parentTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent evt) {
 				prefs.putInt("GSG_OPEN_TAB", parentTabbedPane.getSelectedIndex());
@@ -452,7 +447,7 @@ public class B12xGui extends JFrame {
 				InternetAccess internet = new InternetAccess();
 
 				if(!internet.tester()) {
-					resultsTextAreaHla.append("No internet access available, local data only");
+					resultsTextAreaGfe.append("No internet access available, local data only");
 					resultsTextAreaName.append("No internet access available, local data only");
 				}
 			}

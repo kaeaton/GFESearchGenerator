@@ -84,15 +84,15 @@ public class FileFormatPanel {
 
 		// who is this reset button for?
 		switch(whichTab) {
-			case "HLA":
-        		csvButton.setSelected(prefs.getBoolean("HLA_CSV_SELECTED", true));
-        		tsvButton.setSelected(prefs.getBoolean("HLA_TSV_SELECTED", false));
-        		prettyButton.setSelected(prefs.getBoolean("HLA_PRETTY_SELECTED", false));
-        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_HLA_SAVE_FILE", false));
-				hlaCsvListener(csvButton, tsvButton, prettyButton);
-				hlaTsvListener(csvButton, tsvButton, prettyButton);
-				hlaPrettyListener(csvButton, tsvButton, prettyButton);
-				hlaSaveToFileCheckBoxListener(saveToFileCheckBox);
+			case "GFE":
+        		csvButton.setSelected(prefs.getBoolean("GFE_CSV_SELECTED", true));
+        		tsvButton.setSelected(prefs.getBoolean("GFE_TSV_SELECTED", false));
+        		prettyButton.setSelected(prefs.getBoolean("GFE_PRETTY_SELECTED", false));
+        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_GFE_SAVE_FILE", false));
+				gfeCsvListener(csvButton, tsvButton, prettyButton);
+				gfeTsvListener(csvButton, tsvButton, prettyButton);
+				gfePrettyListener(csvButton, tsvButton, prettyButton);
+				gfeSaveToFileCheckBoxListener(saveToFileCheckBox);
 				break;
 			case "NAME":
         		csvButton.setSelected(prefs.getBoolean("NAME_CSV_SELECTED", true));
@@ -122,18 +122,18 @@ public class FileFormatPanel {
 	}
 
 	// separate functions because each tab needs it's own set of prefs
-	private void hlaPrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
-		if (csvButton.isSelected()) prefs.putBoolean("HLA_CSV_SELECTED", true);
-		else prefs.putBoolean("HLA_CSV_SELECTED", false);
-		System.out.println("HLA_CSV is selected: " + prefs.getBoolean("HLA_CSV_SELECTED", true));
+	private void gfePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+		if (csvButton.isSelected()) prefs.putBoolean("GFE_CSV_SELECTED", true);
+		else prefs.putBoolean("GFE_CSV_SELECTED", false);
+		System.out.println("GFE_CSV is selected: " + prefs.getBoolean("GFE_CSV_SELECTED", true));
 	   
-		if (tsvButton.isSelected()) prefs.putBoolean("HLA_TSV_SELECTED", true);
-		else prefs.putBoolean("HLA_TSV_SELECTED", false);
-		System.out.println("HLA_TSV is selected: " + prefs.getBoolean("HLA_TSV_SELECTED", false));
+		if (tsvButton.isSelected()) prefs.putBoolean("GFE_TSV_SELECTED", true);
+		else prefs.putBoolean("GFE_TSV_SELECTED", false);
+		System.out.println("GFE_TSV is selected: " + prefs.getBoolean("GFE_TSV_SELECTED", false));
 
-		if (prettyButton.isSelected()) prefs.putBoolean("HLA_PRETTY_SELECTED", true);
-		else prefs.putBoolean("HLA_PRETTY_SELECTED", false);
-		System.out.println("HLA_PRETTY is selected: " + prefs.getBoolean("HLA_PRETTY_SELECTED", false));
+		if (prettyButton.isSelected()) prefs.putBoolean("GFE_PRETTY_SELECTED", true);
+		else prefs.putBoolean("GFE_PRETTY_SELECTED", false);
+		System.out.println("GFE_PRETTY is selected: " + prefs.getBoolean("GFE_PRETTY_SELECTED", false));
 	}
 
 	private void namePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
@@ -159,45 +159,45 @@ public class FileFormatPanel {
 		else prefs.putBoolean("FEATURE_TSV_SELECTED", false);
 		System.out.println("FEATURE_TSV is selected: " + prefs.getBoolean("FEATURE_TSV_SELECTED", false));
 
-		if (prettyButton.isSelected()) prefs.putBoolean("HLA_PRETTY_SELECTED", true);
+		if (prettyButton.isSelected()) prefs.putBoolean("GFE_PRETTY_SELECTED", true);
 		else prefs.putBoolean("FEATURE_PRETTY_SELECTED", false);
 		System.out.println("FEATURE_PRETTY is selected: " + prefs.getBoolean("FEATURE_PRETTY_SELECTED", false));
 	}
 
 	// separate listeners because Java button groups don't have listeners
-	/* HLA */
-	private void hlaCsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+	/* GFE */
+	private void gfeCsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		csvButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
+            	gfePrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void hlaTsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+	private void gfeTsvListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		tsvButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
+            	gfePrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void hlaPrettyListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+	private void gfePrettyListener(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		prettyButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	hlaPrefsFileFormat(csvButton, tsvButton, prettyButton);
+            	gfePrefsFileFormat(csvButton, tsvButton, prettyButton);
             }
         });
 	}
 
-	private void hlaSaveToFileCheckBoxListener(JCheckBox saveToFileCheckBox) {
+	private void gfeSaveToFileCheckBoxListener(JCheckBox saveToFileCheckBox) {
 		saveToFileCheckBox.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	prefs.putBoolean("GSG_HLA_SAVE_FILE", saveToFileCheckBox.isSelected());
+            	prefs.putBoolean("GSG_GFE_SAVE_FILE", saveToFileCheckBox.isSelected());
             }
         });
 	}

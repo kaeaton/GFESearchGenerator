@@ -16,7 +16,7 @@ public class BuildRegex {
 
 	}
 
-	public String assembleHlaGfeRegex(String whichTab, String whichLocus,
+	public String assembleGfeRegex(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
 								ArrayList<JTextField> textFields) {
 		// start the regex
@@ -25,9 +25,9 @@ public class BuildRegex {
 		// quick diagnostic test: 
 		// are the checkbox and textfield lists the same size?
 		if(checkBoxes.size() != textFields.size()) {
-			B12xGui.resultsTextAreaHla.append("There's a problem with the Arraylists in BuildRegex.");
-			B12xGui.resultsTextAreaHla.append(" (They're not the same length.)");
-			B12xGui.resultsTextAreaHla.append(System.lineSeparator());
+			B12xGui.resultsTextAreaGfe.append("There's a problem with the Arraylists in BuildRegex.");
+			B12xGui.resultsTextAreaGfe.append(" (They're not the same length.)");
+			B12xGui.resultsTextAreaGfe.append(System.lineSeparator());
 			System.out.println("There's a problem with the Arraylists in BuildRegex.");
 		}
 
@@ -73,7 +73,7 @@ public class BuildRegex {
 		return regex;
 	}
 
-	public String assembleHlaNameRegex(String searchString) {
+	public String assembleNameRegex(String searchString) {
 		
 		System.out.println("Made it to assembleNameRegex");
 

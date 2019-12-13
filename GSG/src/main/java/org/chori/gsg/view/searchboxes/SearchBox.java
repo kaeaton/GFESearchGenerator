@@ -47,7 +47,7 @@ public class SearchBox extends JPanel{
 		featureNumber.setColumns(3);
 		featureNumber.setHorizontalAlignment(JTextField.CENTER);
 		featureNumber.setName(nameNumber);
-		featureNumber.addActionListener(submitButtonGenerator.hlaListener);
+		featureNumber.addActionListener(submitButtonGenerator.gfeListener);
 
 		// special rules for workshop status
 		if (nameNumber.equals("00")) {

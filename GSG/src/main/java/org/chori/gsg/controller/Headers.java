@@ -37,8 +37,8 @@ public class Headers {
 
 		// where are we printing the headers?
 		switch(whichTab) {
-			case "HLA":
-				writeToMe = B12xGui.resultsTextAreaHla;
+			case "GFE":
+				writeToMe = B12xGui.resultsTextAreaGfe;
 				database = "IMGT/HLA Database ";
 				break;
 			case "NAME":

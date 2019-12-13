@@ -31,7 +31,7 @@ public class WhatVersion {
 
 		// who is this combobox for?
 		switch(whichTab) {
-			case "HLA":
+			case "GFE":
 				comboBoxModel = vm.versions();
 				whatVersion.setModel(comboBoxModel);
 
@@ -44,7 +44,7 @@ public class WhatVersion {
 				}
 		
 				// whatLocus.setName("HLA-dropdown");
-				hlaListener(whatVersion);
+				gfeListener(whatVersion);
 				break;
 			case "NAME":
 				comboBoxModel = vm.versions();
@@ -75,29 +75,29 @@ public class WhatVersion {
 		return whatVersion;
 	}
 
-	private void hlaListener(JComboBox hlaWhatVersion) {
-		hlaWhatVersion.addActionListener(new ActionListener() {
+	private void gfeListener(JComboBox gfeWhatVersion) {
+		gfeWhatVersion.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	String whichVersion = hlaWhatVersion.getSelectedItem().toString();
+            	String whichVersion = gfeWhatVersion.getSelectedItem().toString();
                 System.out.println("Which version listener triggered");
-            	prefs.putInt("GSG_HLA_VERSION", hlaWhatVersion.getSelectedIndex());
+            	prefs.putInt("GSG_GFE_VERSION", gfeWhatVersion.getSelectedIndex());
             	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
             	// if local version, update loci model to show available loci
             	LocusModel locusModel = new LocusModel();
-            	B12xGui.whatLocusHla.setModel(locusModel.loci(whichVersion));
+            	B12xGui.whatLocusGfe.setModel(locusModel.loci(whichVersion));
 
             	// grab the new available default locus
-            	String whichLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
+            	String whichLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
 
             	// borrow the set new panel method from WhatLocus
             	WhatLocus whatLocus = new WhatLocus();
-            	whatLocus.setNewHlaPanel(whichLocus);
+            	whatLocus.setNewGfePanel(whichLocus);
 
             	// update the preferences
-            	prefs.putInt("GSG_HLA_LOCUS", B12xGui.whatLocusHla.getSelectedIndex());
-            	prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
+            	prefs.putInt("GSG_GFE_LOCUS", B12xGui.whatLocusGfe.getSelectedIndex());
+            	prefs.put("GSG_GFE_LOCUS_STRING", whichLocus);
             }
         });
 	}

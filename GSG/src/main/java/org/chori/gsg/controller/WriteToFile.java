@@ -19,7 +19,7 @@ public class WriteToFile {
 	private WhereTheDataLives wtdl = new WhereTheDataLives();
 	
 	public WriteToFile () {
-		whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
 		// whichTextArea.put("KIR", B12xGui.kirNeo4jResults);
 		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 
@@ -37,7 +37,7 @@ public class WriteToFile {
 		String fileName = "";
 
 		switch(whichTab) {
-			case "HLA":
+			case "GFE":
 				fileName = wtdl.getResultsDataPath()
 					+ System.getProperty("file.separator") + locus
 					+ "_" + version
@@ -63,7 +63,7 @@ public class WriteToFile {
 	
 	public void writeFile(String locus, String version, String whichTab, String fileType)
 	{
-		System.out.println("Made it to the HLA write to file");
+		System.out.println("Made it to the GFE write to file");
 		String text = (whichTextArea.get(whichTab)).getText();
 		
 		try {

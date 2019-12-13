@@ -26,7 +26,7 @@ public class SearchData {
 	private static HashMap<String, JTextArea> whichTextArea = new HashMap<>();
 
 	public SearchData() {
-		whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
 		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 	}
 
@@ -58,7 +58,7 @@ public class SearchData {
 			if(gfeAlleles[1].contains("*")) { gfe = 0; }
 
 			switch(whichTab) {
-				case "HLA":
+				case "GFE":
 					if (gfeAlleles[gfe].matches(regex)){
 							
 						// if the first data line matches the regex, add to hashmap
@@ -109,7 +109,7 @@ public class SearchData {
 					}
 					break;
 				default:
-					System.out.println("I don't know how to process the data");
+					System.out.println("SearchData doesn't know how to process the data");
 			}
 
 			// Close the buffer
@@ -128,7 +128,7 @@ public class SearchData {
 				case "CSV":
 					// System.out.println("Reached CSV in switch in SearchData");
 					// whichTextArea.get(whichTab).append("test");
-					// B12xGui.resultsTextAreaHla.append("Test");
+					// B12xGui.resultsTextAreaGfe.append("Test");
 					printToMe.append(me.getValue() + "," + me.getKey());
 					printToMe.append(System.lineSeparator());
 					break;

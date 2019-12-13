@@ -51,16 +51,16 @@ public class WhatLocus {
 
 		// who is this combobox for?
 		switch(whichComboBox) {
-			case "HLA":
+			case "GFE":
 				try {
 					// try using prefs
-					whatLocus.setSelectedIndex(prefs.getInt("GSG_HLA_LOCUS", 0));
+					whatLocus.setSelectedIndex(prefs.getInt("GSG_GFE_LOCUS", 0));
 				} catch (Exception ex) { 
 					// if the pref exceeds the length of the model list, reset prefs
 					PrefProbException ppex = new PrefProbException();
-					System.out.println("HLA whatLocus set selected index: " + ex);
+					System.out.println("GFE whatLocus set selected index: " + ex);
 				}
-				hlaListener(whatLocus);
+				gfeListener(whatLocus);
 				break;
 			case "NAME":
 				try {
@@ -81,15 +81,15 @@ public class WhatLocus {
 		return whatLocus;
 	}
 
-	private void hlaListener(JComboBox hlaWhatLocus) {
-		hlaWhatLocus.addActionListener(new ActionListener() {
+	private void gfeListener(JComboBox gfeWhatLocus) {
+		gfeWhatLocus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				whichLocus = hlaWhatLocus.getSelectedItem().toString();
-				setNewHlaPanel(whichLocus);
+				whichLocus = gfeWhatLocus.getSelectedItem().toString();
+				setNewGfePanel(whichLocus);
 				System.out.println("Which Locus listener triggered");
-				prefs.putInt("GSG_HLA_LOCUS", hlaWhatLocus.getSelectedIndex());
-				prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
+				prefs.putInt("GSG_GFE_LOCUS", gfeWhatLocus.getSelectedIndex());
+				prefs.put("GSG_GFE_LOCUS_STRING", whichLocus);
 			}
 		});
 	}
@@ -114,7 +114,7 @@ public class WhatLocus {
 	 * @return the currently displayed JPanel
 	 */
 	public JPanel findPanel(JPanel whichTab, String whichPanel) {
-		Component selectedPanel = B12xGui.hlaPanel;
+		Component selectedPanel = B12xGui.gfePanel;
 		for (Component component : whichTab.getComponents()) {
 			if (component.getName().equals(whichPanel)){
 				selectedPanel = component;
@@ -129,13 +129,13 @@ public class WhatLocus {
 	 * 
 	 * @param locus what HLA locus should be displayed
 	 */
-	public void setNewHlaPanel(String locus) {
+	public void setNewGfePanel(String locus) {
 		System.out.println("Triggered setNewHlaPanel");
-		JPanel newGfePanel = hlaSBA.assembleHlaPanel(locus);
-		newGfePanel.setName("HLA-GFE");
-		JPanel oldPanel = findPanel(B12xGui.hlaPanel, "HLA-GFE");
-		B12xGui.hlaPanel.remove(oldPanel);
-		B12xGui.hlaPanel.add(newGfePanel).revalidate();
-		B12xGui.hlaPanel.repaint();
+		JPanel newHlaPanel = hlaSBA.assembleHlaPanel(locus);
+		newHlaPanel.setName("GFE");
+		JPanel oldPanel = findPanel(B12xGui.gfePanel, "GFE");
+		B12xGui.gfePanel.remove(oldPanel);
+		B12xGui.gfePanel.add(newHlaPanel).revalidate();
+		B12xGui.gfePanel.repaint();
 	}
 }

@@ -25,7 +25,7 @@ public class PrettyData {
 	private LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
 
 	public PrettyData() {
-		whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
 		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 
 		hlaExonTotal.put("A", 8);
@@ -90,7 +90,7 @@ public class PrettyData {
 				}
 
 				switch(whichTab) {
-					case "HLA":
+					case "GFE":
 						if (gfeAlleles[gfe].matches(regex)){
 								
 							// put gfe and name in holding hashmap for later printing

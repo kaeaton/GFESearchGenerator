@@ -72,7 +72,7 @@ public class Neo4jHttpCall {
                     System.out.println("got input string");
                 }
             } catch (Exception ex) {
-                B12xGui.resultsTextAreaHla.append(ex.toString());
+                B12xGui.resultsTextAreaGfe.append(ex.toString());
                 System.out.println(ex);
             }
         } else {

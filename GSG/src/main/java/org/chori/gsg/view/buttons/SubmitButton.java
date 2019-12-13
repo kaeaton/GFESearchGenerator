@@ -59,8 +59,8 @@ public class SubmitButton {
 
 		// who is this reset button for?
 		switch(whichTab) {
-			case "HLA":
-				submitButton.addActionListener(hlaListener);
+			case "GFE":
+				submitButton.addActionListener(gfeListener);
 				break;
 			case "NAME":
 				submitButton.addActionListener(nameListener);
@@ -78,7 +78,7 @@ public class SubmitButton {
 	/**
 	 * Runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
 	 */
-	public ActionListener hlaListener = new ActionListener() {
+	public ActionListener gfeListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			Runnable submit = new Runnable() {
@@ -89,39 +89,39 @@ public class SubmitButton {
 					ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 
 					// what locus, version, and format?
-					String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-					String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
-					String dataFormat = dataFormatFinder(B12xGui.fileFormatHla);
-					Boolean printToFile = printToFileFinder(B12xGui.fileFormatHla);
+					String whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
+					String whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
+					String dataFormat = dataFormatFinder(B12xGui.fileFormatGfe);
+					Boolean printToFile = printToFileFinder(B12xGui.fileFormatGfe);
 					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
 					// where's the data file?                 
 					File data = wtdl.getRawData(whatLocus, whatVersion);
 
 					// build me some Regex
-					String regex = buildRegex.assembleHlaGfeRegex("HLA", whatLocus, 
+					String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
 															allCheckBoxes, allTextFields);
-					String headerSS = buildHSS.assembleHlaHeaderSearchString("HLA", whatLocus, 
+					String headerSS = buildHSS.assembleGfeHeaderSearchString("HLA", whatLocus, 
 															allCheckBoxes, allTextFields);
 
 					// clear results screen
-					B12xGui.resultsTextAreaHla.setText("");
+					B12xGui.resultsTextAreaGfe.setText("");
 
 					// print headers
-					header.printHeaders("HLA", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
+					header.printHeaders("GFE", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
 					
 					// search the data & print to screen
 					if (dataFormat.equals("Pretty")) {
 						PrettyData prettyData = new PrettyData();
-						prettyData.searchThroughData(data, regex, "HLA");
+						prettyData.searchThroughData(data, regex, "GFE");
 					} else {
 						SearchData searchData = new SearchData();
-						searchData.searchThroughData(data, regex, dataFormat, "HLA");
+						searchData.searchThroughData(data, regex, dataFormat, "GFE");
 					}
 
 					if (printToFile) {
 						WriteToFile writeToFile = new WriteToFile();
-						writeToFile.writeFile(whatLocus, whatVersion, "HLA", dataFormat);
+						writeToFile.writeFile(whatLocus, whatVersion, "GFE", dataFormat);
 					}
 				}
 			};
@@ -153,7 +153,7 @@ public class SubmitButton {
 					String searchTerm = B12xGui.nameSearchBox.getText();
 					
 					System.out.println("Name Search Term: " + searchTerm);
-					String regex = buildRegex.assembleHlaNameRegex(searchTerm);
+					String regex = buildRegex.assembleNameRegex(searchTerm);
 					
 					// clear results screen
 					B12xGui.resultsTextAreaName.setText("");

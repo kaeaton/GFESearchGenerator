@@ -1,8 +1,11 @@
 package org.chori.gsg.model.SubmissionRequestFactory;
 
+import java.awt.Component;
 import java.util.HashMap;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.controller.*;
@@ -37,7 +40,7 @@ public abstract class SubmissionRequest {
 	// }
 	// private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
 	// static {
-	// 	whichTextArea.put("HLA", B12xGui.resultsTextAreaHla);
+	// 	whichTextArea.put("HLA", B12xGui.resultsTextAreaGfe);
 	// 	whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 	// 	whichTextArea.put("FEATURE", B12xGui.resultsTextAreaFeature);
 	// }
@@ -68,13 +71,13 @@ public abstract class SubmissionRequest {
 	}
 
 	private String dataFormatFinder(JPanel fileFormatPanel){
-		// for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
-		// 	if (component instanceof JRadioButton){
-		// 		if (((JRadioButton)component).isSelected()) {
-		// 			return ((JRadioButton)component).getText();
-		// 		}
-		// 	}
-		// }
+		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
+			if (component instanceof JRadioButton){
+				if (((JRadioButton)component).isSelected()) {
+					return ((JRadioButton)component).getText();
+				}
+			}
+		}
 		System.out.println("Didn't find a Data format");
 		return null;
 	}
