@@ -40,7 +40,7 @@ public class WhatLocus {
 	 * @return a JComboBox with an associated listener
 	 */
 	public JComboBox createWhatLocusComboBox(String whichComboBox, String version) {
-		System.out.println("Generating the which locus combo box");
+		System.out.println("Generating the what locus combo box");
 		
 		// instantiate combobox and its model
 		JComboBox whatLocus = new JComboBox();

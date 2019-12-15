@@ -26,11 +26,11 @@ public class SubmissionRequestTest {
 						submissionRequestFactory.assembleSubmissionRequest("HLA", "FEATURE").getClass());
 		assertSame("The submission request failures do not match, HLA, ERROR", null,
 						submissionRequestFactory.assembleSubmissionRequest("HLA", "ERROR"));
-		assertSame("The submission request objects do not match, HLA, GFE", kirGfeSubReq.getClass(),
+		assertSame("The submission request objects do not match, KIR, GFE", kirGfeSubReq.getClass(),
 						submissionRequestFactory.assembleSubmissionRequest("KIR", "GFE").getClass());
-		assertSame("The submission request objects do not match, HLA, NAME", kirNameSubReq.getClass(),
+		assertSame("The submission request objects do not match, KIR, NAME", kirNameSubReq.getClass(),
 						submissionRequestFactory.assembleSubmissionRequest("KIR", "NAME").getClass());
-		assertSame("The submission request objects do not match, HLA, FEATURE", kirFeatureSubReq.getClass(),
+		assertSame("The submission request objects do not match, KIR, FEATURE", kirFeatureSubReq.getClass(),
 						submissionRequestFactory.assembleSubmissionRequest("KIR", "FEATURE").getClass());
 		assertSame("The submission request errors do not match, KIR, ERROR", null,
 						submissionRequestFactory.assembleSubmissionRequest("KIR", "ERROR"));

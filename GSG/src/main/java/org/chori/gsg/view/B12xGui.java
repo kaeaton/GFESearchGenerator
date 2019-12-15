@@ -41,6 +41,7 @@ public class B12xGui extends JFrame {
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
 	private static WhatVersion whatVersionGenerator = new WhatVersion();
+	private static WhichLoci whichLociGenerator = new WhichLoci();
 	private static ResetButton resetButtonGenerator = new ResetButton();
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
 	private static CancelButton cancelButtonGenerator = new CancelButton();
@@ -71,15 +72,18 @@ public class B12xGui extends JFrame {
 	// combo boxes for locus and version selection
 	public static JComboBox whatVersionGfe = new JComboBox();
 	public static JComboBox whatLocusGfe = new JComboBox();
+	public static JComboBox whichLociGfe = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
+	public static JComboBox whichLociName = new JComboBox();
 	public static JComboBox whatVersion1Feature = new JComboBox();
 	public static JComboBox whatVersion2Feature = new JComboBox();
 	public static JComboBox whatLocus1Feature = new JComboBox();
 	public static JComboBox whatLocus2Feature = new JComboBox();
+	public static JComboBox whichLociFeature = new JComboBox();
 	public static JComboBox whatVersionBulk = new JComboBox();
+	public static JComboBox whichLociBulk = new JComboBox();
 
-	
 	// file format panels
 	public static JPanel fileFormatGfe = fileFormatPanelGenerator.createFileFormatPanel("GFE");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
@@ -102,6 +106,7 @@ public class B12xGui extends JFrame {
 
 			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE");
 			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString());
+			whichLociGfe = whichLociGenerator.createWhichLociComboBox("GFE");
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
@@ -166,6 +171,12 @@ public class B12xGui extends JFrame {
 		bottomButtonsGfe.add(submitButtonGfe);
 		bottomButtonsGfe.add(cancelButtonGfe);
 
+		// version/loci dropdowns
+		JPanel versionLociPanel = new JPanel();
+		versionLociPanel.add(resetButtonGfe);
+		versionLociPanel.add(whatVersionGfe);
+		versionLociPanel.add(whichLociGfe);
+
 		// layout / add them to the gfeTab
 		gfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -194,12 +205,17 @@ public class B12xGui extends JFrame {
 
 		// line 3
 		c.anchor = GridBagConstraints.WEST;
-		c.gridwidth = 1;
+		// c.gridwidth = 1;
 		c.gridy = 3;
-		gfeTab.add(resetButtonGfe, c);
+		gfeTab.add(versionLociPanel, c);
+		// gfeTab.add(resetButtonGfe, c);
 
-		c.gridx = 1;
-		gfeTab.add(whatVersionGfe, c);
+		// c.gridx = 1;
+		// gfeTab.add(whatVersionGfe, c);
+
+		// c.anchor = GridBagConstraints.CENTER;
+		// c.gridx = 2;
+		// gfeTab.add(whichLociGfe, c);
 
 		// line 4
 		c.anchor = GridBagConstraints.CENTER;
