@@ -55,9 +55,9 @@ public class B12xGui extends JFrame {
 	// the tabs, added initially so I can make them 
 	// public, static and update them
 	public static JPanel gfeTab = new JPanel();
-	public static JPanel nameGfeTab = new JPanel();
-	public static JPanel featureGfeTab = new JPanel();
-	public static JPanel optionsGfeTab = new JPanel();
+	public static JPanel nameTab = new JPanel();
+	public static JPanel featureTab = new JPanel();
+	public static JPanel optionsTab = new JPanel();
 
 	// the holder panels
 	// they're embedded in the layout, with contents to be changed
@@ -110,6 +110,7 @@ public class B12xGui extends JFrame {
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 			whichLociName = whichLociGenerator.createWhichLociComboBox("NAME");
+			whichLociFeature = whichLociGenerator.createWhichLociComboBox("FEATURE");
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
 			whichLociBulk = whichLociGenerator.createWhichLociComboBox("BULK");
 
@@ -241,7 +242,7 @@ public class B12xGui extends JFrame {
 		gfeTab.add(bottomButtonsGfe, c);
 
 	/* Name Search tab */
-		parentTabbedPane.addTab("Name Search", null, nameGfeTab, "Name Search tool");
+		parentTabbedPane.addTab("Name Search", null, nameTab, "Name Search tool");
 		
 		// currentHlaPanel.setName("NAME");
 		namePanel.add(nameSearchBox);
@@ -268,8 +269,8 @@ public class B12xGui extends JFrame {
 		versionLociPanelName.add(whatVersionName);
 		versionLociPanelName.add(whichLociName);
 
-		// layout / add them to the nameGfeTab
-		nameGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the nameTab
+		nameTab.setLayout(new GridBagLayout());
 		GridBagConstraints e = new GridBagConstraints();
 		e.anchor = GridBagConstraints.NORTHWEST;
 		e.insets = new Insets(0,0,10,0);
@@ -278,52 +279,52 @@ public class B12xGui extends JFrame {
 		// line 0
 		e.gridx = 0;
 		e.gridy = 0;
-		nameGfeTab.add(whatLocusName, e);
+		nameTab.add(whatLocusName, e);
 		
 		// e.gridx = 1;
-		// nameGfeTab.add(usageInstructions, e);
+		// nameTab.add(usageInstructions, e);
 
 		// line 1
 		// e.insets = new Insets(0,0,0,0);
 		// e.gridx = 0;
 		// e.gridy = 1;
-		// nameGfeTab.add(selectAllLabel, e);
+		// nameTab.add(selectAllLabel, e);
 
 		// line 2
 		e.gridy = 2;
 		e.gridwidth = 4;
-		nameGfeTab.add(namePanel, e);
+		nameTab.add(namePanel, e);
 
 		// line 3
 		e.anchor = GridBagConstraints.WEST;
 		// e.gridwidth = 1;
 		e.gridy = 3;
-		// nameGfeTab.add(resetButtonName, e);
+		// nameTab.add(resetButtonName, e);
 
 		// e.gridx = 1;
-		nameGfeTab.add(versionLociPanelName, e);
+		nameTab.add(versionLociPanelName, e);
 
 		// line 4
 		e.anchor = GridBagConstraints.CENTER;
 		e.gridx = 0;
 		e.gridy = 4;
-		nameGfeTab.add(fileFormatName, e);
+		nameTab.add(fileFormatName, e);
 
 		// line 5
 		e.anchor = GridBagConstraints.NORTH;
 		e.weightx = 1;
 		e.weighty = 1;
 		e.gridy = 5;
-		nameGfeTab.add(resultsScrollPaneName, e);
+		nameTab.add(resultsScrollPaneName, e);
 
 		// line 6
 		e.weightx = 0;
 		e.weighty = 0;
 		e.gridy = 6;
-		nameGfeTab.add(bottomButtonsName, e);
+		nameTab.add(bottomButtonsName, e);
 
 	/* Features tab */
-		parentTabbedPane.addTab("Feature Comparison", null, featureGfeTab, "Feature Comparison tool");
+		parentTabbedPane.addTab("Feature Comparison", null, featureTab, "Feature Comparison tool");
 
 		// results textarea
 		JScrollPane resultsScrollPaneFeature = new JScrollPane(resultsTextAreaFeature);
@@ -339,8 +340,8 @@ public class B12xGui extends JFrame {
 		bottomButtonsFeature.add(submitButtonFeature);
 		bottomButtonsFeature.add(cancelButtonFeature);
 
-		// layout / add them to the nameGfeTab
-		featureGfeTab.setLayout(new GridBagLayout());
+		// layout / add them to the nameTab
+		featureTab.setLayout(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
 		g.anchor = GridBagConstraints.NORTHWEST;
 		g.insets = new Insets(0,0,10,0);
@@ -349,55 +350,58 @@ public class B12xGui extends JFrame {
 		// line 0
 		g.gridx = 0;
 		g.gridy = 0;
-		featureGfeTab.add(whatLocus1Feature, g);
+		featureTab.add(whatLocus1Feature, g);
 		
 		g.gridx = 1;
-		featureGfeTab.add(whatVersion1Feature, g);
+		featureTab.add(whatVersion1Feature, g);
 
 		// line 1
 		g.gridx = 0;
 		g.gridy = 1;
-		featureGfeTab.add(whatLocus2Feature, g);
+		featureTab.add(whatLocus2Feature, g);
 
 		g.gridx = 1;
-		featureGfeTab.add(whatVersion2Feature, g);
+		featureTab.add(whatVersion2Feature, g);
+
+		g.gridx = 2;
+		featureTab.add(whichLociFeature, g);
 
 		// line 2
 		// g.gridy = 2;
 		// g.gridwidth = 4;
-		// nameGfeTab.add(namePanel, g);
+		// nameTab.add(namePanel, g);
 
 		// line 3
 		// g.anchor = GridBagConstraints.WEST;
 		// g.gridwidth = 1;
 		// g.gridy = 3;
-		// // nameGfeTab.add(resetButtonName, g);
+		// // nameTab.add(resetButtonName, g);
 
 		// // g.gridx = 1;
-		// featureGfeTab.add(whatVersion1Feature, g);
+		// featureTab.add(whatVersion1Feature, g);
 
 		// line 4
 		g.anchor = GridBagConstraints.CENTER;
 		g.gridwidth = 4;
 		g.gridx = 0;
 		g.gridy = 4;
-		featureGfeTab.add(fileFormatFeature, g);
+		featureTab.add(fileFormatFeature, g);
 
 		// line 5
 		g.anchor = GridBagConstraints.NORTH;
 		g.weightx = 1;
 		g.weighty = 1;
 		g.gridy = 5;
-		featureGfeTab.add(resultsScrollPaneFeature, g);
+		featureTab.add(resultsScrollPaneFeature, g);
 
 		// line 6
 		g.weightx = 0;
 		g.weighty = 0;
 		g.gridy = 6;
-		featureGfeTab.add(bottomButtonsFeature, g);
+		featureTab.add(bottomButtonsFeature, g);
 
 	/* Options tab */
-		parentTabbedPane.addTab("Options", null, optionsGfeTab, "Options");
+		parentTabbedPane.addTab("Options", null, optionsTab, "Options");
 
 		// local data only option/can java ping for internet access?
 
@@ -407,7 +411,7 @@ public class B12xGui extends JFrame {
 		JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
 
 		// layout / add them to the optionsTab
-		optionsGfeTab.setLayout(new GridBagLayout());
+		optionsTab.setLayout(new GridBagLayout());
 		GridBagConstraints f = new GridBagConstraints();
 		f.anchor = GridBagConstraints.NORTHWEST;
 		f.insets = new Insets(0,0,10,0);
@@ -416,24 +420,24 @@ public class B12xGui extends JFrame {
 		// line 0
 		f.gridx = 0;
 		f.gridy = 0;
-		optionsGfeTab.add(bulkDownloadButton, f);
+		optionsTab.add(bulkDownloadButton, f);
 
 		f.gridx = 1;
-		optionsGfeTab.add(whichLociBulk, f);
-		
+		optionsTab.add(whichLociBulk, f);
+
 		f.gridx = 2;
-		optionsGfeTab.add(whatVersionBulk, f);
+		optionsTab.add(whatVersionBulk, f);
 		// line 1
 		f.gridx = 0;
 		f.gridy = 1;
-		optionsGfeTab.add(resetPrefsButton, f);
+		optionsTab.add(resetPrefsButton, f);
 
 
 		// line 6
 		f.weightx = 0;
 		f.weighty = 0;
 		f.gridy = 6;
-		optionsGfeTab.add(cancelButtonOptions, f);
+		optionsTab.add(cancelButtonOptions, f);
 
 
 	/* Get and set open tab */
@@ -454,8 +458,8 @@ public class B12xGui extends JFrame {
 
 	public static void main(String args[]) {
 
-
-  //   	try {
+		// look and feel breaks the background on the labels and spacing on locus label
+ 		// try {
 		// 	for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		// 		if ("Nimbus".equals(info.getName())) {
 		// 			javax.swing.UIManager.setLookAndFeel(info.getClassName());
