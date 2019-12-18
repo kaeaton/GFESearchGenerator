@@ -88,8 +88,8 @@ public class WhatLocus {
 				whichLocus = gfeWhatLocus.getSelectedItem().toString();
 				setNewGfePanel(whichLocus);
 				System.out.println("Which Locus listener triggered");
-				prefs.putInt("GSG_GFE_LOCUS", gfeWhatLocus.getSelectedIndex());
-				prefs.put("GSG_GFE_LOCUS_STRING", whichLocus);
+				prefs.putInt("GSG_GFE_HLA_LOCUS", gfeWhatLocus.getSelectedIndex());
+				prefs.put("GSG_GFE_HLA_LOCUS_STRING", whichLocus);
 			}
 		});
 	}
@@ -100,8 +100,8 @@ public class WhatLocus {
 			public void actionPerformed(ActionEvent evt) {
 				whichLocus = nameWhatLocus.getSelectedItem().toString();
 				System.out.println("Which Locus name listener triggered");
-				prefs.putInt("GSG_NAME_LOCUS_1", nameWhatLocus.getSelectedIndex());
-				prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
+				prefs.putInt("GSG_NAME_HLA_LOCUS", nameWhatLocus.getSelectedIndex());
+				prefs.put("GSG_NAME_HLA_LOCUS_STRING", whichLocus);
 			}
 		});
 	}
@@ -125,17 +125,28 @@ public class WhatLocus {
 	}
 
 	/**
-	 * A helper method that sets the new HLA GFE search panel.
+	 * A helper method that sets the new GFE search panel.
+	 * The loci are determined from preferences.
 	 * 
-	 * @param locus what HLA locus should be displayed
+	 * @param locus what locus should be displayed
 	 */
 	public void setNewGfePanel(String locus) {
 		System.out.println("Triggered setNewHlaPanel");
-		JPanel newHlaPanel = hlaSBA.assembleHlaPanel(locus);
-		newHlaPanel.setName("GFE");
+		JPanel newPanel = createNewGfePanel(locus);
 		JPanel oldPanel = findPanel(B12xGui.gfePanel, "GFE");
 		B12xGui.gfePanel.remove(oldPanel);
-		B12xGui.gfePanel.add(newHlaPanel).revalidate();
+		B12xGui.gfePanel.add(newPanel).revalidate();
 		B12xGui.gfePanel.repaint();
+	}
+
+	private JPanel createNewGfePanel(String locus) {
+		JPanel newPanel = new JPanel();
+
+		if(prefs.get("GSG_GFE_LOCI_STRING", "HLA").equals("HLA"))
+			newPanel = hlaSBA.assembleHlaPanel(locus);
+
+		newPanel.setName("GFE");
+
+		return newPanel;
 	}
 }

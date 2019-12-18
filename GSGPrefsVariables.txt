@@ -45,17 +45,13 @@ GSG_GFE_KIR_VERSION					int: what KIR version by index, GFE tab
 GSG_NAME_LOCI 						int: which loci by index, NAME tab
 GSG_NAME_LOCI_STRING				String: which loci, NAME tab
 
-GSG_NAME_HLA_LOCUS_1				int: what HLA locus 1 by index, NAME tab
-GSG_NAME_HLA_LOCUS_STRING_1			String: what HLA locus 1, NAME tab
-GSG_NAME_HLA_VERSION_1				int: what HLA locus 1 by index, NAME tab
+GSG_NAME_HLA_LOCUS					int: what HLA locus by index, NAME tab
+GSG_NAME_HLA_LOCUS_STRING			String: what HLA locus, NAME tab
+GSG_NAME_HLA_VERSION				int: what HLA locus by index, NAME tab
 
-GSG_NAME_KIR_LOCUS_1				int: what KIR locus 1 by index, NAME tab
-GSG_NAME_KIR_LOCUS_STRING_1			String: what KIR locus 1, NAME tab
-GSG_NAME_KIR_VERSION_1				int: what KIR locus 1 by index, NAME tab
-
-GSG_NAME_LOCUS_2					int: what locus 2 by index, NAME tab
-GSG_NAME_LOCUS_STRING_2				String: what locus 2, NAME tab
-
+GSG_NAME_KIR_LOCUS					int: what KIR locus by index, NAME tab
+GSG_NAME_KIR_LOCUS_STRING			String: what KIR locus, NAME tab
+GSG_NAME_KIR_VERSION				int: what KIR locus by index, NAME tab
 
 GSG_FEATURE_LOCI 					int: which loci by index, FEATURE tab
 GSG_FEATURE_LOCI_STRING				String: which loci, FEATURE tab

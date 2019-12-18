@@ -23,9 +23,10 @@ import javax.swing.UIManager;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
-import org.chori.gsg.view.searchboxes.*;
-import org.chori.gsg.view.dropdowns.*;
 import org.chori.gsg.view.buttons.*;
+import org.chori.gsg.view.dropdowns.*;
+import org.chori.gsg.view.prefslisteners.*;
+import org.chori.gsg.view.searchboxes.*;
 
 public class B12xGui extends JFrame {
 
@@ -481,6 +482,8 @@ public class B12xGui extends JFrame {
 				
 				// assign preference listeners for loci changes
 				LociPrefsListeners prefsListener = new LociPrefsListeners();
+				BulkLociPreferenceListener bulkLociPreferenceListener = new BulkLociPreferenceListener();
+				GfeLociPreferenceListener gfeLociPreferenceListener = new GfeLociPreferenceListener();
 
 				InternetAccess internet = new InternetAccess();
 
