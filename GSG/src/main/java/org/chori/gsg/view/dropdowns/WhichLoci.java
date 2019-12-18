@@ -45,7 +45,7 @@ public class WhichLoci {
 		// 	case "GFE":
 				try {
 					// try using prefs
-					whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 1));
+					whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
 				} catch (Exception ex) { 
 					// if the pref exceeds the length of the model list, reset prefs
 					PrefProbException ppex = new PrefProbException();

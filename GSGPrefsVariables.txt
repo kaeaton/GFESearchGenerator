@@ -56,6 +56,9 @@ GSG_NAME_KIR_VERSION_1				int: what KIR locus 1 by index, NAME tab
 GSG_NAME_LOCUS_2					int: what locus 2 by index, NAME tab
 GSG_NAME_LOCUS_STRING_2				String: what locus 2, NAME tab
 
+GSG_BULK_LOCI 						int: which loci to bulk download by index, OPTIONS tab
+GSG_BULK_LOCI_STRING				String: which loci to bulk download by name
+
 GSG_OPEN_TAB						Int: which tab was last in focus
 
 GSG_RAW_DATA						String: where to store the raw data files

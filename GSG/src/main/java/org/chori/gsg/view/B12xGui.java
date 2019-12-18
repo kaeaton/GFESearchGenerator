@@ -109,7 +109,10 @@ public class B12xGui extends JFrame {
 			whichLociGfe = whichLociGenerator.createWhichLociComboBox("GFE");
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
+			whichLociName = whichLociGenerator.createWhichLociComboBox("NAME");
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
+			whichLociBulk = whichLociGenerator.createWhichLociComboBox("BULK");
+
 
 		} catch (NoInternetOrDataException ex) { 
 			System.exit(0);
@@ -147,11 +150,11 @@ public class B12xGui extends JFrame {
 		} catch (IllegalArgumentException iex) {
 			PrefProbException ppex = new PrefProbException();
 		}
+
 		// results textarea
 		JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
 		resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
 		resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
-		// resultsTextAreaGfe.setEditable(false);
 
 		// labels
 		JLabel selectAllLabelGfe = new JLabel("Check all");
@@ -172,10 +175,10 @@ public class B12xGui extends JFrame {
 		bottomButtonsGfe.add(cancelButtonGfe);
 
 		// version/loci dropdowns
-		JPanel versionLociPanel = new JPanel();
-		versionLociPanel.add(resetButtonGfe);
-		versionLociPanel.add(whatVersionGfe);
-		versionLociPanel.add(whichLociGfe);
+		JPanel versionLociPanelGfe = new JPanel();
+		versionLociPanelGfe.add(resetButtonGfe);
+		versionLociPanelGfe.add(whatVersionGfe);
+		versionLociPanelGfe.add(whichLociGfe);
 
 		// layout / add them to the gfeTab
 		gfeTab.setLayout(new GridBagLayout());
@@ -207,7 +210,7 @@ public class B12xGui extends JFrame {
 		c.anchor = GridBagConstraints.WEST;
 		// c.gridwidth = 1;
 		c.gridy = 3;
-		gfeTab.add(versionLociPanel, c);
+		gfeTab.add(versionLociPanelGfe, c);
 		// gfeTab.add(resetButtonGfe, c);
 
 		// c.gridx = 1;
@@ -260,6 +263,11 @@ public class B12xGui extends JFrame {
 		bottomButtonsName.add(submitButtonName);
 		bottomButtonsName.add(cancelButtonName);
 
+		// version/loci dropdowns
+		JPanel versionLociPanelName = new JPanel();
+		versionLociPanelName.add(whatVersionName);
+		versionLociPanelName.add(whichLociName);
+
 		// layout / add them to the nameGfeTab
 		nameGfeTab.setLayout(new GridBagLayout());
 		GridBagConstraints e = new GridBagConstraints();
@@ -288,16 +296,15 @@ public class B12xGui extends JFrame {
 
 		// line 3
 		e.anchor = GridBagConstraints.WEST;
-		e.gridwidth = 1;
+		// e.gridwidth = 1;
 		e.gridy = 3;
 		// nameGfeTab.add(resetButtonName, e);
 
 		// e.gridx = 1;
-		nameGfeTab.add(whatVersionName, e);
+		nameGfeTab.add(versionLociPanelName, e);
 
 		// line 4
 		e.anchor = GridBagConstraints.CENTER;
-		e.gridwidth = 4;
 		e.gridx = 0;
 		e.gridy = 4;
 		nameGfeTab.add(fileFormatName, e);
@@ -412,8 +419,10 @@ public class B12xGui extends JFrame {
 		optionsGfeTab.add(bulkDownloadButton, f);
 
 		f.gridx = 1;
+		optionsGfeTab.add(whichLociBulk, f);
+		
+		f.gridx = 2;
 		optionsGfeTab.add(whatVersionBulk, f);
-
 		// line 1
 		f.gridx = 0;
 		f.gridy = 1;
