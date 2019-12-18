@@ -10,7 +10,7 @@ import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
 
 /**
- * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
+ * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns keaton01 706m
  * 
  * @author Katrina Eaton
  * 
@@ -24,10 +24,9 @@ public class WhichLoci {
 	public WhichLoci() { }
 
 	/**
-	 * Generates the whichLoci (currently HLA and KIR)
-	 * JComboBox (drop down menu) and associates the appropriate listener
+	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
 	 * 
-	 * @param whichTab is passed to the ActionListener so it changes the correct prefs.
+	 * @param whichTab is passed to the ActionListener so it changes the correct preferences.
 	 * @return a JComboBox with an associated listener
 	 */
 	public JComboBox createWhichLociComboBox(String whichTab) {
@@ -36,39 +35,11 @@ public class WhichLoci {
 		// instantiate combobox and its model
 		JComboBox whichLoci = new JComboBox();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
-		// comboBoxModel = new DefaultComboBoxModel(fullHlaLoci);
 		whichLoci.setModel(comboBoxModel);
-		// JPanel newlayout = new JPanel();
 
-		// who is this combobox for?
-		// switch(whichTab) {
-		// 	case "GFE":
-				try {
-					// try using prefs
-					whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
-				} catch (Exception ex) { 
-					// if the pref exceeds the length of the model list, reset prefs
-					PrefProbException ppex = new PrefProbException();
-					System.out.println("GFE whichLoci set selected index: " + ex);
-				}
-				whichLociListener(whichLoci, whichTab);
-			// 	break;
-			// case "NAME":
-				// try {
-				// 	whichLoci.setSelectedIndex(prefs.getInt("GSG_NAME_LOCI", 1));
-				// } catch (Exception ex) {
-				// 	// if the pref exceeds the length of the model list, reset prefs 
-				// 	PrefProbException ppex = new PrefProbException();
-				// 	System.out.println("Name whichLoci set selected index: " + ex);
-				// }
-				// nameListener(whichLoci);
-		// 		break;
-		// 	default:
-		// 		System.out.println("WhichLoci: Haven't set up that combobox model yet");
-		// }
+		whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
 
-		// whatLocus.setModel(comboBoxModel);
-
+		whichLociListener(whichLoci, whichTab);
 		return whichLoci;
 	}
 

@@ -19,6 +19,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
@@ -458,6 +459,11 @@ public class B12xGui extends JFrame {
 
 	public static void main(String args[]) {
 
+		// System.setProperty("apple.laf.useScreenMenuBar","true");
+		// System.setProperty("com.apple.mrj.application.apple.menu.about.name", "GFE Search Generator");
+		// try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
+		// catch(Exception ex) {System.out.println("B12xGui: look and feel class name: " + ex); }
+
 		// look and feel breaks the background on the labels and spacing on locus label
  		// try {
 		// 	for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -473,11 +479,15 @@ public class B12xGui extends JFrame {
 			public void run() {
 				new B12xGui().setVisible(true);
 				
+				// assign preference listeners for loci changes
+				LociPrefsListeners prefsListener = new LociPrefsListeners();
+
 				InternetAccess internet = new InternetAccess();
 
 				if(!internet.tester()) {
 					resultsTextAreaGfe.append("No internet access available, local data only");
 					resultsTextAreaName.append("No internet access available, local data only");
+					resultsTextAreaFeature.append("No internet access available, local data only");
 				}
 			}
 		});

@@ -73,5 +73,5 @@ GSG_KIR_VERSIONS					String: what KIR versions are currently available to downlo
 mvn clean compile assembly:single
 mvn clean test
 mvn javadoc:javadoc
-java -jar target/GSG-4.0-jar-with-dependencies.jar
+java -jar target/GSG-4.1-jar-with-dependencies.jar
 

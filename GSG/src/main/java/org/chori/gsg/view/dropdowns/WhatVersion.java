@@ -64,6 +64,10 @@ public class WhatVersion {
 			case "BULK":
 				comboBoxModel = vm.bulkVersions();
 				whatVersion.setModel(comboBoxModel);
+				if(prefs.get("GSG_BULK_LOCI_STRING", "HLA").equals("HLA"))
+					whatVersion.setVisible(true);
+				else
+					whatVersion.setVisible(false);
 				break;
 
 			default:
