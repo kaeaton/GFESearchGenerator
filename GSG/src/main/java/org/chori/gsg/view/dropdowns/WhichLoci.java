@@ -18,18 +18,19 @@ import org.chori.gsg.view.*;
 
 public class WhichLoci { 
 
-	private final String[] loci = {"ABO", "HLA", "KIR"};
+	private final String[] loci = {"HLA", "KIR"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 
 	public WhichLoci() { }
 
 	/**
-	 * Generates the whichLoci JComboBox (drop down menu) and associates the appropriate listener
+	 * Generates the whichLoci (currently HLA and KIR)
+	 * JComboBox (drop down menu) and associates the appropriate listener
 	 * 
-	 * @param whichTab tells which ActionListener is assigned to it.
+	 * @param whichTab is passed to the ActionListener so it changes the correct prefs.
 	 * @return a JComboBox with an associated listener
 	 */
-	public JComboBox createWhichLociComboBox(String whichtab) {
+	public JComboBox createWhichLociComboBox(String whichTab) {
 		System.out.println("Generating the which loci combo box");
 		
 		// instantiate combobox and its model
@@ -40,46 +41,45 @@ public class WhichLoci {
 		// JPanel newlayout = new JPanel();
 
 		// who is this combobox for?
-		switch(whichtab) {
-			case "GFE":
+		// switch(whichTab) {
+		// 	case "GFE":
 				try {
 					// try using prefs
-					whichLoci.setSelectedIndex(prefs.getInt("GSG_GFE_LOCI", 1));
+					whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 1));
 				} catch (Exception ex) { 
 					// if the pref exceeds the length of the model list, reset prefs
 					PrefProbException ppex = new PrefProbException();
 					System.out.println("GFE whichLoci set selected index: " + ex);
 				}
-				gfeListener(whichLoci);
-				break;
-			case "NAME":
-				try {
-					whichLoci.setSelectedIndex(prefs.getInt("GSG_NAME_LOCI", 1));
-				} catch (Exception ex) {
-					// if the pref exceeds the length of the model list, reset prefs 
-					PrefProbException ppex = new PrefProbException();
-					System.out.println("Name whichLoci set selected index: " + ex);
-				}
+				whichLociListener(whichLoci, whichTab);
+			// 	break;
+			// case "NAME":
+				// try {
+				// 	whichLoci.setSelectedIndex(prefs.getInt("GSG_NAME_LOCI", 1));
+				// } catch (Exception ex) {
+				// 	// if the pref exceeds the length of the model list, reset prefs 
+				// 	PrefProbException ppex = new PrefProbException();
+				// 	System.out.println("Name whichLoci set selected index: " + ex);
+				// }
 				// nameListener(whichLoci);
-				break;
-			default:
-				System.out.println("WhichLoci: Haven't set up that combobox model yet");
-		}
+		// 		break;
+		// 	default:
+		// 		System.out.println("WhichLoci: Haven't set up that combobox model yet");
+		// }
 
 		// whatLocus.setModel(comboBoxModel);
 
 		return whichLoci;
 	}
 
-	private void gfeListener(JComboBox gfeWhichLoci) {
-		gfeWhichLoci.addActionListener(new ActionListener() {
+	private void whichLociListener(JComboBox whichLoci, String whichTab) {
+		whichLoci.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				String whichLoci = gfeWhichLoci.getSelectedItem().toString();
-				// setNewGfePanel(whichLocus);
-				System.out.println("Which GFE Loci listener triggered");
-				prefs.putInt("GSG_GFE_LOCI", gfeWhichLoci.getSelectedIndex());
-				prefs.put("GSG_GFE_LOCI_STRING", whichLoci);
+				String whichLociName = whichLoci.getSelectedItem().toString();
+				System.out.println("Which " + whichTab + " Loci listener triggered");
+				prefs.putInt("GSG_" + whichTab + "_LOCI", whichLoci.getSelectedIndex());
+				prefs.put("GSG_" + whichTab + "_LOCI_STRING", whichLociName);
 			}
 		});
 	}
