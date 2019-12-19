@@ -75,7 +75,7 @@ public class WhereTheDataLives {
 	} 
 
 	// get the data file
-	public File getRawData(String locus, String version) {
+	public File getRawHlaData(String locus, String version) {
 		String specificFile = rawDataPath + version + System.getProperty("file.separator") + "neo4j_" + locus + "_" + version
 								+ "_download.csv";
 		File file = new File(specificFile);

@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.view.*;
-// import org.chori.gsg.view.buttons.submitListeners.*;
 import org.chori.gsg.view.searchboxes.*;
 
 /**
@@ -38,6 +38,8 @@ public class SubmitButton {
 
 	private HashMap<String, String> dataSources = new HashMap<>();
 
+	private SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
+	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
 
 	// the button
 	// public JButton submitButton = new JButton("Submit");
@@ -81,52 +83,7 @@ public class SubmitButton {
 	public ActionListener gfeListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			Runnable submit = new Runnable() {
-				public void run() {
-
-					// the lists of hla components
-					ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
-					ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
-
-					// what locus, version, and format?
-					String whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
-					String whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
-					String dataFormat = dataFormatFinder(B12xGui.fileFormatGfe);
-					Boolean printToFile = printToFileFinder(B12xGui.fileFormatGfe);
-					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
-
-					// where's the data file?                 
-					File data = wtdl.getRawData(whatLocus, whatVersion);
-
-					// build me some Regex
-					String regex = buildRegex.assembleGfeRegex("HLA", whatLocus, 
-															allCheckBoxes, allTextFields);
-					String headerSS = buildHSS.assembleGfeHeaderSearchString("HLA", whatLocus, 
-															allCheckBoxes, allTextFields);
-
-					// clear results screen
-					B12xGui.resultsTextAreaGfe.setText("");
-
-					// print headers
-					header.printHeaders("GFE", headerSS, whatVersion, whatLocus, dataSources.get("neo4j"));
-					
-					// search the data & print to screen
-					if (dataFormat.equals("Pretty")) {
-						PrettyData prettyData = new PrettyData();
-						prettyData.searchThroughData(data, regex, "GFE");
-					} else {
-						SearchData searchData = new SearchData();
-						searchData.searchThroughData(data, regex, dataFormat, "GFE");
-					}
-
-					if (printToFile) {
-						WriteToFile writeToFile = new WriteToFile();
-						writeToFile.writeFile(whatLocus, whatVersion, "GFE", dataFormat);
-					}
-				}
-			};
-			new Thread(submit).start();
-
+			submissionRequestFactory.assembleSubmissionRequest("HLA", "GFE");
 		}
 	};
 
@@ -147,7 +104,7 @@ public class SubmitButton {
 					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
 					// where's the data file?                 
-					File data = wtdl.getRawData(whatLocus, whatVersion);
+					File data = wtdl.getRawHlaData(whatLocus, whatVersion);
 
 					// build me some Regex
 					String searchTerm = B12xGui.nameSearchBox.getText();

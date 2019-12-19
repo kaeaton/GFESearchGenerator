@@ -19,6 +19,7 @@ import org.chori.gsg.view.searchboxes.*;
 public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
 	// class instantiations
+	private Headers header = new Headers();
 	private BuildRegex buildRegex = new BuildRegex();
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
@@ -37,6 +38,10 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	private ArrayList<JTextField> allTextFields;
 	private ArrayList<JCheckBox> allCheckBoxes;
 
+	private String searchRegex;
+	private String headerSearchString;
+	private File rawData;
+
 	// private String jsonRegexRequest = "";
 	// private String humanReadableSearchString = "";
 
@@ -46,17 +51,54 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
+		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
 		
 		this.allTextFields = HlaSearchBoxAssembler.allTextboxes;
 		this.allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
+
 
 		submitData();
 	}
 
 	private void submitData() {
-		// new Thread(submit).start();
+		Runnable submit = new Runnable() {
+			public void run() {
+				createRegexStrings();
+				printTheHeaders();
+				searchTheData();
 
+				if(printToFile)
+					saveResultsToFile();
+			}
+		};
+
+		new Thread(submit).start();
+	}
+
+	private void createRegexStrings() {
+		this.searchRegex = buildRegex.assembleGfeRegex("HLA", whatLocus, allCheckBoxes, allTextFields);
+		this.headerSearchString = buildHeaderSearchString.assembleGfeHeaderSearchString("HLA", whatLocus, 
+																			allCheckBoxes, allTextFields);
+	}
+
+	private void printTheHeaders() {
+		textAreaToPrintTo.setText("");
+
+		header.printHeaders("GFE", headerSearchString, whatVersion, whatLocus, headerDataSource);
+	}
+
+	private void searchTheData() {
+		if (resultsFormat.equals("Pretty")) {
+			PrettyData prettyData = new PrettyData();
+			prettyData.searchThroughData(rawData, searchRegex, "GFE");
+		} else {
+			SearchData searchData = new SearchData();
+			searchData.searchThroughData(rawData, searchRegex, resultsFormat, "GFE");
+		}
 	}
 	
-
+	private void saveResultsToFile() {
+		WriteToFile writeToFile = new WriteToFile();
+		writeToFile.writeFile(whatLocus, whatVersion, "GFE", resultsFormat);
+	}
 }
