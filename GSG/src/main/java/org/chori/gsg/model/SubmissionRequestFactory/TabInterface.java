@@ -1,9 +1,9 @@
-package org.chori.gsg.model.SubmissionRequestFactory;
+package org.chori.gsg.model.submissionRequestFactory;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import org.chori.gsg.model.SubmissionRequests.*;
+import org.chori.gsg.model.submissionRequests.*;
 import org.chori.gsg.view.B12xGui;
 
 public interface TabInterface {

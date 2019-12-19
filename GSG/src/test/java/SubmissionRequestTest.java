@@ -1,14 +1,14 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import org.chori.gsg.model.SubmissionRequestFactory.*;
-import org.chori.gsg.model.SubmissionRequests.*;
+import org.chori.gsg.model.submissionRequestFactory.*;
+import org.chori.gsg.model.submissionRequests.*;
 
 public class SubmissionRequestTest {
  
 
-	SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
-	SubmissionRequestFactory submissionRequestFactory = submissionRequestFactoryInstance.factory;
+	submissionRequestFactoryInstance submissionRequestFactoryInstance = submissionRequestFactoryInstance.getInstance();
+	submissionRequestFactory submissionRequestFactory = submissionRequestFactoryInstance.factory;
 	HlaGfeSubmissionRequest hlaGfeSubReq = new HlaGfeSubmissionRequest();
 	HlaNameSubmissionRequest hlaNameSubReq = new HlaNameSubmissionRequest();
 	HlaFeatureSubmissionRequest hlaFeatureSubReq = new HlaFeatureSubmissionRequest();
@@ -17,7 +17,7 @@ public class SubmissionRequestTest {
 	KirFeatureSubmissionRequest kirFeatureSubReq = new KirFeatureSubmissionRequest();
 
 	@Test
-	public void testSubmissionRequestFactory() {
+	public void testsubmissionRequestFactory() {
 		assertSame("The submission request objects do not match, HLA, GFE", hlaGfeSubReq.getClass(),
 						submissionRequestFactory.assembleSubmissionRequest("HLA", "GFE").getClass());
 		assertSame("The submission request objects do not match, HLA, NAME", hlaNameSubReq.getClass(),

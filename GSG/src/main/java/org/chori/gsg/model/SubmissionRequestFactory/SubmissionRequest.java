@@ -1,4 +1,4 @@
-package org.chori.gsg.model.SubmissionRequestFactory;
+package org.chori.gsg.model.submissionRequestFactory;
 
 import java.awt.Component;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
 
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
-import org.chori.gsg.model.SubmissionRequests.*;
+import org.chori.gsg.model.submissionRequests.*;
 import org.chori.gsg.view.*;
 
 public abstract class SubmissionRequest {

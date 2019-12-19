@@ -1,4 +1,4 @@
-package org.chori.gsg.model.SubmissionRequests;
+package org.chori.gsg.model.submissionRequests;
 
 import java.io.File;
 
@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
-import org.chori.gsg.model.SubmissionRequestFactory.*;
+import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.view.*;
 
 public class HlaNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
@@ -23,7 +23,7 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 	
 	private String headerDataSource = HeaderDataSource.HLA.getHeaderDataSource();
 	private JTextArea textAreaToPrintTo = WhereToPrint.NAME.getWhereToPrint(); 
-	
+
 	// private String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
 	// private String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
 

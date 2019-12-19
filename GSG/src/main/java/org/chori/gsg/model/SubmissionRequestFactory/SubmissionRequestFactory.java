@@ -1,7 +1,7 @@
-package org.chori.gsg.model.SubmissionRequestFactory;
+package org.chori.gsg.model.submissionRequestFactory;
 
 // import org.chori.gsg.controller.*;
-import org.chori.gsg.model.SubmissionRequests.*;
+import org.chori.gsg.model.submissionRequests.*;
 
 public class SubmissionRequestFactory {
 

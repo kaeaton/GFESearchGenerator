@@ -1,4 +1,4 @@
-package org.chori.gsg.model.SubmissionRequestFactory;
+package org.chori.gsg.model.submissionRequestFactory;
 
 public class SubmissionRequestFactoryInstance {
 
