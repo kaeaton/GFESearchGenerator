@@ -15,23 +15,7 @@ import org.chori.gsg.view.*;
 
 public abstract class SubmissionRequest {
 
-	// public String whatTabItsFor;
-	public String whatLocus;
-	public String whatVersion;
-	public String resultsFormat;
-	public Boolean printToFile;
-	public JTextArea textAreaToPrintTo;
-	public JPanel fileFormatPanel;
-	private String headerDataSource;
-
 	public SubmissionRequest() { }
-
-	private void assembleData() {
-		// this.resultsFormat 
-		// 	= dataFormatFinder(whichTabDataFormatPanel.get(whatTab));
-		// this.printToFile
-		// 	= printToFileFinder(whichTabDataFormatPanel.get(whatTab));
-	}
 
 	public String dataFormatFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {

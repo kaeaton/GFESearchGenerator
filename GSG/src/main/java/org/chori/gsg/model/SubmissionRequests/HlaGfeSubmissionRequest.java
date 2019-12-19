@@ -56,7 +56,6 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.allTextFields = HlaSearchBoxAssembler.allTextboxes;
 		this.allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 
-
 		submitData();
 	}
 

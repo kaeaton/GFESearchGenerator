@@ -35,14 +35,73 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	private String resultsFormat = super.dataFormatFinder(fileFormatPanel);
 	private Boolean printToFile = super.printToFileFinder(fileFormatPanel);
 
-	// private ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
-	// private ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
+	private String whatLocus;
+	private String whatVersion;
+	private String resultsFormat;
+	private Boolean printToFile;
+	
+	private ArrayList<JTextField> allTextFields;
+	private ArrayList<JCheckBox> allCheckBoxes;
 
-	// private String jsonRegexRequest = "";
-	// private String humanReadableSearchString = "";
+	private String searchRegex;
+	private String headerSearchString;
+	private File rawData;
 
-	public KirGfeSubmissionRequest() { }
+	public KirGfeSubmissionRequest() {
+		// data retrieved from GUI
+		this.whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
+		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
+		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
+		this.printToFile = super.printToFileFinder(fileFormatPanel);
+		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
+		
+		this.allTextFields = HlaSearchBoxAssembler.allTextboxes;
+		this.allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 
+		submitData();
+	}
+
+	private void submitData() {
+		Runnable submit = new Runnable() {
+			public void run() {
+				createRegexStrings();
+				printTheHeaders();
+				searchTheData();
+
+				if(printToFile)
+					saveResultsToFile();
+			}
+		};
+
+		new Thread(submit).start();
+	}
+
+	private void createRegexStrings() {
+		this.searchRegex = buildRegex.assembleGfeRegex("KIR", whatLocus, allCheckBoxes, allTextFields);
+		this.headerSearchString = buildHeaderSearchString.assembleGfeHeaderSearchString("KIR", whatLocus, 
+																			allCheckBoxes, allTextFields);
+	}
+
+	private void printTheHeaders() {
+		textAreaToPrintTo.setText("");
+
+		header.printHeaders("GFE", headerSearchString, whatVersion, whatLocus, headerDataSource);
+	}
+
+	private void searchTheData() {
+		if (resultsFormat.equals("Pretty")) {
+			PrettyData prettyData = new PrettyData();
+			prettyData.searchThroughData(rawData, searchRegex, "GFE");
+		} else {
+			SearchData searchData = new SearchData();
+			searchData.searchThroughData(rawData, searchRegex, resultsFormat, "GFE");
+		}
+	}
+	
+	private void saveResultsToFile() {
+		WriteToFile writeToFile = new WriteToFile();
+		writeToFile.writeFile(whatLocus, whatVersion, "GFE", resultsFormat);
+	}
 	
 
 }
