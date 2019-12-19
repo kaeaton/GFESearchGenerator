@@ -171,7 +171,7 @@ public class HlaSearchBoxAssembler {
 
 	private JPanel assembleWBox() {
 		JPanel wBox = searchBox.assemble("Workshop Status    ", "00");
-
+		
 		return wBox;
 	}
 

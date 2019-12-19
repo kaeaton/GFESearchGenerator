@@ -38,11 +38,11 @@ public class SubmissionRequestTest {
 						submissionRequestFactory.assembleSubmissionRequest("ABO", "FEATURE"));
 	}
 
-	@Test
-	public void canSubmissionRequestSeeDataSources() {
-		assertEquals("http://neo4j.b12x.org", hlaGfeSubReq.dataSource);
-		assertEquals("http://neo4j.b12x.org", hlaNameSubReq.dataSource);
-		assertEquals("http://neo4j.b12x.org", hlaFeatureSubReq.dataSource);
+	// @Test
+	// public void canSubmissionRequestSeeDataSources() {
+	// 	assertEquals("http://neo4j.b12x.org", hlaGfeSubReq.dataSource);
+	// 	assertEquals("http://neo4j.b12x.org", hlaNameSubReq.dataSource);
+	// 	assertEquals("http://neo4j.b12x.org", hlaFeatureSubReq.dataSource);
 		
-	}
+	// }
 }

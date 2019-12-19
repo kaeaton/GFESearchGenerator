@@ -1,5 +1,6 @@
 package org.chori.gsg.model.SubmissionRequestFactory;
 
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.model.SubmissionRequests.*;
@@ -20,6 +21,22 @@ public interface TabInterface {
     
 		public JTextArea getWhereToPrint() {
 			return this.whereToPrint;
+		}
+	}
+
+	public enum WhatToPrint {
+		GFE(B12xGui.fileFormatGfe),
+		NAME(B12xGui.fileFormatName),
+ 		FEATURE(B12xGui.fileFormatFeature);
+
+		private final JPanel whatToPrint;
+
+		private WhatToPrint(JPanel whatToPrint) {
+			this.whatToPrint = whatToPrint;
+		}
+    
+		public JPanel getWhatToPrint() {
+			return this.whatToPrint;
 		}
 	}
 }

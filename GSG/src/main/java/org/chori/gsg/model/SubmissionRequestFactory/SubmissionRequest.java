@@ -17,51 +17,14 @@ public abstract class SubmissionRequest {
 
 	// public String whatTabItsFor;
 	public String whatLocus;
-	// public String whatVersion;
+	public String whatVersion;
 	public String resultsFormat;
 	public Boolean printToFile;
 	public JTextArea textAreaToPrintTo;
-	// public String dataSource;
+	public JPanel fileFormatPanel;
+	private String headerDataSource;
 
-	// public enum DataSource {
-	// 	HLA("http://neo4j.b12x.org"),
-	// 	KIR(null),
- // 		ABO(null);
-
-	// 	private final String dataSource;
-
-	// 	private DataSource(String dataSource) {
-	// 		this.dataSource = dataSource;
-	// 	}
-    
-	// 	public String getDataSource() {
-	// 		return this.dataSource;
-	// 	}
-	// }
-	// private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
-	// static {
-	// 	whichTextArea.put("HLA", B12xGui.resultsTextAreaGfe);
-	// 	whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
-	// 	whichTextArea.put("FEATURE", B12xGui.resultsTextAreaFeature);
-	// }
-
-	// private static HashMap<String, JPanel> whichTabDataFormatPanel = new Hashmap();
-	// static {
-	// 	whichTabDataFormatPanel.put("HLA", B12xGui.fileFormatHla);
-	// 	whichTabDataFormatPanel.put("NAME", B12xGui.fileFormatName);
-	// 	whichTabDataFormatPanel.put("FEATURE", B12xGui.fileFormatFeature);
-	// }
-
-	// public String getDataSource() {
-	// 	return dataSource;
-	// }
-
-	public SubmissionRequest() {
-		// this.whatTabItsFor = whatTab;
-		// this.textAreaToPrintTo = whichTextArea.get(whatTab);
-
-		// assembleData();
-	}
+	public SubmissionRequest() { }
 
 	private void assembleData() {
 		// this.resultsFormat 
@@ -70,7 +33,7 @@ public abstract class SubmissionRequest {
 		// 	= printToFileFinder(whichTabDataFormatPanel.get(whatTab));
 	}
 
-	private String dataFormatFinder(JPanel fileFormatPanel){
+	public String dataFormatFinder(JPanel fileFormatPanel){
 		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
 			if (component instanceof JRadioButton){
 				if (((JRadioButton)component).isSelected()) {
@@ -82,12 +45,12 @@ public abstract class SubmissionRequest {
 		return null;
 	}
 
-	private Boolean printToFileFinder(JPanel fileFormatPanel){
-		// for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
-		// 	if (component instanceof JCheckBox){
-		// 		return ((JCheckBox)component).isSelected();
-		// 	}
-		// }
+	public Boolean printToFileFinder(JPanel fileFormatPanel){
+		for (Component component : ((JPanel)fileFormatPanel).getComponents()) {
+			if (component instanceof JCheckBox){
+				return ((JCheckBox)component).isSelected();
+			}
+		}
 		return false;
 	}
 }

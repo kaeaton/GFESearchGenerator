@@ -4,19 +4,35 @@ import org.chori.gsg.model.SubmissionRequests.*;
 
 public interface LocusInterface {
 
-	public enum DataSource {
+	public enum HeaderDataSource {
 		HLA("http://neo4j.b12x.org"),
-		KIR(null),
- 		ABO(null);
+		KIR("http://neo4j-kir.b12x.org/"),
+		ABO(null);
 
-		private final String dataSource;
+		private final String headerDataSource;
 
-		private DataSource(String dataSource) {
-			this.dataSource = dataSource;
+		private HeaderDataSource(String headerDataSource) {
+			this.headerDataSource = headerDataSource;
 		}
-    
-		public String getDataSource() {
-			return this.dataSource;
+
+		public String getHeaderDataSource() {
+			return this.headerDataSource;
+		}
+	}
+
+		public enum HttpCallDataSource {
+		HLA("http://neo4j.b12x.org/db/data/transaction/commit"),
+		KIR("http://neo4j-kir.b12x.org/db/data/transaction/commit"),
+		ABO(null);
+
+		private final String httpCallDataSource;
+
+		private HttpCallDataSource(String httpCallDataSource) {
+			this.httpCallDataSource = httpCallDataSource;
+		}
+
+		public String getHttpCallDataSource() {
+			return this.httpCallDataSource;
 		}
 	}
 }

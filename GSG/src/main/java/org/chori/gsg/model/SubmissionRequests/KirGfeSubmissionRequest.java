@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
@@ -17,14 +18,23 @@ import org.chori.gsg.view.searchboxes.*;
 
 public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
-	// // class instantiations
-	// private BuildRegex buildRegex = new BuildRegex();
-	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
-	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
+	// class instantiations
+	private BuildRegex buildRegex = new BuildRegex();
+	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
+	private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
-	public String dataSource = DataSource.HLA.getDataSource();
-	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
+	// interface data
+	private String headerDataSource = HeaderDataSource.KIR.getHeaderDataSource();
+	private String httpCallDataSource = HttpCallDataSource.KIR.getHttpCallDataSource();
+	private JTextArea textAreaToPrintTo = WhereToPrint.GFE.getWhereToPrint(); 
+	private JPanel fileFormatPanel = WhatToPrint.GFE.getWhatToPrint(); 
+	
+	// data retrieved from GUI
+	private String whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
+	private String whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
+	private String resultsFormat = super.dataFormatFinder(fileFormatPanel);
+	private Boolean printToFile = super.printToFileFinder(fileFormatPanel);
+
 	// private ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
 	// private ArrayList<JCheckBox> allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 

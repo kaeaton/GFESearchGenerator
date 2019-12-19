@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
@@ -20,7 +21,9 @@ public class KirNameSubmissionRequest extends SubmissionRequest implements Locus
 	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
-	public String dataSource = DataSource.HLA.getDataSource();
+	private String headerDataSource = HeaderDataSource.KIR.getHeaderDataSource();
+	private JTextArea textAreaToPrintTo = WhereToPrint.NAME.getWhereToPrint(); 
+	
 	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
 	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
 

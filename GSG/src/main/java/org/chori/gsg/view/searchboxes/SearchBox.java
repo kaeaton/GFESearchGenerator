@@ -53,6 +53,7 @@ public class SearchBox extends JPanel{
 		if (nameNumber.equals("00")) {
 			featureNumber.setColumns(2);
 			featureNumber.setText("w");
+			noZero.setVisible(false);
 		}
 
 		HlaSearchBoxAssembler.allTextboxes.add(featureNumber);

@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
@@ -15,14 +16,16 @@ import org.chori.gsg.view.*;
 
 public class HlaNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
-	// // class instantiations
+	// class instantiations
 	// private BuildRegex buildRegex = new BuildRegex();
 	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
-	public String dataSource = DataSource.HLA.getDataSource();
-	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
+	private String headerDataSource = HeaderDataSource.HLA.getHeaderDataSource();
+	private JTextArea textAreaToPrintTo = WhereToPrint.NAME.getWhereToPrint(); 
+	
+	// private String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+	// private String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
 
 	// private String jsonRegexRequest = "";
 	// private String humanReadableSearchString = "";
