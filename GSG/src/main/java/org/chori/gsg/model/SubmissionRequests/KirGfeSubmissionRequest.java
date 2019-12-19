@@ -30,7 +30,6 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	private JTextArea textAreaToPrintTo = WhereToPrint.GFE.getWhereToPrint(); 
 	private JPanel fileFormatPanel = WhatToPrint.GFE.getWhatToPrint(); 
 	
-	// data retrieved from GUI
 	private String whatLocus;
 	private String whatVersion;
 	private String resultsFormat;
@@ -44,6 +43,7 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	private File rawData;
 
 	public KirGfeSubmissionRequest() {
+		
 		// data retrieved from GUI
 		this.whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
 		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();

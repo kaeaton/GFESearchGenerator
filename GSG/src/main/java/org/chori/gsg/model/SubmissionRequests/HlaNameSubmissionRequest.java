@@ -37,10 +37,8 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 	private String headerSearchString;
 	private File rawData;
 
-	// private String jsonRegexRequest = "";
-	// private String humanReadableSearchString = "";
-
 	public HlaNameSubmissionRequest() {
+		
 		// data retrieved from GUI
 		this.whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
 		this.whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();

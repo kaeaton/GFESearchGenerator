@@ -32,7 +32,6 @@ public class SubmitButton {
 	// class instantiations
 	private BuildRegex buildRegex = new BuildRegex();
 	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
-	// private GfeSubmitListener gfeSubmitListener = new GfeSubmitListener();
 	private Headers header = new Headers();
 	private WhereTheDataLives wtdl = new WhereTheDataLives();
 
@@ -45,7 +44,6 @@ public class SubmitButton {
 	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() {
-		dataSources.put("neo4j", "http://neo4j.b12x.org");	
 	}
 
 
@@ -88,49 +86,6 @@ public class SubmitButton {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			submissionRequestFactory.assembleSubmissionRequest("HLA", "NAME");
-
-			// Runnable submit = new Runnable() {
-			// 	public void run() {
-
-			// 		// what locus, version, and format?
-			// 		String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
-			// 		String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
-			// 		String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
-			// 		Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
-			// 		System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
-
-			// 		// where's the data file?                 
-			// 		File data = wtdl.getRawHlaData(whatLocus, whatVersion);
-
-			// 		// build me some Regex
-			// 		String searchTerm = B12xGui.nameSearchBox.getText();
-					
-			// 		System.out.println("Name Search Term: " + searchTerm);
-			// 		String regex = buildRegex.assembleNameRegex(searchTerm);
-					
-			// 		// clear results screen
-			// 		B12xGui.resultsTextAreaName.setText("");
-
-			// 		// print headers
-			// 		header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
-					
-			// 		// search the data & print to screen
-			// 		if (dataFormat.equals("Pretty")) {
-			// 			PrettyData prettyData = new PrettyData();
-			// 			prettyData.searchThroughData(data, regex, "NAME");
-			// 		} else {
-			// 			SearchData searchData = new SearchData();
-			// 			searchData.searchThroughData(data, regex, dataFormat, "NAME");
-			// 		}
-
-			// 		if (printToFile) {
-			// 			WriteToFile writeToFile = new WriteToFile();
-			// 			writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
-			// 		}
-
-			// 	}
-			// };
-			// new Thread(submit).start();
 		}
 	};
 
