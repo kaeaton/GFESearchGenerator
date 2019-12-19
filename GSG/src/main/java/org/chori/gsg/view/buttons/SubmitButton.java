@@ -77,9 +77,6 @@ public class SubmitButton {
 		return submitButton;
 	}
 
-	/**
-	 * Runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 */
 	public ActionListener gfeListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
@@ -87,54 +84,53 @@ public class SubmitButton {
 		}
 	};
 
-	/**
-	 * Runs in a separate thread. It gathers information from assorted points in the GUI and passes it to controller methods.
-	 */
 	public ActionListener nameListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			Runnable submit = new Runnable() {
-				public void run() {
+			submissionRequestFactory.assembleSubmissionRequest("HLA", "NAME");
 
-					// what locus, version, and format?
-					String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
-					String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
-					String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
-					Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
-					System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
+			// Runnable submit = new Runnable() {
+			// 	public void run() {
 
-					// where's the data file?                 
-					File data = wtdl.getRawHlaData(whatLocus, whatVersion);
+			// 		// what locus, version, and format?
+			// 		String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+			// 		String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString(); //"3.34.0"; // 
+			// 		String dataFormat = dataFormatFinder(B12xGui.fileFormatName);
+			// 		Boolean printToFile = printToFileFinder(B12xGui.fileFormatName);
+			// 		System.out.println(whatLocus + ", " + whatVersion + ", " + dataFormat + ", " + printToFile);
 
-					// build me some Regex
-					String searchTerm = B12xGui.nameSearchBox.getText();
+			// 		// where's the data file?                 
+			// 		File data = wtdl.getRawHlaData(whatLocus, whatVersion);
+
+			// 		// build me some Regex
+			// 		String searchTerm = B12xGui.nameSearchBox.getText();
 					
-					System.out.println("Name Search Term: " + searchTerm);
-					String regex = buildRegex.assembleNameRegex(searchTerm);
+			// 		System.out.println("Name Search Term: " + searchTerm);
+			// 		String regex = buildRegex.assembleNameRegex(searchTerm);
 					
-					// clear results screen
-					B12xGui.resultsTextAreaName.setText("");
+			// 		// clear results screen
+			// 		B12xGui.resultsTextAreaName.setText("");
 
-					// print headers
-					header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
+			// 		// print headers
+			// 		header.printHeaders("NAME", searchTerm, whatVersion, whatLocus, dataSources.get("neo4j"));
 					
-					// search the data & print to screen
-					if (dataFormat.equals("Pretty")) {
-						PrettyData prettyData = new PrettyData();
-						prettyData.searchThroughData(data, regex, "NAME");
-					} else {
-						SearchData searchData = new SearchData();
-						searchData.searchThroughData(data, regex, dataFormat, "NAME");
-					}
+			// 		// search the data & print to screen
+			// 		if (dataFormat.equals("Pretty")) {
+			// 			PrettyData prettyData = new PrettyData();
+			// 			prettyData.searchThroughData(data, regex, "NAME");
+			// 		} else {
+			// 			SearchData searchData = new SearchData();
+			// 			searchData.searchThroughData(data, regex, dataFormat, "NAME");
+			// 		}
 
-					if (printToFile) {
-						WriteToFile writeToFile = new WriteToFile();
-						writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
-					}
+			// 		if (printToFile) {
+			// 			WriteToFile writeToFile = new WriteToFile();
+			// 			writeToFile.writeFile(whatLocus, whatVersion, "NAME", dataFormat);
+			// 		}
 
-				}
-			};
-			new Thread(submit).start();
+			// 	}
+			// };
+			// new Thread(submit).start();
 		}
 	};
 

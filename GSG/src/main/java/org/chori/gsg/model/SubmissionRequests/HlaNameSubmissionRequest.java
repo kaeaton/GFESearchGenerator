@@ -17,20 +17,78 @@ import org.chori.gsg.view.*;
 public class HlaNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
 	// class instantiations
-	// private BuildRegex buildRegex = new BuildRegex();
-	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
-	// private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
+	private Headers header = new Headers();
+	private BuildRegex buildRegex = new BuildRegex();
+	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
+	private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
+	// interface data
 	private String headerDataSource = HeaderDataSource.HLA.getHeaderDataSource();
+	private String httpCallDataSource = HttpCallDataSource.HLA.getHttpCallDataSource();
 	private JTextArea textAreaToPrintTo = WhereToPrint.NAME.getWhereToPrint(); 
+	private JPanel fileFormatPanel = WhatToPrint.NAME.getWhatToPrint(); 
 
-	// private String whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
-	// private String whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
+	private String whatLocus;
+	private String whatVersion;
+	private String resultsFormat;
+	private Boolean printToFile;
+	
+	private String searchRegex;
+	private String headerSearchString;
+	private File rawData;
 
 	// private String jsonRegexRequest = "";
 	// private String humanReadableSearchString = "";
 
-	public HlaNameSubmissionRequest() { }
+	public HlaNameSubmissionRequest() {
+		// data retrieved from GUI
+		this.whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
+		this.whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
+		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
+		this.printToFile = super.printToFileFinder(fileFormatPanel);
+		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
+		
+		submitData();
+	}
 
+	private void submitData() {
+		Runnable submit = new Runnable() {
+			public void run() {
+				createRegexStrings();
+				printTheHeaders();
+				searchTheData();
+
+				if(printToFile)
+					saveResultsToFile();
+			}
+		};
+
+		new Thread(submit).start();
+	}
+
+	private void createRegexStrings() {
+		this.headerSearchString = B12xGui.nameSearchBox.getText();
+		this.searchRegex = buildRegex.assembleNameRegex(headerSearchString);
+	}
+
+	private void printTheHeaders() {
+		textAreaToPrintTo.setText("");
+
+		header.printHeaders("NAME", headerSearchString, whatVersion, whatLocus, headerDataSource);
+	}
+
+	private void searchTheData() {
+		if (resultsFormat.equals("Pretty")) {
+			PrettyData prettyData = new PrettyData();
+			prettyData.searchThroughData(rawData, searchRegex, "NAME");
+		} else {
+			SearchData searchData = new SearchData();
+			searchData.searchThroughData(rawData, searchRegex, resultsFormat, "NAME");
+		}
+	}
 	
+	private void saveResultsToFile() {
+		WriteToFile writeToFile = new WriteToFile();
+		writeToFile.writeFile(whatLocus, whatVersion, "NAME", resultsFormat);
+	}
 }

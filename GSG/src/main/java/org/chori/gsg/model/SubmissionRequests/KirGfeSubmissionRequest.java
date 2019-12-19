@@ -19,6 +19,7 @@ import org.chori.gsg.view.searchboxes.*;
 public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
 	// class instantiations
+	private Headers header = new Headers();
 	private BuildRegex buildRegex = new BuildRegex();
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
@@ -30,11 +31,6 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	private JPanel fileFormatPanel = WhatToPrint.GFE.getWhatToPrint(); 
 	
 	// data retrieved from GUI
-	private String whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
-	private String whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
-	private String resultsFormat = super.dataFormatFinder(fileFormatPanel);
-	private Boolean printToFile = super.printToFileFinder(fileFormatPanel);
-
 	private String whatLocus;
 	private String whatVersion;
 	private String resultsFormat;
