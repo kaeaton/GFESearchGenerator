@@ -56,10 +56,10 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.allTextFields = HlaSearchBoxAssembler.allTextboxes;
 		this.allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
 
-		submitData();
+		submitRequest();
 	}
 
-	private void submitData() {
+	private void submitRequest() {
 		Runnable submit = new Runnable() {
 			public void run() {
 				createRegexStrings();

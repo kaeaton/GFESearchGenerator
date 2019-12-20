@@ -46,10 +46,10 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
 		
-		submitData();
+		submitRequest();
 	}
 
-	private void submitData() {
+	private void submitRequest() {
 		Runnable submit = new Runnable() {
 			public void run() {
 				createRegexStrings();
