@@ -50,7 +50,9 @@ public class HlaSearchBoxAssembler {
 	}
 
 	/**
-	 * Assembles the JPanel housing all the JTextFields, JCheckBoxes and JLabels associated with the search panel. Also populates the allCheckboxes and allTextFields ArrayLists
+	 * Assembles the JPanel housing all the JTextFields, JCheckBoxes and 
+	 * JLabels associated with the HLA GFE search panel. 
+	 * Also populates the allCheckboxes and allTextFields ArrayLists
 	 * 
 	 * @param locus what locus panel is being built
 	 * @return the populated JPanel
@@ -171,7 +173,7 @@ public class HlaSearchBoxAssembler {
 
 	private JPanel assembleWBox() {
 		JPanel wBox = searchBox.assemble("Workshop Status    ", "00");
-		
+
 		return wBox;
 	}
 

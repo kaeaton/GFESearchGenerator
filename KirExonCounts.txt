@@ -1,0 +1,16 @@
+KIR2DL1 - 9 Exons
+KIR2DL2 - 9 Exons
+KIR2DL3 - 9 Exons
+KIR2DS1 - 9 Exons
+KIR2DS2 - 9 Exons
+KIR2DS3 - 9 Exons
+KIR2DS4 - 9 Exons
+KIR2DS5 - 9 Exons
+KIR2DL4 - 9 Exons missing Exon 4
+KIR2DL5 - 9 Exons missing Exon 4 (Ask Jill about A and B)
+KIR3DL1 - 9 Exons
+KIR3DL2 - 9 Exons
+KIR3DS1 - 9 Exons
+KIR3DL3 - 9 Exons missing Exon 6
+KIR3DP1 - 5 Exons (Ask Jill about Exon 2)
+KIR2DP1 - 9 Exons

@@ -33,12 +33,16 @@ public class B12xGui extends JFrame {
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
 	// default locus settings
+	private String gfeSelectedLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
 	private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
-	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION_1", "HLA-A");
-	private String kirSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
+	private String nameSelectedLoci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
+	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
+	private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
+	private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 
-	// the panel generators
+	// the GFE panel generators
 	private HlaSearchBoxAssembler hlaPanelGenerator = new HlaSearchBoxAssembler();
+	private KirSearchBoxAssembler kirPanelGenerator = new KirSearchBoxAssembler();
 	
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
@@ -147,9 +151,9 @@ public class B12xGui extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentHlaPanel = hlaPanelGenerator.assembleHlaPanel(whatLocusGfe.getSelectedItem().toString());
-			currentHlaPanel.setName("GFE");
-			gfePanel.add(currentHlaPanel);
+			JPanel currentGfePanel = hlaPanelGenerator.assembleHlaPanel(whatLocusGfe.getSelectedItem().toString());
+			currentGfePanel.setName("GFE");
+			gfePanel.add(currentGfePanel);
 		} catch (IllegalArgumentException iex) {
 			PrefProbException ppex = new PrefProbException();
 		}
@@ -246,7 +250,7 @@ public class B12xGui extends JFrame {
 	/* Name Search tab */
 		parentTabbedPane.addTab("Name Search", null, nameTab, "Name Search tool");
 		
-		// currentHlaPanel.setName("NAME");
+		// currentGfePanel.setName("NAME");
 		namePanel.add(nameSearchBox);
 		nameSearchBox.addActionListener(submitButtonGenerator.nameListener);
 		
