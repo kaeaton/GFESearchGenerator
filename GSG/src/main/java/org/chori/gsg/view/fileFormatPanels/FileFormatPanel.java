@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.view.fileFormatPanel;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,16 +12,19 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPanel;
 
+// import package org.chori.gsg.view.B12xGui;
+
 /**
- * Assembles the file format panel for selecting what format the data appears in and whether to write it to file
+ * Abstract class for the file format panel for selecting what format 
+ * the data appears in and whether to write it to file
  * 
  * @author Katrina Eaton
  * 
  */
-public class FileFormatPanel { 
+public abstract class FileFormatPanel { 
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-
+	private String loci;
 
 	public FileFormatPanel() {
 
@@ -33,7 +36,7 @@ public class FileFormatPanel {
 	 * @param whichTab tells which set of listeners should be attached to the panel features
 	 * @return the populated JPanel
 	 */
-	public JPanel createFileFormatPanel(String whichTab) {
+	public JPanel createFileFormatPanel() {
 		JRadioButton csvButton = new JRadioButton("CSV");
 		JRadioButton tsvButton = new JRadioButton("TSV");
 		JRadioButton prettyButton = new JRadioButton("Pretty");
@@ -80,10 +83,12 @@ public class FileFormatPanel {
 		c.gridx = 4;
 		fileFormatPanel.add(saveToFileCheckBox, c);
 
+		return fileFormatPanel;
+	}
 		// who is this reset button for?
 		switch(whichTab) {
 			case "GFE":
-				String loci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
+				loci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
         		csvButton.setSelected(prefs.getBoolean("GSG_GFE_" + loci + "_CSV_SELECTED", true));
         		tsvButton.setSelected(prefs.getBoolean("GSG_GFE_" + loci + "_TSV_SELECTED", false));
         		prettyButton.setSelected(prefs.getBoolean("GSG_GFE_" + loci + "_PRETTY_SELECTED", false));
@@ -94,24 +99,26 @@ public class FileFormatPanel {
 				gfeSaveToFileCheckBoxListener(saveToFileCheckBox, loci);
 				break;
 			case "NAME":
-        		csvButton.setSelected(prefs.getBoolean("GSG_NAME_CSV_SELECTED", true));
-        		tsvButton.setSelected(prefs.getBoolean("GSG_NAME_TSV_SELECTED", false));
-        		prettyButton.setSelected(prefs.getBoolean("GSG_NAME_PRETTY_SELECTED", false));
-        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_NAME_SAVE_FILE", false));
-				nameCsvListener(csvButton, tsvButton, prettyButton);
-				nameTsvListener(csvButton, tsvButton, prettyButton);
-				namePrettyListener(csvButton, tsvButton, prettyButton);
-				nameSaveToFileCheckBoxListener(saveToFileCheckBox);
+				loci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
+        		csvButton.setSelected(prefs.getBoolean("GSG_NAME_" + loci + "_CSV_SELECTED", true));
+        		tsvButton.setSelected(prefs.getBoolean("GSG_NAME_" + loci + "_TSV_SELECTED", false));
+        		prettyButton.setSelected(prefs.getBoolean("GSG_NAME_" + loci + "_PRETTY_SELECTED", false));
+        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_NAME_" + loci + "_SAVE_FILE", false));
+				nameCsvListener(csvButton, tsvButton, prettyButton, loci);
+				nameTsvListener(csvButton, tsvButton, prettyButton, loci);
+				namePrettyListener(csvButton, tsvButton, prettyButton, loci);
+				nameSaveToFileCheckBoxListener(saveToFileCheckBox, loci);
 				break;
 			case "FEATURE":
-        		csvButton.setSelected(prefs.getBoolean("GSG_FEATURE_CSV_SELECTED", true));
-        		tsvButton.setSelected(prefs.getBoolean("GSG_FEATURE_TSV_SELECTED", false));
-        		prettyButton.setSelected(prefs.getBoolean("GSG_FEATURE_PRETTY_SELECTED", false));
-        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_FEATURE_SAVE_FILE", false));
-				featureCsvListener(csvButton, tsvButton, prettyButton);
-				featureTsvListener(csvButton, tsvButton, prettyButton);
-				featurePrettyListener(csvButton, tsvButton, prettyButton);
-				featureSaveToFileCheckBoxListener(saveToFileCheckBox);
+				loci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
+        		csvButton.setSelected(prefs.getBoolean("GSG_FEATURE_" + loci + "_CSV_SELECTED", true));
+        		tsvButton.setSelected(prefs.getBoolean("GSG_FEATURE_" + loci + "_TSV_SELECTED", false));
+        		prettyButton.setSelected(prefs.getBoolean("GSG_FEATURE_" + loci + "_PRETTY_SELECTED", false));
+        		saveToFileCheckBox.setSelected(prefs.getBoolean("GSG_FEATURE_" + loci + "_SAVE_FILE", false));
+				featureCsvListener(csvButton, tsvButton, prettyButton, loci);
+				featureTsvListener(csvButton, tsvButton, prettyButton, loci);
+				featurePrettyListener(csvButton, tsvButton, prettyButton, loci);
+				featureSaveToFileCheckBoxListener(saveToFileCheckBox, loci);
 				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -121,46 +128,58 @@ public class FileFormatPanel {
 	}
 
 	// separate functions because each tab needs it's own set of prefs
-	private void gfePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton, String loci) {
+	private void gfePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, 
+									JRadioButton prettyButton, String loci) {
 		if (csvButton.isSelected()) prefs.putBoolean("GSG_GFE_" + loci + "_CSV_SELECTED", true);
 		else prefs.putBoolean("GSG_GFE_" + loci + "_CSV_SELECTED", false);
-		System.out.println("GSG_GFE_" + loci + "_CSV is selected: " + prefs.getBoolean("GSG_GFE_" + loci + "_CSV_SELECTED", true));
+		System.out.println("GSG_GFE_" + loci + "_CSV is selected: " 
+			+ prefs.getBoolean("GSG_GFE_" + loci + "_CSV_SELECTED", true));
 	   
 		if (tsvButton.isSelected()) prefs.putBoolean("GSG_GFE_" + loci + "_TSV_SELECTED", true);
 		else prefs.putBoolean("GSG_GFE_" + loci + "_TSV_SELECTED", false);
-		System.out.println("GSG_GFE_" + loci + "_TSV is selected: " + prefs.getBoolean("GSG_GFE_" + loci + "_TSV_SELECTED", false));
+		System.out.println("GSG_GFE_" + loci + "_TSV is selected: " 
+			+ prefs.getBoolean("GSG_GFE_" + loci + "_TSV_SELECTED", false));
 
 		if (prettyButton.isSelected()) prefs.putBoolean("GSG_GFE_" + loci + "_PRETTY_SELECTED", true);
 		else prefs.putBoolean("GSG_GFE_" + loci + "_PRETTY_SELECTED", false);
-		System.out.println("GSG_GFE_" + loci + "_PRETTY is selected: " + prefs.getBoolean("GSG_GFE_" + loci + "_PRETTY_SELECTED", false));
+		System.out.println("GSG_GFE_" + loci + "_PRETTY is selected: " 
+			+ prefs.getBoolean("GSG_GFE_" + loci + "_PRETTY_SELECTED", false));
 	}
 
-	private void namePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
-		if (csvButton.isSelected()) prefs.putBoolean("GSG_NAME_CSV_SELECTED", true);
-		else prefs.putBoolean("GSG_NAME_CSV_SELECTED", false);
-		System.out.println("GSG_NAME_CSV is selected: " + prefs.getBoolean("GSG_NAME_CSV_SELECTED", true));
+	private void namePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, 
+									 JRadioButton prettyButton, String loci) {
+		if (csvButton.isSelected()) prefs.putBoolean("GSG_NAME_" + loci + "_CSV_SELECTED", true);
+		else prefs.putBoolean("GSG_NAME_" + loci + "_CSV_SELECTED", false);
+		System.out.println("GSG_NAME_" + loci + "_CSV is selected: " 
+			+ prefs.getBoolean("GSG_NAME_" + loci + "_CSV_SELECTED", true));
 	   
-		if (tsvButton.isSelected()) prefs.putBoolean("GSG_NAME_TSV_SELECTED", true);
-		else prefs.putBoolean("GSG_NAME_TSV_SELECTED", false);
-		System.out.println("GSG_NAME_TSV is selected: " + prefs.getBoolean("GSG_NAME_TSV_SELECTED", false));
+		if (tsvButton.isSelected()) prefs.putBoolean("GSG_NAME_" + loci + "_TSV_SELECTED", true);
+		else prefs.putBoolean("GSG_NAME_" + loci + "_TSV_SELECTED", false);
+		System.out.println("GSG_NAME_" + loci + "_TSV is selected: " 
+			+ prefs.getBoolean("GSG_NAME_" + loci + "_TSV_SELECTED", false));
 
-		if (prettyButton.isSelected()) prefs.putBoolean("GSG_NAME_PRETTY_SELECTED", true);
-		else prefs.putBoolean("GSG_NAME_PRETTY_SELECTED", false);
-		System.out.println("GSG_NAME_PRETTY is selected: " + prefs.getBoolean("GSG_NAME_PRETTY_SELECTED", false));
+		if (prettyButton.isSelected()) prefs.putBoolean("GSG_NAME_" + loci + "_PRETTY_SELECTED", true);
+		else prefs.putBoolean("GSG_NAME_" + loci + "_PRETTY_SELECTED", false);
+		System.out.println("GSG_NAME_" + loci + "_PRETTY is selected: " 
+			+ prefs.getBoolean("GSG_NAME_" + loci + "_PRETTY_SELECTED", false));
 	}
 
-	private void featurePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
-		if (csvButton.isSelected()) prefs.putBoolean("GSG_FEATURE_CSV_SELECTED", true);
-		else prefs.putBoolean("GSG_FEATURE_CSV_SELECTED", false);
-		System.out.println("GSG_FEATURE_CSV is selected: " + prefs.getBoolean("GSG_FEATURE_CSV_SELECTED", true));
+	private void featurePrefsFileFormat(JRadioButton csvButton, JRadioButton tsvButton, 
+										JRadioButton prettyButton, String loci) {
+		if (csvButton.isSelected()) prefs.putBoolean("GSG_FEATURE_" + loci + "_CSV_SELECTED", true);
+		else prefs.putBoolean("GSG_FEATURE_" + loci + "_CSV_SELECTED", false);
+		System.out.println("GSG_FEATURE_" + loci + "_CSV is selected: " 
+			+ prefs.getBoolean("GSG_FEATURE_" + loci + "_CSV_SELECTED", true));
 	   
-		if (tsvButton.isSelected()) prefs.putBoolean("GSG_FEATURE_TSV_SELECTED", true);
-		else prefs.putBoolean("GSG_FEATURE_TSV_SELECTED", false);
-		System.out.println("GSG_FEATURE_TSV is selected: " + prefs.getBoolean("GSG_FEATURE_TSV_SELECTED", false));
+		if (tsvButton.isSelected()) prefs.putBoolean("GSG_FEATURE_" + loci + "_TSV_SELECTED", true);
+		else prefs.putBoolean("GSG_FEATURE_" + loci + "_TSV_SELECTED", false);
+		System.out.println("GSG_FEATURE_" + loci + "_TSV is selected: " 
+			+ prefs.getBoolean("GSG_FEATURE_" + loci + "_TSV_SELECTED", false));
 
-		if (prettyButton.isSelected()) prefs.putBoolean("GSG_FEATURE_PRETTY_SELECTED", true);
-		else prefs.putBoolean("GSG_FEATURE_PRETTY_SELECTED", false);
-		System.out.println("GSG_FEATURE_PRETTY is selected: " + prefs.getBoolean("GSG_FEATURE_PRETTY_SELECTED", false));
+		if (prettyButton.isSelected()) prefs.putBoolean("GSG_FEATURE_" + loci + "_PRETTY_SELECTED", true);
+		else prefs.putBoolean("GSG_FEATURE_" + loci + "_PRETTY_SELECTED", false);
+		System.out.println("GSG_FEATURE_" + loci + "_PRETTY is selected: " 
+			+ prefs.getBoolean("GSG_FEATURE_" + loci + "_PRETTY_SELECTED", false));
 	}
 
 	// separate listeners because Java button groups don't have listeners
