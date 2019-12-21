@@ -1,27 +1,14 @@
 package org.chori.gsg.view.buttons;
 
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
-import org.chori.gsg.controller.*;
-import org.chori.gsg.model.*;
 import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.view.*;
-import org.chori.gsg.view.searchboxes.*;
 
 /**
- * Generates the assorted search buttons and associated listeners
+ * Generates the assorted submit buttons and associated listeners
  * 
  * @author Katrina Eaton
  * 
@@ -29,19 +16,8 @@ import org.chori.gsg.view.searchboxes.*;
 
 public class SubmitButton { 
 
-	// class instantiations
-	private BuildRegex buildRegex = new BuildRegex();
-	private BuildHeaderSearchString buildHSS = new BuildHeaderSearchString();
-	private Headers header = new Headers();
-	private WhereTheDataLives wtdl = new WhereTheDataLives();
-
-	private HashMap<String, String> dataSources = new HashMap<>();
-
 	private SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
 	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
-
-	// the button
-	// public JButton submitButton = new JButton("Submit");
 
 	public SubmitButton() { }
 
