@@ -31,7 +31,8 @@ public class FileFormatPanel {
 	public FileFormatPanel() { }
 
 	/**
-	 * Assembles the JPanel housing all the JRadioButtons and the JCheckBox for selecting data format and if a file is saved. All features have an associated listener.
+	 * Assembles the JPanel housing all the JRadioButtons and the JCheckBox for selecting data format 
+	 * and if a file is saved. All features have an associated listener.
 	 * 
 	 * @param tab tells which set of listeners should be attached to the panel features
 	 * @return the populated JPanel
@@ -53,7 +54,7 @@ public class FileFormatPanel {
 		return fileFormatPanel;
 	}
 
-	public ButtonGroup createButtonGroup(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
+	private ButtonGroup createButtonGroup(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton) {
 		ButtonGroup formatButtonGroup = new ButtonGroup();
 		formatButtonGroup.add(csvButton);
 		formatButtonGroup.add(tsvButton);
@@ -62,7 +63,7 @@ public class FileFormatPanel {
 		return formatButtonGroup;
 	}
 
-	public void setSelected(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton, 
+	private void setSelected(JRadioButton csvButton, JRadioButton tsvButton, JRadioButton prettyButton, 
 							JCheckBox saveToFileCheckBox, String tab, String loci) {
 		csvButton.setSelected(prefs.getBoolean("GSG_" + tab + "_" + loci + "_CSV_SELECTED", true));
 		tsvButton.setSelected(prefs.getBoolean("GSG_" + tab + "_" + loci + "_TSV_SELECTED", false));
