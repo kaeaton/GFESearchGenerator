@@ -42,7 +42,7 @@ public class B12xGui extends JFrame {
 
 	// the GFE panel generators
 	private HlaSearchBoxAssembler hlaPanelGenerator = new HlaSearchBoxAssembler();
-	private KirSearchBoxAssembler kirPanelGenerator = new KirSearchBoxAssembler();
+	// private KirSearchBoxAssembler kirPanelGenerator = new KirSearchBoxAssembler();
 	
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
@@ -91,9 +91,9 @@ public class B12xGui extends JFrame {
 	public static JComboBox whichLociBulk = new JComboBox();
 
 	// file format panels
-	public static JPanel fileFormatGfe = fileFormatPanelGenerator.createFileFormatPanel("GFE");
-	public static JPanel fileFormatName = fileFormatPanelGenerator.createFileFormatPanel("NAME");
-	public static JPanel fileFormatFeature = fileFormatPanelGenerator.createFileFormatPanel("FEATURE");
+	public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
+	public static JPanel fileFormatName = fileFormatPanelGenerator.getFileFormatPanel("NAME");
+	public static JPanel fileFormatFeature = fileFormatPanelGenerator.getFileFormatPanel("FEATURE");
 
 	// search box for name search
 	public static JTextField nameSearchBox = new JTextField("", 20);
