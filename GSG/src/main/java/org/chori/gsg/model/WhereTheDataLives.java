@@ -58,13 +58,12 @@ public class WhereTheDataLives {
 		// turn it from string to a path
 		Path rawDataPath = Paths.get(path);
 
-		// if the path don't exist, make it
+		// if the path doesn't exist, make it
 		try {
 			if (!rawDataPath.toFile().exists())
             {
                 System.out.println("The file does not exist.");
                 rawDataPath.toFile().getParentFile().mkdirs();
-                // path.toFile().createNewFile();
             }
 	    } catch (Exception ex) { System.out.println("Error creating file structure: " + ex); }
 

@@ -79,7 +79,7 @@ public class HlaSearchBoxAssembler {
 		
 		c.insets = new Insets(0,0,0,0);
 		c.gridx = 1;
-		gfeSearchPanel.add(assembleWBox(), c);
+		// gfeSearchPanel.add(assembleWBox(), c);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
@@ -133,7 +133,7 @@ public class HlaSearchBoxAssembler {
 		selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 8, 0));
 
 		// locus label
-		JLabel locusLabel = new JLabel(locus + "  ");
+		JLabel locusLabel = new JLabel(locus + " w");
 
 		// sub panel and layout
 		JPanel labelPanel = new JPanel();

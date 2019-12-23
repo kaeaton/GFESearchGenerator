@@ -35,14 +35,14 @@ public class BuildRegex {
 		regex = regex.concat(whichLocus);
 
 		// add the workshop status. Right now it has to be "w".
-		if (textFields.get(0).getText().isEmpty()){
+		// if (textFields.get(0).getText().isEmpty()){
 			regex = regex.concat("w");
-		} else {
-			regex = regex.concat(textFields.get(0).getText());
-		}
+		// } else {
+		// 	regex = regex.concat(textFields.get(0).getText());
+		// }
 
 		// For each textfield add regex or specified term to currentRegex
-		for (int i = 1; i < textFields.size(); i++){
+		for (int i = 0; i < textFields.size(); i++){
 
 			// textfield empty, no checkbox
 			if ((textFields.get(i).getText().isEmpty()) && !(checkBoxes.get(i).isSelected())) {
