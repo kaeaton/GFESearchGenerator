@@ -35,11 +35,7 @@ public class BuildRegex {
 		regex = regex.concat(whichLocus);
 
 		// add the workshop status. Right now it has to be "w".
-		// if (textFields.get(0).getText().isEmpty()){
-			regex = regex.concat("w");
-		// } else {
-		// 	regex = regex.concat(textFields.get(0).getText());
-		// }
+		regex = regex.concat("w");
 
 		// For each textfield add regex or specified term to currentRegex
 		for (int i = 0; i < textFields.size(); i++){

@@ -14,9 +14,7 @@ public class BuildHeaderSearchString {
 	// this creates a text version of the search string to be included in the
 	// results so users can see what they were looking for/at.
 	// * is a wildcard, x is a wildcard without 0.
-	public BuildHeaderSearchString() {
-
-	}
+	public BuildHeaderSearchString() { }
 
 	public String assembleGfeHeaderSearchString(String whichTab, String whichLocus,
 								ArrayList<JCheckBox> checkBoxes, 
@@ -27,12 +25,7 @@ public class BuildHeaderSearchString {
 		searchString = searchString.concat(whichLocus);
 
 		// add the workshop status. Right now it has to be "w".
-        if (textFields.get(0).getText().isEmpty()){
-            searchString = searchString.concat("w");
-            // searchString = searchString.concat("w");}
-        } else {
-            searchString = searchString.concat(textFields.get(0).getText());
-        }
+        searchString = searchString.concat("w");
 
 		// For each textfield add searchString or specified term to currentsearchString
         for (int i = 1; i < textFields.size(); i++){
