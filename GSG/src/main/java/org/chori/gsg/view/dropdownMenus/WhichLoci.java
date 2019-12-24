@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdowns;
+package org.chori.gsg.view.dropdownMenus;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

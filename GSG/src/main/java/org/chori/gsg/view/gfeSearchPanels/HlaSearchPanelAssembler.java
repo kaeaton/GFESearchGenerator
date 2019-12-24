@@ -20,13 +20,13 @@ import javax.swing.LayoutStyle;
  * @author Katrina Eaton
  * 
  */
-public class HlaSearchBoxAssembler {
+public class HlaSearchPanelAssembler {
 
 	// Exons per locus
 	private HashMap<String, Integer> hlaExonTotal = new HashMap();
 
 	// Searchbox source
-	private SearchBox searchBox = new SearchBox();
+	private IndividualFeatureSearchPanel individualFeatureSearchPanel = new IndividualFeatureSearchPanel();
 
 	// select all checkbox
 	public static JCheckBox selectAllCheckBox;
@@ -34,8 +34,9 @@ public class HlaSearchBoxAssembler {
 	// component arraylists
 	public static ArrayList<JCheckBox> allCheckboxes;
 	public static ArrayList<JTextField> allTextboxes;
+	private static ArrayList<JPanel> allFeaturePanels;
 
-	public HlaSearchBoxAssembler() {
+	public HlaSearchPanelAssembler() {
 		hlaExonTotal.put("HLA-A", 8);
 		hlaExonTotal.put("HLA-B", 7);
 		hlaExonTotal.put("HLA-C", 8);
@@ -57,12 +58,16 @@ public class HlaSearchBoxAssembler {
 	 * @param locus what locus panel is being built
 	 * @return the populated JPanel
 	 */
-	public JPanel assembleHlaPanel(String locus){
-
-		// reinitiate the array lists so they only have 
-		// the current components in them
+	public JPanel getHlaPanel(String locus) {
+		// reset the arrayLists
 		allCheckboxes = new ArrayList();
 		allTextboxes = new ArrayList();
+		allFeaturePanels = new ArrayList();
+
+		assembleHlaPanel(allFeaturePanels);
+	}
+
+	private JPanel assembleHlaPanel(String locus){}
 
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
@@ -168,13 +173,6 @@ public class HlaSearchBoxAssembler {
 				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		return labelPanel;
-	}
-
-
-	private JPanel assembleWBox() {
-		JPanel wBox = searchBox.assemble("Workshop Status    ", "00");
-
-		return wBox;
 	}
 
 	private JPanel assemble5PrimeUtr() {

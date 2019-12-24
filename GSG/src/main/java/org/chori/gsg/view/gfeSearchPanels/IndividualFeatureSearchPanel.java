@@ -40,7 +40,7 @@ public class SearchBox extends JPanel{
 
 		/* checkbox */
 		JCheckBox noZero = new JCheckBox();
-		HlaSearchBoxAssembler.allCheckboxes.add(noZero);
+		HlaSearchPanelAssembler.allCheckboxes.add(noZero);
 
 		/* textbox */
 		JTextField featureNumber = new JTextField();
@@ -49,14 +49,7 @@ public class SearchBox extends JPanel{
 		featureNumber.setName(nameNumber);
 		featureNumber.addActionListener(submitButtonGenerator.gfeListener);
 
-		// special rules for workshop status
-		if (nameNumber.equals("00")) {
-			featureNumber.setColumns(2);
-			featureNumber.setText("w");
-			noZero.setVisible(false);
-		}
-
-		HlaSearchBoxAssembler.allTextboxes.add(featureNumber);
+		HlaSearchPanelAssembler.allTextboxes.add(featureNumber);
 
 		/* label */
 		JLabel jLabel = new JLabel();

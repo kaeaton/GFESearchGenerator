@@ -28,7 +28,7 @@ public class BuildHeaderSearchString {
         searchString = searchString.concat("w");
 
 		// For each textfield add searchString or specified term to currentsearchString
-        for (int i = 1; i < textFields.size(); i++){
+        for (int i = 0; i < textFields.size(); i++){
 
             if ((textFields.get(i).getText().isEmpty()) && !(checkBoxes.get(i).isSelected())) {
                 searchString = searchString.concat("*-");
