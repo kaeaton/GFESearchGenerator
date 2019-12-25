@@ -1,4 +1,4 @@
-// package org.chori.gsg.view.searchboxes;
+// package org.chori.gsg.view.gfeSearchPanels;
 
 // import java.awt.GridBagConstraints;
 // import java.awt.GridBagLayout;
@@ -20,7 +20,7 @@
 //  * @author Katrina Eaton
 //  * 
 //  */
-// public class KirSearchBoxAssembler {
+// public class KirSearchPanelAssembler {
 
 // 	// Exons per locus
 // 	private HashMap<String, Integer> kirExonTotal = new HashMap();
@@ -35,7 +35,7 @@
 // 	public static ArrayList<JCheckBox> allCheckboxes;
 // 	public static ArrayList<JTextField> allTextboxes;
 
-// 	public KirSearchBoxAssembler() {
+// 	public KirSearchPanelAssembler() {
 // 		kirExonTotal.put("KIR2DL4", 9);   // missing Exon 4
 // 		kirExonTotal.put("KIR2DL5A", 9);  // missing Exon 4
 // 		kirExonTotal.put("KIR2DL5B", 9);  // missing Exon 4

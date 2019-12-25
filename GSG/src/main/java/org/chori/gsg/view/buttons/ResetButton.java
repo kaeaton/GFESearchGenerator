@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.*;
 
 public class ResetButton { 
@@ -39,7 +39,7 @@ public class ResetButton {
             public void actionPerformed(ActionEvent evt) {
             	
             	// the list of hla textfields
-            	ArrayList<JTextField> allTextFields = HlaSearchBoxAssembler.allTextboxes;
+            	ArrayList<JTextField> allTextFields = HlaSearchPanelAssembler.allTextboxes;
             	
             	// set the textfields back to empty
             	for (JTextField textField:allTextFields){

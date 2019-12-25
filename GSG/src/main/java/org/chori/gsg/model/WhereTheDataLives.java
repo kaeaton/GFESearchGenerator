@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.util.prefs.Preferences;
 
 import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdowns.*;
+import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;
 
 public class WhereTheDataLives {

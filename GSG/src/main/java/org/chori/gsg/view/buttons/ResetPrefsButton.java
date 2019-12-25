@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.*;
 
 public class ResetPrefsButton {

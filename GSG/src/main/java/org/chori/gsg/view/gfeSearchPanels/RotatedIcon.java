@@ -1,4 +1,4 @@
-package org.chori.gsg.view.searchboxes;
+package org.chori.gsg.view.gfeSearchPanels;
 
 import java.awt.Component;
 import java.awt.Graphics2D;

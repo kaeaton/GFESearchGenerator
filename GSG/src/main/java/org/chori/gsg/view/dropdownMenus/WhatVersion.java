@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdowns;
+package org.chori.gsg.view.dropdownMenus;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.chori.gsg.exceptions.*;
-import org.chori.gsg.view.searchboxes.*;
-import org.chori.gsg.view.dropdowns.*;
+import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.*;
 
 public class WhatVersion { 

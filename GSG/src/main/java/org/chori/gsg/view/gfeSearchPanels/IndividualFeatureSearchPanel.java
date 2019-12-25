@@ -1,4 +1,4 @@
-package org.chori.gsg.view.searchboxes;
+package org.chori.gsg.view.gfeSearchPanels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,18 +13,17 @@ import javax.swing.JTextField;
 
 import org.chori.gsg.view.buttons.SubmitButton;
 
-public class SearchBox extends JPanel{ 
+public class IndividualFeatureSearchPanel extends JPanel{ 
 
 	private TextIcon t1;
 	private RotatedIcon r1;
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
 	
-	public SearchBox(){
-		System.out.println("Assembling a regular searchbox");
-
+	public IndividualFeatureSearchPanel(){
+		// System.out.println("Assembling a regular searchbox");
 	}
 
-	public JPanel assemble(String label, String nameNumber){
+	public JPanel assembleFeatureSearchPanel(String label, String nameNumber){
 
 		/* setting up variables */
 		JPanel featureGroup = new JPanel();

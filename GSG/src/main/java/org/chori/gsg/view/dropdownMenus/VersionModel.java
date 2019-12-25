@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdowns;
+package org.chori.gsg.view.dropdownMenus;
 
 // import com.fasterxml.jackson.core.JsonFactory;
 // import java.io.BufferedReader;

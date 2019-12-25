@@ -12,7 +12,7 @@ import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.view.*;
-import org.chori.gsg.view.searchboxes.*;
+import org.chori.gsg.view.gfeSearchPanels.*;
 
 public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
@@ -51,8 +51,8 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
 		
-		this.allTextFields = HlaSearchBoxAssembler.allTextboxes;
-		this.allCheckBoxes = HlaSearchBoxAssembler.allCheckboxes;
+		this.allTextFields = HlaSearchPanelAssembler.allTextboxes;
+		this.allCheckBoxes = HlaSearchPanelAssembler.allCheckboxes;
 
 		submitRequest();
 	}

@@ -1,13 +1,13 @@
-package org.chori.gsg.view.searchboxes;
+package org.chori.gsg.view.gfeSearchPanels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.border.EmptyBorder;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
+// import javax.swing.border.EmptyBorder;
+// import javax.swing.BorderFactory;
+// import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,11 +25,11 @@ public class HlaSearchPanelAssembler {
 	// Exons per locus
 	private HashMap<String, Integer> hlaExonTotal = new HashMap();
 
-	// Searchbox source
-	private IndividualFeatureSearchPanel individualFeatureSearchPanel = new IndividualFeatureSearchPanel();
-
-	// select all checkbox
-	public static JCheckBox selectAllCheckBox;
+	// component sources
+	// private SelectAllCheckbox selectAllCheckBox = new SelectAllCheckbox();
+	// private LocusLabelPanel locusLabelPanel = new LocusLabelPanel();
+	// private IndividualFeatureSearchPanel individualFeatureSearchPanel = new IndividualFeatureSearchPanel();
+	private FeatureAssembler featureAssembler = new FeatureAssembler();
 
 	// component arraylists
 	public static ArrayList<JCheckBox> allCheckboxes;
@@ -62,12 +62,13 @@ public class HlaSearchPanelAssembler {
 		// reset the arrayLists
 		allCheckboxes = new ArrayList();
 		allTextboxes = new ArrayList();
-		allFeaturePanels = new ArrayList();
+		allFeaturePanels = featureAssembler.getAllFeaturePanels(locus, hlaExonTotal.get(locus));
 
-		assembleHlaPanel(allFeaturePanels);
+		JPanel completedPanel = assembleHlaPanel(allFeaturePanels);
+		return completedPanel;
 	}
 
-	private JPanel assembleHlaPanel(String locus){}
+	private JPanel assembleHlaPanel(ArrayList<JPanel> allFeaturePanels){
 
 		// parent panel
 		JPanel gfeSearchPanel = new JPanel();
@@ -132,50 +133,54 @@ public class HlaSearchPanelAssembler {
 		return gfeSearchPanel;
 	}
 
-	private JPanel labelPanel(String locus) {
-		// check all checkbox
-		selectAllCheckBox = new JCheckBox();
-		selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 8, 0));
+	// private JPanel labelPanel(String locus) {
+		// // check all checkbox
+		// selectAllCheckBox = new JCheckBox();
+		// selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 8, 0));
 
 		// locus label
-		JLabel locusLabel = new JLabel(locus + " w");
+		// JLabel locusLabel = new JLabel(locus + " w");
 
 		// sub panel and layout
-		JPanel labelPanel = new JPanel();
-		GroupLayout labelLayout = new GroupLayout(labelPanel);
-		labelPanel.setLayout(labelLayout);
+		// JPanel labelPanel = new JPanel();
+		// GroupLayout labelLayout = new GroupLayout(labelPanel);
+		// labelPanel.setLayout(labelLayout);
 
 		// add checkbox and label
-		labelPanel.add(selectAllCheckBox);
-		labelPanel.add(locusLabel);
+		// labelPanel.add(selectAllCheckBox);
+		// labelPanel.add(locusLabel);
 
 		// checkbox listner
-        SelectCheckboxes.selectAllCB(selectAllCheckBox, allCheckboxes);
+        // SelectCheckboxes.selectAllCB(selectAllCheckBox, allCheckboxes);
 
 		/* assembly */
 
 		// layout horizontal: all in one group so they stack
-		labelLayout.setHorizontalGroup(
-			labelLayout.createSequentialGroup()
-				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(selectAllCheckBox)
-				.addComponent(locusLabel)));
-				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+	// 	labelLayout.setHorizontalGroup(
+	// 		labelLayout.createSequentialGroup()
+	// 			.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	// 			.addComponent(selectAllCheckBox)
+	// 			.addComponent(locusLabel)));
 
-		// layout vertical: separate groups so they stack
-		labelLayout.setVerticalGroup(
-			labelLayout.createSequentialGroup()
-				.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(selectAllCheckBox))
-				.addGroup(labelLayout.createParallelGroup() // GroupLayout.Alignment.BASELINE
-				.addComponent(locusLabel))
-				.addGroup(labelLayout.createParallelGroup())); // GroupLayout.Alignment.BASELINE
-				// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+	// 	// layout vertical: separate groups so they stack
+	// 	labelLayout.setVerticalGroup(
+	// 		labelLayout.createSequentialGroup()
+	// 			.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	// 			.addComponent(selectAllCheckBox))
+	// 			.addGroup(labelLayout.createParallelGroup() // GroupLayout.Alignment.BASELINE
+	// 			.addComponent(locusLabel))
+	// 			.addGroup(labelLayout.createParallelGroup())); // GroupLayout.Alignment.BASELINE
 
-		return labelPanel;
-	}
+	// 	return labelPanel;
+	// }
 
 	private JPanel assemble5PrimeUtr() {
+		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
+
+		return fivePrimeUtr;
+	}
+
+	private JPanel assembleExon(int counter) {
 		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
 
 		return fivePrimeUtr;
