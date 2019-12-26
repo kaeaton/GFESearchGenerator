@@ -150,7 +150,9 @@ public class B12xGui extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = hlaPanelGenerator.assembleHlaPanel(whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = hlaPanelGenerator.getHlaPanel(whatLocusGfe.getSelectedItem().toString());
+			System.out.println("Generated the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
+			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);
 		} catch (IllegalArgumentException iex) {
@@ -484,9 +486,9 @@ public class B12xGui extends JFrame {
 				new B12xGui().setVisible(true);
 				
 				// assign preference listeners for loci changes
-				LociPrefsListeners prefsListener = new LociPrefsListeners();
-				BulkLociPreferenceListener bulkLociPreferenceListener = new BulkLociPreferenceListener();
-				GfeLociPreferenceListener gfeLociPreferenceListener = new GfeLociPreferenceListener();
+				// LociPrefsListeners prefsListener = new LociPrefsListeners();
+				// BulkLociPreferenceListener bulkLociPreferenceListener = new BulkLociPreferenceListener();
+				// GfeLociPreferenceListener gfeLociPreferenceListener = new GfeLociPreferenceListener();
 
 				InternetAccess internet = new InternetAccess();
 

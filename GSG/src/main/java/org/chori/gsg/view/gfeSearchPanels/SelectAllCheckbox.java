@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 
-public class SelectCheckbox { 
+public class SelectAllCheckbox { 
 
 	public SelectAllCheckbox() { }
 

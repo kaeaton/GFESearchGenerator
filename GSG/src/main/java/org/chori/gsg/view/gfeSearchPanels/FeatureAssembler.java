@@ -12,16 +12,18 @@ public class FeatureAssembler {
 
 	public FeatureAssembler() { }
 
-	public ArrayList<JPanel> getFeaturePanels(String locus, int totalExonCount) {
+	public ArrayList<JPanel> getAllFeaturePanels(String locus, int totalExonCount) {
 		// reset the arrayList
 		ArrayList<JPanel> allFeaturePanels = new ArrayList();
+		System.out.println("allFeaturePanels size: " + allFeaturePanels.size());
 
-		gatherAllFeaturePanels(locus, totalExonCount);
+		allFeaturePanels = gatherAllFeaturePanels(locus, totalExonCount);
+		System.out.println("allFeaturePanels size(FeatureAssembler): " + allFeaturePanels.size());
 
 		return allFeaturePanels;
 	}
 
-	private void gatherAllFeaturePanels(String locus, int totalExonCount) {
+	private ArrayList<JPanel> gatherAllFeaturePanels(String locus, int totalExonCount) {
 		allFeaturePanels.add(locusLabelPanel.getLocusLabelPanel(locus));
 		allFeaturePanels.add(assemble5PrimeUtr());
 
@@ -37,6 +39,7 @@ public class FeatureAssembler {
 
 		allFeaturePanels.add(assemble3PrimeUtr(nameCounter));
 
+		return allFeaturePanels;
 	}
 
 	private int generateExonAndIntronPanel(int totalExonCount) {
@@ -94,25 +97,28 @@ public class FeatureAssembler {
 	}
 
 	private JPanel assemble5PrimeUtr() {
-		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "00");
+		JPanel fivePrimeUtr = individualFeatureSearchPanel.assembleFeatureSearchPanel("5' UTR", "00");
 
 		return fivePrimeUtr;
 	}
 
 	private JPanel assembleExon(int locationCounter, int nameCounter) {
-		JPanel exonFeature = searchBox.assemble(("Exon " + locationCounter), 
-												  String.valueOf(nameCounter));
+		JPanel exonFeature = individualFeatureSearchPanel.assembleFeatureSearchPanel(("Exon " 
+			+ locationCounter), String.valueOf(nameCounter));
+
 		return exonFeature;
 	}
 
 	private JPanel assembleIntron(int locationCounter, int nameCounter) {
-		JPanel intronFeature = searchBox.assemble(("Intron " + locationCounter), 
-													String.valueOf(nameCounter));
+		JPanel intronFeature = individualFeatureSearchPanel.assembleFeatureSearchPanel(("Intron " 
+			+ locationCounter), String.valueOf(nameCounter));
+
 		return intronFeature;
 	}
 
 	private JPanel assemble3PrimeUtr(int nameCounter) {
-		JPanel threePrimeUtr = searchBox.assemble("3' UTR", String.valueOf(nameCounter));
+		JPanel threePrimeUtr = individualFeatureSearchPanel.assembleFeatureSearchPanel("3' UTR", 
+			String.valueOf(nameCounter));
 
 		return threePrimeUtr;
 	}

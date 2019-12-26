@@ -2,14 +2,14 @@ package org.chori.gsg.view.gfeSearchPanels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
+// import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.HashMap;
 // import javax.swing.border.EmptyBorder;
 // import javax.swing.BorderFactory;
 // import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
+// import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -34,7 +34,7 @@ public class HlaSearchPanelAssembler {
 	// component arraylists
 	public static ArrayList<JCheckBox> allCheckboxes;
 	public static ArrayList<JTextField> allTextboxes;
-	private static ArrayList<JPanel> allFeaturePanels;
+	private static ArrayList<JPanel> allFeaturePanels = new ArrayList();
 
 	public HlaSearchPanelAssembler() {
 		hlaExonTotal.put("HLA-A", 8);
@@ -59,10 +59,15 @@ public class HlaSearchPanelAssembler {
 	 * @return the populated JPanel
 	 */
 	public JPanel getHlaPanel(String locus) {
-		// reset the arrayLists
+		// reset the arrayLists, populated via IndividualFeatureSearchPanel
 		allCheckboxes = new ArrayList();
 		allTextboxes = new ArrayList();
+		if(allFeaturePanels.size() != 0) {
+			allFeaturePanels.clear();
+		}
+
 		allFeaturePanels = featureAssembler.getAllFeaturePanels(locus, hlaExonTotal.get(locus));
+		System.out.println("allFeaturePanels size: " + allFeaturePanels.size());
 
 		JPanel completedPanel = assembleHlaPanel(allFeaturePanels);
 		return completedPanel;
@@ -81,115 +86,21 @@ public class HlaSearchPanelAssembler {
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
 		c.gridy = 0;
-		gfeSearchPanel.add(labelPanel(locus), c);
+		System.out.println("allFeaturePanels size: " + allFeaturePanels.size());
+		gfeSearchPanel.add(allFeaturePanels.get(0), c);
 		
-		c.insets = new Insets(0,0,0,0);
-		c.gridx = 1;
-		// gfeSearchPanel.add(assembleWBox(), c);
-		
+		allFeaturePanels.remove(0);
+		// c.insets = new Insets(0,0,0,0);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 2;
-		gfeSearchPanel.add(assemble5PrimeUtr(), c);
 
-		// location counter for names to sort boxes
-		int locationCounter = 2;
-		int gridXCounter = 3;
-
-		// add the exon/intron pairs starting at 1 going up to exon total - 1
-		for (int i = 1; i < hlaExonTotal.get(locus); i++) {
-			
-			// Add exon bundle
-			JPanel exonBox = searchBox.assemble(("Exon " + i), 
-					String.valueOf(locationCounter));
-			c.gridx = gridXCounter;
-			gfeSearchPanel.add(exonBox, c);
-			locationCounter++;
-			gridXCounter++;
-
-			// add intron bundle
-			JPanel intronBox = searchBox.assemble(("Intron " + i), 
-					String.valueOf(locationCounter));
-			c.gridx = gridXCounter;
-			gfeSearchPanel.add(intronBox, c);
-			locationCounter++;
-			gridXCounter++;
-
+		int i = 1;
+		for(JPanel featurePanel:allFeaturePanels) {
+			c.gridx = i;
+			gfeSearchPanel.add(featurePanel, c);
+			i++;
 		}
 
-		// add final exon box. Use hash table to get its ID number
-		JPanel exonBox = searchBox.assemble(("Exon " + hlaExonTotal.get(locus)), 
-				String.valueOf(locationCounter));
-		c.gridx = gridXCounter;
-		gfeSearchPanel.add(exonBox, c);
-		locationCounter++;
-		gridXCounter++;
-
-		// 3' UTR bundle
-		c.gridx = gridXCounter;
-		gfeSearchPanel.add(assemble3PrimeUtr(locationCounter), c);
-
-        System.out.println("Total checkboxes = " + allCheckboxes.size());
-        System.out.println("Total textboxes = " + allTextboxes.size());
 		return gfeSearchPanel;
-	}
-
-	// private JPanel labelPanel(String locus) {
-		// // check all checkbox
-		// selectAllCheckBox = new JCheckBox();
-		// selectAllCheckBox.setBorder(new EmptyBorder(3, 10, 8, 0));
-
-		// locus label
-		// JLabel locusLabel = new JLabel(locus + " w");
-
-		// sub panel and layout
-		// JPanel labelPanel = new JPanel();
-		// GroupLayout labelLayout = new GroupLayout(labelPanel);
-		// labelPanel.setLayout(labelLayout);
-
-		// add checkbox and label
-		// labelPanel.add(selectAllCheckBox);
-		// labelPanel.add(locusLabel);
-
-		// checkbox listner
-        // SelectCheckboxes.selectAllCB(selectAllCheckBox, allCheckboxes);
-
-		/* assembly */
-
-		// layout horizontal: all in one group so they stack
-	// 	labelLayout.setHorizontalGroup(
-	// 		labelLayout.createSequentialGroup()
-	// 			.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	// 			.addComponent(selectAllCheckBox)
-	// 			.addComponent(locusLabel)));
-
-	// 	// layout vertical: separate groups so they stack
-	// 	labelLayout.setVerticalGroup(
-	// 		labelLayout.createSequentialGroup()
-	// 			.addGroup(labelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-	// 			.addComponent(selectAllCheckBox))
-	// 			.addGroup(labelLayout.createParallelGroup() // GroupLayout.Alignment.BASELINE
-	// 			.addComponent(locusLabel))
-	// 			.addGroup(labelLayout.createParallelGroup())); // GroupLayout.Alignment.BASELINE
-
-	// 	return labelPanel;
-	// }
-
-	private JPanel assemble5PrimeUtr() {
-		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
-
-		return fivePrimeUtr;
-	}
-
-	private JPanel assembleExon(int counter) {
-		JPanel fivePrimeUtr = searchBox.assemble("5' UTR", "01");
-
-		return fivePrimeUtr;
-	}
-
-	private JPanel assemble3PrimeUtr(int locationCounter) {
-		JPanel threePrimeUtr = searchBox.assemble("3' UTR", String.valueOf(locationCounter));
-
-		return threePrimeUtr;
 	}
 }
 
