@@ -23,8 +23,8 @@ public class ResetButton {
 		
 		// who is this reset button for?
 		switch(whichTab) {
-			case "HLA":
-				hlaListener();
+			case "GFE":
+				gfeListener();
 				break;
 			default:
 				System.out.println("Haven't set up that combobox model yet");
@@ -33,7 +33,7 @@ public class ResetButton {
 		return resetButton;
 	}
 
-	private void hlaListener() {
+	private void gfeListener() {
 		resetButton.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
@@ -45,9 +45,6 @@ public class ResetButton {
             	for (JTextField textField:allTextFields){
 					
 					textField.setText("");
-
-					// special rule for workshop status
-					if(textField.getName().equals("00")) textField.setText("w");
 				}
             }
         });
