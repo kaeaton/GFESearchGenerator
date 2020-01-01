@@ -61,7 +61,6 @@ public class GfeSearchPanelAssembler {
 
 		// label, and workshop status & 5'UTR bundles
 		c.weightx = 0;
-		// c.insets = new Insets(0,0,10,0);
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
 		c.gridy = 0;

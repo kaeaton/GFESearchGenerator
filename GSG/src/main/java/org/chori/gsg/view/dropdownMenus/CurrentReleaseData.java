@@ -12,11 +12,7 @@ import org.chori.gsg.view.*;
 public class CurrentReleaseData {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-	// // private final String[] hlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
-	// private String versionType = "HLA";
-	// private String type = "HLA";
-	// private String locus = "HLA-DQA1";
-	// private String version = "3.36.0";
+
 	private ArrayList<String> versions = new ArrayList<>();
 
 	// class instantiations
@@ -60,7 +56,7 @@ public class CurrentReleaseData {
 	        
 	        // recieve data and parse it
 			switch (type) {
-				case "HLA":
+				case "GFE":
 					parser.parseNeo4jResponse(locus, version, incomingData);
 					break;
 				default:
