@@ -49,8 +49,8 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
 		
-		this.allTextFields = HlaSearchPanelAssembler.allTextboxes;
-		this.allCheckBoxes = HlaSearchPanelAssembler.allCheckboxes;
+		this.allTextFields = GfeSearchPanelAssembler.allTextboxes;
+		this.allCheckBoxes = GfeSearchPanelAssembler.allCheckboxes;
 
 		submitRequest();
 	}

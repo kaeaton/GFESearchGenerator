@@ -14,7 +14,7 @@ public class LocusLabelPanel {
 
 	public JPanel getLocusLabelPanel(String locus) {
 		JLabel locusLabel = new JLabel(locus + " w");
-		ArrayList<JCheckBox> allTheCheckBoxes = HlaSearchPanelAssembler.allCheckboxes;
+		ArrayList<JCheckBox> allTheCheckBoxes = GfeSearchPanelAssembler.allCheckboxes;
 		JCheckBox selectAllCheckBox = selectAllCheckboxGenerator.getSelectAllCheckBox(allTheCheckBoxes);
 
 		return assembleLocusLabelPanel(selectAllCheckBox, locusLabel);

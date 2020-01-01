@@ -15,10 +15,8 @@ public class FeatureAssembler {
 	public ArrayList<JPanel> getAllFeaturePanels(String locus, int totalExonCount) {
 		// reset the arrayList
 		ArrayList<JPanel> allFeaturePanels = new ArrayList();
-		System.out.println("allFeaturePanels size: " + allFeaturePanels.size());
 
 		allFeaturePanels = gatherAllFeaturePanels(locus, totalExonCount);
-		System.out.println("allFeaturePanels size(FeatureAssembler): " + allFeaturePanels.size());
 
 		return allFeaturePanels;
 	}

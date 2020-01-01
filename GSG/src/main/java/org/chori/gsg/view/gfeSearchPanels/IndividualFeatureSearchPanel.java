@@ -39,7 +39,7 @@ public class IndividualFeatureSearchPanel extends JPanel{
 
 		/* checkbox */
 		JCheckBox noZero = new JCheckBox();
-		HlaSearchPanelAssembler.allCheckboxes.add(noZero);
+		GfeSearchPanelAssembler.allCheckboxes.add(noZero);
 
 		/* textbox */
 		JTextField featureNumber = new JTextField();
@@ -48,7 +48,7 @@ public class IndividualFeatureSearchPanel extends JPanel{
 		featureNumber.setName(nameNumber);
 		featureNumber.addActionListener(submitButtonGenerator.gfeListener);
 
-		HlaSearchPanelAssembler.allTextboxes.add(featureNumber);
+		GfeSearchPanelAssembler.allTextboxes.add(featureNumber);
 
 		/* label */
 		JLabel jLabel = new JLabel();

@@ -40,7 +40,7 @@ public class B12xGui extends JFrame {
 	private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 
 	// the GFE panel generators
-	private HlaSearchPanelAssembler hlaPanelGenerator = new HlaSearchPanelAssembler();
+	private GfeSearchPanelAssembler hlaPanelGenerator = new GfeSearchPanelAssembler();
 	// private KirSearchPanelAssembler kirPanelGenerator = new KirSearchPanelAssembler();
 	
 	// component generators
@@ -150,8 +150,7 @@ public class B12xGui extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = hlaPanelGenerator.getHlaPanel(whatLocusGfe.getSelectedItem().toString());
-			System.out.println("Generated the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
 			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);

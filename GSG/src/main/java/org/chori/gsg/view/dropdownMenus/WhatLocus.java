@@ -22,7 +22,7 @@ import org.chori.gsg.view.*;
  */
 public class WhatLocus { 
 
-	private HlaSearchPanelAssembler hlaSBA = new HlaSearchPanelAssembler();
+	private GfeSearchPanelAssembler hlaSBA = new GfeSearchPanelAssembler();
 	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
 	private final String[] kirLoci = {"KIR2DL4", "KIR2DL5A", "KIR2DL5B", "KIR2DP1", "KIR2DS1", "KIR2DS2", "KIR2DS3", "KIR2DS4", "KIR2DS5", "KIR3DL1", "KIR3DL2", "KIR3DL3", "KIR3DP1", "KIR3DS1"};
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
@@ -144,7 +144,7 @@ public class WhatLocus {
 		JPanel newPanel = new JPanel();
 
 		if(prefs.get("GSG_GFE_LOCI_STRING", "HLA").equals("HLA"))
-			newPanel = hlaSBA.getHlaPanel(locus);
+			newPanel = hlaSBA.getGfePanel(locus);
 
 		newPanel.setName("GFE");
 
