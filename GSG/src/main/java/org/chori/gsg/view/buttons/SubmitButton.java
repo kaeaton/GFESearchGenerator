@@ -1,5 +1,6 @@
 package org.chori.gsg.view.buttons;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -24,6 +25,7 @@ public class SubmitButton {
 	public JButton createSubmitButton(String whichTab) {
 		System.out.println("Generating the submit button");
 		JButton submitButton = new JButton("Submit");
+		submitButton.setPreferredSize(new Dimension(90, 30));
 
 		// who is this reset button for?
 		switch(whichTab) {

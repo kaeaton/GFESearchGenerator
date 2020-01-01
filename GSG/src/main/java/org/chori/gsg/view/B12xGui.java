@@ -49,7 +49,7 @@ public class B12xGui extends JFrame {
 	private static WhichLoci whichLociGenerator = new WhichLoci();
 	private static ResetButton resetButtonGenerator = new ResetButton();
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
-	private static CancelButton cancelButtonGenerator = new CancelButton();
+	private static ExitButton exitButtonGenerator = new ExitButton();
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 	private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
@@ -174,12 +174,12 @@ public class B12xGui extends JFrame {
 		// buttons
 		JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
 		JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
-		JButton cancelButtonGfe = cancelButtonGenerator.createCancelButton();
+		JButton exitButtonGfe = exitButtonGenerator.createExitButton();
 
 		// submit/cancel buttons panel
 		JPanel bottomButtonsGfe = new JPanel();
 		bottomButtonsGfe.add(submitButtonGfe);
-		bottomButtonsGfe.add(cancelButtonGfe);
+		bottomButtonsGfe.add(exitButtonGfe);
 
 		// version/loci dropdowns
 		JPanel versionLociPanelGfe = new JPanel();
@@ -263,12 +263,12 @@ public class B12xGui extends JFrame {
 		// buttons
 		JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
 		JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
-		JButton cancelButtonName = cancelButtonGenerator.createCancelButton();
+		JButton exitButtonName = exitButtonGenerator.createExitButton();
 
 		// submit/cancel buttons panel
 		JPanel bottomButtonsName = new JPanel();
 		bottomButtonsName.add(submitButtonName);
-		bottomButtonsName.add(cancelButtonName);
+		bottomButtonsName.add(exitButtonName);
 
 		// version/loci dropdowns
 		JPanel versionLociPanelName = new JPanel();
@@ -339,12 +339,12 @@ public class B12xGui extends JFrame {
 
 		// buttons
 		JButton submitButtonFeature = submitButtonGenerator.createSubmitButton("FEATURE");
-		JButton cancelButtonFeature = cancelButtonGenerator.createCancelButton();
+		JButton exitButtonFeature = exitButtonGenerator.createExitButton();
 
 		// submit/cancel buttons panel
 		JPanel bottomButtonsFeature = new JPanel();
 		bottomButtonsFeature.add(submitButtonFeature);
-		bottomButtonsFeature.add(cancelButtonFeature);
+		bottomButtonsFeature.add(exitButtonFeature);
 
 		// layout / add them to the nameTab
 		featureTab.setLayout(new GridBagLayout());
@@ -414,7 +414,7 @@ public class B12xGui extends JFrame {
 		// buttons
 		JButton bulkDownloadButton = bulkDownloadButtonGenerator.createBulkDownloadButton();
 		JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
-		JButton cancelButtonOptions = cancelButtonGenerator.createCancelButton();
+		JButton exitButtonOptions = exitButtonGenerator.createExitButton();
 
 		// layout / add them to the optionsTab
 		optionsTab.setLayout(new GridBagLayout());
@@ -443,7 +443,7 @@ public class B12xGui extends JFrame {
 		f.weightx = 0;
 		f.weighty = 0;
 		f.gridy = 6;
-		optionsTab.add(cancelButtonOptions, f);
+		optionsTab.add(exitButtonOptions, f);
 
 
 	/* Get and set open tab */
