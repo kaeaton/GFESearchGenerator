@@ -12,7 +12,7 @@ import org.chori.gsg.view.*;
 
 public class ResetButton { 
 
-	public JButton resetButton = new JButton("Reset search terms");
+	public JButton resetButton = new JButton("Reset text fields");
 
 	public ResetButton() {
 
@@ -27,7 +27,7 @@ public class ResetButton {
 				gfeListener();
 				break;
 			default:
-				System.out.println("Haven't set up that combobox model yet");
+				System.out.println("Haven't set up that reset combobox model yet");
 		}
 
 		return resetButton;
@@ -38,12 +38,11 @@ public class ResetButton {
     		@Override
             public void actionPerformed(ActionEvent evt) {
             	
-            	// the list of hla textfields
+            	// the list of gfe textfields
             	ArrayList<JTextField> allTextFields = GfeSearchPanelAssembler.allTextboxes;
             	
             	// set the textfields back to empty
             	for (JTextField textField:allTextFields){
-					
 					textField.setText("");
 				}
             }
