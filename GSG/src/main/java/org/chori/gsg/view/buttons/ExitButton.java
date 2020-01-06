@@ -15,13 +15,15 @@ public class ExitButton {
 		JButton exitButton = new JButton("Exit");
 		exitButton.setPreferredSize(new Dimension(90, 30));
 
-		exitButton.addActionListener(new ActionListener() {
-    		@Override
-            public void actionPerformed(ActionEvent evt) {
-				System.exit(0);
-            }
-        });
+		exitButton.addActionListener(exitListener);
 
-        return exitButton;
+		return exitButton;
 	}
+
+	public static ActionListener exitListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			System.exit(0);
+		}
+	};
 }
