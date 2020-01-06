@@ -125,7 +125,7 @@ public class LocusModel {
 // 			}
 
 // 			// check file length, is it more than just a header line?
-// 			if (fileLength(locus, version))
+// 			if (isTheFileLongEnough(locus, version))
 // 				availableLoci.add(locus);
 // 		}
 
@@ -139,13 +139,13 @@ public class LocusModel {
 
 // 	// sometimes files have nothing but a header in them
 // 	// makes sure the file is big enough to actually contain data
-// 	private boolean fileLength(String whatLocus, String whatVersion) {
+// 	private boolean isTheFileLongEnough(String whatLocus, String whatVersion) {
 // 		//
 // 		File data = rawData.getRawData(whatLocus, whatVersion);
 // 		if (data != null) {
-// 			long fileLength = data.length();
+// 			long isTheFileLongEnough = data.length();
 // 			System.out.println("File length of " + whatVersion 
-// 				+ ", " + whatLocus + ": " + fileLength);
+// 				+ ", " + whatLocus + ": " + isTheFileLongEnough);
 		
 // 			// check that file is longer than just a header
 // 			if(data.length() > 100)

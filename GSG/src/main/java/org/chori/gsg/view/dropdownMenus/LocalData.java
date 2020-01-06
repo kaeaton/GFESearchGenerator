@@ -13,8 +13,9 @@ import org.chori.gsg.view.*;
 
 public class LocalData {
 
-	private WhereTheDataLives wtdl = new WhereTheDataLives();
+	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	private InternetAccess internet = new InternetAccess();
+	private FileUtilities fileUtilities = new FileUtilities();
 
 	public LocalData () { }
 
@@ -23,7 +24,7 @@ public class LocalData {
 		ArrayList<String> versions = new ArrayList<>();
 		
 		// find the GSGData folder
-		String rawDataPath = wtdl.getRawDataPath();
+		String rawDataPath = whereTheDataLives.getRawDataPath();
 
 		// read the GSGData folder
 		File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
@@ -70,7 +71,7 @@ public class LocalData {
 		ArrayList<String> availableLoci = new ArrayList<>();
 		
 		// find the BSGData folder
-		String rawDataPath = wtdl.getRawDataPath();
+		String rawDataPath = whereTheDataLives.getRawDataPath();
 		rawDataPath = rawDataPath + version;
 		// System.out.println("Locus Model file path: " + rawDataPath);
 
@@ -104,7 +105,7 @@ public class LocalData {
 
 			// get file suffix, if csv, and more than just a header, extract locus name
 			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
-			if (fileSuffix.compareTo("csv") == 0 && wtdl.fileLength(aFile)) {
+			if (fileSuffix.compareTo("csv") == 0 && fileUtilities.isTheFileLongEnough(aFile)) {
 				locus = protoLocus.substring(0, protoLocus.length() - 20);
 				availableLoci.add(locus);
 				// System.out.println("locus name: " + locus);

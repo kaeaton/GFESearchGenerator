@@ -13,6 +13,7 @@ public class WhereTheDataLives {
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
 	private CurrentReleaseData crd = new CurrentReleaseData();
+	private FileUtilities fileUtilities = new FileUtilities();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
 				+ System.getProperty("file.separator") + "Documents"
@@ -79,7 +80,7 @@ public class WhereTheDataLives {
 								+ "_download.csv";
 		File file = new File(specificFile);
 		
-		if(file.exists() && fileLength(file)) {
+		if(file.exists() && fileUtilities.isTheFileLongEnough(file)) {
 			System.out.println("Found the raw data file");
 			return file;
 		} else {
@@ -107,23 +108,23 @@ public class WhereTheDataLives {
 
 	}
 
-	// sometimes files have nothing but a header in them
-	// makes sure the file is big enough to actually contain data
-	public boolean fileLength(File file) {//String whatLocus, String whatVersion) {
-		//
-		// File data = getRawData(whatLocus, whatVersion);
-		if (file.exists()) {
-			System.out.println("wtdl.fileLength(): The file exists, we're going to check the length: " + file.toString());
-			long fileLength = file.length();
-			// System.out.println("File length of " + whatVersion 
-				// + ", " + whatLocus + ": " + fileLength);
+	// // sometimes files have nothing but a header in them
+	// // makes sure the file is big enough to actually contain data
+	// public boolean isTheFileLongEnough(File file) {//String whatLocus, String whatVersion) {
+	// 	//
+	// 	// File data = getRawData(whatLocus, whatVersion);
+	// 	if (file.exists()) {
+	// 		System.out.println("wtdl.isTheFileLongEnough(): The file exists, we're going to check the length: " + file.toString());
+	// 		long isTheFileLongEnough = file.length();
+	// 		// System.out.println("File length of " + whatVersion 
+	// 			// + ", " + whatLocus + ": " + isTheFileLongEnough);
 		
-			// (a header is about 18 bytes. This is giving a bit of a cushion)
-			if(file.length() > 100)
-				return true;
-		}
+	// 		// (a header is about 18 bytes. This is giving a bit of a cushion)
+	// 		if(file.length() > 100)
+	// 			return true;
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
 }

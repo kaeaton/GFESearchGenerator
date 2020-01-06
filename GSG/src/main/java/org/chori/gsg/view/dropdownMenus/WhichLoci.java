@@ -49,10 +49,16 @@ public class WhichLoci {
 			public void actionPerformed(ActionEvent evt) {
 				String whichLociName = whichLoci.getSelectedItem().toString();
 				System.out.println("Which " + whichTab + " Loci listener triggered");
-				
+
+				updateLocusAndVersions(whichTab, whichLociName);
+
 				prefs.putInt("GSG_" + whichTab + "_LOCI", whichLoci.getSelectedIndex());
 				prefs.put("GSG_" + whichTab + "_LOCI_STRING", whichLociName);
 			}
 		});
+	}
+
+	private void updateLocusAndVersions(String whichTab, String whichLoci) {
+		
 	}
 }

@@ -51,7 +51,7 @@ public class WhatVersion {
 				comboBoxModel = vm.versions();
 				whatVersion.setModel(comboBoxModel);
 				try {
-					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION_1", 0));
+					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION", 0));
 				} catch (IllegalArgumentException iex) { 
 					System.out.println("Name whatVersion setSelectedIndex error: " + iex); 
 					PrefProbException ppex = new PrefProbException();
