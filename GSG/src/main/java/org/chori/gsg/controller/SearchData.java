@@ -115,7 +115,7 @@ public class SearchData {
 			// Close the buffer
 			br.close();
 
-		} catch (Exception ex) { System.out.println(ex); }
+		} catch (Exception ex) { System.out.println("SearchData: searchThroughData: " + ex); }
 
 		// sort the data: passed on with GFE as key
 		SortData sorting = new SortData();

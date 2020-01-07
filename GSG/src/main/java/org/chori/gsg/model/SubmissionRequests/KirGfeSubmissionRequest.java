@@ -19,7 +19,8 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	// class instantiations
 	private Headers header = new Headers();
 	private BuildRegex buildRegex = new BuildRegex();
-	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
+	private FileUtilities fileUtilities = new FileUtilities();
+	// private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	private BuildHeaderSearchString buildHeaderSearchString = new BuildHeaderSearchString();
 	
 	// interface data
@@ -47,7 +48,7 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
-		this.rawData = whereTheDataLives.getRawHlaData(whatLocus, whatVersion);
+		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion);
 		
 		this.allTextFields = GfeSearchPanelAssembler.allTextboxes;
 		this.allCheckBoxes = GfeSearchPanelAssembler.allCheckboxes;

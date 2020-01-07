@@ -64,6 +64,8 @@ public class PrettyData {
 
 
 		try {
+			System.out.println("PrettyData: checking that the file passed to searchThroughData actually exists: "
+								+ file.toString());
 			// Read the File
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			br.readLine(); // 1st line: filedate

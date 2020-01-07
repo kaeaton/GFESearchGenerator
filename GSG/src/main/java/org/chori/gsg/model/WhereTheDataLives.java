@@ -13,7 +13,7 @@ public class WhereTheDataLives {
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
 	private CurrentReleaseData crd = new CurrentReleaseData();
-	private FileUtilities fileUtilities = new FileUtilities();
+	// private FileUtilities fileUtilities = new FileUtilities();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
 				+ System.getProperty("file.separator") + "Documents"
@@ -74,25 +74,20 @@ public class WhereTheDataLives {
 		return path;
 	} 
 
-	// get the data file
-	public File getRawHlaData(String locus, String version) {
-		String specificFile = rawDataPath + version + System.getProperty("file.separator") + "neo4j_" + locus + "_" + version
-								+ "_download.csv";
-		File file = new File(specificFile);
+	// // get the data file
+	// public File getTheRawDataFile(String locus, String version) {
+	// 	String specificFile = rawDataPath + version + System.getProperty("file.separator") + "neo4j_" + locus + "_" + version
+	// 							+ "_download.csv";
+	// 	File file = new File(specificFile);
 		
-		if(file.exists() && fileUtilities.isTheFileLongEnough(file)) {
-			System.out.println("Found the raw data file");
-			return file;
-		} else {
-			storeResultsData("HLA", locus, version);
-			return file;
-		}
-		// System.out.println("Didn't find the raw data file.");
-
-		// System.out.println("looking for the file at " + specificFile);
-
-		// return null;
-	}
+	// 	if(file.exists() && fileUtilities.isTheFileLongEnough(file)) {
+	// 		System.out.println("Found the raw data file");
+	// 		return file;
+	// 	} else {
+	// 		storeResultsData("HLA", locus, version);
+	// 		return file;
+	// 	}
+	// }
 
 	// create the file to store results
 	public void storeResultsData(String type, String locus, String version) {
@@ -104,27 +99,5 @@ public class WhereTheDataLives {
 			crd.getRawLocusData(type, locus, version);
 
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
-
-
 	}
-
-	// // sometimes files have nothing but a header in them
-	// // makes sure the file is big enough to actually contain data
-	// public boolean isTheFileLongEnough(File file) {//String whatLocus, String whatVersion) {
-	// 	//
-	// 	// File data = getRawData(whatLocus, whatVersion);
-	// 	if (file.exists()) {
-	// 		System.out.println("wtdl.isTheFileLongEnough(): The file exists, we're going to check the length: " + file.toString());
-	// 		long isTheFileLongEnough = file.length();
-	// 		// System.out.println("File length of " + whatVersion 
-	// 			// + ", " + whatLocus + ": " + isTheFileLongEnough);
-		
-	// 		// (a header is about 18 bytes. This is giving a bit of a cushion)
-	// 		if(file.length() > 100)
-	// 			return true;
-	// 	}
-
-	// 	return false;
-	// }
-
 }

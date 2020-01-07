@@ -73,7 +73,7 @@ public class LocalData {
 		// find the BSGData folder
 		String rawDataPath = whereTheDataLives.getRawDataPath();
 		rawDataPath = rawDataPath + version;
-		// System.out.println("Locus Model file path: " + rawDataPath);
+		System.out.println("Locus Model file path: " + rawDataPath);
 
 		// read the BSGData folder
 		File[] files = new File(rawDataPath).listFiles();
