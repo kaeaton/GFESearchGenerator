@@ -25,7 +25,7 @@ public class FileUtilities {
 	 * 
 	 * @param locus a string telling which locus for HLA, or just "KIR" for KIR data
 	 * @param version a string listing the version.
-	 * @return if it exists, a csv file of raw data.
+	 * @return a csv file of raw data.
 	 */
 	public File getTheRawDataFile(String locus, String version) {
 		String specificFile = whereTheDataLives.getRawDataPath() + version + System.getProperty("file.separator") 
