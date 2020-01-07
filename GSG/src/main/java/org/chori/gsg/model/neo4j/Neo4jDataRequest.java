@@ -23,7 +23,7 @@ public class Neo4jDataRequest {
 			neo4jDataRequest = hlaRequest(locus, version);
 		}
 
-		return formNeo4jJsonRequest(neo4jDataRequest);
+		return createNeo4jJsonRequest(neo4jDataRequest);
 	}
 
 	private String kirRequest(String version) {
@@ -45,7 +45,7 @@ public class Neo4jDataRequest {
 		return hlaRequest;
 	}
 
-	private String formNeo4jJsonRequest(String neo4jDataRequest) {
+	private String createNeo4jJsonRequest(String neo4jDataRequest) {
 		try {
 			
 			return generateJson.neo4jJsonGenerator(neo4jDataRequest);
