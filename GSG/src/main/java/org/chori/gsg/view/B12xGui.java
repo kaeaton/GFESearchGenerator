@@ -258,10 +258,8 @@ public class B12xGui extends JFrame {
 		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
 		resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
 		resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
-		// resultsTextAreaGfe.setEditable(false);
 
 		// buttons
-		JButton resetButtonName = resetButtonGenerator.createResetButton("NAME");
 		JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
 		JButton exitButtonName = exitButtonGenerator.createExitButton();
 
