@@ -13,7 +13,7 @@ public class Neo4jDataRequest {
 
 	public Neo4jDataRequest() { }
 
-	public String formNeo4jDataRequest(String locus, String version) throws IOException 
+	public String createNeo4jDataRequest(String locus, String version) throws IOException 
 	{
 		String neo4jDataRequest;
 
@@ -23,7 +23,7 @@ public class Neo4jDataRequest {
 			neo4jDataRequest = hlaRequest(locus, version);
 		}
 
-		return createNeo4jJsonRequest(neo4jDataRequest);
+		return formNeo4jJsonRequest(neo4jDataRequest);
 	}
 
 	private String kirRequest(String version) {
@@ -45,7 +45,7 @@ public class Neo4jDataRequest {
 		return hlaRequest;
 	}
 
-	private String createNeo4jJsonRequest(String neo4jDataRequest) {
+	private String formNeo4jJsonRequest(String neo4jDataRequest) {
 		try {
 			
 			return generateJson.neo4jJsonGenerator(neo4jDataRequest);
