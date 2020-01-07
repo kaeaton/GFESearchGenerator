@@ -50,9 +50,9 @@ public class CurrentReleaseData {
 		try{
 			// retrieve the data
 	        // create the request and send it
-	        Neo4jRequests request = new Neo4jRequests();
+	        Neo4jDataRequest neo4jDataRequest = new Neo4jDataRequest();
 	        InputStream incomingData = httpCall.makeCall(type, 
-	        	request.formNeo4jRequest(type, locus, version));
+	        	neo4jDataRequest.formNeo4jRequest(locus, version));
 	        
 	        // recieve data and parse it
 			switch (type) {
