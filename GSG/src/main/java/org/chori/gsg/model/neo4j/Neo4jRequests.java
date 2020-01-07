@@ -21,8 +21,16 @@ public class Neo4jRequests {
 			// hla or kir?
 			// String requestType = LocusNameParser.hlaOrKir(locus);
 			
-			// hla
-			if(type.equals("HLA")) {
+			// kir
+			if(locus.equals("KIR")) {
+			// request string MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) WHERE r.imgt_release = "2.7.0" RETURN n.name, g.name
+				 
+				request = ("MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) " +
+							"WHERE r.imgt_release = " + quote + version + quote +
+							" RETURN n.name, g.name");
+			}
+
+			else { //if(type.equals("GFE")) {
 			// request string: MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) WHERE n.locus = "locus" AND r.imgt_release = "version" RETURN n.name, g.name
 
 				request = ("MATCH (n:IMGT_HLA)-[r:HAS_GFE]-(g:GFE) " +
@@ -31,20 +39,11 @@ public class Neo4jRequests {
 							" RETURN n.name, g.name");
 			}
 			
-			// kir
-			else if(locus.equals("KIR")) {
-			// request string MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) WHERE r.imgt_release = "2.7.0" RETURN n.name, g.name
-				 
-			request = ("MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) " +
-						"WHERE r.imgt_release = " + quote + version + quote +
-						" RETURN n.name, g.name");
-			}
-			
-			// oops
-			else
-			{
-				System.out.println("Problem creating the neo4j data request.");
-			}
+			// // oops
+			// else
+			// {
+			// 	System.out.println("Problem creating the neo4j data request.");
+			// }
 			
 			// generate the json request
 			GenerateJson generateJson = new GenerateJson();
