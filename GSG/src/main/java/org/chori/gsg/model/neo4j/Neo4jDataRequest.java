@@ -13,7 +13,7 @@ public class Neo4jDataRequest {
 
 	public Neo4jDataRequest() { }
 
-	public String formNeo4jRequest(String locus, String version) throws IOException 
+	public String formNeo4jDataRequest(String locus, String version) throws IOException 
 	{
 		String neo4jDataRequest;
 

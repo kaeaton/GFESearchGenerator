@@ -52,7 +52,7 @@ public class CurrentReleaseData {
 	        // create the request and send it
 	        Neo4jDataRequest neo4jDataRequest = new Neo4jDataRequest();
 	        InputStream incomingData = httpCall.makeCall(type, 
-	        	neo4jDataRequest.formNeo4jRequest(locus, version));
+	        	neo4jDataRequest.formNeo4jDataRequest(locus, version));
 	        
 	        // recieve data and parse it
 			switch (type) {
