@@ -18,7 +18,7 @@ public class GfeSearchPanelAssembler {
 
 	// component sources
 	private ExonCount exonCount = new ExonCount();
-	private FeatureAssembler featureAssembler = new FeatureAssembler();
+	private GatherFeaturePanels gatherFeaturePanels = new GatherFeaturePanels();
 
 	// exon hashmap
 	private final HashMap<String, Integer> allExonCounts = exonCount.getExonCount();
@@ -46,7 +46,7 @@ public class GfeSearchPanelAssembler {
 			allFeaturePanels.clear();
 		}
 
-		allFeaturePanels = featureAssembler.getAllFeaturePanels(locus, allExonCounts.get(locus));
+		allFeaturePanels = gatherFeaturePanels.getAllFeaturePanels(locus, allExonCounts.get(locus));
 
 		JPanel completedPanel = assembleGfePanel(allFeaturePanels);
 		return completedPanel;
