@@ -10,34 +10,28 @@ public class GenerateJson {
 	private JsonFactoryInstance getFactory = JsonFactoryInstance.getInstance();
 	private JsonFactory factory = getFactory.factory;
 
-	public GenerateJson() 
-	{
-		
-	}
+	public GenerateJson() { }
 	
-	public String neo4jJsonGenerator(String request)
-	{
+	public String neo4jJsonGenerator(String request) {
 		StringWriter writer = new StringWriter();
 		
-		try
-		{
+		try {
 			JsonGenerator generator = factory.createGenerator(writer);
 
-			// start writing with {
-			generator.writeStartObject();
+			generator.writeStartObject(); 			// {
 			generator.writeFieldName("statements");
-			generator.writeStartArray();
-			generator.writeStartObject();
+			generator.writeStartArray(); 			// [
+			generator.writeStartObject(); 			// {
 			generator.writeStringField("statement", request);
-			generator.writeEndObject();
-			generator.writeEndArray();
-			generator.writeEndObject();
+			generator.writeEndObject(); 			// }
+			generator.writeEndArray(); 				// ]
+			generator.writeEndObject(); 			// }
 			generator.close();
 
-			System.out.println(writer.toString());            
-		} catch (Exception ex) {
-			System.out.println(ex);
-		}
+			System.out.println(writer.toString());
+
+		} catch (Exception ex) { System.out.println("Error assembling JSON for Neo4j: " + ex); }
+
 		return writer.toString();
 	}
 }
