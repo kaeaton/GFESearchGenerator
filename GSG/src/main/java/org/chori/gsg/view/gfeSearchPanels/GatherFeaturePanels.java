@@ -95,27 +95,27 @@ public class GatherFeaturePanels {
 	}
 
 	private JPanel assemble5PrimeUtr() {
-		JPanel fivePrimeUtr = individualFeatureSearchPanel.assembleFeatureSearchPanel("5' UTR", "00");
+		JPanel fivePrimeUtr = individualFeatureSearchPanel.createIndividualFeaturePanel("5' UTR", "00");
 
 		return fivePrimeUtr;
 	}
 
 	private JPanel assembleExon(int locationCounter, int nameCounter) {
-		JPanel exonFeature = individualFeatureSearchPanel.assembleFeatureSearchPanel(("Exon " 
+		JPanel exonFeature = individualFeatureSearchPanel.createIndividualFeaturePanel(("Exon " 
 			+ locationCounter), String.valueOf(nameCounter));
 
 		return exonFeature;
 	}
 
 	private JPanel assembleIntron(int locationCounter, int nameCounter) {
-		JPanel intronFeature = individualFeatureSearchPanel.assembleFeatureSearchPanel(("Intron " 
+		JPanel intronFeature = individualFeatureSearchPanel.createIndividualFeaturePanel(("Intron " 
 			+ locationCounter), String.valueOf(nameCounter));
 
 		return intronFeature;
 	}
 
 	private JPanel assemble3PrimeUtr(int nameCounter) {
-		JPanel threePrimeUtr = individualFeatureSearchPanel.assembleFeatureSearchPanel("3' UTR", 
+		JPanel threePrimeUtr = individualFeatureSearchPanel.createIndividualFeaturePanel("3' UTR", 
 			String.valueOf(nameCounter));
 
 		return threePrimeUtr;
