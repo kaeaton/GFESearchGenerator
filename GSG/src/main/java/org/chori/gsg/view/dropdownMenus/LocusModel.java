@@ -20,6 +20,7 @@ public class LocusModel {
 	// class instantiations
 	// private WhereTheDataLives wtdl = new WhereTheDataLives();
 	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
+	private final String[] fullKirLoci = {"KIR2DL4", "KIR2DL5A", "KIR2DL5B", "KIR2DP1", "KIR2DS1", "KIR2DS2", "KIR2DS3", "KIR2DS4", "KIR2DS5", "KIR3DL1", "KIR3DL2", "KIR3DL3", "KIR3DP1", "KIR3DS1"};
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();

@@ -17,7 +17,7 @@ public class CurrentReleaseData {
 
 	// class instantiations
 	private Neo4jHttpCall httpCall = new Neo4jHttpCall();
-	private IncomingJsonData parser = new IncomingJsonData();
+	private IncomingJsonData incomingJsonData = new IncomingJsonData();
 
 	public CurrentReleaseData() { }
 
@@ -30,7 +30,7 @@ public class CurrentReleaseData {
 				.makeCall(type, whatVersion.formNeo4jVersionRequest(type));
 
 			// recieve the version data and parse it
-			versions = parser.parseVersion(incomingVersionData, type);
+			versions = incomingJsonData.parseVersion(incomingVersionData, type);
 			System.out.println(versions.toString());
 
 			System.out.println("Versions in Prefs: " + prefs.get("GSG_HLA_VERSIONS", ""));
@@ -57,10 +57,10 @@ public class CurrentReleaseData {
 	        // recieve data and parse it
 			switch (type) {
 				case "GFE":
-					parser.parseNeo4jResponse(locus, version, incomingData);
+					incomingJsonData.parseNeo4jResponse(locus, version, incomingData);
 					break;
 				default:
-					System.out.println(type + " hasn't been added yet.");
+					System.out.println("Current release data: " + type + " hasn't been added yet.");
 			}
 		} catch (Exception ex) { System.out.println("Downloading locus data failed: " + ex); }
 	}
