@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.*;
 import java.util.prefs.Preferences;
 
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;
@@ -46,27 +47,26 @@ public class WhereTheDataLives {
 		return prefs.get("GSG_RESULTS_DATA", defaultBasePath);
 	}
 
-	// create file to store raw data
-	public String storeRawData(String type, String locus, String version) {
+	// create path to a file to store raw data
+	public String createRawDataFilePath(String type, String locus, String version) {
 
 		// where the file is going to live and
 		// what the file is going to be called
-		String path = (rawDataPath 
-				+ version + System.getProperty("file.separator")
-				+ "neo4j_" + locus + "_" + version
-				+ "_Download.csv");
+		String path = "";
 
-		// turn it from string to a path
-		Path rawDataPath = Paths.get(path);
+		switch(type) {
+			case "HLA":
+				path = hlaPath(locus, version);
+				break;
+			case "KIR":
+				path = kirPath(version);
+				break;
+			default:
+				System.out.println("WTDL: createRawDataPath: Haven't set up that path yet");
+		}
+		
 
-		// if the path doesn't exist, make it
-		try {
-			if (!rawDataPath.toFile().exists())
-            {
-                System.out.println("The file does not exist.");
-                rawDataPath.toFile().getParentFile().mkdirs();
-            }
-	    } catch (Exception ex) { System.out.println("Error creating file structure: " + ex); }
+		createPath(path);
 
 	    // return the string of the now existing path
 	    // (the IncomingJsonData class will make the actual file
@@ -74,20 +74,41 @@ public class WhereTheDataLives {
 		return path;
 	} 
 
-	// // get the data file
-	// public File getTheRawDataFile(String locus, String version) {
-	// 	String specificFile = rawDataPath + version + System.getProperty("file.separator") + "neo4j_" + locus + "_" + version
-	// 							+ "_download.csv";
-	// 	File file = new File(specificFile);
-		
-	// 	if(file.exists() && fileUtilities.isTheFileLongEnough(file)) {
-	// 		System.out.println("Found the raw data file");
-	// 		return file;
-	// 	} else {
-	// 		storeResultsData("HLA", locus, version);
-	// 		return file;
-	// 	}
-	// }
+	private String hlaPath(String locus, String version) {
+
+		// sample file name/path: /Documents/GSG/GSGData/3.35.0/neo4j_HLA-A_3.35.0_Download.csv
+		String path = (getRawDataPath() 
+				+ version + System.getProperty("file.separator")
+				+ "neo4j_" + locus + "_" + version
+				+ "_Download.csv");
+
+		return path;
+	}
+
+	private String kirPath(String version) {
+
+		// sample file name/path: /Documents/GSG/GSGData/2.7.0/neo4j_KIR_2.7.0_Download.csv
+		String path = (getRawDataPath() 
+				+ version + System.getProperty("file.separator")
+				+ "neo4j_KIR_" + version + "_Download.csv");
+
+		return path;
+	}
+
+	private void createPath(String pathString) {
+
+		// turn it from string to a path
+		Path path = Paths.get(pathString);
+
+		// if the path doesn't exist, make it
+		try {
+			if (!path.toFile().exists())
+            {
+                System.out.println("The file does not exist.");
+                path.toFile().getParentFile().mkdirs();
+            }
+	    } catch (Exception ex) { System.out.println("WTDL: Error creating file structure: " + ex); }
+	}
 
 	// create the file to store results
 	public void storeResultsData(String type, String locus, String version) {

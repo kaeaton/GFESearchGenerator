@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * Assembles the search boxes (JTextFields) and checkboxes for the HLA GFE search page
+ * Assembles the subpanels for the GFE search panel
  * 
  * @author Katrina Eaton
  * 
@@ -18,7 +18,7 @@ public class GfeSearchPanelAssembler {
 
 	// component sources
 	private ExonCount exonCount = new ExonCount();
-	private GatherFeaturePanels gatherFeaturePanels = new GatherFeaturePanels();
+	private GatherIndividualFeaturePanels gatherIndividualFeaturePanels = new GatherIndividualFeaturePanels();
 
 	// exon hashmap
 	private final HashMap<String, Integer> allExonCounts = exonCount.getExonCount();
@@ -46,7 +46,7 @@ public class GfeSearchPanelAssembler {
 			allFeaturePanels.clear();
 		}
 
-		allFeaturePanels = gatherFeaturePanels.getAllFeaturePanels(locus, allExonCounts.get(locus));
+		allFeaturePanels = gatherIndividualFeaturePanels.getAllFeaturePanels(locus, allExonCounts.get(locus));
 
 		JPanel completedPanel = assembleGfePanel(allFeaturePanels);
 		return completedPanel;

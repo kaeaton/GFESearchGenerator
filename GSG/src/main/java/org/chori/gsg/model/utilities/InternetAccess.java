@@ -1,4 +1,4 @@
-package org.chori.gsg.model;
+package org.chori.gsg.model.utilities;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

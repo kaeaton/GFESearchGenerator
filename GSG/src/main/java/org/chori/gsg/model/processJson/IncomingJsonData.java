@@ -44,7 +44,7 @@ public class IncomingJsonData {
 		try 
 		{
 			WhereTheDataLives wtdl = new WhereTheDataLives();
-			String gfeRawPath = wtdl.storeRawData("HLA", locus, version);
+			String gfeRawPath = wtdl.createRawDataFilePath("HLA", locus, version);
 
 			File gfeRaw = new File(gfeRawPath);
 

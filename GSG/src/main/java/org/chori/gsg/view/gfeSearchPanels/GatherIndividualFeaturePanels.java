@@ -3,14 +3,14 @@ package org.chori.gsg.view.gfeSearchPanels;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-public class GatherFeaturePanels {
+public class GatherIndividualFeaturePanels {
 
 	private LocusLabelPanel locusLabelPanel = new LocusLabelPanel();
 	private IndividualFeatureSearchPanel individualFeatureSearchPanel = new IndividualFeatureSearchPanel();
 
 	private ArrayList<JPanel> allFeaturePanels = new ArrayList();
 
-	public GatherFeaturePanels() { }
+	public GatherIndividualFeaturePanels() { }
 
 	public ArrayList<JPanel> getAllFeaturePanels(String locus, int totalExonCount) {
 		// reset the arrayList

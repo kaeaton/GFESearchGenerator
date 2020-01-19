@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 public class LocalData {

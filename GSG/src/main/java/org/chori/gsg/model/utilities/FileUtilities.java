@@ -1,7 +1,10 @@
-package org.chori.gsg.model;
+package org.chori.gsg.model.utilities;
 
 import java.io.File;
 import java.nio.file.*;
+
+import org.chori.gsg.model.*;
+
 
 /**
  * Utilities for processing files
