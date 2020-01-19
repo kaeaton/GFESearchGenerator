@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.neo4j.*;
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 public class IncomingJsonData {
