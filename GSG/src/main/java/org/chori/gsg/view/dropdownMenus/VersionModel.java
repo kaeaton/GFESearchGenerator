@@ -46,7 +46,7 @@ public class VersionModel {
 
 
 	public DefaultComboBoxModel versions() {
-		String onlineVersions = "";
+		String onlineVersions = null;
 		String[] parsedOnlineVersions = new String[3];
 		ArrayList<String> localVersions = new ArrayList<>();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -54,6 +54,7 @@ public class VersionModel {
 
 		localVersions = localData.localVersionData();
 		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
 
 		// if online versions equals null, and you have internet
 		// download the current versions
@@ -67,7 +68,7 @@ public class VersionModel {
 		// split on the commas, add to an ArrayList.
 		if(onlineVersions != null && internet.tester()) {
 			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
-			System.out.println("online versions array: " + onlineVersions);
+			System.out.println("Version model: online versions array: " + onlineVersions);
 			parsedOnlineVersions = onlineVersions.split(", ");
 			ArrayList<String> onlineVersionsList = new ArrayList<String>(Arrays.asList(parsedOnlineVersions));
 			versionSet.addAll(onlineVersionsList);
@@ -106,7 +107,7 @@ public class VersionModel {
 		// and split on the commas
 		if(onlineVersions != null && internet.tester()) {
 			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
-			System.out.println("online versions array: " + onlineVersions);
+			System.out.println("Version model: bulkVersions: online versions array: " + onlineVersions);
 			parsedOnlineVersions = onlineVersions.split(", ");
 		}
 
