@@ -21,7 +21,7 @@ public class LocalData {
 	public LocalData () { }
 
 	/* what versions do we have? */
-	public ArrayList<String> localVersionData() {
+	public ArrayList<String> getLocalVersionData() {
 		ArrayList<String> versions = new ArrayList<>();
 		
 		// find the GSGData folder

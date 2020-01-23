@@ -28,8 +28,8 @@ public class InternetAccess {
 			connection.connect();
 			System.out.println("InternetAccess.tester: Internet is connected");
 			return true;
-		} catch (MalformedURLException e) { System.out.println("InternetAccess.tester: Internet is not connected");
-		} catch (IOException e) { System.out.println("InternetAccess.tester: Internet is not connected"); }
+		} catch (MalformedURLException ex) { System.out.println("InternetAccess.tester: " + ex);
+		} catch (IOException ex) { System.out.println("InternetAccess.tester: Internet is probably not connected: " + ex); }
 
 		return false;
 

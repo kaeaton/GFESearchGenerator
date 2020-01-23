@@ -39,6 +39,7 @@ public class B12xGui extends JFrame {
 	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
 	private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
 	private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
+	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generators
 	private GfeSearchPanelAssembler hlaPanelGenerator = new GfeSearchPanelAssembler();
@@ -106,18 +107,18 @@ public class B12xGui extends JFrame {
 			InternetAccess internet = new InternetAccess();
 			LocalData localData = new LocalData();
 
-			if(!internet.tester() && localData.localVersionData() == null) {
+			if(!internet.tester() && localData.getLocalVersionData() == null) {
 				throw new NoInternetOrDataException();
 			}
 
-			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE");
+			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);
 			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString());
 			whichLociGfe = whichLociGenerator.createWhichLociComboBox("GFE");
-			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME");
+			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME", nameSelectedLoci);
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 			whichLociName = whichLociGenerator.createWhichLociComboBox("NAME");
 			whichLociFeature = whichLociGenerator.createWhichLociComboBox("FEATURE");
-			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK");
+			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK", bulkSelectedLoci);
 			whichLociBulk = whichLociGenerator.createWhichLociComboBox("BULK");
 
 

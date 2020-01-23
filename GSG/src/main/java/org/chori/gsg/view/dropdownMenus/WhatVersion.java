@@ -21,7 +21,7 @@ public class WhatVersion {
 
 	public WhatVersion() { }
 
-	public JComboBox createWhatVersionComboBox(String whichTab) {
+	public JComboBox createWhatVersionComboBox(String whichTab, String whichLoci) {
 		System.out.println("Generating the which version combo box");
 		
 		VersionModel vm = new VersionModel();
@@ -33,7 +33,7 @@ public class WhatVersion {
 		// who is this combobox for?
 		switch(whichTab) {
 			case "GFE":
-				comboBoxModel = vm.versions();
+				comboBoxModel = vm.assembleVersionModel(whichLoci);
 				whatVersion.setModel(comboBoxModel);
 
 				// System.out.println(vm.localVersionData());
@@ -48,7 +48,7 @@ public class WhatVersion {
 				gfeListener(whatVersion);
 				break;
 			case "NAME":
-				comboBoxModel = vm.versions();
+				comboBoxModel = vm.assembleVersionModel(whichLoci);
 				whatVersion.setModel(comboBoxModel);
 				try {
 					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION", 0));
