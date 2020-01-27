@@ -72,7 +72,7 @@ public class FileUtilities {
 	// 			throw new NoInternetException();
 	// 		}
 
-	// 		crd.getRawLocusData(type, locus, version);
+	// 		currentReleaseData.getRawLocusData(type, locus, version);
 
 	// 	} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 

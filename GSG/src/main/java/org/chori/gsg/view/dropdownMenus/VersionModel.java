@@ -56,7 +56,7 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			currentReleaseData.getCurrentVersions("HLA");
+			currentReleaseData.getCurrentVersionsByLoci("HLA");
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		}
 
@@ -97,7 +97,7 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			currentReleaseData.getCurrentVersions("HLA");
+			currentReleaseData.getCurrentVersionsByLoci("HLA");
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		}
 

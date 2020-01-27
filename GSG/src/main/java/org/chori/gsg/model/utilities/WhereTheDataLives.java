@@ -13,7 +13,7 @@ public class WhereTheDataLives {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
-	private CurrentReleaseData crd = new CurrentReleaseData();
+	private CurrentReleaseData currentReleaseData = new CurrentReleaseData();
 	// private FileUtilities fileUtilities = new FileUtilities();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
@@ -117,7 +117,7 @@ public class WhereTheDataLives {
 				throw new NoInternetException();
 			}
 
-			crd.getRawLocusData(type, locus, version);
+			currentReleaseData.getRawLocusData(type, locus, version);
 
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 	}

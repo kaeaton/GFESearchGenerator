@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
@@ -19,95 +20,95 @@ import org.chori.gsg.view.*;
  * 
  */
 public class Neo4jHttpCall {
-    
-    private InputStream incomingData;
-    private InternetAccess internetAccess = new InternetAccess();
+	
+	private InputStream incomingData;
+	private InternetAccess internetAccess = new InternetAccess();
 
-    final String neo4jHlaURL = "http://neo4j.b12x.org/db/data/transaction/commit";
+	final String neo4jHlaURL = "http://neo4j.b12x.org/db/data/transaction/commit";
+	final String neo4jKirURL = "http://neo4j-kir.b12x.org/db/data/transaction/commit";
 
+	public Neo4jHttpCall() { }
+	
+	/**
+	 * Opens the call to the Neo4j database housing the GFEs
+	 * 
+	 * @param lociType tells the program which url to use to connect to the appropriate database
+	 * @param request The json string submitted to the database to request data
+	 * @throws IOException allows it to report exceptions in the call
+	 * @return a data InputStream containing the response from the Neo4j database
+	 */
+	public InputStream makeCall(String lociType, String request) throws IOException {
 
-    public Neo4jHttpCall() { }
-    
-    /**
-     * Opens the call to the Neo4j database housing the GFEs
-     * 
-     * @param lociType tells the program which url to use to connect to the appropriate database
-     * @param request The json string submitted to the database to request data
-     * @throws IOException allows it to report exceptions in the call
-     * @return a data InputStream containing the response from the Neo4j database
-     */
-    public InputStream makeCall(String lociType, String request) throws IOException {
-        final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
-		final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
-			  
-		// which URL do we use?
-		URL neo4jURL = lociType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
 		if(internetAccess.tester()) {
-    		try {
 
-                // final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
+			URL neo4jURL = determineWhichURL(lociType);
+				
+			// Open connection
+			HttpURLConnection connection = (HttpURLConnection) neo4jURL.openConnection();
+			connection = addConnectionHeaders(connection);
 
-                // Open connection
-    			HttpURLConnection connection = (HttpURLConnection) neo4jURL.openConnection();
-              
-                // Setup the connection
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("Accept", "application/json");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestProperty("X-Stream", "true");
-                connection.setRequestProperty("Authorization",***REMOVED***);
-                
-                // Send our request
-                OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
-                wr.write(request);
-                wr.flush();
-                
-                // Did we get a response?
-    			System.out.println("Connection: " + connection);
-                int httpResult = connection.getResponseCode();
-                System.out.println("http response code: " + httpResult);
-                if (httpResult == HttpURLConnection.HTTP_OK) {
-                    incomingData = connection.getInputStream();
-                    System.out.println("got input string");
-                }
-            } catch (Exception ex) {
-                B12xGui.resultsTextAreaGfe.append(ex.toString());
-                System.out.println(ex);
-            }
-        } else {
-            
-        }
-        return incomingData;
-    }
+			sendRequest(connection, request);
+			incomingData = getResponse(connection);
+		}
 
-    private HttpURLConnection createUrlAndOpenConnection() {
-        try {
+		return incomingData;
+	}
 
-            URL url = new URL(neo4jHlaURL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection = addConnectionHeaders(connection);
+	private URL determineWhichURL(String lociType) throws MalformedURLException{
 
-            return connection;
-        } catch (Exception ex) {
-            System.out.println("createUrlAndOpenConnection error: " + ex);
-        }
-        
-        return null;
-    }
+		switch(lociType) {
+			case "HLA":
+				URL url = new URL(neo4jHlaURL);
+				return url;
 
-    private HttpURLConnection addConnectionHeaders (HttpURLConnection connection) throws ProtocolException {
-        try {
-            connection.setDoOutput(true);
-            connection.setDoInput(true);
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("X-Stream", "true");
-            connection.setRequestProperty("Authorization",***REMOVED***);
-        } catch (Exception ex) { System.out.println("Neo4jHttpCall: " + ex); }
+			case "KIR":
+				url = new URL(neo4jKirURL);
+				return url;
 
-        return connection;
-    }
+			default:
+				System.out.println("Neo4jHttpCall: determineURL: Haven't set up that loci's URL yet");
+		}
+		
+		// if all else fails
+		URL url = new URL("");
+		return url;
+	}
+
+	private HttpURLConnection addConnectionHeaders (HttpURLConnection connection) throws ProtocolException {
+		
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.setRequestMethod("GET");
+		connection.setRequestProperty("Accept", "application/json");
+		connection.setRequestProperty("Content-Type", "application/json");
+		connection.setRequestProperty("X-Stream", "true");
+		connection.setRequestProperty("Authorization",***REMOVED***);
+
+		return connection;
+	}
+
+	private void sendRequest(HttpURLConnection connection, String request) {
+		try {
+
+			OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
+			wr.write(request);
+			wr.flush();
+
+		} catch (Exception ex) { System.out.println("Neo4jHttpCall: sendRequest: " + ex); }
+	}
+
+	private InputStream getResponse(HttpURLConnection connection) {
+		try {
+
+			int httpResult = connection.getResponseCode();
+			System.out.println("http response code: " + httpResult);
+
+			if (httpResult == HttpURLConnection.HTTP_OK) {
+				incomingData = connection.getInputStream();
+			}
+			
+		} catch (Exception ex) { System.out.println("Neo4jHttpCall: getResponse: " + ex); }
+
+		return incomingData;
+	}
 }

@@ -21,7 +21,7 @@ public class CurrentReleaseData {
 
 	public CurrentReleaseData() { }
 
-	public void getCurrentVersions(String lociType) {
+	public void getCurrentVersionsByLoci(String lociType) {
 		try {
 			// to determine the most recent version:
 			// create the request and send it
@@ -51,8 +51,10 @@ public class CurrentReleaseData {
 			// retrieve the data
 	        // create the request and send it
 	        Neo4jDataRequest neo4jDataRequest = new Neo4jDataRequest();
+	        System.out.println("CurrentReleaseData: requesting Input Stream");
 	        InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
 	        	neo4jDataRequest.createNeo4jDataRequest(locus, version));
+	        System.out.println("CurrentReleaseData: received Input Stream");
 	        
 	        // recieve data and parse it
 			switch (lociType) {
@@ -62,6 +64,6 @@ public class CurrentReleaseData {
 				default:
 					System.out.println("Current release data: " + lociType + " hasn't been added yet.");
 			}
-		} catch (Exception ex) { System.out.println("Downloading locus data failed: " + ex); }
+		} catch (Exception ex) { System.out.println("Current Release Data: Downloading locus data failed: " + ex); }
 	}
 }

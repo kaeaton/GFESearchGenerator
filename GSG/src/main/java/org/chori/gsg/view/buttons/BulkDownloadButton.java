@@ -39,13 +39,13 @@ public class BulkDownloadButton {
 			Runnable download = new Runnable() {
 				public void run() {
 					lociType = B12xGui.whichLociBulk.getSelectedItem().toString();
-					CurrentReleaseData crd = new CurrentReleaseData();
-					crd.getCurrentVersions(lociType);
+					CurrentReleaseData currentReleaseData = new CurrentReleaseData();
+					currentReleaseData.getCurrentVersionsByLoci(lociType);
 					String version = B12xGui.whatVersionBulk.getSelectedItem().toString();
 
 					try {
 						for (String locus:hlaLoci) {
-							crd.getRawLocusData(lociType, locus, version);
+							currentReleaseData.getRawLocusData(lociType, locus, version);
 						}
 					} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 
@@ -57,4 +57,8 @@ public class BulkDownloadButton {
 			
 		}
 	};
+
+	private void getCurrentVersionsByLoci(String lociType) {
+
+	}
 }
