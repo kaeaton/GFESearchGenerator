@@ -31,24 +31,24 @@ public class Neo4jHttpCall {
     /**
      * Opens the call to the Neo4j database housing the GFEs
      * 
-     * @param versionType tells the program which url to use to connect to the appropriate database
+     * @param lociType tells the program which url to use to connect to the appropriate database
      * @param request The json string submitted to the database to request data
      * @throws IOException allows it to report exceptions in the call
      * @return a data InputStream containing the response from the Neo4j database
      */
-    public InputStream makeCall(String versionType, String request) throws IOException {
-        // final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
-		// final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
+    public InputStream makeCall(String lociType, String request) throws IOException {
+        final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
+		final URL neo4jKirURL = new URL("http://neo4j-kir.b12x.org/db/data/transaction/commit");
 			  
 		// which URL do we use?
-		// URL neo4jURL = versionType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
+		URL neo4jURL = lociType.equals("KIR") ? neo4jKirURL : neo4jHlaURL; 
 		if(internetAccess.tester()) {
     		try {
 
-                final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
+                // final URL neo4jHlaURL = new URL("http://neo4j.b12x.org/db/data/transaction/commit");
 
                 // Open connection
-    			HttpURLConnection connection = (HttpURLConnection) neo4jHlaURL.openConnection();
+    			HttpURLConnection connection = (HttpURLConnection) neo4jURL.openConnection();
               
                 // Setup the connection
                 connection.setDoOutput(true);
