@@ -14,7 +14,7 @@ import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 /**
- * Opens the connection for the Neo4j Database
+ * Opens the connection for the Neo4j Database and sends the request JSON
  * 
  * @author Katrina Eaton
  * 
