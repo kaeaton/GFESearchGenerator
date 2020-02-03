@@ -42,7 +42,7 @@ public class BulkDownloadButton {
 		}
 	};
 
-	Runnable download = new Runnable() {
+	private Runnable download = new Runnable() {
 		public void run() {
 			lociType = B12xGui.whichLociBulk.getSelectedItem().toString();
 			currentReleaseData.getCurrentVersionsByLoci(lociType);
