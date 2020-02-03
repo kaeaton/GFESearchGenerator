@@ -16,6 +16,7 @@ public class CurrentReleaseData {
 	private ArrayList<String> versions = new ArrayList<>();
 
 	// class instantiations
+	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 	private Neo4jHttpCall neo4jHttpCall = new Neo4jHttpCall();
 	private IncomingJsonData incomingJsonData = new IncomingJsonData();
 
@@ -25,7 +26,6 @@ public class CurrentReleaseData {
 		try {
 			// to determine the most recent version:
 			// create the request and send it
-			Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 			InputStream incomingVersionData = neo4jHttpCall
 				.makeCall(lociType, neo4jVersionRequest.formNeo4jVersionRequest(lociType));
 
