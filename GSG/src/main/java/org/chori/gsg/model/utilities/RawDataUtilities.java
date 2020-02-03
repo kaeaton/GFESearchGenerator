@@ -6,7 +6,7 @@ import java.nio.file.*;
 import org.chori.gsg.model.*;
 
 /**
- * Utilities for processing & downloading raw data
+ * Utilities for processing and downloading raw data
  * 
  * @author Katrina Eaton
  * 

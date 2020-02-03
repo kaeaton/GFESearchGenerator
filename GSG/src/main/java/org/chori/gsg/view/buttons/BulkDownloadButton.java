@@ -11,7 +11,8 @@ import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.*;
 
 /**
- * Provides a button for an easy way to bulk download all data for a given loci type.
+ * Creates a button for an easy way to bulk download all data for a given loci type.
+ * The button is found on the Options tab of the GUI.
  * 
  * @author Katrina Eaton
  * 
