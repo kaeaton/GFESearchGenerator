@@ -53,7 +53,7 @@ public class CurrentReleaseData {
 	        Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
 	        System.out.println("CurrentReleaseData: requesting Input Stream");
 	        InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
-	        	neo4jGfeDataRequest.createNeo4jDataRequest(lociType, locus, version));
+	        	neo4jGfeDataRequest.createNeo4jGfeDataRequest(lociType, locus, version));
 	        System.out.println("CurrentReleaseData: received Input Stream");
 	        
 	        // recieve data and parse it
