@@ -20,7 +20,7 @@ public class Neo4jGfeDataRequest {
 
 	public Neo4jGfeDataRequest() { }
 
-	public String createNeo4jDataRequest(String lociType, String locus, String version) throws IOException 
+	public String createNeo4jDataRequest(String lociType, String locus, String version)
 	{
 		String neo4jDataRequest;
 		String jsonNeo4jDataRequest;
