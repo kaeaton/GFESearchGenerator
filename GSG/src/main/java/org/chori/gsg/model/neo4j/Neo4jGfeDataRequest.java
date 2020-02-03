@@ -23,12 +23,13 @@ public class Neo4jGfeDataRequest {
 	public String createNeo4jGfeDataRequest(String lociType, String locus, String version)
 	{
 		String neo4jDataRequest;
-		String jsonNeo4jDataRequest;
+		String jsonNeo4jDataRequest = null;
 
 		neo4jDataRequest = whichLociDataRequest(lociType, locus, version);
 
-		jsonNeo4jDataRequest = convertNeo4jRequestToJson(neo4jDataRequest);
-
+		if(!neo4jDataRequest.equals(""))
+			jsonNeo4jDataRequest = convertNeo4jRequestToJson(neo4jDataRequest);
+		
 		return jsonNeo4jDataRequest;
 	}
 
@@ -73,6 +74,6 @@ public class Neo4jGfeDataRequest {
 		   
 		} catch (Exception ex) { System.out.println("Neo4jRequest: createNeo4jJsonRequest: " + ex); }
 		
-		return "";
+		return null;
 	}
 }
