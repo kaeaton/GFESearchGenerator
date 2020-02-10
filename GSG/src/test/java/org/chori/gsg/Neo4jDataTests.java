@@ -19,7 +19,7 @@ public class Neo4jDataTests {
 		JSONAssert.assertEquals(expectedHlaJsonString, generatedHlaJsonString, false);
 		JSONAssert.assertEquals(expectedKirJsonString, generatedKirJsonString, false);
 		assertSame("The neo4jGfeDataRequest for ABO does not match", null,
-						neo4jGfeDataRequest.createNeo4jGfeDataRequest("ABO", "KIR", "2.7.0"));
+						neo4jGfeDataRequest.createNeo4jGfeDataRequest("ABO", "ABO", "2.7.0"));
 	}
 }
 

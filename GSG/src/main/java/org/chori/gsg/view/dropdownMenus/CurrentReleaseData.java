@@ -61,6 +61,9 @@ public class CurrentReleaseData {
 				case "HLA":
 					incomingJsonData.parseNeo4jResponse(locus, version, incomingData);
 					break;
+				case "KIR":
+					incomingJsonData.parseNeo4jResponse("KIR", version, incomingData);
+					break;
 				default:
 					System.out.println("Current release data: " + lociType + " hasn't been added yet.");
 			}

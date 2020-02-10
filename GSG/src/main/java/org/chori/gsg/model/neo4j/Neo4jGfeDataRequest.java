@@ -7,7 +7,7 @@ import org.chori.gsg.model.processJson.*;
 import org.chori.gsg.model.*;
 
 /**
- * Generates the Json formatted requests for data from the assorted neo4j Databases
+ * Generates the Json formatted requests for gfe data from the assorted neo4j Databases
  * 
  * @author Katrina Eaton
  * 
@@ -62,7 +62,7 @@ public class Neo4jGfeDataRequest {
 		// request string MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) WHERE r.imgt_release = "2.7.0" RETURN n.name, g.name
 				 
 		String kirRequest = ("MATCH (n:IMGT_KIR)-[r:HAS_GFE]-(g:GFE) " +
-							"WHERE r.imgt_release = " + quote + version + quote +
+							"WHERE r.imgt_release = " + quote + "2.9.0" + quote +//version + quote +
 							" RETURN n.name, g.name");
 		return kirRequest;
 	}
