@@ -17,6 +17,7 @@ public class DataAvailableOnline {
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 	private Neo4jHttpCall neo4jHttpCall = new Neo4jHttpCall();
 	private IncomingJsonData incomingJsonData = new IncomingJsonData();
+	private Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
 
 	public DataAvailableOnline() { }
 
@@ -31,7 +32,7 @@ public class DataAvailableOnline {
 			// recieve the version data and parse it
 			downloadedVersions = incomingJsonData.parseVersion(incomingVersionData, lociType);
 
-		} catch (Exception ex) { System.out.println("Downloading versions failed: " + ex); }
+		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading versions by loci failed: " + ex); }
 
 		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 		storeLociVersions(lociType, downloadedVersions);
@@ -50,15 +51,18 @@ public class DataAvailableOnline {
 
 	public void getRawLocusData(String lociType, String locus, String version) {
 		try{
-			// retrieve the data
 	        // create the request and send it
-	        Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
-	        System.out.println("DataAvailableOnline: requesting Input Stream");
 	        InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
 	        	neo4jGfeDataRequest.createNeo4jGfeDataRequest(lociType, locus, version));
 	        System.out.println("DataAvailableOnline: received Input Stream");
 	        
-	        // recieve data and parse it
+	        parseIncomingData(incomingData, lociType, locus, version);
+
+		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading locus data failed: " + ex); }
+	}
+
+	private void parseIncomingData(InputStream incomingData, String lociType, String locus, String version) {
+		try{
 			switch (lociType) {
 				case "HLA":
 					incomingJsonData.parseNeo4jResponse(locus, version, incomingData);
@@ -69,6 +73,6 @@ public class DataAvailableOnline {
 				default:
 					System.out.println("Current release data: " + lociType + " hasn't been added yet.");
 			}
-		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading locus data failed: " + ex); }
+		} catch (Exception ex) { System.out.println("DataAvailableOnline: Parsing incoming locus data failed: " + ex); }
 	}
 }
