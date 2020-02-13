@@ -13,7 +13,7 @@ public class CurrentReleaseData {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 
-	private ArrayList<String> versions = new ArrayList<>();
+	// private ArrayList<String> versions = new ArrayList<>();
 
 	// class instantiations
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
@@ -23,27 +23,31 @@ public class CurrentReleaseData {
 	public CurrentReleaseData() { }
 
 	public void getCurrentVersionsByLoci(String lociType) {
+		ArrayList<String> downloadedVersions = new ArrayList<>();
+
 		try {
-			// to determine the most recent version:
 			// create the request and send it
 			InputStream incomingVersionData = neo4jHttpCall
 				.makeCall(lociType, neo4jVersionRequest.formNeo4jVersionRequest(lociType));
 
 			// recieve the version data and parse it
-			versions = incomingJsonData.parseVersion(incomingVersionData, lociType);
-			System.out.println(versions.toString());
-
-			System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
-
-			// save current versions to preferences
-			String storedAvailableVersions = prefs.get("GSG_" + lociType + "_VERSIONS", "");
-			if (!storedAvailableVersions.equals(versions.toString())) {
-				prefs.put("GSG_" + lociType + "_VERSIONS", versions.toString());
-			}	
-
-			System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+			downloadedVersions = incomingJsonData.parseVersion(incomingVersionData, lociType);
 
 		} catch (Exception ex) { System.out.println("Downloading versions failed: " + ex); }
+
+		System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+		storeLociVersions(lociType, downloadedVersions);
+	}
+
+	private void storeLociVersions(String lociType, ArrayList<String> downloadedVersions) {
+		
+		String storedAvailableVersions = prefs.get("GSG_" + lociType + "_VERSIONS", "");
+
+		if (!storedAvailableVersions.equals(downloadedVersions.toString())) {
+			prefs.put("GSG_" + lociType + "_VERSIONS", downloadedVersions.toString());
+		}	
+
+		System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 	}
 
 	public void getRawLocusData(String lociType, String locus, String version) {
