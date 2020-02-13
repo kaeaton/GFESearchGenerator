@@ -9,18 +9,16 @@ import org.chori.gsg.model.neo4j.*;
 import org.chori.gsg.model.processJson.*;
 import org.chori.gsg.view.*;
 
-public class CurrentReleaseData {
+public class DataAvailableOnline {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
-
-	// private ArrayList<String> versions = new ArrayList<>();
 
 	// class instantiations
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 	private Neo4jHttpCall neo4jHttpCall = new Neo4jHttpCall();
 	private IncomingJsonData incomingJsonData = new IncomingJsonData();
 
-	public CurrentReleaseData() { }
+	public DataAvailableOnline() { }
 
 	public void getCurrentVersionsByLoci(String lociType) {
 		ArrayList<String> downloadedVersions = new ArrayList<>();
@@ -35,7 +33,7 @@ public class CurrentReleaseData {
 
 		} catch (Exception ex) { System.out.println("Downloading versions failed: " + ex); }
 
-		System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 		storeLociVersions(lociType, downloadedVersions);
 	}
 
@@ -47,7 +45,7 @@ public class CurrentReleaseData {
 			prefs.put("GSG_" + lociType + "_VERSIONS", downloadedVersions.toString());
 		}	
 
-		System.out.println("Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 	}
 
 	public void getRawLocusData(String lociType, String locus, String version) {
@@ -55,10 +53,10 @@ public class CurrentReleaseData {
 			// retrieve the data
 	        // create the request and send it
 	        Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
-	        System.out.println("CurrentReleaseData: requesting Input Stream");
+	        System.out.println("DataAvailableOnline: requesting Input Stream");
 	        InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
 	        	neo4jGfeDataRequest.createNeo4jGfeDataRequest(lociType, locus, version));
-	        System.out.println("CurrentReleaseData: received Input Stream");
+	        System.out.println("DataAvailableOnline: received Input Stream");
 	        
 	        // recieve data and parse it
 			switch (lociType) {
@@ -71,6 +69,6 @@ public class CurrentReleaseData {
 				default:
 					System.out.println("Current release data: " + lociType + " hasn't been added yet.");
 			}
-		} catch (Exception ex) { System.out.println("Current Release Data: Downloading locus data failed: " + ex); }
+		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading locus data failed: " + ex); }
 	}
 }

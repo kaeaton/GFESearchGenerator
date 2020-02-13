@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 
+import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.buttons.*;
@@ -38,7 +39,7 @@ public class VersionModel {
 	private LocalData localData = new LocalData();
 	private InternetAccess internet = new InternetAccess();
 	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
-	private CurrentReleaseData currentReleaseData = new CurrentReleaseData();
+	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
 
 	public VersionModel() { }
 
@@ -56,7 +57,7 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			currentReleaseData.getCurrentVersionsByLoci("HLA");
+			dataAvailableOnline.getCurrentVersionsByLoci("HLA");
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		}
 
@@ -97,7 +98,7 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			currentReleaseData.getCurrentVersionsByLoci("HLA");
+			dataAvailableOnline.getCurrentVersionsByLoci("HLA");
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		}
 

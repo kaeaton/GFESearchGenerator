@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 
+import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.*;
@@ -24,7 +25,7 @@ public class BulkDownloadButton {
 	private final List<String> hlaLoci = Arrays.asList("HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5");
 
 	private InternetAccess internetAccess = new InternetAccess();
-	private CurrentReleaseData currentReleaseData = new CurrentReleaseData();
+	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
 
 	public BulkDownloadButton() { }
 
@@ -46,7 +47,7 @@ public class BulkDownloadButton {
 	private Runnable download = new Runnable() {
 		public void run() {
 			lociType = B12xGui.whichLociBulk.getSelectedItem().toString();
-			currentReleaseData.getCurrentVersionsByLoci(lociType);
+			dataAvailableOnline.getCurrentVersionsByLoci(lociType);
 
 			String version = B12xGui.whatVersionBulk.getSelectedItem().toString();
 
@@ -72,14 +73,14 @@ public class BulkDownloadButton {
 	private void getHlaData(String version) {
 		try {
 			for (String locus:hlaLoci) {
-				currentReleaseData.getRawLocusData("HLA", locus, version);
+				dataAvailableOnline.getRawLocusData("HLA", locus, version);
 			}
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 
 	private void getKirData(String version) {
 		try {
-			currentReleaseData.getRawLocusData("KIR", "KIR", version);
+			dataAvailableOnline.getRawLocusData("KIR", "KIR", version);
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 }

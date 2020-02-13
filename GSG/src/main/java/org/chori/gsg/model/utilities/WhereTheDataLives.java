@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.*;
 import java.util.prefs.Preferences;
 
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.model.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;
@@ -13,7 +13,7 @@ public class WhereTheDataLives {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
-	private CurrentReleaseData currentReleaseData = new CurrentReleaseData();
+	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
 	// private FileUtilities fileUtilities = new FileUtilities();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
@@ -117,7 +117,7 @@ public class WhereTheDataLives {
 				throw new NoInternetException();
 			}
 
-			currentReleaseData.getRawLocusData(type, locus, version);
+			dataAvailableOnline.getRawLocusData(type, locus, version);
 
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 	}
