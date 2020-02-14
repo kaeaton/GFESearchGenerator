@@ -36,7 +36,7 @@ public class VersionModel {
 	// private	static HashMap<Integer, JTextArea> whichTextArea = new HashMap();
 
 	// class instantiations
-	private LocalData localData = new LocalData();
+	private DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 	private InternetAccess internet = new InternetAccess();
 	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
 	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
@@ -50,7 +50,7 @@ public class VersionModel {
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		Set<String> versionSet = new HashSet<String>();
 
-		localVersions = localData.getLocalVersionData();
+		localVersions = dataAvailableLocally.getLocalVersionData();
 		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
 

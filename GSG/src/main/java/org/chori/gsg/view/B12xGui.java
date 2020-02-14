@@ -105,9 +105,9 @@ public class B12xGui extends JFrame {
 			// error handling: if you have no data and no internet
 			// the program doesn't work
 			InternetAccess internet = new InternetAccess();
-			LocalData localData = new LocalData();
+			DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 
-			if(!internet.tester() && localData.getLocalVersionData() == null) {
+			if(!internet.tester() && dataAvailableLocally.getLocalVersionData() == null) {
 				throw new NoInternetOrDataException();
 			}
 

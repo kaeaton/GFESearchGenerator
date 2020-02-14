@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
+import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
@@ -24,7 +25,7 @@ public class LocusModel {
 
 	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
 	private InternetAccess internet = new InternetAccess();
-	private LocalData localData = new LocalData();
+	private DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 
 	public LocusModel() { }
 
@@ -38,7 +39,7 @@ public class LocusModel {
 			System.out.println("Reached online version for loci in LocusModel");
 		} else {
 			// figure out what datafiles are available for selected version
-			availableLoci = localData.getLocalDataFiles(version);
+			availableLoci = dataAvailableLocally.getLocalDataFiles(version);
 		}
 
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -72,87 +73,4 @@ public class LocusModel {
 
 		return false;
 	}
-
 }
-
-
-// 	public ArrayList<String> getLocalDataFiles(String whichTab) {
-// 		ArrayList<String> availableLoci = new ArrayList<>();
-		
-// 		// find the BSGData folder
-// 		String rawDataPath = wtdl.getRawDataPath();
-// 		String version = "";
-
-// 		// get which version
-// 		switch(whichTab) {
-// 			case "HLA":
-// 				version = B12xGui.whatVersionHla.getSelectedItem().toString();
-// 				System.out.println("Locus Model selected version (HLA): " + version);
-// 				rawDataPath = rawDataPath + version;
-// 				System.out.println("Locus Model file path (HLA): " + rawDataPath);
-// 				break;
-// 			default:
-// 				System.out.println("LocusModel: haven't set up that version reader yet");
-// 		}
-
-
-// 		// read the BSGData folder
-// 		File[] files = new File(rawDataPath).listFiles();
-// 		// System.out.println(Arrays.toString(files));
-		
-// 		// // get the folders for various versions
-// 		int pathLength = (rawDataPath.length() + 7);
-// 		// System.out.println("Path length: " + pathLength);
-
-// 		int filePathLength;
-// 		String file;
-// 		String protoLocus;
-// 		String locus = "";
-		
-// 		for (File aFile:files) {
-// 			// get file path length
-// 			filePathLength = aFile.toString().length();
-// 			file = aFile.toString();
-			
-// 			// get locus out of file name
-// 			protoLocus = file.substring(pathLength, filePathLength);
-// 			// System.out.println("subpath: " + protoLocus);
-
-// 			// get file suffix, if csv, extract locus name
-// 			String fileSuffix = protoLocus.substring(protoLocus.length() - 3);
-// 			if (fileSuffix.compareTo("csv") == 0) {
-// 				locus = protoLocus.substring(0, protoLocus.length() - 20);
-// 				System.out.println("locus name: " + locus);
-// 			}
-
-// 			// check file length, is it more than just a header line?
-// 			if (isTheFileLongEnough(locus, version))
-// 				availableLoci.add(locus);
-// 		}
-
-// 		// sort the loci
-// 		Collections.sort(availableLoci);
-
-// 		System.out.println(availableLoci.toString());
-
-// 		return availableLoci;
-// 	}
-
-// 	// sometimes files have nothing but a header in them
-// 	// makes sure the file is big enough to actually contain data
-// 	private boolean isTheFileLongEnough(String whatLocus, String whatVersion) {
-// 		//
-// 		File data = rawData.getRawData(whatLocus, whatVersion);
-// 		if (data != null) {
-// 			long isTheFileLongEnough = data.length();
-// 			System.out.println("File length of " + whatVersion 
-// 				+ ", " + whatLocus + ": " + isTheFileLongEnough);
-		
-// 			// check that file is longer than just a header
-// 			if(data.length() > 100)
-// 				return true;
-// 		}
-
-// 		return false;
-// 	}
-// }

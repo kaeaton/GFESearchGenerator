@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus;
+package org.chori.gsg.model;
 
 import java.io.File;
 import java.nio.file.*;
@@ -8,17 +8,17 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 
-import org.chori.gsg.model.*;
+// import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
-public class LocalData {
+public class DataAvailableLocally {
 
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	private InternetAccess internet = new InternetAccess();
 	private FileUtilities fileUtilities = new FileUtilities();
 
-	public LocalData () { }
+	public DataAvailableLocally () { }
 
 	/* what versions do we have? */
 	public ArrayList<String> getLocalVersionData() {
