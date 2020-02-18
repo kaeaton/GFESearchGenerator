@@ -50,7 +50,7 @@ public class VersionModel {
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		Set<String> versionSet = new HashSet<String>();
 
-		localVersions = dataAvailableLocally.getLocalVersionData();
+		localVersions = dataAvailableLocally.getLocalVersionsByLoci(whichLoci);
 		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
 

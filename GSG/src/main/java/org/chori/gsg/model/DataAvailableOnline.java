@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus;
+package org.chori.gsg.model;
 
 import java.io.InputStream;
 import java.util.ArrayList;

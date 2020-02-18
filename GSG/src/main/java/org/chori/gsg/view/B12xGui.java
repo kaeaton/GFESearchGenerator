@@ -108,6 +108,7 @@ public class B12xGui extends JFrame {
 			DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 
 			if(!internet.tester() && dataAvailableLocally.getLocalVersionData() == null) {
+			//!dataAvailableLocally.isThereAnyLocalData()) {
 				throw new NoInternetOrDataException();
 			}
 

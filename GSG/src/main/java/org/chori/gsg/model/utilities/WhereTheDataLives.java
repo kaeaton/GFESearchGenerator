@@ -48,13 +48,13 @@ public class WhereTheDataLives {
 	}
 
 	// create path to a file to store raw data
-	public String createRawDataFilePath(String type, String locus, String version) {
+	public String createRawDataFilePath(String lociType, String locus, String version) {
 
 		// where the file is going to live and
 		// what the file is going to be called
 		String path = "";
 
-		switch(type) {
+		switch(lociType) {
 			case "HLA":
 				path = hlaPath(locus, version);
 				break;
@@ -111,13 +111,13 @@ public class WhereTheDataLives {
 	}
 
 	// create the file to store results
-	public void storeResultsData(String type, String locus, String version) {
+	public void storeResultsData(String lociType, String locus, String version) {
 		try {
 			if(!internet.tester()) {
 				throw new NoInternetException();
 			}
 
-			dataAvailableOnline.getRawLocusData(type, locus, version);
+			dataAvailableOnline.getRawLocusData(lociType, locus, version);
 
 		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 	}
