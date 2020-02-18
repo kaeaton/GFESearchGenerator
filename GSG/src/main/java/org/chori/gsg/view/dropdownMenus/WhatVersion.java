@@ -86,9 +86,11 @@ public class WhatVersion {
             	prefs.putInt("GSG_GFE_VERSION", gfeWhatVersion.getSelectedIndex());
             	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
-            	// if local version, update loci model to show available loci
+            	// if local version, update locus model to show available loci
+				String lociType = B12xGui.whichLociGfe.getSelectedItem().toString(); 
+
             	LocusModel locusModel = new LocusModel();
-            	B12xGui.whatLocusGfe.setModel(locusModel.loci(whichVersion));
+            	B12xGui.whatLocusGfe.setModel(locusModel.loci(whichVersion, lociType));
 
             	// grab the new available default locus
             	String whichLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
@@ -113,9 +115,11 @@ public class WhatVersion {
             	prefs.putInt("GSG_NAME_VERSION_1", nameWhatVersion.getSelectedIndex());
             	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
 
-            	// if local version, update loci model to show available loci
+            	// if local version, update locus model to show available loci
+				String lociType = B12xGui.whichLociName.getSelectedItem().toString(); 
+
             	LocusModel locusModel = new LocusModel();
-            	B12xGui.whatLocusName.setModel(locusModel.loci(whichVersion));
+            	B12xGui.whatLocusName.setModel(locusModel.loci(whichVersion, lociType));
 
             	// grab the new available default locus
             	// String whichLocus = B12xGui.whatLocusName.getSelectedItem().toString();

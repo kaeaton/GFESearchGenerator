@@ -113,11 +113,11 @@ public class B12xGui extends JFrame {
 			}
 
 			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);
-			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString());
 			whichLociGfe = whichLociGenerator.createWhichLociComboBox("GFE");
+			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME", nameSelectedLoci);
-			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString());
 			whichLociName = whichLociGenerator.createWhichLociComboBox("NAME");
+			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			whichLociFeature = whichLociGenerator.createWhichLociComboBox("FEATURE");
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK", bulkSelectedLoci);
 			whichLociBulk = whichLociGenerator.createWhichLociComboBox("BULK");
@@ -152,8 +152,8 @@ public class B12xGui extends JFrame {
 		
 		// generate the HLA GFE panel
 		try {
-			System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
+			// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel("HLA-A"); //whatLocusGfe.getSelectedItem().toString());
 			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);

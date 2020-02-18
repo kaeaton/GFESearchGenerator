@@ -40,14 +40,14 @@ public class WhatLocus {
 	 * @param version which version are we looking at. Local/legacy data may not have all loci available
 	 * @return a JComboBox with an associated listener
 	 */
-	public JComboBox createWhatLocusComboBox(String whichComboBox, String version) {
+	public JComboBox createWhatLocusComboBox(String whichComboBox, String version, String lociType) {
 		System.out.println("Generating the what locus combo box");
 		
 		// instantiate combobox and its model
 		JComboBox whatLocus = new JComboBox();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 		// comboBoxModel = new DefaultComboBoxModel(fullHlaLoci);
-		whatLocus.setModel(locusModel.loci(version));// comboBoxModel);
+		whatLocus.setModel(locusModel.loci(version, lociType));// comboBoxModel);
 		// JPanel newlayout = new JPanel();
 
 		// who is this combobox for?
@@ -65,6 +65,7 @@ public class WhatLocus {
 				break;
 			case "NAME":
 				try {
+					// try using prefs
 					whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
 				} catch (Exception ex) {
 					// if the pref exceeds the length of the model list, reset prefs 

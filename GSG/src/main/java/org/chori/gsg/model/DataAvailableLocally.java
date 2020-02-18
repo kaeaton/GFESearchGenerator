@@ -69,7 +69,7 @@ public class DataAvailableLocally {
 	 * to the ArrayList.
 	 * 
 	 * @param lociType which group of loci are we checking for data?
-	 * @return an ArrayList of locally available versions
+	 * @return an ArrayList of locally available versions, will be empty if no local data
 	 */
 	public ArrayList<String> getLocalVersionsByLoci(String lociType) {
 		ArrayList<String> localVersions = new ArrayList<>();
@@ -80,7 +80,8 @@ public class DataAvailableLocally {
 		File[] localDirectories = gatherLocalDirectories(rawDataPath);
 
 		localVersions = getVersionsFromDirectories(localDirectories, rawDataPath, lociType);
-
+		
+		sortTheVersionsList(localVersions);
 		return localVersions;
 	}
 
@@ -117,15 +118,21 @@ public class DataAvailableLocally {
 			String version = dir.substring(pathLength, dirLength);
 
 			//gather files within the specific version folder, check to see if they have data
-			ArrayList<String> localDataFiles = getLocalDataFiles(version);
+			ArrayList<String> localDataFiles = getLocalDataFiles(version, lociType);
 
 			// if at least one file has data, return the version number
 			if(!localDataFiles.isEmpty()) {
 				return version;
 			}
-		} catch(Exception ex) { System.out.println("LocalData.getFolderVersionr(): " + ex + " (Probably no folder found)"); }
+		} catch(Exception ex) { System.out.println("LocalData.getFolderVersion(): " + ex + " (Probably no folder found)"); }
 
 		return "";
+	}
+
+	private ArrayList<String> sortTheVersionsList(ArrayList<String> versions) {
+		
+		Collections.sort(versions, Collections.reverseOrder());
+		return versions;
 	}
 
 	/* what versions do we have? */
@@ -155,7 +162,7 @@ public class DataAvailableLocally {
 				
 				// get version number off the end
 				versionNumber = dir.substring(pathLength, dirLength);
-				ArrayList<String> localDataFiles = getLocalDataFiles(versionNumber);
+				ArrayList<String> localDataFiles = getLocalDataFiles(versionNumber, "HLA");
 				System.out.println("subpath: " + versionNumber);
 				
 				// add to list if not KIR ("2.7.0")
@@ -175,11 +182,12 @@ public class DataAvailableLocally {
 	}
 
 	/* what data files are there? */
-	public ArrayList<String> getLocalDataFiles(String version) {
+	public ArrayList<String> getLocalDataFiles(String version, String lociType) {
 		ArrayList<String> availableLoci = new ArrayList<>();
 		
 		// find the BSGData folder
-		String rawDataPath = whereTheDataLives.getRawDataPath();
+		String rawDataPath = whereTheDataLives.getRawDataPath()+ lociType
+							 + System.getProperty("file.separator");
 		rawDataPath = rawDataPath + version;
 		System.out.println("Locus Model file path: " + rawDataPath);
 

@@ -29,8 +29,9 @@ public class LocusModel {
 
 	public LocusModel() { }
 
-	public DefaultComboBoxModel loci(String version) {
+	public DefaultComboBoxModel loci(String version, String lociType) {
 		ArrayList<String> availableLoci = new ArrayList<>();
+		// String lociType = B12xGui.whichLociBulk.getSelectedItem().toString();
 
 		// what versions are available online?
 		if(internet.tester() && onlineVersion(version)) {
@@ -39,7 +40,7 @@ public class LocusModel {
 			System.out.println("Reached online version for loci in LocusModel");
 		} else {
 			// figure out what datafiles are available for selected version
-			availableLoci = dataAvailableLocally.getLocalDataFiles(version);
+			availableLoci = dataAvailableLocally.getLocalDataFiles(version, lociType);
 		}
 
 		DefaultComboBoxModel model = new DefaultComboBoxModel();

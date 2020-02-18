@@ -51,6 +51,7 @@ public class VersionModel {
 		Set<String> versionSet = new HashSet<String>();
 
 		localVersions = dataAvailableLocally.getLocalVersionsByLoci(whichLoci);
+		System.out.println("VersionModel.assembleVersionModel: avaliable version data: " + localVersions.toArray());
 		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
 
@@ -72,7 +73,7 @@ public class VersionModel {
 			versionSet.addAll(onlineVersionsList);
 		}
 		
-		if (localVersions != null)
+		if (!localVersions.isEmpty())
 			versionSet.addAll(localVersions);
 
 		// if(onlineVersions == null)
