@@ -55,7 +55,7 @@ public class WhatLocus {
 			case "GFE":
 				try {
 					// try using prefs
-					whatLocus.setSelectedIndex(prefs.getInt("GSG_GFE_LOCUS", 0));
+					whatLocus.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_LOCUS", 0));
 				} catch (Exception ex) { 
 					// if the pref exceeds the length of the model list, reset prefs
 					PrefProbException ppex = new PrefProbException();
@@ -66,7 +66,7 @@ public class WhatLocus {
 			case "NAME":
 				try {
 					// try using prefs
-					whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_LOCUS_1", 0));
+					whatLocus.setSelectedIndex(prefs.getInt("GSG_NAME_" + lociType + "_LOCUS", 0));
 				} catch (Exception ex) {
 					// if the pref exceeds the length of the model list, reset prefs 
 					PrefProbException ppex = new PrefProbException();
@@ -87,11 +87,12 @@ public class WhatLocus {
 		gfeWhatLocus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
+				String lociType = B12xGui.whichLociGfe.getSelectedItem().toString();
 				whichLocus = gfeWhatLocus.getSelectedItem().toString();
 				setNewGfePanel(whichLocus);
 				System.out.println("Which Locus listener triggered");
-				prefs.putInt("GSG_GFE_HLA_LOCUS", gfeWhatLocus.getSelectedIndex());
-				prefs.put("GSG_GFE_HLA_LOCUS_STRING", whichLocus);
+				prefs.putInt("GSG_GFE_" + lociType + "_LOCUS", gfeWhatLocus.getSelectedIndex());
+				prefs.put("GSG_GFE_" + lociType + "_LOCUS_STRING", whichLocus);
 			}
 		});
 	}
@@ -100,10 +101,11 @@ public class WhatLocus {
 		nameWhatLocus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
+				String lociType = B12xGui.whichLociName.getSelectedItem().toString();
 				whichLocus = nameWhatLocus.getSelectedItem().toString();
 				System.out.println("Which Locus name listener triggered");
-				prefs.putInt("GSG_NAME_HLA_LOCUS", nameWhatLocus.getSelectedIndex());
-				prefs.put("GSG_NAME_HLA_LOCUS_STRING", whichLocus);
+				prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", nameWhatLocus.getSelectedIndex());
+				prefs.put("GSG_NAME_" + lociType + "_LOCUS_STRING", whichLocus);
 			}
 		});
 	}

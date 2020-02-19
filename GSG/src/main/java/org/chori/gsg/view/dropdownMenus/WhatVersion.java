@@ -21,7 +21,7 @@ public class WhatVersion {
 
 	public WhatVersion() { }
 
-	public JComboBox createWhatVersionComboBox(String whichTab, String whichLoci) {
+	public JComboBox createWhatVersionComboBox(String whichTab, String lociType) {
 		System.out.println("Generating the which version combo box");
 		
 		VersionModel vm = new VersionModel();
@@ -33,12 +33,13 @@ public class WhatVersion {
 		// who is this combobox for?
 		switch(whichTab) {
 			case "GFE":
-				comboBoxModel = vm.assembleVersionModel(whichLoci);
+				// lociType = B12xGui.whichLociGfe.getSelectedItem().toString();
+				comboBoxModel = vm.assembleVersionModel(lociType);
 				whatVersion.setModel(comboBoxModel);
 
 				// System.out.println(vm.localVersionData());
 				try {
-					whatVersion.setSelectedIndex(prefs.getInt("GSG_HLA_VERSION", 0));
+					whatVersion.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_VERSION", 0));
 				} catch (IllegalArgumentException iex) { 
 					System.out.println("HLA whatVersion setSelectedIndex error: " + iex); 
 					PrefProbException ppex = new PrefProbException();
@@ -48,10 +49,11 @@ public class WhatVersion {
 				gfeListener(whatVersion);
 				break;
 			case "NAME":
-				comboBoxModel = vm.assembleVersionModel(whichLoci);
+				// lociType = B12xGui.whichLociName.getSelectedItem().toString();
+				comboBoxModel = vm.assembleVersionModel(lociType);
 				whatVersion.setModel(comboBoxModel);
 				try {
-					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_VERSION", 0));
+					whatVersion.setSelectedIndex(prefs.getInt("GSG_NAME_" + lociType + "_VERSION", 0));
 				} catch (IllegalArgumentException iex) { 
 					System.out.println("Name whatVersion setSelectedIndex error: " + iex); 
 					PrefProbException ppex = new PrefProbException();
@@ -81,13 +83,14 @@ public class WhatVersion {
 		gfeWhatVersion.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
+
+				String lociType = B12xGui.whichLociGfe.getSelectedItem().toString();
             	String whichVersion = gfeWhatVersion.getSelectedItem().toString();
                 System.out.println("Which version listener triggered");
-            	prefs.putInt("GSG_GFE_VERSION", gfeWhatVersion.getSelectedIndex());
-            	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus);
 
-            	// if local version, update locus model to show available loci
-				String lociType = B12xGui.whichLociGfe.getSelectedItem().toString(); 
+
+            	prefs.putInt("GSG_GFE_" + lociType + "_VERSION", gfeWhatVersion.getSelectedIndex());
+            	// prefs.put("GSG_HLA_LOCUS_STRING", whichLocus); 
 
             	LocusModel locusModel = new LocusModel();
             	B12xGui.whatLocusGfe.setModel(locusModel.loci(whichVersion, lociType));
@@ -110,13 +113,11 @@ public class WhatVersion {
 		nameWhatVersion.addActionListener(new ActionListener() {
     		@Override
             public void actionPerformed(ActionEvent evt) {
-            	String whichVersion = nameWhatVersion.getSelectedItem().toString();
-                System.out.println("Which name version listener triggered");
-            	prefs.putInt("GSG_NAME_VERSION_1", nameWhatVersion.getSelectedIndex());
-            	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
-
             	// if local version, update locus model to show available loci
-				String lociType = B12xGui.whichLociName.getSelectedItem().toString(); 
+				String lociType = B12xGui.whichLociName.getSelectedItem().toString(); String whichVersion = nameWhatVersion.getSelectedItem().toString();
+                System.out.println("Which name version listener triggered");
+            	prefs.putInt("GSG_NAME_" + lociType + "_VERSION", nameWhatVersion.getSelectedIndex());
+            	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
 
             	LocusModel locusModel = new LocusModel();
             	B12xGui.whatLocusName.setModel(locusModel.loci(whichVersion, lociType));
@@ -125,8 +126,8 @@ public class WhatVersion {
             	// String whichLocus = B12xGui.whatLocusName.getSelectedItem().toString();
 
             	// update the preferences
-            	prefs.putInt("GSG_NAME_LOCUS_1", B12xGui.whatLocusName.getSelectedIndex());
-            	// prefs.put("GSG_NAME_LOCUS_STRING_1", whichLocus);
+            	prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", B12xGui.whatLocusName.getSelectedIndex());
+            	// prefs.put("GSG_NAME_" + lociType + "_LOCUS_STRING", whichLocus);
             }
         });
 	}

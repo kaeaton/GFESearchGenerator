@@ -24,7 +24,7 @@ GSG_FEATURE_KIR_CSV_SELECTED		Boolean: FEATURE KIR CSV radiobutton
 GSG_FEATURE_KIR_TSV_SELECTED		Boolean: FEATURE KIR TSV radiobutton
 GSG_FEATURE_KIR_PRETTY_SELECTED		Boolean: FEATURE KIR TXT radiobutton
 
-// duplicates because maay have different settings for KIR and HLA
+// duplicates because may have different settings for KIR and HLA
 GSG_GFE_HLA_SAVE_FILE				Boolean: Save HLA results to file, GFE tab
 GSG_GFE_KIR_SAVE_FILE				Boolean: Save KIR results to file, GFE tab
 
@@ -79,6 +79,8 @@ GSG_RAW_DATA						String: where to store the raw data files
 GSG_RESULTS_DATA					String: where to store the results files
 GSG_HLA_VERSIONS					String: what HLA versions are currently available to download
 GSG_KIR_VERSIONS					String: what KIR versions are currently available to download
+GSG_MOVED_DATA						Boolean: has the program checked for old data and moved it to correct folders?
+
 
 // misc
 GSG_OPEN_TAB						Int: which tab was last in focus

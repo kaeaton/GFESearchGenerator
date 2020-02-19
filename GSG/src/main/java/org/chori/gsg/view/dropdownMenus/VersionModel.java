@@ -43,14 +43,14 @@ public class VersionModel {
 
 	public VersionModel() { }
 
-	public DefaultComboBoxModel assembleVersionModel(String whichLoci) {
+	public DefaultComboBoxModel assembleVersionModel(String lociType) {
 		String onlineVersions = null;
 		String[] parsedOnlineVersions = new String[3];
 		ArrayList<String> localVersions = new ArrayList<>();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		Set<String> versionSet = new HashSet<String>();
 
-		localVersions = dataAvailableLocally.getLocalVersionsByLoci(whichLoci);
+		localVersions = dataAvailableLocally.getLocalVersionsByLoci(lociType);
 		System.out.println("VersionModel.assembleVersionModel: avaliable version data: " + localVersions.toArray());
 		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
@@ -58,8 +58,8 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			dataAvailableOnline.getCurrentVersionsByLoci("HLA");
-			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+			dataAvailableOnline.getCurrentVersionsByLoci(lociType);
+			onlineVersions = prefs.get("GSG_" + lociType + "_VERSIONS", null);
 		}
 
 		// if you have online versions, parse them
