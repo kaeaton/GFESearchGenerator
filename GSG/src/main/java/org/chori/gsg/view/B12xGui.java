@@ -153,7 +153,7 @@ public class B12xGui extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel("HLA-A"); //whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
 			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);
