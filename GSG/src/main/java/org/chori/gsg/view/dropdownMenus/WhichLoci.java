@@ -33,14 +33,14 @@ public class WhichLoci {
 		System.out.println("Generating the which loci combo box");
 		
 		// instantiate combobox and its model
-		JComboBox whichLoci = new JComboBox();
+		JComboBox whichLociDropDown = new JComboBox();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
-		whichLoci.setModel(comboBoxModel);
+		whichLociDropDown.setModel(comboBoxModel);
 
-		whichLoci.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
+		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
 
-		whichLociListener(whichLoci, whichTab);
-		return whichLoci;
+		whichLociListener(whichLociDropDown, whichTab);
+		return whichLociDropDown;
 	}
 
 	private void whichLociListener(JComboBox whichLoci, String whichTab) {
