@@ -82,7 +82,7 @@ public class Neo4jHttpCall {
 		connection.setRequestProperty("Accept", "application/json");
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setRequestProperty("X-Stream", "true");
-		connection.setRequestProperty("Authorization", Passwords.gfedbPassword());
+		connection.setRequestProperty("Authorization", Passwords.getGfedbPassword());
 
 		return connection;
 	}
