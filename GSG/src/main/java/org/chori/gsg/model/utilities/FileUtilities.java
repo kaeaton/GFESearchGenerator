@@ -65,17 +65,21 @@ public class FileUtilities {
 		return false;
 	}
 
-	// create the file to store results
-	// public void storeResultsData(String type, String locus, String version) {
-	// 	try {
-	// 		if(!internet.tester()) {
-	// 			throw new NoInternetException();
-	// 		}
+	/**
+	 * Which side is the GFE? (Old files use names as key, new ones gfe.)
+	 * We want the side that doesn't contain the asterisk.
+	 * 
+	 * @param lineOfData a non-header line from the data file, usually from a buffered reader.
+	 * @return an int identifying which piece of data is the GFE.
+	 */
+	public int whichSideIsTheGfe(String lineOfData) {
+		String[] gfeAlleles = lineOfData.split(",");
 
-	// 		currentReleaseData.getRawLocusData(type, locus, version);
+		int gfe = 1;
 
-	// 	} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
+		if(gfeAlleles[1].contains("*"))
+			gfe = 0;
 
-
-	// }
+		return gfe;
+	}
 }

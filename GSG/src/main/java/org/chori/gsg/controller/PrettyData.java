@@ -14,6 +14,7 @@ import java.util.regex.*;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 public class PrettyData {
@@ -23,6 +24,7 @@ public class PrettyData {
 	private	static HashMap<String, JTextArea> whichTextArea = new HashMap();
 	private HashMap<String, String> dataMatches = new HashMap();
 	private LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
+	private FileUtilities fileUtilities = new FileUtilities();
 
 	public PrettyData() {
 		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
@@ -77,19 +79,17 @@ public class PrettyData {
 				// reset the match flag
 				matchFlag = false;
 
-				// use comma as separator
-				gfeAlleles = line.split(",");
-
-				// which side is the GFE? (Old files use names as key, new ones gfe)
-				// we want the side that doesn't contain the asterisk.
+				// which side is the GFE?
 				// flag so we only run it once
 				if (idGfeFlag) {
 					
-					if(gfeAlleles[1].contains("*"))
-						gfe = 0;
+					gfe = fileUtilities.whichSideIsTheGfe(line);
 
 					idGfeFlag = false;
 				}
+
+				// use comma as separator
+				gfeAlleles = line.split(",");
 
 				switch(whichTab) {
 					case "GFE":
