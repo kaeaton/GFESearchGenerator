@@ -19,11 +19,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 public class SearchData {
 
 	private static HashMap<String, JTextArea> whichTextArea = new HashMap<>();
+	private FileUtilities fileUtilities = new FileUtilities();
 
 	public SearchData() {
 		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
@@ -35,6 +37,7 @@ public class SearchData {
 		int i = 0;
 		String line,
 			   timeStamp = LocalDateTime.now().toString();
+		String[] gfeAlleles = new String[2]; 
 			   
 		HashMap<String, String> unsortedData = new HashMap();
 		LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
@@ -48,27 +51,13 @@ public class SearchData {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String fileDate = br.readLine();
 			String version = br.readLine();
+			line = br.readLine();
 
-			// the first dataline to check which side is GFE
-			String[] gfeAlleles = br.readLine().split(",");
-
-			// which side is the GFE? (Old files use names as key, new ones gfe)
-			// we want the side that doesn't contain the asterisk.
-			int gfe = 1;
-			if(gfeAlleles[1].contains("*")) { gfe = 0; }
+			int gfe = fileUtilities.whichSideIsTheGfe(line);
 
 			switch(whichTab) {
 				case "GFE":
-					if (gfeAlleles[gfe].matches(regex)){
-							
-						// if the first data line matches the regex, add to hashmap
-						unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-						i++;
-					}
-			
-					// screen the rest of the data
-					while ((line = br.readLine()) != null) {
-						
+					do {
 						// use comma as separator
 						gfeAlleles = line.split(",");
 						if (gfeAlleles[gfe].matches(regex)){
@@ -76,37 +65,27 @@ public class SearchData {
 							unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 							i++;
 						}
-					}
+					} while ((line = br.readLine()) != null);
+
 					break;
 				case "NAME":
 					// Create a pattern from regex 
 					Pattern pattern = Pattern.compile(regex);
 
-					// Create a matcher for the input String 
-					Matcher matcher = pattern.matcher(gfeAlleles[1 - gfe]);
-
-					if (matcher.lookingAt()){
-						System.out.println("First name search matched regex");
-						// if the first data line matches the regex, add to hashmap
-						unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
-						i++;
-					}
-			
-					// screen the rest of the data
-					while ((line = br.readLine()) != null) {
-						
+					do {
 						// use comma as separator
 						gfeAlleles = line.split(",");
 
 						// Create a matcher for the input String 
-						matcher = pattern.matcher(gfeAlleles[1 - gfe]);
+						Matcher matcher = pattern.matcher(gfeAlleles[1 - gfe]);
 
 						if (matcher.lookingAt()){
 							
 							unsortedData.put(gfeAlleles[gfe], gfeAlleles[1 - gfe]);
 							i++;
 						}
-					}
+					} while ((line = br.readLine()) != null);
+					
 					break;
 				default:
 					System.out.println("SearchData doesn't know how to process the data");
