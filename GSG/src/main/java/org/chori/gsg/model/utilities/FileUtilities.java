@@ -69,7 +69,7 @@ public class FileUtilities {
 	 * Which side is the GFE? (Old files use names as key, new ones gfe.)
 	 * We want the side that doesn't contain the asterisk.
 	 * 
-	 * @param lineOfData a non-header line from the data file, usually from a buffered reader.
+	 * @param lineOfData a non-header String (line) from the data file, usually from a buffered reader.
 	 * @return an int identifying which piece of data is the GFE.
 	 */
 	public int whichSideIsTheGfe(String lineOfData) {
