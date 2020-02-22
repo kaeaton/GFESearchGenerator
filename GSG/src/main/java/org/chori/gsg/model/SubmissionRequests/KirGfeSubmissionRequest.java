@@ -49,7 +49,7 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
-		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion);
+		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion, "KIR");
 		
 		this.allTextFields = GfeSearchPanelAssembler.allTextboxes;
 		this.allCheckBoxes = GfeSearchPanelAssembler.allCheckboxes;

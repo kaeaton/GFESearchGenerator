@@ -46,7 +46,7 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 		this.whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
-		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion);
+		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion, "HLA");
 		
 		submitRequest();
 	}

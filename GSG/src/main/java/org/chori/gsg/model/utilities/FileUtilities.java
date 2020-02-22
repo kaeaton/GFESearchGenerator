@@ -26,12 +26,15 @@ public class FileUtilities {
 	 * (scans for file length to make sure it's not just a header)
 	 * If the file does not exist or contains no data, this downloads it.
 	 * 
-	 * @param locus a string telling which locus for HLA, or just "KIR" for KIR data
+	 * @param locus a string telling which locus for HLA, or just "KIR" for KIR data.
 	 * @param version a string listing the version.
+	 * @param lociType a string identifying which loci we're looking at.
 	 * @return a csv file of raw data.
 	 */
-	public File getTheRawDataFile(String locus, String version) {
-		String specificFile = whereTheDataLives.getRawDataPath() + version + System.getProperty("file.separator") 
+	public File getTheRawDataFile(String locus, String version, String lociType) {
+		String specificFile = whereTheDataLives.getRawDataPath() + lociType 
+								+ System.getProperty("file.separator")
+								+ version + System.getProperty("file.separator") 
 								+ "neo4j_" + locus + "_" + version + "_download.csv";
 
 		File theFile = new File(specificFile);

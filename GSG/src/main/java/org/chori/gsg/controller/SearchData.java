@@ -33,6 +33,16 @@ public class SearchData {
 		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
 	}
 
+	/**
+	 * Uses a buffered reader to pull the raw data out of the CSV file and compares 
+	 * the GFEs to the provided regex. It then prints the results to the textarea of the
+	 * appropriate tab in either TSV or CSV format.
+	 * 
+	 * @param file the file of raw CSV data.
+	 * @param regex the regex string we're comparing the gfe's to.
+	 * @param dataFormat a string identifying if the data should be presented as CSV or TSV.
+	 * @param whichTab a string identifying which tab the results should be printed to.
+	 */
 	public void searchThroughData(File file, String regex, String dataFormat, String whichTab) {
 		HashMap<String, String> unsortedData = new HashMap();
 		LinkedHashMap<String, String> sortedDataMatches = new LinkedHashMap();
