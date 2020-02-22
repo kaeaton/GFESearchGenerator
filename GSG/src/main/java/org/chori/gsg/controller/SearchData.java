@@ -14,12 +14,19 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
+
+/**
+ * This class compares the data to the appropriate regex string and prints
+ * the matches to the appropriate textArea.
+ * 
+ * @author Katrina Eaton
+ * 
+ */
 public class SearchData {
 
 	private static HashMap<String, JTextArea> whichTextArea = new HashMap<>();
 	private FileUtilities fileUtilities = new FileUtilities();
 	private SortData sortData = new SortData();
-
 
 	public SearchData() {
 		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
