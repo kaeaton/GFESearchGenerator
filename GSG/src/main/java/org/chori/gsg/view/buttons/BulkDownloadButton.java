@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.downloadData.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.*;
@@ -25,6 +26,7 @@ public class BulkDownloadButton {
 	private final List<String> hlaLoci = Arrays.asList("HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5");
 
 	private InternetAccess internetAccess = new InternetAccess();
+	private DownloadRawData downloadRawData = new DownloadRawData();
 	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
 
 	public BulkDownloadButton() { }
@@ -73,14 +75,14 @@ public class BulkDownloadButton {
 	private void getHlaData(String version) {
 		try {
 			for (String locus:hlaLoci) {
-				dataAvailableOnline.getRawLocusData("HLA", locus, version);
+				downloadRawData.getRawLocusData("HLA", locus, version);
 			}
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 
 	private void getKirData(String version) {
 		try {
-			dataAvailableOnline.getRawLocusData("KIR", "KIR", version);
+			downloadRawData.getRawLocusData("KIR", "KIR", version);
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 }

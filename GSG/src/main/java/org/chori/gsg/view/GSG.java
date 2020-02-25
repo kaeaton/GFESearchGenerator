@@ -107,9 +107,11 @@ public class GSG extends JFrame {
 			InternetAccess internet = new InternetAccess();
 			DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 
-			if(!internet.tester() && dataAvailableLocally.getLocalVersionData() == null) {
-			//!dataAvailableLocally.isThereAnyLocalData()) {
-				throw new NoInternetOrDataException();
+			// if(!internet.tester() && dataAvailableLocally.getLocalVersionData() == null) {
+			if(!dataAvailableLocally.isThereAnyLocalData()) {
+				if(!internet.tester()) {
+					throw new NoInternetOrDataException();
+				}
 			}
 
 			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);

@@ -3,7 +3,8 @@ package org.chori.gsg.model.utilities;
 import java.io.File;
 import java.nio.file.*;
 
-import org.chori.gsg.model.*;
+import org.chori.gsg.model.downloadData.*;
+import org.chori.gsg.model.utilities.WhereTheDataLives;
 
 
 /**
@@ -15,6 +16,7 @@ import org.chori.gsg.model.*;
 
 public class FileUtilities {
 
+	private DownloadRawData downloadRawData = new DownloadRawData();
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 
 	public FileUtilities() { }
@@ -43,7 +45,8 @@ public class FileUtilities {
 			System.out.println("Found the raw data file");
 			return theFile;
 		} else {
-			whereTheDataLives.storeResultsData("GFE", locus, version);
+			downloadRawData.getRawLocusData(lociType, locus, version);
+			// whereTheDataLives.storeResultsData("GFE", locus, version);
 			return theFile;
 		}
 	}

@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.util.prefs.Preferences;
 
 import org.chori.gsg.model.*;
+import org.chori.gsg.model.downloadData.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;
@@ -76,8 +77,9 @@ public class WhereTheDataLives {
 
 	private String hlaPath(String locus, String version) {
 
-		// sample file name/path: /Documents/GSG/GSGData/3.35.0/neo4j_HLA-A_3.35.0_Download.csv
+		// sample file name/path: /Documents/GSG/GSGData/HLA/3.35.0/neo4j_HLA-A_3.35.0_Download.csv
 		String path = (getRawDataPath() 
+				+ "HLA" + System.getProperty("file.separator")
 				+ version + System.getProperty("file.separator")
 				+ "neo4j_" + locus + "_" + version
 				+ "_Download.csv");
@@ -87,8 +89,9 @@ public class WhereTheDataLives {
 
 	private String kirPath(String version) {
 
-		// sample file name/path: /Documents/GSG/GSGData/2.7.0/neo4j_KIR_2.7.0_Download.csv
+		// sample file name/path: /Documents/GSG/GSGData/KIR/2.7.0/neo4j_KIR_2.7.0_Download.csv
 		String path = (getRawDataPath() 
+				+ "KIR" + System.getProperty("file.separator")
 				+ version + System.getProperty("file.separator")
 				+ "neo4j_KIR_" + version + "_Download.csv");
 
@@ -108,17 +111,5 @@ public class WhereTheDataLives {
                 path.toFile().getParentFile().mkdirs();
             }
 	    } catch (Exception ex) { System.out.println("WTDL: Error creating file structure: " + ex); }
-	}
-
-	// create the file to store results
-	public void storeResultsData(String lociType, String locus, String version) {
-		try {
-			if(!internet.tester()) {
-				throw new NoInternetException();
-			}
-
-			dataAvailableOnline.getRawLocusData(lociType, locus, version);
-
-		} catch(Exception ex) { System.out.println("WTDL.getRawData is having trouble getting the data: " + ex ); }
 	}
 }
