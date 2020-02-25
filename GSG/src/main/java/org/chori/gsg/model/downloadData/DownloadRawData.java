@@ -18,11 +18,11 @@ public class DownloadRawData {
 	        // create the request and send it
 	        InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
 	        	neo4jGfeDataRequest.createNeo4jGfeDataRequest(lociType, locus, version));
-	        System.out.println("DataAvailableOnline: received Input Stream");
+	        System.out.println("DownloadRawData: received Input Stream");
 	        
 	        parseIncomingData(incomingData, lociType, locus, version);
 
-		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading locus data failed: " + ex); }
+		} catch (Exception ex) { System.out.println("DownloadRawData: Downloading locus data failed: " + ex); }
 	}
 
 	private void parseIncomingData(InputStream incomingData, String lociType, String locus, String version) {
@@ -37,6 +37,6 @@ public class DownloadRawData {
 				default:
 					System.out.println("Current release data: " + lociType + " hasn't been added yet.");
 			}
-		} catch (Exception ex) { System.out.println("DataAvailableOnline: Parsing incoming locus data failed: " + ex); }
+		} catch (Exception ex) { System.out.println("DownloadRawData: Parsing incoming locus data failed: " + ex); }
 	}
 }

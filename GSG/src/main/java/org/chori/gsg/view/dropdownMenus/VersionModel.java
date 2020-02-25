@@ -39,7 +39,7 @@ public class VersionModel {
 	private DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
 	private InternetAccess internet = new InternetAccess();
 	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
-	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
+	private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
 
 	public VersionModel() { }
 
@@ -58,7 +58,7 @@ public class VersionModel {
 		// if online versions equals null, and you have internet
 		// download the current versions
 		if(onlineVersions == null && internet.tester()) {
-			dataAvailableOnline.getCurrentVersionsByLoci(lociType);
+			versionsAvailableOnline.getCurrentVersionsByLoci(lociType);
 			onlineVersions = prefs.get("GSG_" + lociType + "_VERSIONS", null);
 		}
 
@@ -96,7 +96,7 @@ public class VersionModel {
 
 		// if you have internet download the current versions
 		if(internet.tester()) {
-			dataAvailableOnline.getCurrentVersionsByLoci("HLA");
+			versionsAvailableOnline.getCurrentVersionsByLoci("HLA");
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		} else if(onlineVersions != null) {
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);

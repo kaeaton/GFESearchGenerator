@@ -9,7 +9,7 @@ import org.chori.gsg.model.neo4j.*;
 import org.chori.gsg.model.processJson.*;
 import org.chori.gsg.view.*;
 
-public class DataAvailableOnline {
+public class VersionsAvailableOnline {
 
 	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
@@ -17,9 +17,9 @@ public class DataAvailableOnline {
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 	private Neo4jHttpCall neo4jHttpCall = new Neo4jHttpCall();
 	private IncomingJsonData incomingJsonData = new IncomingJsonData();
-	private Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
+	// private Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
 
-	public DataAvailableOnline() { }
+	public VersionsAvailableOnline() { }
 
 	public void getCurrentVersionsByLoci(String lociType) {
 		ArrayList<String> downloadedVersions = new ArrayList<>();
@@ -32,9 +32,8 @@ public class DataAvailableOnline {
 			// recieve the version data and parse it
 			downloadedVersions = incomingJsonData.parseVersion(incomingVersionData, lociType);
 
-		} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading versions by loci failed: " + ex); }
+		} catch (Exception ex) { System.out.println("VersionsAvailableOnline: Downloading versions by loci failed: " + ex); }
 
-		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 		storeLociVersions(lociType, downloadedVersions);
 	}
 
@@ -46,6 +45,6 @@ public class DataAvailableOnline {
 			prefs.put("GSG_" + lociType + "_VERSIONS", downloadedVersions.toString());
 		}	
 
-		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+		System.out.println("VersionsAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 	}
 }

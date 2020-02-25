@@ -27,7 +27,7 @@ public class BulkDownloadButton {
 
 	private InternetAccess internetAccess = new InternetAccess();
 	private DownloadRawData downloadRawData = new DownloadRawData();
-	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
+	private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
 
 	public BulkDownloadButton() { }
 
@@ -49,7 +49,7 @@ public class BulkDownloadButton {
 	private Runnable download = new Runnable() {
 		public void run() {
 			lociType = GSG.whichLociBulk.getSelectedItem().toString();
-			dataAvailableOnline.getCurrentVersionsByLoci(lociType);
+			versionsAvailableOnline.getCurrentVersionsByLoci(lociType);
 
 			String version = GSG.whatVersionBulk.getSelectedItem().toString();
 
