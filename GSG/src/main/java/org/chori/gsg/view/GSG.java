@@ -28,7 +28,7 @@ import org.chori.gsg.view.buttons.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 
-public class B12xGui extends JFrame {
+public class GSG extends JFrame {
 
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
@@ -99,7 +99,7 @@ public class B12xGui extends JFrame {
 	// search box for name search
 	public static JTextField nameSearchBox = new JTextField("", 20);
 	
-	public B12xGui() {
+	public GSG() {
 		try {
 
 			// error handling: if you have no data and no internet
@@ -126,7 +126,7 @@ public class B12xGui extends JFrame {
 		} catch (NoInternetOrDataException ex) { 
 			System.exit(0);
 		} catch (Exception ex) {
-			System.out.println("B12xGui initialization: " + ex);
+			System.out.println("GSG initialization: " + ex);
 		}
 
 
@@ -468,7 +468,7 @@ public class B12xGui extends JFrame {
 		// System.setProperty("apple.laf.useScreenMenuBar","true");
 		// System.setProperty("com.apple.mrj.application.apple.menu.about.name", "GFE Search Generator");
 		// try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
-		// catch(Exception ex) {System.out.println("B12xGui: look and feel class name: " + ex); }
+		// catch(Exception ex) {System.out.println("GSG: look and feel class name: " + ex); }
 
 		// look and feel breaks the background on the labels and spacing on locus label
  		// try {
@@ -483,7 +483,7 @@ public class B12xGui extends JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new B12xGui().setVisible(true);
+				new GSG().setVisible(true);
 				
 				// assign preference listeners for loci changes
 				// LociPrefsListeners prefsListener = new LociPrefsListeners();

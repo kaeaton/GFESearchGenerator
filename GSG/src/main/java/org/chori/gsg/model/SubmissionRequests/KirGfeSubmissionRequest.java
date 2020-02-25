@@ -45,8 +45,8 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	public KirGfeSubmissionRequest() {
 		
 		// data retrieved from GUI
-		this.whatLocus = B12xGui.whatLocusGfe.getSelectedItem().toString();
-		this.whatVersion = B12xGui.whatVersionGfe.getSelectedItem().toString();
+		this.whatLocus = GSG.whatLocusGfe.getSelectedItem().toString();
+		this.whatVersion = GSG.whatVersionGfe.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion, "KIR");
@@ -79,6 +79,7 @@ public class KirGfeSubmissionRequest extends SubmissionRequest implements LocusI
 	}
 
 	private void printTheHeaders() {
+		// clear prior data
 		textAreaToPrintTo.setText("");
 
 		header.printHeaders("GFE", headerSearchString, whatVersion, whatLocus, headerDataSource);

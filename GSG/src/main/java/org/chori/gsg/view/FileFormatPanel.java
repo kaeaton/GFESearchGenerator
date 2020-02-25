@@ -12,7 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPanel;
 
-// import package org.chori.gsg.view.B12xGui;
+// import package org.chori.gsg.view.GSG;
 
 /**
  * The class for the panel for selecting what format 
@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class FileFormatPanel { 
 
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private String loci;
 
 	

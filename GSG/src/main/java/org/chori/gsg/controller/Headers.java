@@ -38,11 +38,11 @@ public class Headers {
 		// where are we printing the headers?
 		switch(whichTab) {
 			case "GFE":
-				writeToMe = B12xGui.resultsTextAreaGfe;
+				writeToMe = GSG.resultsTextAreaGfe;
 				database = "IMGT/HLA Database ";
 				break;
 			case "NAME":
-				writeToMe = B12xGui.resultsTextAreaName;
+				writeToMe = GSG.resultsTextAreaName;
 				database = "IMGT/HLA Database ";
 				break;
 			default:
@@ -81,11 +81,11 @@ public class Headers {
 		// where are we printing the headers?
 		switch(whichTab) {
 			case "NAME2":
-				writeToMe = B12xGui.resultsTextAreaName;
+				writeToMe = GSG.resultsTextAreaName;
 				database = "IMGT/HLA Database ";
 				break;
 			case "FEATURE":
-				writeToMe = B12xGui.resultsTextAreaFeature;
+				writeToMe = GSG.resultsTextAreaFeature;
 				database = "IMGT/HLA Database ";
 				break;
 			default:

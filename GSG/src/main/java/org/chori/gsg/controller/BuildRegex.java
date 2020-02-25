@@ -25,9 +25,9 @@ public class BuildRegex {
 		// quick diagnostic test: 
 		// are the checkbox and textfield lists the same size?
 		if(checkBoxes.size() != textFields.size()) {
-			B12xGui.resultsTextAreaGfe.append("There's a problem with the Arraylists in BuildRegex.");
-			B12xGui.resultsTextAreaGfe.append(" (They're not the same length.)");
-			B12xGui.resultsTextAreaGfe.append(System.lineSeparator());
+			GSG.resultsTextAreaGfe.append("There's a problem with the Arraylists in BuildRegex.");
+			GSG.resultsTextAreaGfe.append(" (They're not the same length.)");
+			GSG.resultsTextAreaGfe.append(System.lineSeparator());
 			System.out.println("There's a problem with the Arraylists in BuildRegex.");
 		}
 

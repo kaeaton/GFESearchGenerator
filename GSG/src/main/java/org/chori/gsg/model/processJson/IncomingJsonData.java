@@ -94,7 +94,7 @@ public class IncomingJsonData {
 							if(neo4jPairs.containsKey(key)) {
 								System.out.println("Duplicate gfe key found: " + key);
 							
-								javax.swing.JOptionPane.showMessageDialog(B12xGui.parentTabbedPane,
+								javax.swing.JOptionPane.showMessageDialog(GSG.parentTabbedPane,
 									("GFE " + key + " exists in the database at least twice. It is associated with " + value),
 									"This GFE has been downloaded before",
 									javax.swing.JOptionPane.ERROR_MESSAGE);

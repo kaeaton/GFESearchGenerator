@@ -20,9 +20,9 @@ public class WriteToFile {
 	private WhereTheDataLives wtdl = new WhereTheDataLives();
 	
 	public WriteToFile () {
-		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
-		// whichTextArea.put("KIR", B12xGui.kirNeo4jResults);
-		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
+		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		// whichTextArea.put("KIR", GSG.kirNeo4jResults);
+		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 
 		fileSuffix.put("CSV", ".csv");
 		fileSuffix.put("TSV", ".tsv");

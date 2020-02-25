@@ -11,7 +11,7 @@ import org.chori.gsg.view.*;
 
 public class DataAvailableOnline {
 
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	// class instantiations
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();

@@ -32,7 +32,7 @@ import org.chori.gsg.view.buttons.*;
 
 public class VersionModel {
 
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	// private	static HashMap<Integer, JTextArea> whichTextArea = new HashMap();
 
 	// class instantiations
@@ -94,12 +94,11 @@ public class VersionModel {
 		String onlineVersions = "";
 		String[] parsedOnlineVersions = new String[3];
 
-		onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
-
-		// if online versions equals null, and you have internet
-		// download the current versions
-		if(onlineVersions == null && internet.tester()) {
+		// if you have internet download the current versions
+		if(internet.tester()) {
 			dataAvailableOnline.getCurrentVersionsByLoci("HLA");
+			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		} else if(onlineVersions != null) {
 			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
 		}
 

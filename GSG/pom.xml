@@ -82,7 +82,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>org.chori.gsg.view.B12xGui</mainClass>
+                <mainClass>org.chori.gsg.view.GSG</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>

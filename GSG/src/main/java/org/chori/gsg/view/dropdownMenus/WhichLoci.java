@@ -19,7 +19,7 @@ import org.chori.gsg.view.*;
 public class WhichLoci { 
 
 	private final String[] loci = {"HLA", "KIR"};
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	public WhichLoci() { }
 

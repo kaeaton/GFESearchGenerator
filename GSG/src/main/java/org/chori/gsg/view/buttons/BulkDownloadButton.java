@@ -46,10 +46,10 @@ public class BulkDownloadButton {
 
 	private Runnable download = new Runnable() {
 		public void run() {
-			lociType = B12xGui.whichLociBulk.getSelectedItem().toString();
+			lociType = GSG.whichLociBulk.getSelectedItem().toString();
 			dataAvailableOnline.getCurrentVersionsByLoci(lociType);
 
-			String version = B12xGui.whatVersionBulk.getSelectedItem().toString();
+			String version = GSG.whatVersionBulk.getSelectedItem().toString();
 
 			downloadData(lociType, version);
 		}

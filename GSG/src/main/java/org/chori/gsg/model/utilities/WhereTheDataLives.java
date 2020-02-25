@@ -11,7 +11,7 @@ import org.chori.gsg.exceptions.*;
 
 public class WhereTheDataLives {
 
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private InternetAccess internet = new InternetAccess();
 	private DataAvailableOnline dataAvailableOnline = new DataAvailableOnline();
 	// private FileUtilities fileUtilities = new FileUtilities();

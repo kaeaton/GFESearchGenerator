@@ -13,7 +13,7 @@ import org.chori.gsg.view.*;
 
 public class ResetPrefsButton {
 
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	public ResetPrefsButton() { }
 

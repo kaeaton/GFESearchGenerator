@@ -23,7 +23,7 @@ import org.chori.gsg.view.*;
 public class WhatLocus { 
 
 	private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
-	private Preferences prefs = Preferences.userNodeForPackage(B12xGui.class);
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private String whichLocus = "HLA-A";
 	private LocusModel locusModel = new LocusModel();
 
@@ -82,7 +82,7 @@ public class WhatLocus {
 		gfeWhatLocus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				String lociType = B12xGui.whichLociGfe.getSelectedItem().toString();
+				String lociType = GSG.whichLociGfe.getSelectedItem().toString();
 				whichLocus = gfeWhatLocus.getSelectedItem().toString();
 				setNewGfePanel(whichLocus);
 				System.out.println("Which Locus listener triggered");
@@ -96,7 +96,7 @@ public class WhatLocus {
 		nameWhatLocus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				String lociType = B12xGui.whichLociName.getSelectedItem().toString();
+				String lociType = GSG.whichLociName.getSelectedItem().toString();
 				whichLocus = nameWhatLocus.getSelectedItem().toString();
 				System.out.println("Which Locus name listener triggered");
 				prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", nameWhatLocus.getSelectedIndex());
@@ -109,23 +109,22 @@ public class WhatLocus {
 	 * A helper method that sets the new GFE search panel.
 	 * The loci are determined from preferences.
 	 * 
-	 * @param locus what locus should be displayed
+	 * @param whatLocus what locus should be displayed
 	 */
 	public void setNewGfePanel(String whatLocus) {
 		System.out.println("Triggered setNewGfePanel");
 		JPanel newPanel = createNewGfePanel(whatLocus);
-		JPanel oldPanel = findPanel(B12xGui.gfePanel, "GFE");
-		B12xGui.gfePanel.remove(oldPanel);
-		B12xGui.gfePanel.add(newPanel).revalidate();
-		B12xGui.gfePanel.repaint();
+		JPanel oldPanel = findPanel(GSG.gfePanel, "GFE");
+
+		GSG.gfePanel.remove(oldPanel);
+		GSG.gfePanel.add(newPanel).revalidate();
+		GSG.gfePanel.repaint();
 	}
 
 	private JPanel createNewGfePanel(String whatLocus) {
 		JPanel newPanel = new JPanel();
 
-		// if(prefs.get("GSG_GFE_LOCI_STRING", "HLA").equals("HLA"))
-			newPanel = gfeSearchPanelAssembler.getGfePanel(whatLocus);
-
+		newPanel = gfeSearchPanelAssembler.getGfePanel(whatLocus);
 		newPanel.setName("GFE");
 
 		return newPanel;
@@ -139,7 +138,7 @@ public class WhatLocus {
 	 * @return the currently displayed JPanel
 	 */
 	public JPanel findPanel(JPanel whichTab, String whichPanel) {
-		Component selectedPanel = B12xGui.gfePanel;
+		Component selectedPanel = GSG.gfePanel;
 		for (Component component : whichTab.getComponents()) {
 			if (component.getName().equals(whichPanel)){
 				selectedPanel = component;

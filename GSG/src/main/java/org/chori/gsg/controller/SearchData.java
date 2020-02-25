@@ -29,8 +29,8 @@ public class SearchData {
 	private SortData sortData = new SortData();
 
 	public SearchData() {
-		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
-		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
+		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 	}
 
 	/**
@@ -62,10 +62,10 @@ public class SearchData {
 
 			switch(whichTab) {
 				case "GFE":
-					unsortedData = sortGfeData(br, regex, line, gfe);
+					unsortedData = searchGfeData(br, regex, line, gfe);
 					break;
 				case "NAME":
-					unsortedData = sortNameData(br, regex, line, gfe);
+					unsortedData = searchNameData(br, regex, line, gfe);
 					break;
 				default:
 					System.out.println("SearchData doesn't know how to process the data");
@@ -84,7 +84,7 @@ public class SearchData {
 		printFooter(totalMatches, printToMe);
 	}
 
-	private HashMap<String, String> sortGfeData(BufferedReader br, String regex, String line, int gfe) {
+	private HashMap<String, String> searchGfeData(BufferedReader br, String regex, String line, int gfe) {
 		HashMap<String, String> unsortedData = new HashMap();
 		String[] gfeAlleles = new String[2];
 
@@ -103,7 +103,7 @@ public class SearchData {
 		return unsortedData;
 	}
 
-	private HashMap<String, String> sortNameData(BufferedReader br, String regex, String line, int gfe) {
+	private HashMap<String, String> searchNameData(BufferedReader br, String regex, String line, int gfe) {
 		HashMap<String, String> unsortedData = new HashMap();
 		String[] gfeAlleles = new String[2];
 

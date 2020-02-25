@@ -42,8 +42,8 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 	public HlaNameSubmissionRequest() {
 		
 		// data retrieved from GUI
-		this.whatLocus = B12xGui.whatLocusName.getSelectedItem().toString();
-		this.whatVersion = B12xGui.whatVersionName.getSelectedItem().toString();
+		this.whatLocus = GSG.whatLocusName.getSelectedItem().toString();
+		this.whatVersion = GSG.whatVersionName.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion, "HLA");
@@ -67,11 +67,12 @@ public class HlaNameSubmissionRequest extends SubmissionRequest implements Locus
 	}
 
 	private void createRegexStrings() {
-		this.headerSearchString = B12xGui.nameSearchBox.getText();
+		this.headerSearchString = GSG.nameSearchBox.getText();
 		this.searchRegex = buildRegex.assembleNameRegex(headerSearchString);
 	}
 
 	private void printTheHeaders() {
+		// clear the prior results
 		textAreaToPrintTo.setText("");
 
 		header.printHeaders("NAME", headerSearchString, whatVersion, whatLocus, headerDataSource);

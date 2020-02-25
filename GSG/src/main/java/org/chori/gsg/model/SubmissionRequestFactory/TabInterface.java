@@ -4,14 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.model.submissionRequests.*;
-import org.chori.gsg.view.B12xGui;
+import org.chori.gsg.view.GSG;
 
 public interface TabInterface {
 
 	public enum WhereToPrint {
-		GFE(B12xGui.resultsTextAreaGfe),
-		NAME(B12xGui.resultsTextAreaName),
- 		FEATURE(B12xGui.resultsTextAreaFeature);
+		GFE(GSG.resultsTextAreaGfe),
+		NAME(GSG.resultsTextAreaName),
+ 		FEATURE(GSG.resultsTextAreaFeature);
 
 		private final JTextArea whereToPrint;
 
@@ -25,9 +25,9 @@ public interface TabInterface {
 	}
 
 	public enum WhatToPrint {
-		GFE(B12xGui.fileFormatGfe),
-		NAME(B12xGui.fileFormatName),
- 		FEATURE(B12xGui.fileFormatFeature);
+		GFE(GSG.fileFormatGfe),
+		NAME(GSG.fileFormatName),
+ 		FEATURE(GSG.fileFormatFeature);
 
 		private final JPanel whatToPrint;
 

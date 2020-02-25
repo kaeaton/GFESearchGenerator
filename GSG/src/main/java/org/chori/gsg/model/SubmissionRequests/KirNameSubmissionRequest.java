@@ -25,8 +25,8 @@ public class KirNameSubmissionRequest extends SubmissionRequest implements Locus
 	private String headerDataSource = HeaderDataSource.KIR.getHeaderDataSource();
 	private JTextArea textAreaToPrintTo = WhereToPrint.NAME.getWhereToPrint(); 
 	
-	// private String whatLocus = B12xGui.whatLocusHla.getSelectedItem().toString();
-	// private String whatVersion = B12xGui.whatVersionHla.getSelectedItem().toString();
+	// private String whatLocus = GSG.whatLocusHla.getSelectedItem().toString();
+	// private String whatVersion = GSG.whatVersionHla.getSelectedItem().toString();
 
 	// private String jsonRegexRequest = "";
 	// private String humanReadableSearchString = "";

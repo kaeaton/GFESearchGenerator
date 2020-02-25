@@ -27,8 +27,8 @@ public class PrettyData {
 	private FileUtilities fileUtilities = new FileUtilities();
 
 	public PrettyData() {
-		whichTextArea.put("GFE", B12xGui.resultsTextAreaGfe);
-		whichTextArea.put("NAME", B12xGui.resultsTextAreaName);
+		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 
 		hlaExonTotal.put("A", 8);
 		hlaExonTotal.put("B", 7);

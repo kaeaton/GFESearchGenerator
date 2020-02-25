@@ -72,13 +72,13 @@ public class SubmitButton {
 	private String getWhichLoci(String whichTab) {
 		switch(whichTab) {
 			case "GFE":
-				return B12xGui.whichLociGfe.getSelectedItem().toString();
+				return GSG.whichLociGfe.getSelectedItem().toString();
 				// break;
 			case "NAME":
-				return B12xGui.whichLociName.getSelectedItem().toString();
+				return GSG.whichLociName.getSelectedItem().toString();
 				// break;
 			case "FEATURE":
-				return B12xGui.whichLociFeature.getSelectedItem().toString();
+				return GSG.whichLociFeature.getSelectedItem().toString();
 				// break;
 			default:
 				System.out.println("getWhichLoci in Submit button: Haven't set up that tab yet");
