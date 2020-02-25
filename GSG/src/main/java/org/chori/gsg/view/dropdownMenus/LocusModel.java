@@ -25,7 +25,7 @@ public class LocusModel {
 
 	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private InternetAccess internet = new InternetAccess();
-	private DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
+	private VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
 
 	public LocusModel() { }
 
@@ -40,7 +40,7 @@ public class LocusModel {
 			System.out.println("Reached online version for loci in LocusModel");
 		} else {
 			// figure out what datafiles are available for selected version
-			availableLoci = dataAvailableLocally.getLocalDataFiles(version, lociType);
+			availableLoci = versionsAvailableLocally.getLocalDataFiles(version, lociType);
 		}
 
 		DefaultComboBoxModel model = new DefaultComboBoxModel();

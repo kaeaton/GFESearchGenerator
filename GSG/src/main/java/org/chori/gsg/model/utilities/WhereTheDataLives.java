@@ -14,8 +14,6 @@ public class WhereTheDataLives {
 
 	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private InternetAccess internet = new InternetAccess();
-	// private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
-	// private FileUtilities fileUtilities = new FileUtilities();
 
 	private final String defaultBasePath = (System.getProperty("user.home") 
 				+ System.getProperty("file.separator") + "Documents"

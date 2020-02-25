@@ -105,10 +105,9 @@ public class GSG extends JFrame {
 			// error handling: if you have no data and no internet
 			// the program doesn't work
 			InternetAccess internet = new InternetAccess();
-			DataAvailableLocally dataAvailableLocally = new DataAvailableLocally();
+			VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
 
-			// if(!internet.tester() && dataAvailableLocally.getLocalVersionData() == null) {
-			if(!dataAvailableLocally.isThereAnyLocalData()) {
+			if(!versionsAvailableLocally.isThereAnyLocalData()) {
 				if(!internet.tester()) {
 					throw new NoInternetOrDataException();
 				}

@@ -28,13 +28,13 @@ import org.chori.gsg.model.utilities.*;
  * @author Katrina Eaton
  * 
  */
-public class DataAvailableLocally {
+public class VersionsAvailableLocally {
 
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 	// private InternetAccess internet = new InternetAccess();
 	private FileUtilities fileUtilities = new FileUtilities();
 
-	public DataAvailableLocally () { }
+	public VersionsAvailableLocally () { }
 
 	/**
 	 * Checks for local data from any supported loci. Used by the GUI at launch
