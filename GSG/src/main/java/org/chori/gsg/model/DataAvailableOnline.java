@@ -48,31 +48,4 @@ public class DataAvailableOnline {
 
 		System.out.println("DataAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
 	}
-
-	// public void getRawLocusData(String lociType, String locus, String version) {
-	// 	try{
-	//         // create the request and send it
-	//         InputStream incomingData = neo4jHttpCall.makeCall(lociType, 
-	//         	neo4jGfeDataRequest.createNeo4jGfeDataRequest(lociType, locus, version));
-	//         System.out.println("DataAvailableOnline: received Input Stream");
-	        
-	//         parseIncomingData(incomingData, lociType, locus, version);
-
-	// 	} catch (Exception ex) { System.out.println("DataAvailableOnline: Downloading locus data failed: " + ex); }
-	// }
-
-	// private void parseIncomingData(InputStream incomingData, String lociType, String locus, String version) {
-	// 	try{
-	// 		switch (lociType) {
-	// 			case "HLA":
-	// 				incomingJsonData.parseNeo4jResponse(locus, version, incomingData);
-	// 				break;
-	// 			case "KIR":
-	// 				incomingJsonData.parseNeo4jResponse("KIR", version, incomingData);
-	// 				break;
-	// 			default:
-	// 				System.out.println("Current release data: " + lociType + " hasn't been added yet.");
-	// 		}
-	// 	} catch (Exception ex) { System.out.println("DataAvailableOnline: Parsing incoming locus data failed: " + ex); }
-	// }
 }
