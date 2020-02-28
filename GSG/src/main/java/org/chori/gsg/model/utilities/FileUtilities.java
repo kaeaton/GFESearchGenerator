@@ -16,11 +16,10 @@ import org.chori.gsg.model.utilities.WhereTheDataLives;
 
 public class FileUtilities {
 
-	private DownloadRawData downloadRawData = new DownloadRawData();
-	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
+	private DownloadRawDataFactoryInstance downloadRawDataFactoryInstance = DownloadRawDataFactoryInstance.getInstance();
+	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactoryInstance.factory;
 
 	public FileUtilities() { }
-
 
 	/**
 	 * Returns the csv file of raw data.
@@ -34,6 +33,10 @@ public class FileUtilities {
 	 * @return a csv file of raw data.
 	 */
 	public File getTheRawDataFile(String locus, String version, String lociType) {
+
+		// DownloadRawData downloadRawData = new DownloadRawData();
+		WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
+
 		String specificFile = whereTheDataLives.getRawDataPath() + lociType 
 								+ System.getProperty("file.separator")
 								+ version + System.getProperty("file.separator") 
@@ -45,8 +48,8 @@ public class FileUtilities {
 			System.out.println("Found the raw data file");
 			return theFile;
 		} else {
-			downloadRawData.getRawLocusData(lociType, locus, version);
-			// whereTheDataLives.storeResultsData("GFE", locus, version);
+			DownloadRawData downloadRawData = downloadRawDataFactory.createDownloadRawDataByLoci(lociType);
+			downloadRawData.getRawLocusData(locus, version);
 			return theFile;
 		}
 	}

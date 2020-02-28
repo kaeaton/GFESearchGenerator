@@ -1,14 +1,13 @@
 package org.chori.gsg.model.submissionRequestFactory;
 
-// import org.chori.gsg.controller.*;
 import org.chori.gsg.model.submissionRequests.*;
 
 public class SubmissionRequestFactory {
 
-	public static SubmissionRequest assembleSubmissionRequest(String whichGenes, String whichTab) {
+	public static SubmissionRequest assembleSubmissionRequest(String lociType, String whichTab) {
 		SubmissionRequest submissionRequest = null;
 
-		switch (whichGenes) {
+		switch (lociType) {
 		case "HLA":
 			switch (whichTab) {
 			case "GFE":

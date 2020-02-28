@@ -26,8 +26,11 @@ public class BulkDownloadButton {
 	private final List<String> hlaLoci = Arrays.asList("HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5");
 
 	private InternetAccess internetAccess = new InternetAccess();
-	private DownloadRawData downloadRawData = new DownloadRawData();
 	private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
+
+	private DownloadRawDataFactoryInstance downloadRawDataFactoryInstance = DownloadRawDataFactoryInstance.getInstance();
+	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactoryInstance.factory;
+
 
 	public BulkDownloadButton() { }
 
@@ -53,18 +56,20 @@ public class BulkDownloadButton {
 
 			String version = GSG.whatVersionBulk.getSelectedItem().toString();
 
-			downloadData(lociType, version);
+			// downloadData(lociType, version);
+			DownloadRawData downloadRawData = downloadRawDataFactory.createDownloadRawDataByLoci(lociType);
+			downloadData(downloadRawData, lociType, version);		
 		}
 	};
 
-	private void downloadData(String lociType, String version) {
+	private void downloadData(DownloadRawData downloadRawData, String lociType, String version) {
 		switch(lociType) {
 			case "HLA":
-				getHlaData(version);
+				getHlaData(downloadRawData, version);
 				break;
 
 			case "KIR":
-				getKirData(version);
+				getKirData(downloadRawData, version);
 				break;
 
 			default:
@@ -72,17 +77,17 @@ public class BulkDownloadButton {
 		}
 	}
 
-	private void getHlaData(String version) {
+	private void getHlaData(DownloadRawData downloadRawData, String version) {
 		try {
 			for (String locus:hlaLoci) {
-				downloadRawData.getRawLocusData("HLA", locus, version);
+				downloadRawData.getRawLocusData(locus, version);
 			}
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 
-	private void getKirData(String version) {
+	private void getKirData(DownloadRawData downloadRawData, String version) {
 		try {
-			downloadRawData.getRawLocusData("KIR", "KIR", version);
+			downloadRawData.getRawLocusData("KIR", version);
 		} catch (Exception ex) { System.out.println("Bulk downloading failed: " + ex); }
 	}
 }

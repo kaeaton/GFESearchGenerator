@@ -25,7 +25,7 @@ public abstract class SubmissionRequest {
 				}
 			}
 		}
-		System.out.println("Didn't find a Data format");
+		System.out.println("Submission Request: Didn't find a Data format");
 		return null;
 	}
 
