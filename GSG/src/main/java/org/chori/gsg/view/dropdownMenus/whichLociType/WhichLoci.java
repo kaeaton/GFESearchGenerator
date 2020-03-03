@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus;
+package org.chori.gsg.view.dropdownMenus.whichLociType;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

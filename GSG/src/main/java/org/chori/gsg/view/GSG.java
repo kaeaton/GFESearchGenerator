@@ -26,6 +26,7 @@ import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.buttons.*;
 import org.chori.gsg.view.dropdownMenus.*;
+import org.chori.gsg.view.dropdownMenus.whichLociType.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 
 public class GSG extends JFrame {
