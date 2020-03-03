@@ -1,10 +1,5 @@
 package org.chori.gsg.model.downloadData;
 
-import java.io.InputStream;
-
-import org.chori.gsg.model.neo4j.*;
-import org.chori.gsg.model.processJson.*;
-
 public class DownloadRawDataFactory {
 
 	public DownloadRawDataFactory() { }
@@ -17,7 +12,7 @@ public class DownloadRawDataFactory {
 			downloadRawData = new DownloadRawHlaData();
 			break;
 		case "KIR":
-			downloadRawData = new DownloadRawHlaData();
+			downloadRawData = new DownloadRawKirData();
 			break;
 		default:
 			System.out.println("DownloadRawDataSwitch, DownloadRawData Factory: haven't added those genes yet");
