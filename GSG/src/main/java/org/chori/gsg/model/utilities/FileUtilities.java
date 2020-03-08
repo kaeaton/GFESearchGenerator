@@ -16,8 +16,7 @@ import org.chori.gsg.model.utilities.WhereTheDataLives;
 
 public class FileUtilities {
 
-	private DownloadRawDataFactoryInstance downloadRawDataFactoryInstance = DownloadRawDataFactoryInstance.getInstance();
-	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactoryInstance.factory;
+	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactory.getInstance();
 
 	public FileUtilities() { }
 

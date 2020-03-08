@@ -4,6 +4,14 @@ import org.chori.gsg.model.submissionRequests.*;
 
 public class SubmissionRequestFactory {
 
+	private static final SubmissionRequestFactory instance = new SubmissionRequestFactory();
+	
+	private SubmissionRequestFactory() { }
+
+	public static SubmissionRequestFactory getInstance() {
+		return instance;
+	}
+	
 	public static SubmissionRequest assembleSubmissionRequest(String lociType, String whichTab) {
 		SubmissionRequest submissionRequest = null;
 

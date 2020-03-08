@@ -7,6 +7,7 @@ import java.util.prefs.Preferences;
 // import org.chori.gsg.model.*;
 import org.chori.gsg.model.neo4j.*;
 import org.chori.gsg.model.processJson.*;
+import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 
 public class VersionsAvailableOnline {
@@ -14,12 +15,27 @@ public class VersionsAvailableOnline {
 	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	// class instantiations
+	private InternetAccess internet = new InternetAccess();
 	private Neo4jVersionRequest neo4jVersionRequest = new Neo4jVersionRequest();
 	private Neo4jHttpCall neo4jHttpCall = new Neo4jHttpCall();
 	private IncomingJsonData incomingJsonData = new IncomingJsonData();
-	// private Neo4jGfeDataRequest neo4jGfeDataRequest = new Neo4jGfeDataRequest();
 
 	public VersionsAvailableOnline() { }
+
+	public void downloadCurrentVersionsInTheBackground() {
+
+		new Thread(downloadCurrentVersions).start();
+	}
+
+	private Runnable downloadCurrentVersions = new Runnable() {
+		String lociType = "HLA";
+		
+		public void run() {
+			if(internet.tester()) {
+				getCurrentVersionsByLoci(lociType);
+			}
+		}
+	};
 
 	public void getCurrentVersionsByLoci(String lociType) {
 		ArrayList<String> downloadedVersions = new ArrayList<>();

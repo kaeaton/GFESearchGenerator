@@ -27,10 +27,7 @@ public class BulkDownloadButton {
 
 	private InternetAccess internetAccess = new InternetAccess();
 	private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
-
-	private DownloadRawDataFactoryInstance downloadRawDataFactoryInstance = DownloadRawDataFactoryInstance.getInstance();
-	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactoryInstance.factory;
-
+	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactory.getInstance();
 
 	public BulkDownloadButton() { }
 

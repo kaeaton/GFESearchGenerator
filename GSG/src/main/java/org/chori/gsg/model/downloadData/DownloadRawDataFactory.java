@@ -2,7 +2,13 @@ package org.chori.gsg.model.downloadData;
 
 public class DownloadRawDataFactory {
 
-	public DownloadRawDataFactory() { }
+	private static final DownloadRawDataFactory instance = new DownloadRawDataFactory();
+	
+	private DownloadRawDataFactory() { }
+
+	public static DownloadRawDataFactory getInstance() {
+		return instance;
+	}
 
 	public static DownloadRawData createDownloadRawDataByLoci(String lociType) {
 		DownloadRawData downloadRawData = null;

@@ -7,8 +7,9 @@ import org.chori.gsg.model.submissionRequests.*;
 public class SubmissionRequestTest {
  
 
-	SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
-	SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
+	// SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
+	// SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
+	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactory.getInstance();
 	HlaGfeSubmissionRequest hlaGfeSubReq = new HlaGfeSubmissionRequest();
 	HlaNameSubmissionRequest hlaNameSubReq = new HlaNameSubmissionRequest();
 	HlaFeatureSubmissionRequest hlaFeatureSubReq = new HlaFeatureSubmissionRequest();

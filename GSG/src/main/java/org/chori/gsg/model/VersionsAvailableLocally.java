@@ -5,12 +5,13 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 
 // import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
-// import org.chori.gsg.view.*;
+import org.chori.gsg.view.*;
 
 
 /**
@@ -31,7 +32,7 @@ import org.chori.gsg.model.utilities.*;
 public class VersionsAvailableLocally {
 
 	private WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
-	// private InternetAccess internet = new InternetAccess();
+	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	private FileUtilities fileUtilities = new FileUtilities();
 
 	public VersionsAvailableLocally () { }
@@ -48,14 +49,21 @@ public class VersionsAvailableLocally {
 			{
 				add("HLA");
 				add("KIR");
-				add("ABO"); 
-            } 
+            }
         };
 
-        for(String lociGroup: loci) {
-        	ArrayList<String> versionsByLoci = getLocalVersionsByLoci(lociGroup);
-        	if(!versionsByLoci.isEmpty())
+        ArrayList<String> locallyAvailableVersions = new ArrayList<>();
+
+        for(String lociType: loci) {
+        	String locallyStoredVersions = prefs.get("GSG_" + lociType + "_LOCAL_VERSIONS", "");
+        	if(!locallyStoredVersions.equals("")) {
         		return true;
+        	} else {
+        		locallyAvailableVersions = getLocalVersionsByLoci(lociType);
+        		if(!locallyAvailableVersions.isEmpty()) {
+        			return true;
+        		}
+        	}
         }
 
         return false;
@@ -82,6 +90,8 @@ public class VersionsAvailableLocally {
 		localVersions = getVersionsFromDirectories(localDirectories, rawDataPath, lociType);
 		
 		sortTheVersionsList(localVersions);
+		storeLociVersions(lociType, localVersions);
+
 		return localVersions;
 	}
 
@@ -135,50 +145,15 @@ public class VersionsAvailableLocally {
 		return versions;
 	}
 
-	/* what versions do we have? */
-	public ArrayList<String> getLocalVersionData() {
-		ArrayList<String> versions = new ArrayList<>();
-		// find the GSGData folder
-		String rawDataPath = whereTheDataLives.getRawDataPath();
-
-		// read the GSGData folder
-		File[] directories = new File(rawDataPath).listFiles(File::isDirectory);
-		System.out.println("What folders are we looking at? " + Arrays.toString(directories));
+	private void storeLociVersions(String lociType, ArrayList<String> localVersions) {
 		
-		// get the folders for various versions
-		int pathLength = rawDataPath.length();
-		// System.out.println("Path length: " + pathLength);
+		String storedAvailableVersions = prefs.get("GSG_" + lociType + "_LOCAL_VERSIONS", "");
 
-		int dirLength;
-		String dir;
-		String versionNumber;
-		
-		try {
-			for (File directory:directories) {
-				// get directory length
-				dirLength = directory.toString().length();
-				dir = directory.toString();
-				System.out.println("We're currently looking at folder: " + dir);
-				
-				// get version number off the end
-				versionNumber = dir.substring(pathLength, dirLength);
-				ArrayList<String> localDataFiles = getLocalDataFiles(versionNumber, "HLA");
-				System.out.println("subpath: " + versionNumber);
-				
-				// add to list if not KIR ("2.7.0")
-				if(!versionNumber.equals("2.7.0") && localDataFiles != null) {
-					versions.add(versionNumber);
-				}
-			}
-		} catch(Exception ex) { System.out.println("LocalData: " + ex + " (Probably no folder found)"); }
+		if (!storedAvailableVersions.equals(localVersions.toString())) {
+			prefs.put("GSG_" + lociType + "_LOCAL_VERSIONS", localVersions.toString());
+		}	
 
-		// sort the versions
-		if(!versions.isEmpty()) {
-			Collections.sort(versions, Collections.reverseOrder());
-
-			return versions;
-		}
-		return null;
+		System.out.println("VersionsAvailableLocally: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_LOCAL_VERSIONS", ""));
 	}
 
 	/* what data files are there? */

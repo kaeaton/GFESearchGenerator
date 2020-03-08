@@ -5,7 +5,6 @@ import java.io.InputStream;
 public class DownloadRawKirData extends DownloadRawData {
 	public DownloadRawKirData() { }
 
-	// @Override
 	public void getRawLocusData(String locus, String version) {
 		try{
 			// create the request and send it
@@ -18,7 +17,6 @@ public class DownloadRawKirData extends DownloadRawData {
 		} catch (Exception ex) { System.out.println("DownloadRawData: Downloading locus data failed: " + ex); }
 	}
 
-	// @Override
 	protected void parseIncomingData(InputStream incomingData, String locus, String version) {
 		try {
 			incomingJsonData.parseNeo4jResponse("KIR", version, incomingData);

@@ -10,18 +10,18 @@ import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
 
 /**
- * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
+ * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns keaton01 706m
  * 
  * @author Katrina Eaton
  * 
  */
 
-public class WhichLoci { 
+public class WhichLociGfe { 
 
 	private final String[] loci = {"HLA", "KIR"};
 	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
-	public WhichLoci() { }
+	public WhichLociGfe() { }
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
