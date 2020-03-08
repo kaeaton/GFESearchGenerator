@@ -6,7 +6,7 @@ public class WhichLociFactory {
 	
 	private WhichLociFactory() { }
 
-    public static WhichLociFactory getInstance() {
+    public static WhichLociFactory getWhichLociFactoryInstance() {
         return instance;
     }
 

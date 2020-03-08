@@ -6,7 +6,7 @@ public class DownloadRawDataFactory {
 	
 	private DownloadRawDataFactory() { }
 
-	public static DownloadRawDataFactory getInstance() {
+	public static DownloadRawDataFactory getDownloadRawDataFactoryInstance() {
 		return instance;
 	}
 

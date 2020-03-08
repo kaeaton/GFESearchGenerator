@@ -8,7 +8,7 @@ public class SubmissionRequestFactory {
 	
 	private SubmissionRequestFactory() { }
 
-	public static SubmissionRequestFactory getInstance() {
+	public static SubmissionRequestFactory getSubmissionRequestFactoryInstance() {
 		return instance;
 	}
 	

@@ -19,7 +19,7 @@ public class SubmitButton {
 
 	// private SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
 	// private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
-	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactory.getInstance();
+	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactory.getSubmissionRequestFactoryInstance();
 
 	public SubmitButton() { }
 

@@ -9,7 +9,7 @@ public class SubmissionRequestTest {
 
 	// SubmissionRequestFactoryInstance submissionRequestFactoryInstance = SubmissionRequestFactoryInstance.getInstance();
 	// SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactoryInstance.factory;
-	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactory.getInstance();
+	private SubmissionRequestFactory submissionRequestFactory = SubmissionRequestFactory.getSubmissionRequestFactoryInstance();
 	HlaGfeSubmissionRequest hlaGfeSubReq = new HlaGfeSubmissionRequest();
 	HlaNameSubmissionRequest hlaNameSubReq = new HlaNameSubmissionRequest();
 	HlaFeatureSubmissionRequest hlaFeatureSubReq = new HlaFeatureSubmissionRequest();
