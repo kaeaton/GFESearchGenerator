@@ -43,13 +43,13 @@ public class GSG extends JFrame {
 	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generators
-	private GfeSearchPanelAssembler hlaPanelGenerator = new GfeSearchPanelAssembler();
+	private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
 	// private KirSearchPanelAssembler kirPanelGenerator = new KirSearchPanelAssembler();
 	
 	// component generators
 	private static WhatLocus whatLocusGenerator = new WhatLocus();
 	private static WhatVersion whatVersionGenerator = new WhatVersion();
-	private static WhichLoci whichLociGenerator = new WhichLoci();
+	private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
 	private static ResetButton resetButtonGenerator = new ResetButton();
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
 	private static ExitButton exitButtonGenerator = new ExitButton();
@@ -115,14 +115,14 @@ public class GSG extends JFrame {
 			}
 
 			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);
-			whichLociGfe = whichLociGenerator.createWhichLociComboBox("GFE");
+			whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
 			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME", nameSelectedLoci);
-			whichLociName = whichLociGenerator.createWhichLociComboBox("NAME");
+			whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
 			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
-			whichLociFeature = whichLociGenerator.createWhichLociComboBox("FEATURE");
+			whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK", bulkSelectedLoci);
-			whichLociBulk = whichLociGenerator.createWhichLociComboBox("BULK");
+			whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
 
 
 		} catch (NoInternetOrDataException ex) { 
@@ -155,7 +155,7 @@ public class GSG extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = hlaPanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
 			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);

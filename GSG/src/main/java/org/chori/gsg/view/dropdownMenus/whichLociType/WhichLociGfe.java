@@ -16,10 +16,10 @@ import org.chori.gsg.view.*;
  * 
  */
 
-public class WhichLociGfe { 
+public class WhichLociGfe extends WhichLoci { 
 
-	private final String[] loci = {"HLA", "KIR"};
-	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
+	// private final String[] loci = {"HLA", "KIR"};
+	// private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	public WhichLociGfe() { }
 
@@ -29,7 +29,7 @@ public class WhichLociGfe {
 	 * @param whichTab is passed to the ActionListener so it changes the correct preferences.
 	 * @return a JComboBox with an associated listener
 	 */
-	public JComboBox createWhichLociComboBox(String whichTab) {
+	public JComboBox createWhichLociComboBox() {
 		System.out.println("Generating the which loci combo box");
 		
 		// instantiate combobox and its model
@@ -37,28 +37,29 @@ public class WhichLociGfe {
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
 		whichLociDropDown.setModel(comboBoxModel);
 
-		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
+		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_GFE_LOCI", 0));
 
-		whichLociListener(whichLociDropDown, whichTab);
+		addWhichLociListener(whichLociDropDown);
+
 		return whichLociDropDown;
 	}
 
-	private void whichLociListener(JComboBox whichLoci, String whichTab) {
-		whichLoci.addActionListener(new ActionListener() {
+	protected void addWhichLociListener(JComboBox whichLociDropDown) {
+		whichLociDropDown.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				String lociType = whichLoci.getSelectedItem().toString();
-				System.out.println("Which " + whichTab + " Loci listener triggered");
+				String lociType = whichLociDropDown.getSelectedItem().toString();
+				System.out.println("WhichLociGfe listener triggered");
 
-				updateLocusAndVersions(whichTab, lociType);
+				updateLocusAndVersions(lociType);
 
-				prefs.putInt("GSG_" + whichTab + "_LOCI", whichLoci.getSelectedIndex());
-				prefs.put("GSG_" + whichTab + "_LOCI_STRING", lociType);
+				prefs.putInt("GSG_GFE_LOCI", whichLociDropDown.getSelectedIndex());
+				prefs.put("GSG_GFE_LOCI_STRING", lociType);
 			}
 		});
 	}
 
-	private void updateLocusAndVersions(String whichTab, String lociType) {
+	protected void updateLocusAndVersions(String lociType) {
 		
 	}
 }

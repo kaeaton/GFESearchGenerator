@@ -10,12 +10,12 @@ public class WhichLociFactory {
         return instance;
     }
 
-	public static WhichLoci createWhichLociDropdown(String tab) {
-		WhichLoci whichLociDropdown = null;
+	public static WhichLoci createWhichLoci(String tab) {
+		WhichLoci whichLoci = null;
 
 		switch (tab) {
 		case "GFE":
-			// downloadRawData = new DownloadRawHlaData();
+			whichLoci = new WhichLociGfe();
 			break;
 		case "NAME":
 			// downloadRawData = new DownloadRawKirData();
@@ -24,10 +24,10 @@ public class WhichLociFactory {
 			// downloadRawData = new DownloadRawKirData();
 			break;
 		default:
-			System.out.println("DownloadRawDataSwitch, DownloadRawData Factory: haven't added those genes yet");
+			System.out.println("WhichLociFactory: haven't added that tab yet");
 			break;
 		}
 
-		return whichLociDropdown;
+		return whichLoci;
 	}
 }

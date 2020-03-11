@@ -16,49 +16,20 @@ import org.chori.gsg.view.*;
  * 
  */
 
-public class WhichLoci { 
+public abstract class WhichLoci { 
 
-	private final String[] loci = {"HLA", "KIR"};
-	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
+	protected final String[] loci = {"HLA", "KIR"};
+	protected Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 
 	public WhichLoci() { }
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
 	 * 
-	 * @param whichTab is passed to the ActionListener so it changes the correct preferences.
 	 * @return a JComboBox with an associated listener
 	 */
-	public JComboBox createWhichLociComboBox(String whichTab) {
-		System.out.println("Generating the which loci combo box");
-		
-		// instantiate combobox and its model
-		JComboBox whichLociDropDown = new JComboBox();
-		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
-		whichLociDropDown.setModel(comboBoxModel);
+	public abstract JComboBox createWhichLociComboBox();
 
-		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_LOCI", 0));
-
-		whichLociListener(whichLociDropDown, whichTab);
-		return whichLociDropDown;
-	}
-
-	private void whichLociListener(JComboBox whichLoci, String whichTab) {
-		whichLoci.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				String lociType = whichLoci.getSelectedItem().toString();
-				System.out.println("Which " + whichTab + " Loci listener triggered");
-
-				updateLocusAndVersions(whichTab, lociType);
-
-				prefs.putInt("GSG_" + whichTab + "_LOCI", whichLoci.getSelectedIndex());
-				prefs.put("GSG_" + whichTab + "_LOCI_STRING", lociType);
-			}
-		});
-	}
-
-	private void updateLocusAndVersions(String whichTab, String lociType) {
-		
-	}
+	protected abstract void addWhichLociListener(JComboBox whichLociDropDown);
+	protected abstract void updateLocusAndVersions(String lociType);
 }
