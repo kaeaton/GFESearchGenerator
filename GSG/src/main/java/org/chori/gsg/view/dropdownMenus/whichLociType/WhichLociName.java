@@ -16,9 +16,9 @@ import org.chori.gsg.view.*;
  * 
  */
 
-public class WhichLociGfe extends WhichLoci { 
+public class WhichLociName extends WhichLoci { 
 
-	public WhichLociGfe() { }
+	public WhichLociName() { }
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
@@ -33,7 +33,7 @@ public class WhichLociGfe extends WhichLoci {
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
 		whichLociDropDown.setModel(comboBoxModel);
 
-		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_GFE_LOCI", 0));
+		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_NAME_LOCI", 0));
 
 		addWhichLociListener(whichLociDropDown);
 
@@ -45,12 +45,12 @@ public class WhichLociGfe extends WhichLoci {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
-				System.out.println("WhichLociGfe listener triggered");
+				System.out.println("WhichLociName listener triggered");
 
 				updateLocusAndVersions(lociType);
 
-				prefs.putInt("GSG_GFE_LOCI", whichLociDropDown.getSelectedIndex());
-				prefs.put("GSG_GFE_LOCI_STRING", lociType);
+				prefs.putInt("GSG_NAME_LOCI", whichLociDropDown.getSelectedIndex());
+				prefs.put("GSG_NAME_LOCI_STRING", lociType);
 			}
 		});
 	}

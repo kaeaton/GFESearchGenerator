@@ -27,6 +27,8 @@ import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.buttons.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.dropdownMenus.whichLociType.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.*;
+// import org.chori.gsg.view.dropdownMenus.whatVersion.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 
 public class GSG extends JFrame {
@@ -42,12 +44,11 @@ public class GSG extends JFrame {
 	private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
-	// the GFE panel generators
+	// the GFE panel generator
 	private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
-	// private KirSearchPanelAssembler kirPanelGenerator = new KirSearchPanelAssembler();
 	
 	// component generators
-	private static WhatLocus whatLocusGenerator = new WhatLocus();
+	private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
 	private static WhatVersion whatVersionGenerator = new WhatVersion();
 	private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
 	private static ResetButton resetButtonGenerator = new ResetButton();
@@ -116,11 +117,11 @@ public class GSG extends JFrame {
 
 			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);
 			whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
-			whatLocusGfe = whatLocusGenerator.createWhatLocusComboBox("GFE", whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
+			whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME", nameSelectedLoci);
 			whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
-			whatLocusName = whatLocusGenerator.createWhatLocusComboBox("NAME", whatVersionName.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
-			whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
+			whatLocusName = whatLocusFactory.createWhatLocus("NAME").createWhatLocusComboBox(whatVersionName.getSelectedItem().toString(), prefs.get("GSG_NAME_LOCI_STRING", "HLA"));
+			// whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
 			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK", bulkSelectedLoci);
 			whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
 

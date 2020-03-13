@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus;
+package org.chori.gsg.view.dropdownMenus.whatLocus;
 
 import java.io.File;
 import java.nio.file.*;

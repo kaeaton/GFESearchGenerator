@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.dropdownMenus.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.*;
 import org.chori.gsg.view.*;
 
 public class WhatVersion { 
@@ -118,8 +119,8 @@ public class WhatVersion {
     	String whichLocus = GSG.whatLocusGfe.getSelectedItem().toString();
 
     	// borrow the set new panel method from WhatLocus
-    	WhatLocus whatLocus = new WhatLocus();
-    	whatLocus.setNewGfePanel(whichLocus);
+    	WhatLocusGfe whatLocusGfe = new WhatLocusGfe();
+    	whatLocusGfe.setNewGfePanel(whichLocus);
 
     	// update the preferences
     	prefs.putInt("GSG_GFE_" + lociType + "_LOCUS", GSG.whatLocusGfe.getSelectedIndex());

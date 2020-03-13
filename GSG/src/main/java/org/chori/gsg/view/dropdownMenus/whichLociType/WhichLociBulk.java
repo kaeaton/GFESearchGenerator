@@ -10,15 +10,15 @@ import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
 
 /**
- * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
+ * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns.
  * 
  * @author Katrina Eaton
  * 
  */
 
-public class WhichLociGfe extends WhichLoci { 
+public class WhichLociBulk extends WhichLoci { 
 
-	public WhichLociGfe() { }
+	public WhichLociBulk() { }
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
@@ -26,14 +26,14 @@ public class WhichLociGfe extends WhichLoci {
 	 * @return a JComboBox with an associated listener
 	 */
 	public JComboBox createWhichLociComboBox() {
-		System.out.println("Generating the which loci combo box");
+		System.out.println("Generating the bulk which loci combo box");
 		
 		// instantiate combobox and its model
 		JComboBox whichLociDropDown = new JComboBox();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
 		whichLociDropDown.setModel(comboBoxModel);
 
-		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_GFE_LOCI", 0));
+		whichLociDropDown.setSelectedIndex(prefs.getInt("GSG_BULK_LOCI", 0));
 
 		addWhichLociListener(whichLociDropDown);
 
@@ -45,12 +45,12 @@ public class WhichLociGfe extends WhichLoci {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
-				System.out.println("WhichLociGfe listener triggered");
+				System.out.println("WhichLociBulk listener triggered");
 
 				updateLocusAndVersions(lociType);
 
-				prefs.putInt("GSG_GFE_LOCI", whichLociDropDown.getSelectedIndex());
-				prefs.put("GSG_GFE_LOCI_STRING", lociType);
+				prefs.putInt("GSG_BULK_LOCI", whichLociDropDown.getSelectedIndex());
+				prefs.put("GSG_BULK_LOCI_STRING", lociType);
 			}
 		});
 	}
