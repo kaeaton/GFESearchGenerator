@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 
 // import org.chori.gsg.exceptions.*;
 // import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 import org.chori.gsg.view.*;
 
@@ -17,6 +18,7 @@ public abstract class WhatVersion {
 
 	protected Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	protected VersionModelFactory versionModelFactory = VersionModelFactory.getVersionModelFactoryInstance();
+	protected LocusModelFactory locusModelFactory = LocusModelFactory.getLocusModelFactoryInstance();
 
 	public WhatVersion() { }
 
@@ -26,9 +28,9 @@ public abstract class WhatVersion {
 	protected void setSelectedVersionIndex(JComboBox whatVersionDropDown, String whichTab, String lociType) {
 		try {
 			whatVersionDropDown.setSelectedIndex(prefs.getInt("GSG_" + whichTab + "_" + lociType + "_VERSION", 0));
-		} catch (IllegalArgumentException iex) { 
+		} catch (Exception ex) { 
 			whatVersionDropDown.setSelectedIndex(0);
-			System.out.println("Name whatVersion.setIndex(): setSelectedIndex error: " + iex); 
+			System.out.println("Name whatVersion.setIndex(): setSelectedIndex error: " + ex); 
 			// PrefProbException ppex = new PrefProbException();
 		}
 	}

@@ -3,7 +3,7 @@ package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
 /**
  * The Version Model factory. A model is the object used
  * to populate a dropdown menu. This factory is only used by the
- * WhatVersion Dropdowns.
+ * WhatVersion Dropdowns. Broken down by tab.
  * 
  * @author Katrina Eaton
  * 

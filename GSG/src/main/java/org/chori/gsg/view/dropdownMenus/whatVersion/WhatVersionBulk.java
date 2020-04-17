@@ -12,6 +12,11 @@ public class WhatVersionBulk extends WhatVersion {
 
 	public WhatVersionBulk() { }
 
+	/**
+	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
+	 * 
+	 * @return a JComboBox with an associated listener
+	 */
 	public JComboBox createWhatVersionComboBox() {
 
 		String lociType = prefs.get("GSG_BULK_LOCI_STRING", "HLA");

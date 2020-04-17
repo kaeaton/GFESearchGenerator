@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.chori.gsg.exceptions.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.*;
 
@@ -23,6 +24,8 @@ import org.chori.gsg.view.*;
 public class WhatLocusGfe extends WhatLocus { 
 
 	private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
+	private LocusModel locusModel;
+	private DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
 	public WhatLocusGfe() {	}
 
@@ -30,7 +33,7 @@ public class WhatLocusGfe extends WhatLocus {
 	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
 	 * 
 	 * @param version which version are we looking at. Local/legacy data may not have all loci available
-	 * @param lociType identifies if it is looking for HLA/KIR/ABO
+	 * @param lociType identifies if it is looking for HLA/KIR
 	 * @return a JComboBox with an associated listener
 	 */
 	public JComboBox createWhatLocusComboBox(String version, String lociType) {
@@ -38,26 +41,29 @@ public class WhatLocusGfe extends WhatLocus {
 		
 		// instantiate combobox and its model
 		JComboBox whatLocusDropDown = new JComboBox();
-		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
-		whatLocusDropDown.setModel(locusModel.loci(version, lociType));
+		
+		// create and assign appropriate locus model based on loci type
+		locusModel = locusModelFactory.createLocusModel(lociType);
+		comboBoxModel = locusModel.assembleLocusModel(version);
+		whatLocusDropDown.setModel(comboBoxModel);
 
 		// set selected locus and assign listener
-		setSelectedLocusIndex(whatLocusDropDown, lociType);
+		setSelectedLocusIndex(whatLocusDropDown, "GFE", lociType);
 		addWhatLocusListener(whatLocusDropDown);
 
 		return whatLocusDropDown;
 	}
 
-	protected void setSelectedLocusIndex(JComboBox whatLocusDropDown, String lociType) {
-		try {
-			// try using prefs
-			whatLocusDropDown.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_LOCUS", 0));
-		} catch (Exception ex) { 
-			// if the pref exceeds the length of the model list, reset prefs
-			PrefProbException ppex = new PrefProbException();
-			System.out.println("whatLocus.setSelectedLocusIndex(): " + ex);
-		}
-	}
+	// protected void setSelectedLocusIndex(JComboBox whatLocusDropDown, String lociType) {
+	// 	try {
+	// 		// try using prefs
+	// 		whatLocusDropDown.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_LOCUS", 0));
+	// 	} catch (Exception ex) { 
+	// 		// if the pref exceeds the length of the model list, reset prefs
+	// 		PrefProbException ppex = new PrefProbException();
+	// 		System.out.println("whatLocus.setSelectedLocusIndex(): " + ex);
+	// 	}
+	// }
 
 	protected void addWhatLocusListener(JComboBox whatLocusDropDown) {
 		whatLocusDropDown.addActionListener(new ActionListener() {
@@ -100,7 +106,7 @@ public class WhatLocusGfe extends WhatLocus {
 	/**
 	 * A helper method that allows the program to find the currently displayed search panel
 	 * 
-	 * @param whichTab which tab is should look for the panel in
+	 * @param whichTabPanel which tab is should look for the panel in
 	 * @param whichPanel the current panel's name the locus it's for
 	 * @return the currently displayed JPanel
 	 */

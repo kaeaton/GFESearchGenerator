@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.chori.gsg.exceptions.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.*;
 
@@ -25,7 +26,8 @@ public class WhatLocusName extends WhatLocus {
 	// private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
 	// private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
 	// private String whichLocus = "HLA-A";
-	// private LocusModel locusModel = new LocusModel();
+	protected LocusModel locusModel;
+	protected DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
 	public WhatLocusName() { }
 
@@ -39,28 +41,31 @@ public class WhatLocusName extends WhatLocus {
 	public JComboBox createWhatLocusComboBox(String version, String lociType) {
 		System.out.println("Generating the what locus name combo box");
 		
-		// instantiate combobox and its model
+		// instantiate combobox
 		JComboBox whatLocusDropDown = new JComboBox();
-		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
-		whatLocusDropDown.setModel(locusModel.loci(version, lociType));
+
+		// create and assign appropriate locus model based on loci type
+		locusModel = locusModelFactory.createLocusModel(lociType);
+		comboBoxModel = locusModel.assembleLocusModel(version);
+		whatLocusDropDown.setModel(comboBoxModel);
 
 		// set selected locus and assign listener
-		setSelectedLocusIndex(whatLocusDropDown, lociType);
+		setSelectedLocusIndex(whatLocusDropDown, "NAME", lociType);
 		addWhatLocusListener(whatLocusDropDown);
 
 		return whatLocusDropDown;
 	}
 
-	protected void setSelectedLocusIndex(JComboBox whatLocusDropDown, String lociType) {
-		try {
-			// try using prefs
-			whatLocusDropDown.setSelectedIndex(prefs.getInt("GSG_NAME_" + lociType + "_LOCUS", 0));
-		} catch (Exception ex) { 
-			// if the pref exceeds the length of the model list, reset prefs
-			PrefProbException ppex = new PrefProbException();
-			System.out.println("whatLocus.setSelectedLocusIndex(): " + ex);
-		}
-	}
+	// protected void setSelectedLocusIndex(JComboBox whatLocusDropDown, String lociType) {
+	// 	try {
+	// 		// try using prefs
+	// 		whatLocusDropDown.setSelectedIndex(prefs.getInt("GSG_NAME_" + lociType + "_LOCUS", 0));
+	// 	} catch (Exception ex) { 
+	// 		// if the pref exceeds the length of the model list, reset prefs
+	// 		PrefProbException ppex = new PrefProbException();
+	// 		System.out.println("whatLocus.setSelectedLocusIndex(): " + ex);
+	// 	}
+	// }
 
 	protected void addWhatLocusListener(JComboBox whatLocusDropDown) {
 		whatLocusDropDown.addActionListener(new ActionListener() {

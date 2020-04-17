@@ -9,19 +9,21 @@ import javax.swing.JComboBox;
 
 // import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 import org.chori.gsg.view.*;
 
 public class WhatVersionName extends WhatVersion { 
 
 	protected VersionModel versionModelName = versionModelFactory.createVersionModel("NAME");
+	protected LocusModel locusModel;
+	protected DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
 	public WhatVersionName() { }
 
 	/**
 	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
 	 * 
-	 * @param lociType identifies if it is looking for HLA/KIR/ABO
 	 * @return a JComboBox with an associated listener
 	 */
 	public JComboBox createWhatVersionComboBox() {
@@ -57,12 +59,16 @@ public class WhatVersionName extends WhatVersion {
     		@Override
             public void actionPerformed(ActionEvent evt) {
             	// if local version, update locus model to show available loci
-				String lociType = GSG.whichLociName.getSelectedItem().toString(); String whichVersion = whatVersionDropDown.getSelectedItem().toString();
+				String lociType = GSG.whichLociName.getSelectedItem().toString(); 
+				String version = whatVersionDropDown.getSelectedItem().toString();
                 System.out.println("Which name version listener triggered");
+                
             	prefs.putInt("GSG_NAME_" + lociType + "_VERSION", whatVersionDropDown.getSelectedIndex());
 
-            	LocusModel locusModel = new LocusModel();
-            	GSG.whatLocusName.setModel(locusModel.loci(whichVersion, lociType));
+            	// create and assign appropriate locus model based on loci type
+				locusModel = locusModelFactory.createLocusModel(lociType);
+				comboBoxModel = locusModel.assembleLocusModel(version);
+            	GSG.whatLocusName.setModel(comboBoxModel);
 
             	// update the preferences
             	prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", GSG.whatLocusName.getSelectedIndex());

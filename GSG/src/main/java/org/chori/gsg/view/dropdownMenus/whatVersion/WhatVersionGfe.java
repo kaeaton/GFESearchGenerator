@@ -12,15 +12,24 @@ import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 import org.chori.gsg.view.*;
 
 public class WhatVersionGfe extends WhatVersion { 
 
 	protected VersionModel versionModelGfe = versionModelFactory.createVersionModel("GFE");
+	// protected LocusModelFactory locusModelFactory = LocusModelFactory.getLocusModelFactoryInstance();
+	protected LocusModel locusModel;
+	protected DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
 	public WhatVersionGfe() { }
 
+	/**
+	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
+	 * 
+	 * @return a JComboBox with an associated listener
+	 */
 	public JComboBox createWhatVersionComboBox() {
 		
 		String lociType = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
@@ -43,22 +52,27 @@ public class WhatVersionGfe extends WhatVersion {
             public void actionPerformed(ActionEvent evt) {
 
 				String lociType = GSG.whichLociGfe.getSelectedItem().toString();
-            	String whichVersion = whatVersionDropDown.getSelectedItem().toString();
-                System.out.println("Which version listener triggered");
+            	String version = whatVersionDropDown.getSelectedItem().toString();
+                System.out.println("Which gfe version listener triggered");
 
             	prefs.putInt("GSG_GFE_" + lociType + "_VERSION", whatVersionDropDown.getSelectedIndex());
 
-            	LocusModel locusModel = new LocusModel();
-            	GSG.whatLocusName.setModel(locusModel.loci(whichVersion, lociType));
+            	// create and assign appropriate locus model based on loci type
+				locusModel = locusModelFactory.createLocusModel(lociType);
+				comboBoxModel = locusModel.assembleLocusModel(version);
+            	GSG.whatLocusName.setModel(comboBoxModel);
 
-            	updateGfePanel(whichVersion, lociType);
+            	updateGfePanel(version, lociType);
             }
         });
 	}
 
-	private void updateGfePanel(String whichGfeVersion, String lociType) {
-		LocusModel locusModel = new LocusModel();
-    	GSG.whatLocusGfe.setModel(locusModel.loci(whichGfeVersion, lociType));
+	private void updateGfePanel(String version, String lociType) {
+
+    	// create and assign appropriate locus model based on loci type
+		locusModel = locusModelFactory.createLocusModel(lociType);
+		comboBoxModel = locusModel.assembleLocusModel(version);
+    	GSG.whatLocusGfe.setModel(comboBoxModel);
 
     	// grab the new available default locus
     	String whichLocus = GSG.whatLocusGfe.getSelectedItem().toString();

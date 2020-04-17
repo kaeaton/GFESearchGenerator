@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatLocus;
+package org.chori.gsg.view.dropdownMenus.whatLocus.locusModel;
 
 import java.io.File;
 import java.nio.file.*;
@@ -16,20 +16,19 @@ import org.chori.gsg.view.*;
 
 	
 
-public class LocusModel {
+public class LocusModelHla extends LocusModel {
 
 	// class instantiations
 	// private WhereTheDataLives wtdl = new WhereTheDataLives();
 	private final String[] fullHlaLoci = {"HLA-A", "HLA-B", "HLA-C", "HLA-DPA1", "HLA-DPB1", "HLA-DQA1", "HLA-DQB1", "HLA-DRB1", "HLA-DRB3", "HLA-DRB4", "HLA-DRB5"};
-	private final String[] fullKirLoci = {"KIR2DL4", "KIR2DL5A", "KIR2DL5B", "KIR2DP1", "KIR2DS1", "KIR2DS2", "KIR2DS3", "KIR2DS4", "KIR2DS5", "KIR3DL1", "KIR3DL2", "KIR3DL3", "KIR3DP1", "KIR3DS1"};
 
-	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
-	private InternetAccess internet = new InternetAccess();
-	private VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
+	// private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
+	// private InternetAccess internet = new InternetAccess();
+	// private VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
 
-	public LocusModel() { }
+	public LocusModelHla() { }
 
-	public DefaultComboBoxModel loci(String version, String lociType) {
+	public DefaultComboBoxModel assembleLocusModel(String version) {
 		ArrayList<String> availableLoci = new ArrayList<>();
 		// String lociType = GSG.whichLociBulk.getSelectedItem().toString();
 
@@ -40,7 +39,7 @@ public class LocusModel {
 			System.out.println("Reached online version for loci in LocusModel");
 		} else {
 			// figure out what datafiles are available for selected version
-			availableLoci = versionsAvailableLocally.getLocalDataFiles(version, lociType);
+			availableLoci = versionsAvailableLocally.getLocalDataFiles(version, "HLA");
 		}
 
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -53,7 +52,7 @@ public class LocusModel {
 		return model;
 	}
 
-	private Boolean onlineVersion(String version) {
+	protected Boolean onlineVersion(String version) {
 
 		String onlineVersions = prefs.get("GSG_HLA_VERSIONS", "");
 		String [] parsedOnlineVersions = new String[3];
