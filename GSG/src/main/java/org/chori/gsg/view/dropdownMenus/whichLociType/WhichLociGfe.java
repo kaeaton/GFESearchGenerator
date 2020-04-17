@@ -6,8 +6,8 @@ import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
@@ -17,6 +17,8 @@ import org.chori.gsg.view.*;
  */
 
 public class WhichLociGfe extends WhichLoci { 
+
+	protected VersionModel versionModelGfe = VersionModelFactory.getVersionModelFactoryInstance().createVersionModel("GFE");
 
 	public WhichLociGfe() { }
 
@@ -47,7 +49,7 @@ public class WhichLociGfe extends WhichLoci {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
 				System.out.println("WhichLociGfe listener triggered");
 
-				updateLocusAndVersions(lociType);
+				updateLocusAndVersions();
 
 				prefs.putInt("GSG_GFE_LOCI", whichLociDropDown.getSelectedIndex());
 				prefs.put("GSG_GFE_LOCI_STRING", lociType);
@@ -55,7 +57,11 @@ public class WhichLociGfe extends WhichLoci {
 		});
 	}
 
-	protected void updateLocusAndVersions(String lociType) {
-		
+	protected void updateLocusAndVersions() {
+		String lociType = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
+
+		DefaultComboBoxModel newVersionModel = versionModelGfe.assembleVersionModel(lociType);
+		GSG.whatVersionBulk.setModel(newVersionModel);
+
 	}
 }

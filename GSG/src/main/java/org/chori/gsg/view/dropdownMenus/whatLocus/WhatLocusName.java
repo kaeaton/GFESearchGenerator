@@ -32,7 +32,6 @@ public class WhatLocusName extends WhatLocus {
 	/**
 	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
 	 * 
-	 * @param whichTabComboBox tells which ActionListener is assigned to it. Some tabs have more than one.
 	 * @param version which version are we looking at. Local/legacy data may not have all loci available
 	 * @param lociType identifies if it is looking for HLA/KIR/ABO
 	 * @return a JComboBox with an associated listener

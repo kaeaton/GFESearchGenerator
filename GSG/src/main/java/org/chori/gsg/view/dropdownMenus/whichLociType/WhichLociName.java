@@ -47,7 +47,7 @@ public class WhichLociName extends WhichLoci {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
 				System.out.println("WhichLociName listener triggered");
 
-				updateLocusAndVersions(lociType);
+				updateLocusAndVersions();
 
 				prefs.putInt("GSG_NAME_LOCI", whichLociDropDown.getSelectedIndex());
 				prefs.put("GSG_NAME_LOCI_STRING", lociType);
@@ -55,7 +55,7 @@ public class WhichLociName extends WhichLoci {
 		});
 	}
 
-	protected void updateLocusAndVersions(String lociType) {
+	protected void updateLocusAndVersions() {
 		
 	}
 }

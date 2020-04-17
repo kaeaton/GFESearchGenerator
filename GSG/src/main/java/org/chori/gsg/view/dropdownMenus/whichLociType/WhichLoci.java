@@ -6,7 +6,7 @@ import javax.swing.JComboBox;
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-// import org.chori.gsg.view.dropdownMenus.whatVersion.*;
+import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
@@ -19,6 +19,7 @@ public abstract class WhichLoci {
 
 	protected final String[] loci = {"HLA", "KIR"};
 	protected Preferences prefs = Preferences.userNodeForPackage(GSG.class);
+	protected VersionModelFactory versionModelFactory = VersionModelFactory.getVersionModelFactoryInstance();
 
 	public WhichLoci() { }
 
@@ -30,5 +31,5 @@ public abstract class WhichLoci {
 	public abstract JComboBox createWhichLociComboBox();
 
 	protected abstract void addWhichLociListener(JComboBox whichLociDropDown);
-	protected abstract void updateLocusAndVersions(String lociType);
+	protected abstract void updateLocusAndVersions();
 }

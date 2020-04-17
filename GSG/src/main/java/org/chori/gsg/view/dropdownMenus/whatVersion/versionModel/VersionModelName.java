@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus;
+package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
 
 // import com.fasterxml.jackson.core.JsonFactory;
 // import java.io.BufferedReader;
@@ -27,21 +27,11 @@ import javax.swing.JTextArea;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
-import org.chori.gsg.view.buttons.*;
 
 
-public class VersionModel {
+public class VersionModelName extends VersionModel {
 
-	private Preferences prefs = Preferences.userNodeForPackage(GSG.class);
-	// private	static HashMap<Integer, JTextArea> whichTextArea = new HashMap();
-
-	// class instantiations
-	private InternetAccess internet = new InternetAccess();
-	private ResetPrefsButton resetPrefs = new ResetPrefsButton();
-	private VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
-	private VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
-
-	public VersionModel() { }
+	public VersionModelName() { }
 
 	public DefaultComboBoxModel assembleVersionModel(String lociType) {
 		String onlineVersions = "";
@@ -54,14 +44,14 @@ public class VersionModel {
 		// localVersions = versionsAvailableLocally.getLocalVersionsByLoci(lociType);
 		localVersions = prefs.get("GSG_" + lociType + "_LOCAL_VERSIONS", "");
 		System.out.println("VersionModel.assembleVersionModel: avaliable version data: " + localVersions);
-		onlineVersions = prefs.get("GSG_" + lociType + "_VERSIONS", "");
+		onlineVersions = prefs.get("GSG_" + lociType + "_ONLINE_VERSIONS", "");
 		System.out.println("Version model: online versions array from prefs: " + onlineVersions);
 
 		// if online versions is empty, and you have internet
 		// download the current versions
 		if(onlineVersions.equals("") && internet.tester()) {
 			versionsAvailableOnline.getCurrentVersionsByLoci(lociType);
-			onlineVersions = prefs.get("GSG_" + lociType + "_VERSIONS", null);
+			onlineVersions = prefs.get("GSG_" + lociType + "_ONLINE_VERSIONS", null);
 		}
 
 		// if you have stored versions, parse them
@@ -88,36 +78,4 @@ public class VersionModel {
 
 		return versionSet;
 	}
-
-
-
-	public DefaultComboBoxModel bulkVersions() {
-
-		DefaultComboBoxModel model = new DefaultComboBoxModel();
-		String onlineVersions = "";
-		String[] parsedOnlineVersions = new String[3];
-
-		// if you have internet download the current versions
-		if(internet.tester()) {
-			versionsAvailableOnline.getCurrentVersionsByLoci("HLA");
-			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
-		} else if(onlineVersions != null) {
-			onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
-		}
-
-		// if you have online versions, parse them
-		// it's an array read as a string, so remove the brackets
-		// and split on the commas
-		if(onlineVersions != null && internet.tester()) {
-			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
-			System.out.println("Version model: bulkVersions: online versions array: " + onlineVersions);
-			parsedOnlineVersions = onlineVersions.split(", ");
-		}
-
-		model = new DefaultComboBoxModel(parsedOnlineVersions);
-		return model;
-	}
-
-
-
 }

@@ -28,7 +28,7 @@ import org.chori.gsg.view.buttons.*;
 import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.dropdownMenus.whichLociType.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-// import org.chori.gsg.view.dropdownMenus.whatVersion.*;
+import org.chori.gsg.view.dropdownMenus.whatVersion.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 
 public class GSG extends JFrame {
@@ -40,8 +40,8 @@ public class GSG extends JFrame {
 	private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
 	private String nameSelectedLoci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
 	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
-	private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
-	private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
+	// private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
+	// private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
 	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generator
@@ -49,7 +49,7 @@ public class GSG extends JFrame {
 	
 	// component generators
 	private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
-	private static WhatVersion whatVersionGenerator = new WhatVersion();
+	private static WhatVersionFactory whatVersionFactory = WhatVersionFactory.getWhatVersionFactoryInstance();
 	private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
 	private static ResetButton resetButtonGenerator = new ResetButton();
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
@@ -115,15 +115,19 @@ public class GSG extends JFrame {
 				}
 			}
 
-			whatVersionGfe = whatVersionGenerator.createWhatVersionComboBox("GFE", gfeSelectedLoci);
 			whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
+			whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
+			// whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
+			// whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
-			whatVersionName = whatVersionGenerator.createWhatVersionComboBox("NAME", nameSelectedLoci);
+			
 			whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
+			whatVersionName = whatVersionFactory.createWhatVersion("NAME").createWhatVersionComboBox();
 			whatLocusName = whatLocusFactory.createWhatLocus("NAME").createWhatLocusComboBox(whatVersionName.getSelectedItem().toString(), prefs.get("GSG_NAME_LOCI_STRING", "HLA"));
 			// whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
-			whatVersionBulk = whatVersionGenerator.createWhatVersionComboBox("BULK", bulkSelectedLoci);
+			
 			whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
+			whatVersionBulk = whatVersionFactory.createWhatVersion("BULK").createWhatVersionComboBox();
 
 
 		} catch (NoInternetOrDataException ex) { 
@@ -156,7 +160,8 @@ public class GSG extends JFrame {
 		// generate the HLA GFE panel
 		try {
 			// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
+			JPanel currentGfePanel = gfePanelGenerator.getGfePanel("HLA-A");
+			// JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
 			
 			currentGfePanel.setName("GFE");
 			gfePanel.add(currentGfePanel);

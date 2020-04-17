@@ -1,16 +1,16 @@
 package org.chori.gsg.view.dropdownMenus.whatLocus;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+// import java.awt.Component;
+// import java.awt.event.ActionEvent;
+// import java.awt.event.ActionListener;
+// import java.util.ArrayList;
 import java.util.prefs.Preferences;
-import javax.swing.DefaultComboBoxModel;
+// import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
+// import javax.swing.JPanel;
 
-import org.chori.gsg.exceptions.*;
-import org.chori.gsg.view.gfeSearchPanels.*;
+// import org.chori.gsg.exceptions.*;
+// import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.*;
 
 

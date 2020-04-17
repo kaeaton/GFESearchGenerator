@@ -41,10 +41,12 @@ GSG_GFE_LOCI_STRING					String: which loci, GFE tab
 GSG_GFE_HLA_LOCUS					int: what HLA locus by index, GFE tab
 GSG_GFE_HLA_LOCUS_STRING			String: what HLA locus, GFE tab
 GSG_GFE_HLA_VERSION					int: what HLA version by index, GFE tab
+GSG_GFE_HLA_VERSION_STRING			String: what HLA version, GFE tab
 
 GSG_GFE_KIR_LOCUS					int: what KIR locus by index, GFE tab
 GSG_GFE_KIR_LOCUS_STRING			String: what KIR locus, GFE tab
 GSG_GFE_KIR_VERSION					int: what KIR version by index, GFE tab
+GSG_GFE_KIR_VERSION_STRING			String: what KIR version, GFE tab
 
 // name tab
 GSG_NAME_LOCI 						int: which loci by index, NAME tab
@@ -53,10 +55,12 @@ GSG_NAME_LOCI_STRING				String: which loci, NAME tab
 GSG_NAME_HLA_LOCUS					int: what HLA locus by index, NAME tab
 GSG_NAME_HLA_LOCUS_STRING			String: what HLA locus, NAME tab
 GSG_NAME_HLA_VERSION				int: what HLA locus by index, NAME tab
+GSG_NAME_HLA_VERSION_STRING			String: what HLA version, NAME tab
 
 GSG_NAME_KIR_LOCUS					int: what KIR locus by index, NAME tab
 GSG_NAME_KIR_LOCUS_STRING			String: what KIR locus, NAME tab
-GSG_NAME_KIR_VERSION				int: what KIR locus by index, NAME tab
+GSG_NAME_KIR_VERSION				int: what KIR version by index, NAME tab
+GSG_NAME_KIR_VERSION_STRING			String: what KIR version, NAME tab
 
 // feature tab
 GSG_FEATURE_LOCI 					int: which loci by index, FEATURE tab
@@ -64,11 +68,11 @@ GSG_FEATURE_LOCI_STRING				String: which loci, FEATURE tab
 
 GSG_FEATURE_HLA_LOCUS				int: what HLA locus by index, NAME tab
 GSG_FEATURE_HLA_LOCUS_STRING		String: what HLA locus, NAME tab
-GSG_FEATURE_HLA_VERSION				int: what HLA locus by index, NAME tab
+GSG_FEATURE_HLA_VERSION				int: what HLA version by index, NAME tab
 
 GSG_FEATURE_KIR_LOCUS				int: what KIR locus by index, NAME tab
 GSG_FEATURE_KIR_LOCUS_STRING		String: what KIR locus, NAME tab
-GSG_FEATURE_KIR_VERSION				int: what KIR locus by index, NAME tab
+GSG_FEATURE_KIR_VERSION				int: what KIR version by index, NAME tab
 
 // options tab
 GSG_BULK_LOCI 						int: which loci to bulk download by index, OPTIONS tab
@@ -77,10 +81,11 @@ GSG_BULK_LOCI_STRING				String: which loci to bulk download by name
 // data
 GSG_RAW_DATA						String: where to store the raw data files
 GSG_RESULTS_DATA					String: where to store the results files
-GSG_HLA_VERSIONS					String: what HLA versions are currently available to download
-GSG_KIR_VERSIONS					String: what KIR versions are currently available to download
+GSG_HLA_ONLINE_VERSIONS				String: what HLA versions are currently available to download
+GSG_KIR_ONLINE_VERSIONS				String: what KIR versions are currently available to download
+GSG_HLA_LOCAL_VERSIONS				String: what HLA versions are currently available locally
+GSG_KIR_LOCAL_VERSIONS				String: what KIR versions are currently available locally
 GSG_MOVED_DATA						Boolean: has the program checked for old data and moved it to correct folders?
-
 
 // misc
 GSG_OPEN_TAB						Int: which tab was last in focus

@@ -1,0 +1,73 @@
+package org.chori.gsg.view.dropdownMenus.whatVersion;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+// import java.util.prefs.Preferences;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+// import org.chori.gsg.exceptions.*;
+import org.chori.gsg.view.dropdownMenus.whatLocus.*;
+import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.view.*;
+
+public class WhatVersionName extends WhatVersion { 
+
+	protected VersionModel versionModelName = versionModelFactory.createVersionModel("NAME");
+
+	public WhatVersionName() { }
+
+	/**
+	 * Generates the JComboBox (drop down menu) and associates the appropriate listener
+	 * 
+	 * @param lociType identifies if it is looking for HLA/KIR/ABO
+	 * @return a JComboBox with an associated listener
+	 */
+	public JComboBox createWhatVersionComboBox() {
+		String lociType = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
+		
+		JComboBox whatVersionDropDown = new JComboBox();
+		
+		// populate dropdown
+		DefaultComboBoxModel defaultComboBoxModel = versionModelName.assembleVersionModel(lociType);
+		whatVersionDropDown.setModel(defaultComboBoxModel);
+
+		setSelectedVersionIndex(whatVersionDropDown, "NAME", lociType);
+
+		addWhatVersionListener(whatVersionDropDown);
+		// nameListener(whatVersionDropDown);
+
+		return whatVersionDropDown;
+	}
+
+	// protected void setSelectedVersionIndex(JComboBox whatVersionDropDown, String lociType) {
+	// 	try {
+	// 		// try using prefs
+	// 		whatVersionDropDown.setSelectedIndex(prefs.getInt("GSG_NAME_" + lociType + "_VERSION", 0));
+	// 	} catch (IllegalArgumentException iex) { 
+	// 		// if the pref exceeds the length of the model list, reset prefs
+	// 		System.out.println("Name whatVersion.setSelectedVersionIndex(): setSelectedIndex error: " + iex); 
+	// 		// PrefProbException ppex = new PrefProbException();
+	// 	}
+	// }
+
+	protected void addWhatVersionListener(JComboBox whatVersionDropDown) {
+		whatVersionDropDown.addActionListener(new ActionListener() {
+    		@Override
+            public void actionPerformed(ActionEvent evt) {
+            	// if local version, update locus model to show available loci
+				String lociType = GSG.whichLociName.getSelectedItem().toString(); String whichVersion = whatVersionDropDown.getSelectedItem().toString();
+                System.out.println("Which name version listener triggered");
+            	prefs.putInt("GSG_NAME_" + lociType + "_VERSION", whatVersionDropDown.getSelectedIndex());
+
+            	LocusModel locusModel = new LocusModel();
+            	GSG.whatLocusName.setModel(locusModel.loci(whichVersion, lociType));
+
+            	// update the preferences
+            	prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", GSG.whatLocusName.getSelectedIndex());
+            	// prefs.put("GSG_NAME_" + lociType + "_LOCUS_STRING", whichLocus);
+            }
+        });
+	}
+}

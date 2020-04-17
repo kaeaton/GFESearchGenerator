@@ -75,7 +75,6 @@ public class WhatLocusGfe extends WhatLocus {
 
 	/**
 	 * A helper method that sets the new GFE search panel.
-	 * The loci are determined from preferences.
 	 * 
 	 * @param whatLocus what locus should be displayed
 	 */

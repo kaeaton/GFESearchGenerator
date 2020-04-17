@@ -27,8 +27,8 @@ public class WhatLocusFactory {
 	private WhatLocusFactory() { }
 
 	public static WhatLocusFactory getWhatLocusFactoryInstance() {
-        return instance;
-    }
+		return instance;
+	}
 
 	public WhatLocus createWhatLocus(String tab) {
 		WhatLocus whatLocus = null;

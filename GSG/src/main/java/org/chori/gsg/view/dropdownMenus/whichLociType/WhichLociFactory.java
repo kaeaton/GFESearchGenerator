@@ -21,17 +21,17 @@ public class WhichLociFactory {
 		WhichLoci whichLoci = null;
 
 		switch (tab) {
-		case "GFE":
-			whichLoci = new WhichLociGfe();
-			break;
-		case "NAME":
-			whichLoci = new WhichLociName();
-			break;
-		case "BULK":
-			whichLoci = new WhichLociBulk();
-			break;
-		default:
-			System.out.println("WhichLociFactory: haven't added that tab (" + tab + ") yet");
+			case "GFE":
+				whichLoci = new WhichLociGfe();
+				break;
+			case "NAME":
+				whichLoci = new WhichLociName();
+				break;
+			case "BULK":
+				whichLoci = new WhichLociBulk();
+				break;
+			default:
+				System.out.println("WhichLociFactory: haven't added that tab (" + tab + ") yet");
 		}
 
 		return whichLoci;

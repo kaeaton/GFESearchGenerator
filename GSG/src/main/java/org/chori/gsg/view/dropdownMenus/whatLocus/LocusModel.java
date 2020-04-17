@@ -55,10 +55,10 @@ public class LocusModel {
 
 	private Boolean onlineVersion(String version) {
 
-		String onlineVersions = prefs.get("GSG_HLA_VERSIONS", null);
+		String onlineVersions = prefs.get("GSG_HLA_VERSIONS", "");
 		String [] parsedOnlineVersions = new String[3];
 
-		if(onlineVersions != null)
+		if(!onlineVersions.equals(""))
 			onlineVersions = onlineVersions.substring(1, onlineVersions.length() - 1);
 			parsedOnlineVersions = onlineVersions.split(", ");
 

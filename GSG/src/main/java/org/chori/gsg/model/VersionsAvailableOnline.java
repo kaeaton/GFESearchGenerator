@@ -37,6 +37,10 @@ public class VersionsAvailableOnline {
 		}
 	};
 
+	// private String getLociType(String whatTab) {
+		
+	// }
+
 	public void getCurrentVersionsByLoci(String lociType) {
 		ArrayList<String> downloadedVersions = new ArrayList<>();
 
@@ -55,12 +59,12 @@ public class VersionsAvailableOnline {
 
 	private void storeLociVersions(String lociType, ArrayList<String> downloadedVersions) {
 		
-		String storedAvailableVersions = prefs.get("GSG_" + lociType + "_VERSIONS", "");
+		String storedAvailableVersions = prefs.get("GSG_" + lociType + "_ONLINE_VERSIONS", "");
 
 		if (!storedAvailableVersions.equals(downloadedVersions.toString())) {
-			prefs.put("GSG_" + lociType + "_VERSIONS", downloadedVersions.toString());
+			prefs.put("GSG_" + lociType + "_ONLINE_VERSIONS", downloadedVersions.toString());
 		}	
 
-		System.out.println("VersionsAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_VERSIONS", ""));
+		System.out.println("VersionsAvailableOnline: Versions in Prefs: " + prefs.get("GSG_" + lociType + "_ONLINE_VERSIONS", ""));
 	}
 }

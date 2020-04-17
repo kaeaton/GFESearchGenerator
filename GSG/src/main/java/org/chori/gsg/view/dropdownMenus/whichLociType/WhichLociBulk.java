@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns.
@@ -17,6 +18,8 @@ import org.chori.gsg.view.*;
  */
 
 public class WhichLociBulk extends WhichLoci { 
+
+	protected VersionModel versionModelBulk = versionModelFactory.createVersionModel("BULK");
 
 	public WhichLociBulk() { }
 
@@ -47,7 +50,7 @@ public class WhichLociBulk extends WhichLoci {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
 				System.out.println("WhichLociBulk listener triggered");
 
-				updateLocusAndVersions(lociType);
+				updateLocusAndVersions();
 
 				prefs.putInt("GSG_BULK_LOCI", whichLociDropDown.getSelectedIndex());
 				prefs.put("GSG_BULK_LOCI_STRING", lociType);
@@ -55,7 +58,12 @@ public class WhichLociBulk extends WhichLoci {
 		});
 	}
 
-	protected void updateLocusAndVersions(String lociType) {
-		
+	protected void updateLocusAndVersions() {		
+		String lociType = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
+
+		DefaultComboBoxModel newVersionModel = versionModelBulk.assembleVersionModel(lociType);
+		GSG.whatVersionBulk.setModel(newVersionModel);
+
+		// no locus for bulk download
 	}
 }
