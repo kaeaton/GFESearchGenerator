@@ -14,11 +14,13 @@ import org.chori.gsg.view.dropdownMenus.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.view.tabs.GfeTab;
 import org.chori.gsg.view.*;
 
 public class WhatVersionGfe extends WhatVersion { 
 
 	protected VersionModel versionModelGfe = versionModelFactory.createVersionModel("GFE");
+	private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
 	// protected LocusModelFactory locusModelFactory = LocusModelFactory.getLocusModelFactoryInstance();
 	protected LocusModel locusModel;
 	protected DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
@@ -51,7 +53,8 @@ public class WhatVersionGfe extends WhatVersion {
     		@Override
             public void actionPerformed(ActionEvent evt) {
 
-				String lociType = GSG.whichLociGfe.getSelectedItem().toString();
+				String lociType = GfeTab.whichLociGfe.getSelectedItem().toString();
+				// String lociType = GSG.whichLociGfe.getSelectedItem().toString();
             	String version = whatVersionDropDown.getSelectedItem().toString();
                 System.out.println("Which gfe version listener triggered");
 
@@ -60,7 +63,8 @@ public class WhatVersionGfe extends WhatVersion {
             	// create and assign appropriate locus model based on loci type
 				locusModel = locusModelFactory.createLocusModel(lociType);
 				comboBoxModel = locusModel.assembleLocusModel(version);
-            	GSG.whatLocusName.setModel(comboBoxModel);
+            	GfeTab.whatLocusGfe.setModel(comboBoxModel);
+            	// GSG.whatLocusName.setModel(comboBoxModel);
 
             	updateGfePanel(version, lociType);
             }
@@ -72,17 +76,20 @@ public class WhatVersionGfe extends WhatVersion {
     	// create and assign appropriate locus model based on loci type
 		locusModel = locusModelFactory.createLocusModel(lociType);
 		comboBoxModel = locusModel.assembleLocusModel(version);
-    	GSG.whatLocusGfe.setModel(comboBoxModel);
+    	GfeTab.whatLocusGfe.setModel(comboBoxModel);
+    	// GSG.whatLocusGfe.setModel(comboBoxModel);
 
     	// grab the new available default locus
-    	String whichLocus = GSG.whatLocusGfe.getSelectedItem().toString();
+    	// String whichLocus = GSG.whatLocusGfe.getSelectedItem().toString();
+    	String whichLocus = GfeTab.whatLocusGfe.getSelectedItem().toString();
 
     	// borrow the set new panel method from WhatLocus
     	WhatLocusGfe whatLocusGfe = new WhatLocusGfe();
     	whatLocusGfe.setNewGfePanel(whichLocus);
 
     	// update the preferences
-    	prefs.putInt("GSG_GFE_" + lociType + "_LOCUS", GSG.whatLocusGfe.getSelectedIndex());
+    	// prefs.putInt("GSG_GFE_" + lociType + "_LOCUS", GSG.whatLocusGfe.getSelectedIndex());
+    	prefs.putInt("GSG_GFE_" + lociType + "_LOCUS", GfeTab.whatLocusGfe.getSelectedIndex());
     	prefs.put("GSG_GFE_" + lociType + "_LOCUS_STRING", whichLocus);
 	}
 }

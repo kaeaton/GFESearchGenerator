@@ -11,7 +11,8 @@ import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 
 /**
- * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns.
+ * Creates the dropdown to select the set of genes being used, and listener for the dropdown
+ * for the bulk download section of the options tab.
  * 
  * @author Katrina Eaton
  * 
@@ -25,6 +26,7 @@ public class WhichLociBulk extends WhichLoci {
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
+	 * for the BULK download in the options tab.
 	 * 
 	 * @return a JComboBox with an associated listener
 	 */
@@ -33,6 +35,8 @@ public class WhichLociBulk extends WhichLoci {
 		
 		// instantiate combobox and its model
 		JComboBox whichLociDropDown = new JComboBox();
+
+		// loci defined in parent class
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
 		whichLociDropDown.setModel(comboBoxModel);
 
@@ -50,7 +54,7 @@ public class WhichLociBulk extends WhichLoci {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
 				System.out.println("WhichLociBulk listener triggered");
 
-				updateLocusAndVersions();
+				updateLocusAndVersionDropdowns(lociType);
 
 				prefs.putInt("GSG_BULK_LOCI", whichLociDropDown.getSelectedIndex());
 				prefs.put("GSG_BULK_LOCI_STRING", lociType);
@@ -58,8 +62,7 @@ public class WhichLociBulk extends WhichLoci {
 		});
 	}
 
-	protected void updateLocusAndVersions() {		
-		String lociType = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
+	protected void updateLocusAndVersionDropdowns(String lociType) {		
 
 		DefaultComboBoxModel newVersionModel = versionModelBulk.assembleVersionModel(lociType);
 		GSG.whatVersionBulk.setModel(newVersionModel);

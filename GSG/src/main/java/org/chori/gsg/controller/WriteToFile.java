@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
 
 public class WriteToFile {
 
@@ -20,8 +21,8 @@ public class WriteToFile {
 	private WhereTheDataLives wtdl = new WhereTheDataLives();
 	
 	public WriteToFile () {
-		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
-		// whichTextArea.put("KIR", GSG.kirNeo4jResults);
+		// whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		whichTextArea.put("GFE", GfeTab.resultsTextAreaGfe);
 		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 
 		fileSuffix.put("CSV", ".csv");

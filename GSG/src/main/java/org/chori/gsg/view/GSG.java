@@ -19,7 +19,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
+// import javax.swing.UIManager;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
@@ -30,14 +30,15 @@ import org.chori.gsg.view.dropdownMenus.whichLociType.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.view.tabs.*;
 
 public class GSG extends JFrame {
 
 	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
 	// default locus settings
-	private String gfeSelectedLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
-	private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
+	// private String gfeSelectedLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
+	// private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
 	private String nameSelectedLoci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
 	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
 	// private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
@@ -45,7 +46,7 @@ public class GSG extends JFrame {
 	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generator
-	private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
+	// private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
 	
 	// component generators
 	private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
@@ -58,6 +59,8 @@ public class GSG extends JFrame {
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 	private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
 
+	private static GfeTab assembleGfeTab = new GfeTab();
+
 	// need this to add at initialization
 	public static JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
@@ -68,20 +71,20 @@ public class GSG extends JFrame {
 	public static JPanel featureTab = new JPanel();
 	public static JPanel optionsTab = new JPanel();
 
-	// the holder panels
+	// the holder panel
 	// they're embedded in the layout, with contents to be changed
-	public static JPanel gfePanel = new JPanel();
+	// public static JPanel gfePanel = new JPanel();
 	public static JPanel namePanel = new JPanel();
 
 	// results text areas
-	public static JTextArea resultsTextAreaGfe = new JTextArea();
+	// public static JTextArea resultsTextAreaGfe = new JTextArea();
 	public static JTextArea resultsTextAreaName = new JTextArea();
 	public static JTextArea resultsTextAreaFeature = new JTextArea();
 	
 	// combo boxes for locus and version selection
-	public static JComboBox whatVersionGfe = new JComboBox();
-	public static JComboBox whatLocusGfe = new JComboBox();
-	public static JComboBox whichLociGfe = new JComboBox();
+	// public static JComboBox whatVersionGfe = new JComboBox();
+	// public static JComboBox whatLocusGfe = new JComboBox();
+	// public static JComboBox whichLociGfe = new JComboBox();
 	public static JComboBox whatVersionName = new JComboBox();
 	public static JComboBox whatLocusName = new JComboBox();
 	public static JComboBox whichLociName = new JComboBox();
@@ -94,7 +97,7 @@ public class GSG extends JFrame {
 	public static JComboBox whichLociBulk = new JComboBox();
 
 	// file format panels
-	public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
+	// public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.getFileFormatPanel("NAME");
 	public static JPanel fileFormatFeature = fileFormatPanelGenerator.getFileFormatPanel("FEATURE");
 
@@ -107,23 +110,30 @@ public class GSG extends JFrame {
 			// error handling: if you have no data and no internet
 			// the program doesn't work
 			InternetAccess internet = new InternetAccess();
-			VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
 
-			if(!versionsAvailableLocally.isThereAnyLocalData()) {
-				if(!internet.tester()) {
-					throw new NoInternetOrDataException();
-				}
+			VersionsAvailableLocally versionsAvailableLocally = new VersionsAvailableLocally();
+			boolean localData = versionsAvailableLocally.isThereAnyLocalData();
+
+			if(internet.tester()) {
+
+				// if you have internet access, download the current versions in the background
+				VersionsAvailableOnline versionsAvailableOnline = new VersionsAvailableOnline();
+				versionsAvailableOnline.downloadCurrentVersionsInTheBackground();
+
+			} else if(!localData) {
+
+				// if you DON'T have internet access OR local data, throw an error
+				throw new NoInternetOrDataException();
 			}
 
-			whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
-			whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
 			// whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
+			// whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
 			// whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
-			whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			
 			whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
 			whatVersionName = whatVersionFactory.createWhatVersion("NAME").createWhatVersionComboBox();
 			whatLocusName = whatLocusFactory.createWhatLocus("NAME").createWhatLocusComboBox(whatVersionName.getSelectedItem().toString(), prefs.get("GSG_NAME_LOCI_STRING", "HLA"));
+			
 			// whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
 			
 			whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
@@ -152,111 +162,113 @@ public class GSG extends JFrame {
 	/* tabbed pane */
 		parentTabbedPane.setPreferredSize(new Dimension(1000, 700));
 
-	/* HLA GFE tab */
+	/* GFE search tab */
 
 		// add panel to tab pane
 		parentTabbedPane.addTab("GFE Search", null, gfeTab, "GFE Search tool");
+		JPanel gfeAssembledTab = assembleGfeTab.assembleGfeTab();
+		gfeTab.add(gfeAssembledTab);
 		
-		// generate the HLA GFE panel
-		try {
-			// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-			JPanel currentGfePanel = gfePanelGenerator.getGfePanel("HLA-A");
-			// JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
+		// // generate the HLA GFE panel
+		// try {
+		// 	// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
+		// 	JPanel currentGfePanel = gfePanelGenerator.getGfePanel("HLA-A");
+		// 	// JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
 			
-			currentGfePanel.setName("GFE");
-			gfePanel.add(currentGfePanel);
-		} catch (IllegalArgumentException iex) {
-			PrefProbException ppex = new PrefProbException();
-		}
+		// 	currentGfePanel.setName("GFE");
+		// 	gfePanel.add(currentGfePanel);
+		// } catch (IllegalArgumentException iex) {
+		// 	PrefProbException ppex = new PrefProbException();
+		// }
 
-		// results textarea
-		JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
-		resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
-		resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
+		// // results textarea
+		// JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
+		// resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
+		// resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
 
-		// labels
-		JLabel selectAllLabelGfe = new JLabel("Check all");
-		JTextArea usageInstructionsGfe = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
-													+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
-		usageInstructionsGfe.setBackground(gfePanel.getBackground());
-		usageInstructionsGfe.setEditable(false);
-		usageInstructionsGfe.setFocusable(false);
+		// // labels
+		// JLabel selectAllLabelGfe = new JLabel("Check all");
+		// JTextArea usageInstructionsGfe = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
+		// 											+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
+		// usageInstructionsGfe.setBackground(gfePanel.getBackground());
+		// usageInstructionsGfe.setEditable(false);
+		// usageInstructionsGfe.setFocusable(false);
 
-		// buttons
-		JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
-		JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
-		JButton exitButtonGfe = exitButtonGenerator.createExitButton();
+		// // buttons
+		// JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
+		// JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
+		// JButton exitButtonGfe = exitButtonGenerator.createExitButton();
 
-		// submit/cancel buttons panel
-		JPanel bottomButtonsGfe = new JPanel();
-		bottomButtonsGfe.add(submitButtonGfe);
-		bottomButtonsGfe.add(exitButtonGfe);
+		// // submit/cancel buttons panel
+		// JPanel bottomButtonsGfe = new JPanel();
+		// bottomButtonsGfe.add(submitButtonGfe);
+		// bottomButtonsGfe.add(exitButtonGfe);
 
-		// version/loci dropdowns
-		JPanel versionLociPanelGfe = new JPanel();
-		versionLociPanelGfe.add(resetButtonGfe);
-		versionLociPanelGfe.add(whatVersionGfe);
-		versionLociPanelGfe.add(whichLociGfe);
+		// // version/loci dropdowns
+		// JPanel versionLociPanelGfe = new JPanel();
+		// versionLociPanelGfe.add(resetButtonGfe);
+		// versionLociPanelGfe.add(whatVersionGfe);
+		// versionLociPanelGfe.add(whichLociGfe);
 
-		// layout / add them to the gfeTab
-		gfeTab.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		c.anchor = GridBagConstraints.NORTHWEST;
-		c.insets = new Insets(0,0,10,0);
-		c.weightx = 0.5;
+		// // layout / add them to the gfeTab
+		// gfeTab.setLayout(new GridBagLayout());
+		// GridBagConstraints c = new GridBagConstraints();
+		// c.anchor = GridBagConstraints.NORTHWEST;
+		// c.insets = new Insets(0,0,10,0);
+		// c.weightx = 0.5;
 		
-		// line 0
-		c.gridx = 0;
-		c.gridy = 0;
-		gfeTab.add(whatLocusGfe, c);
+		// // line 0
+		// c.gridx = 0;
+		// c.gridy = 0;
+		// gfeTab.add(whatLocusGfe, c);
 		
-		c.gridx = 1;
-		gfeTab.add(usageInstructionsGfe, c);
-
-		// line 1
-		c.insets = new Insets(0,0,0,0);
-		c.gridx = 0;
-		c.gridy = 1;
-		gfeTab.add(selectAllLabelGfe, c);
-
-		// line 2
-		c.gridy = 2;
-		c.gridwidth = 4;
-		gfeTab.add(gfePanel, c);
-
-		// line 3
-		c.anchor = GridBagConstraints.WEST;
-		// c.gridwidth = 1;
-		c.gridy = 3;
-		gfeTab.add(versionLociPanelGfe, c);
-		// gfeTab.add(resetButtonGfe, c);
-
 		// c.gridx = 1;
-		// gfeTab.add(whatVersionGfe, c);
+		// gfeTab.add(usageInstructionsGfe, c);
 
+		// // line 1
+		// c.insets = new Insets(0,0,0,0);
+		// c.gridx = 0;
+		// c.gridy = 1;
+		// gfeTab.add(selectAllLabelGfe, c);
+
+		// // line 2
+		// c.gridy = 2;
+		// c.gridwidth = 4;
+		// gfeTab.add(gfePanel, c);
+
+		// // line 3
+		// c.anchor = GridBagConstraints.WEST;
+		// // c.gridwidth = 1;
+		// c.gridy = 3;
+		// gfeTab.add(versionLociPanelGfe, c);
+		// // gfeTab.add(resetButtonGfe, c);
+
+		// // c.gridx = 1;
+		// // gfeTab.add(whatVersionGfe, c);
+
+		// // c.anchor = GridBagConstraints.CENTER;
+		// // c.gridx = 2;
+		// // gfeTab.add(whichLociGfe, c);
+
+		// // line 4
 		// c.anchor = GridBagConstraints.CENTER;
-		// c.gridx = 2;
-		// gfeTab.add(whichLociGfe, c);
+		// c.gridwidth = 4;
+		// c.gridx = 0;
+		// c.gridy = 4;
+		// gfeTab.add(fileFormatGfe, c);
 
-		// line 4
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridwidth = 4;
-		c.gridx = 0;
-		c.gridy = 4;
-		gfeTab.add(fileFormatGfe, c);
+		// // line 5
+		// c.anchor = GridBagConstraints.NORTH;
+		// c.weightx = 1;
+		// c.weighty = 1;
+		// c.gridy = 5;
+		// gfeTab.add(resultsScrollPaneGfe, c);
 
-		// line 5
-		c.anchor = GridBagConstraints.NORTH;
-		c.weightx = 1;
-		c.weighty = 1;
-		c.gridy = 5;
-		gfeTab.add(resultsScrollPaneGfe, c);
-
-		// line 6
-		c.weightx = 0;
-		c.weighty = 0;
-		c.gridy = 6;
-		gfeTab.add(bottomButtonsGfe, c);
+		// // line 6
+		// c.weightx = 0;
+		// c.weighty = 0;
+		// c.gridy = 6;
+		// gfeTab.add(bottomButtonsGfe, c);
 
 	/* Name Search tab */
 		parentTabbedPane.addTab("Name Search", null, nameTab, "Name Search tool");
@@ -268,7 +280,7 @@ public class GSG extends JFrame {
 		// results textarea
 		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
 		resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
-		resultsScrollPaneName.setPreferredSize(new Dimension(950, 300));
+		resultsScrollPaneName.setPreferredSize(new Dimension(950, 400));
 
 		// buttons
 		JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
@@ -498,13 +510,13 @@ public class GSG extends JFrame {
 				// BulkLociPreferenceListener bulkLociPreferenceListener = new BulkLociPreferenceListener();
 				// GfeLociPreferenceListener gfeLociPreferenceListener = new GfeLociPreferenceListener();
 
-				InternetAccess internet = new InternetAccess();
+				// InternetAccess internet = new InternetAccess();
 
-				if(!internet.tester()) {
-					resultsTextAreaGfe.append("No internet access available, local data only");
-					resultsTextAreaName.append("No internet access available, local data only");
-					resultsTextAreaFeature.append("No internet access available, local data only");
-				}
+				// if(!internet.tester()) {
+				// 	resultsTextAreaGfe.append("No internet access available, local data only");
+				// 	resultsTextAreaName.append("No internet access available, local data only");
+				// 	resultsTextAreaFeature.append("No internet access available, local data only");
+				// }
 			}
 		});
 	}

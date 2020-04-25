@@ -14,6 +14,8 @@ import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.view.tabs.GfeTab;
+
 
 public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
 
@@ -47,8 +49,10 @@ public class HlaGfeSubmissionRequest extends SubmissionRequest implements LocusI
 
 	public HlaGfeSubmissionRequest() {
 		// data retrieved from GUI
-		this.whatLocus = GSG.whatLocusGfe.getSelectedItem().toString();
-		this.whatVersion = GSG.whatVersionGfe.getSelectedItem().toString();
+		this.whatLocus = GfeTab.whatLocusGfe.getSelectedItem().toString();
+		this.whatVersion = GfeTab.whatVersionGfe.getSelectedItem().toString();
+		// this.whatLocus = GSG.whatLocusGfe.getSelectedItem().toString();
+		// this.whatVersion = GSG.whatVersionGfe.getSelectedItem().toString();
 		this.resultsFormat = super.dataFormatFinder(fileFormatPanel);
 		this.printToFile = super.printToFileFinder(fileFormatPanel);
 		this.rawData = fileUtilities.getTheRawDataFile(whatLocus, whatVersion, "HLA");

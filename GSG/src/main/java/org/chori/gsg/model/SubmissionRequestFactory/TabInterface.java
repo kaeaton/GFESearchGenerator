@@ -5,11 +5,13 @@ import javax.swing.JTextArea;
 
 import org.chori.gsg.model.submissionRequests.*;
 import org.chori.gsg.view.GSG;
+import org.chori.gsg.view.tabs.*;
 
 public interface TabInterface {
 
 	public enum WhereToPrint {
-		GFE(GSG.resultsTextAreaGfe),
+		GFE(GfeTab.resultsTextAreaGfe),
+		// GFE(GSG.resultsTextAreaGfe),
 		NAME(GSG.resultsTextAreaName),
  		FEATURE(GSG.resultsTextAreaFeature);
 
@@ -25,7 +27,8 @@ public interface TabInterface {
 	}
 
 	public enum WhatToPrint {
-		GFE(GSG.fileFormatGfe),
+		GFE(GfeTab.fileFormatGfe),
+		// GFE(GSG.fileFormatGfe),
 		NAME(GSG.fileFormatName),
  		FEATURE(GSG.fileFormatFeature);
 

@@ -11,6 +11,7 @@ import org.chori.gsg.view.*;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
+ * for the NAME tab.
  * 
  * @author Katrina Eaton
  * 
@@ -22,6 +23,7 @@ public class WhichLociName extends WhichLoci {
 
 	/**
 	 * Generates the whichLoci (currently HLA and KIR) JComboBox (drop down menu)
+	 * for the NAME tab.
 	 * 
 	 * @return a JComboBox with an associated listener
 	 */
@@ -30,6 +32,8 @@ public class WhichLociName extends WhichLoci {
 		
 		// instantiate combobox and its model
 		JComboBox whichLociDropDown = new JComboBox();
+
+		// loci defined in parent class
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(loci);
 		whichLociDropDown.setModel(comboBoxModel);
 
@@ -47,7 +51,7 @@ public class WhichLociName extends WhichLoci {
 				String lociType = whichLociDropDown.getSelectedItem().toString();
 				System.out.println("WhichLociName listener triggered");
 
-				updateLocusAndVersions();
+				updateLocusAndVersionDropdowns(lociType);
 
 				prefs.putInt("GSG_NAME_LOCI", whichLociDropDown.getSelectedIndex());
 				prefs.put("GSG_NAME_LOCI_STRING", lociType);
@@ -55,7 +59,7 @@ public class WhichLociName extends WhichLoci {
 		});
 	}
 
-	protected void updateLocusAndVersions() {
+	protected void updateLocusAndVersionDropdowns(String lociType) {
 		
 	}
 }

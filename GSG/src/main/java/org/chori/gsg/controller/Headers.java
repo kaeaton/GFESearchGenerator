@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
 
 
 /**
@@ -38,7 +39,8 @@ public class Headers {
 		// where are we printing the headers?
 		switch(whichTab) {
 			case "GFE":
-				writeToMe = GSG.resultsTextAreaGfe;
+				writeToMe = GfeTab.resultsTextAreaGfe;
+				// writeToMe = GSG.resultsTextAreaGfe;
 				database = "IMGT/HLA Database ";
 				break;
 			case "NAME":

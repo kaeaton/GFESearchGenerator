@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.view.tabs.GfeTab;
 import org.chori.gsg.view.*;
 
 
@@ -23,7 +24,8 @@ import org.chori.gsg.view.*;
  */
 public class WhatLocusGfe extends WhatLocus { 
 
-	private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
+	// private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
+	private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
 	private LocusModel locusModel;
 	private DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
@@ -69,7 +71,8 @@ public class WhatLocusGfe extends WhatLocus {
 		whatLocusDropDown.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				String lociType = GSG.whichLociGfe.getSelectedItem().toString();
+				String lociType = GfeTab.whichLociGfe.getSelectedItem().toString();
+				// String lociType = GSG.whichLociGfe.getSelectedItem().toString();
 				String whatLocus = whatLocusDropDown.getSelectedItem().toString();
 				setNewGfePanel(whatLocus);
 				System.out.println("Which Locus listener triggered");
@@ -86,22 +89,22 @@ public class WhatLocusGfe extends WhatLocus {
 	 */
 	public void setNewGfePanel(String whatLocus) {
 		System.out.println("Triggered setNewGfePanel");
-		JPanel newPanel = createNewGfePanel(whatLocus);
-		JPanel oldPanel = findPanel(GSG.gfePanel, "GFE");
+		// JPanel newPanel = updateGfePanel.updateTheGfePanel(whatLocus);
+		// JPanel oldPanel = findPanel(GSG.gfePanel, "GFE");
 
-		GSG.gfePanel.remove(oldPanel);
-		GSG.gfePanel.add(newPanel).revalidate();
-		GSG.gfePanel.repaint();
+		// GSG.gfePanel.remove(oldPanel);
+		// GSG.gfePanel.add(newPanel).revalidate();
+		// GSG.gfePanel.repaint();
 	}
 
-	private JPanel createNewGfePanel(String whatLocus) {
-		JPanel newPanel = new JPanel();
+	// private JPanel createNewGfePanel(String whatLocus) {
+	// 	JPanel newPanel = new JPanel();
 
-		newPanel = gfeSearchPanelAssembler.getGfePanel(whatLocus);
-		newPanel.setName("GFE");
+	// 	newPanel = updateTheGfePanel(whatLocus);
+	// 	newPanel.setName("GFE");
 
-		return newPanel;
-	}
+	// 	return newPanel;
+	// }
 
 	/**
 	 * A helper method that allows the program to find the currently displayed search panel
@@ -110,14 +113,14 @@ public class WhatLocusGfe extends WhatLocus {
 	 * @param whichPanel the current panel's name the locus it's for
 	 * @return the currently displayed JPanel
 	 */
-	public JPanel findPanel(JPanel whichTabPanel, String whichPanel) {
-		Component selectedPanel = GSG.gfePanel;
-		for (Component component : whichTabPanel.getComponents()) {
-			if (component.getName().equals(whichPanel)){
-				selectedPanel = component;
-				System.out.println("panel: " + selectedPanel);
-			} 
-		}
-		return (JPanel)selectedPanel;
-	}
+	// public JPanel findPanel(JPanel whichTabPanel, String whichPanel) {
+	// 	Component selectedPanel = GSG.gfePanel;
+	// 	for (Component component : whichTabPanel.getComponents()) {
+	// 		if (component.getName().equals(whichPanel)){
+	// 			selectedPanel = component;
+	// 			System.out.println("panel: " + selectedPanel);
+	// 		} 
+	// 	}
+	// 	return (JPanel)selectedPanel;
+	// }
 }

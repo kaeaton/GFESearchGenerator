@@ -33,6 +33,7 @@ public class FileFormatPanel {
 	/**
 	 * Assembles the JPanel housing all the JRadioButtons for selecting data format 
 	 * and and the JCheckBox for if a file is saved. All features have an associated listener.
+	 * (There is no one setting for the radio buttons, so each has a listener.)
 	 * 
 	 * @param tab tells which set of listeners should be attached to the panel features
 	 * @return the populated JPanel

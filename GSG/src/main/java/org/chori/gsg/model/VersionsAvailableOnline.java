@@ -31,9 +31,7 @@ public class VersionsAvailableOnline {
 		String lociType = "HLA";
 		
 		public void run() {
-			if(internet.tester()) {
-				getCurrentVersionsByLoci(lociType);
-			}
+			getCurrentVersionsByLoci(lociType);
 		}
 	};
 

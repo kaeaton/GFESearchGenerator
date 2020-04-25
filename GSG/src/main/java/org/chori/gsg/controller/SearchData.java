@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
 
 
 /**
@@ -29,7 +30,8 @@ public class SearchData {
 	private SortData sortData = new SortData();
 
 	public SearchData() {
-		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		whichTextArea.put("GFE", GfeTab.resultsTextAreaGfe);
+		// whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
 		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 	}
 

@@ -31,5 +31,5 @@ public abstract class WhichLoci {
 	public abstract JComboBox createWhichLociComboBox();
 
 	protected abstract void addWhichLociListener(JComboBox whichLociDropDown);
-	protected abstract void updateLocusAndVersions();
+	protected abstract void updateLocusAndVersionDropdowns(String lociType);
 }

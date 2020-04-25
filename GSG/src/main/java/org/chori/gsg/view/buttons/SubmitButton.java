@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import org.chori.gsg.model.submissionRequestFactory.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
 
 /**
  * Generates the assorted submit buttons and associated listeners
@@ -71,7 +72,7 @@ public class SubmitButton {
 	private String getWhichLoci(String whichTab) {
 		switch(whichTab) {
 			case "GFE":
-				return GSG.whichLociGfe.getSelectedItem().toString();
+				return GfeTab.whichLociGfe.getSelectedItem().toString();
 				// break;
 			case "NAME":
 				return GSG.whichLociName.getSelectedItem().toString();

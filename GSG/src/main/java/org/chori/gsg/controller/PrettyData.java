@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.utilities.*;
 import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
 
 public class PrettyData {
 
@@ -27,7 +28,8 @@ public class PrettyData {
 	private FileUtilities fileUtilities = new FileUtilities();
 
 	public PrettyData() {
-		whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
+		whichTextArea.put("GFE", GfeTab.resultsTextAreaGfe);
+		// whichTextArea.put("GFE", GSG.resultsTextAreaGfe);
 		whichTextArea.put("NAME", GSG.resultsTextAreaName);
 
 		hlaExonTotal.put("A", 8);

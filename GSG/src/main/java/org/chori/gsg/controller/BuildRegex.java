@@ -9,7 +9,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 // import org.chori.bsg.model;
-import org.chori.gsg.view.*;
+// import org.chori.gsg.view.*;
+import org.chori.gsg.view.tabs.*;
+
 
 public class BuildRegex {
 	public BuildRegex() {
@@ -25,9 +27,9 @@ public class BuildRegex {
 		// quick diagnostic test: 
 		// are the checkbox and textfield lists the same size?
 		if(checkBoxes.size() != textFields.size()) {
-			GSG.resultsTextAreaGfe.append("There's a problem with the Arraylists in BuildRegex.");
-			GSG.resultsTextAreaGfe.append(" (They're not the same length.)");
-			GSG.resultsTextAreaGfe.append(System.lineSeparator());
+			GfeTab.resultsTextAreaGfe.append("There's a problem with the Arraylists in BuildRegex.");
+			GfeTab.resultsTextAreaGfe.append(" (They're not the same length.)");
+			GfeTab.resultsTextAreaGfe.append(System.lineSeparator());
 			System.out.println("There's a problem with the Arraylists in BuildRegex.");
 		}
 
