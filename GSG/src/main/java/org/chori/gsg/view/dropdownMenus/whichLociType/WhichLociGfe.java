@@ -10,7 +10,7 @@ import org.chori.gsg.view.*;
 import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
 import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
-import org.chori.gsg.view.tabs.*;
+import org.chori.gsg.view.tabs.GfeTab;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns
@@ -26,7 +26,7 @@ public class WhichLociGfe extends WhichLoci {
 	protected LocusModel locusModelHla = LocusModelFactory.getLocusModelFactoryInstance().createLocusModel("HLA");
 	protected LocusModel locusModelKir = LocusModelFactory.getLocusModelFactoryInstance().createLocusModel("KIR");
 	
-	private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
+	// private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
 	private DefaultComboBoxModel newVersionModel = new DefaultComboBoxModel();
 	private DefaultComboBoxModel newLocusModel = new DefaultComboBoxModel();
 
@@ -71,8 +71,13 @@ public class WhichLociGfe extends WhichLoci {
 	}
 
 	protected void updateLocusAndVersionDropdowns(String lociType) {
+		GfeTab assembleGfeTab = GfeTab.getGfeTabInstance();
 
+
+		String whatLocus = "HLA-B";
 		newVersionModel = versionModelGfe.assembleVersionModel(lociType);
+		System.out.println("WhichLociGfe: updateLocusAndVersionDropdowns");
+		assembleGfeTab.updateTheGfePanel(whatLocus);
 		// GfeTab.whatVersionBulk.setModel(newVersionModel);
 		// GSG.whatVersionBulk.setModel(newVersionModel);
 		// newLocusModel = 

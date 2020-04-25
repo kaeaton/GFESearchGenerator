@@ -38,7 +38,7 @@ public class GfeSearchPanelAssembler {
 	 * @param locus what locus panel is being built
 	 * @return the populated JPanel
 	 */
-	public JPanel getGfePanel(String locus) {
+	public JPanel makeGfePanel(String locus) {
 		// reset the arrayLists, populated via IndividualFeatureSearchPanel
 		allCheckboxes = new ArrayList();
 		allTextboxes = new ArrayList();

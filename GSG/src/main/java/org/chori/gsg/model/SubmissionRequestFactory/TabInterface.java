@@ -11,7 +11,6 @@ public interface TabInterface {
 
 	public enum WhereToPrint {
 		GFE(GfeTab.resultsTextAreaGfe),
-		// GFE(GSG.resultsTextAreaGfe),
 		NAME(GSG.resultsTextAreaName),
  		FEATURE(GSG.resultsTextAreaFeature);
 
@@ -28,7 +27,6 @@ public interface TabInterface {
 
 	public enum WhatToPrint {
 		GFE(GfeTab.fileFormatGfe),
-		// GFE(GSG.fileFormatGfe),
 		NAME(GSG.fileFormatName),
  		FEATURE(GSG.fileFormatFeature);
 

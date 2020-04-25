@@ -19,7 +19,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-// import javax.swing.UIManager;
 
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
@@ -59,7 +58,7 @@ public class GSG extends JFrame {
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 	private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
 
-	private static GfeTab assembleGfeTab = new GfeTab();
+	private static GfeTab assembleGfeTab = GfeTab.getGfeTabInstance();
 
 	// need this to add at initialization
 	public static JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -168,107 +167,6 @@ public class GSG extends JFrame {
 		parentTabbedPane.addTab("GFE Search", null, gfeTab, "GFE Search tool");
 		JPanel gfeAssembledTab = assembleGfeTab.assembleGfeTab();
 		gfeTab.add(gfeAssembledTab);
-		
-		// // generate the HLA GFE panel
-		// try {
-		// 	// System.out.println("Generating the initial gfePanel using whatLocusGfe: " + whatLocusGfe.getSelectedItem().toString());
-		// 	JPanel currentGfePanel = gfePanelGenerator.getGfePanel("HLA-A");
-		// 	// JPanel currentGfePanel = gfePanelGenerator.getGfePanel(whatLocusGfe.getSelectedItem().toString());
-			
-		// 	currentGfePanel.setName("GFE");
-		// 	gfePanel.add(currentGfePanel);
-		// } catch (IllegalArgumentException iex) {
-		// 	PrefProbException ppex = new PrefProbException();
-		// }
-
-		// // results textarea
-		// JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
-		// resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
-		// resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
-
-		// // labels
-		// JLabel selectAllLabelGfe = new JLabel("Check all");
-		// JTextArea usageInstructionsGfe = new JTextArea("Enter in the terms you are looking for. (Zero represents unsequenced data, and is a valid term.) Empty boxes function as wildcards."
-		// 											+ "\nChecking a box will prevent any results containing the number zero (an unsequenced feature) in that feature.");
-		// usageInstructionsGfe.setBackground(gfePanel.getBackground());
-		// usageInstructionsGfe.setEditable(false);
-		// usageInstructionsGfe.setFocusable(false);
-
-		// // buttons
-		// JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
-		// JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
-		// JButton exitButtonGfe = exitButtonGenerator.createExitButton();
-
-		// // submit/cancel buttons panel
-		// JPanel bottomButtonsGfe = new JPanel();
-		// bottomButtonsGfe.add(submitButtonGfe);
-		// bottomButtonsGfe.add(exitButtonGfe);
-
-		// // version/loci dropdowns
-		// JPanel versionLociPanelGfe = new JPanel();
-		// versionLociPanelGfe.add(resetButtonGfe);
-		// versionLociPanelGfe.add(whatVersionGfe);
-		// versionLociPanelGfe.add(whichLociGfe);
-
-		// // layout / add them to the gfeTab
-		// gfeTab.setLayout(new GridBagLayout());
-		// GridBagConstraints c = new GridBagConstraints();
-		// c.anchor = GridBagConstraints.NORTHWEST;
-		// c.insets = new Insets(0,0,10,0);
-		// c.weightx = 0.5;
-		
-		// // line 0
-		// c.gridx = 0;
-		// c.gridy = 0;
-		// gfeTab.add(whatLocusGfe, c);
-		
-		// c.gridx = 1;
-		// gfeTab.add(usageInstructionsGfe, c);
-
-		// // line 1
-		// c.insets = new Insets(0,0,0,0);
-		// c.gridx = 0;
-		// c.gridy = 1;
-		// gfeTab.add(selectAllLabelGfe, c);
-
-		// // line 2
-		// c.gridy = 2;
-		// c.gridwidth = 4;
-		// gfeTab.add(gfePanel, c);
-
-		// // line 3
-		// c.anchor = GridBagConstraints.WEST;
-		// // c.gridwidth = 1;
-		// c.gridy = 3;
-		// gfeTab.add(versionLociPanelGfe, c);
-		// // gfeTab.add(resetButtonGfe, c);
-
-		// // c.gridx = 1;
-		// // gfeTab.add(whatVersionGfe, c);
-
-		// // c.anchor = GridBagConstraints.CENTER;
-		// // c.gridx = 2;
-		// // gfeTab.add(whichLociGfe, c);
-
-		// // line 4
-		// c.anchor = GridBagConstraints.CENTER;
-		// c.gridwidth = 4;
-		// c.gridx = 0;
-		// c.gridy = 4;
-		// gfeTab.add(fileFormatGfe, c);
-
-		// // line 5
-		// c.anchor = GridBagConstraints.NORTH;
-		// c.weightx = 1;
-		// c.weighty = 1;
-		// c.gridy = 5;
-		// gfeTab.add(resultsScrollPaneGfe, c);
-
-		// // line 6
-		// c.weightx = 0;
-		// c.weighty = 0;
-		// c.gridy = 6;
-		// gfeTab.add(bottomButtonsGfe, c);
 
 	/* Name Search tab */
 		parentTabbedPane.addTab("Name Search", null, nameTab, "Name Search tool");

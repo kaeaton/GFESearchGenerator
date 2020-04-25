@@ -20,8 +20,9 @@ import org.chori.gsg.view.*;
 public class WhatVersionGfe extends WhatVersion { 
 
 	protected VersionModel versionModelGfe = versionModelFactory.createVersionModel("GFE");
-	private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
+	// private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
 	// protected LocusModelFactory locusModelFactory = LocusModelFactory.getLocusModelFactoryInstance();
+	private static GfeTab assembleGfeTab = GfeTab.getGfeTabInstance();
 	protected LocusModel locusModel;
 	protected DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
@@ -72,6 +73,10 @@ public class WhatVersionGfe extends WhatVersion {
 	}
 
 	private void updateGfePanel(String version, String lociType) {
+
+
+		String whatLocus = prefs.get("GSG_GFE_" + lociType + "_LOCUS_STRING", "HLA-B");
+		assembleGfeTab.updateTheGfePanel(whatLocus);
 
     	// create and assign appropriate locus model based on loci type
 		locusModel = locusModelFactory.createLocusModel(lociType);

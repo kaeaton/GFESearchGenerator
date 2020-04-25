@@ -1,5 +1,6 @@
 package org.chori.gsg.view.tabs;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -7,8 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.prefs.Preferences;
 
-// import javax.swing.event.ChangeEvent;
-// import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,10 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-// import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
+// import javax.swing.UIManager;
 
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.buttons.*;
@@ -50,8 +48,10 @@ public class GfeTab {
 
 	// the JPanel to return
 	public static JPanel gfeTab = new JPanel();
+
 	// the holder panel - embedded in the layout, with contents to be changed
 	public static JPanel gfePanel = new JPanel();
+	private JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-B");
 
 	public static JTextArea resultsTextAreaGfe = new JTextArea();
 	public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
@@ -61,20 +61,26 @@ public class GfeTab {
 	public static JComboBox whatLocusGfe = new JComboBox();
 	public static JComboBox whichLociGfe = new JComboBox();
 
-	public GfeTab() { 
+	private static final GfeTab instance = new GfeTab();
+
+	private GfeTab() { 
 		whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
 		whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
 		whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 	}
 
+	public static GfeTab getGfeTabInstance() {
+		return instance;
+	}
+
 	public JPanel assembleGfeTab() {
-		JPanel currentGfePanel = gfePanelGenerator.getGfePanel("HLA-A");
+		JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
 		gfePanel.add(currentGfePanel);
 
 		// results textarea
 		JScrollPane resultsScrollPaneGfe = new JScrollPane(resultsTextAreaGfe);
 		resultsTextAreaGfe.setFont(new Font("Courier New", 0, 13));
-		resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 300));
+		resultsScrollPaneGfe.setPreferredSize(new Dimension(950, 350));
 
 		// labels
 		JLabel selectAllLabelGfe = new JLabel("Check all");
@@ -88,10 +94,6 @@ public class GfeTab {
 		JButton resetButtonGfe = resetButtonGenerator.createResetButton("GFE");
 		JButton submitButtonGfe = submitButtonGenerator.createSubmitButton("GFE");
 		JButton exitButtonGfe = exitButtonGenerator.createExitButton();
-
-		// spacing panel
-		JPanel spacingPanel = new JPanel();
-		spacingPanel.setPreferredSize(new Dimension(950, 50));
 
 		// submit/cancel buttons panel
 		JPanel bottomButtonsGfe = new JPanel();
@@ -132,17 +134,8 @@ public class GfeTab {
 
 		// line 3
 		c.anchor = GridBagConstraints.WEST;
-		// c.gridwidth = 1;
 		c.gridy = 3;
 		gfeTab.add(versionLociPanelGfe, c);
-		// gfeTab.add(resetButtonGfe, c);
-
-		// c.gridx = 1;
-		// gfeTab.add(whatVersionGfe, c);
-
-		// c.anchor = GridBagConstraints.CENTER;
-		// c.gridx = 2;
-		// gfeTab.add(whichLociGfe, c);
 
 		// line 4
 		c.anchor = GridBagConstraints.CENTER;
@@ -159,23 +152,26 @@ public class GfeTab {
 		gfeTab.add(resultsScrollPaneGfe, c);
 
 		// line 6
+		c.anchor = GridBagConstraints.SOUTH;
 		c.weightx = 0;
 		c.weighty = 0;
 		c.gridy = 6;
-		gfeTab.add(spacingPanel, c);
-
-		// line 7
-		c.anchor = GridBagConstraints.SOUTH;
-		// c.weightx = 0;
-		// c.weighty = 0;
-		c.gridy = 7;
 		gfeTab.add(bottomButtonsGfe, c);
 
 		return gfeTab;
 
 	}
 
+	public void updateTheGfePanel(String whatLocus) {
+		System.out.println("Triggered setNewGfePanel");
+		
+		Component[] components = gfePanel.getComponents();
+		gfePanel.remove(components[0]);
 
+		currentGfePanel = gfePanelGenerator.makeGfePanel(whatLocus);
+		gfePanel.add(currentGfePanel).revalidate();
+		gfePanel.repaint();
+	}
 
 
 
