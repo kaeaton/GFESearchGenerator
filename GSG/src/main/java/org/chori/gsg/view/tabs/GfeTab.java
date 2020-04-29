@@ -51,7 +51,7 @@ public class GfeTab {
 
 	// the holder panel - embedded in the layout, with contents to be changed
 	public static JPanel gfePanel = new JPanel();
-	private JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-B");
+	private JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
 
 	public static JTextArea resultsTextAreaGfe = new JTextArea();
 	public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
@@ -74,7 +74,10 @@ public class GfeTab {
 	}
 
 	public JPanel assembleGfeTab() {
-		JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
+
+		// generate the currentGfePanel
+		String currentLocus = whatLocusShouldInitiallyLoad();
+		currentGfePanel = gfePanelGenerator.makeGfePanel(currentLocus);
 		gfePanel.add(currentGfePanel);
 
 		// results textarea
@@ -164,7 +167,7 @@ public class GfeTab {
 
 	public void updateTheGfePanel(String whatLocus) {
 		System.out.println("Triggered setNewGfePanel");
-		
+
 		Component[] components = gfePanel.getComponents();
 		gfePanel.remove(components[0]);
 
@@ -173,7 +176,18 @@ public class GfeTab {
 		gfePanel.repaint();
 	}
 
+	private String whatLocusShouldInitiallyLoad() {
+		String whichLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
+		String whatLocus = "HLA-A";
 
+		if(whichLoci == "HLA") {
+			whatLocus = prefs.get("GSG_GFE_HLA_LOCUS_STRING", "HLA-A");
+		} else if (whichLoci == "KIR") {
+			whatLocus = prefs.get("GSG_GFE_KIR_LOCUS_STRING", "KIR2DL4");
+		}
+
+		return whatLocus;
+	}
 
 }
 

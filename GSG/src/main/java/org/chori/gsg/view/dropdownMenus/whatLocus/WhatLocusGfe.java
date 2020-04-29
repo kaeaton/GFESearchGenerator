@@ -25,7 +25,6 @@ import org.chori.gsg.view.*;
 public class WhatLocusGfe extends WhatLocus { 
 
 	// private GfeSearchPanelAssembler gfeSearchPanelAssembler = new GfeSearchPanelAssembler();
-	private UpdateGfePanel updateGfePanel = new UpdateGfePanel();
 	private LocusModel locusModel;
 	private DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
