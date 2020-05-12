@@ -47,10 +47,10 @@ public class GfeTab {
 	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
 
 	// the JPanel to return
-	public static JPanel gfeTab = new JPanel();
+	private JPanel gfeTab = new JPanel();
 
 	// the holder panel - embedded in the layout, with contents to be changed
-	public static JPanel gfePanel = new JPanel();
+	private JPanel gfePanel = new JPanel();
 	private JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
 
 	public static JTextArea resultsTextAreaGfe = new JTextArea();
@@ -64,6 +64,13 @@ public class GfeTab {
 	private static final GfeTab instance = new GfeTab();
 
 	private GfeTab() { 
+		// the JPanel to return
+		// JPanel gfeTab = new JPanel();
+
+		// the holder panel - embedded in the layout, with contents to be changed
+		// JPanel gfePanel = new JPanel();
+		// JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
+
 		whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
 		whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
 		whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
@@ -163,6 +170,14 @@ public class GfeTab {
 
 		return gfeTab;
 
+	}
+
+	public void writeToGfeTab(String text) {
+		resultsTextAreaGfe.append(text); 
+	}
+
+	public static JPanel getFileFormatGfe() {
+		return fileFormatGfe;
 	}
 
 	public void updateTheGfePanel(String whatLocus) {

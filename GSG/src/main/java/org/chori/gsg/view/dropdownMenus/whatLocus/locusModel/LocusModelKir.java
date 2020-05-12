@@ -33,20 +33,20 @@ public class LocusModelKir extends LocusModel {
 		// String lociType = GSG.whichLociBulk.getSelectedItem().toString();
 
 		// what versions are available online?
-		if(internet.tester() && onlineVersion(version)) {
+		// if(internet.tester() && onlineVersion(version)) {
 			ArrayList<String> allLoci = new ArrayList<>(Arrays.asList(fullKirLoci));
 			availableLoci = allLoci;
 			System.out.println("Reached online version for loci in LocusModel");
-		} else {
-			// figure out what datafiles are available for selected version
-			availableLoci = versionsAvailableLocally.getLocalDataFiles(version, "KIR");
-		}
+		// } else {
+		// 	// figure out what datafiles are available for selected version
+		// 	availableLoci = versionsAvailableLocally.getLocalDataFiles(version, "KIR");
+		// }
 
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 
 		// return a model available for them
-		System.out.println("LocusModel.loci(): populating new DefaultComboBoxModel with: " + availableLoci.toString());
-		System.out.println("LocusModel.loci(): populating new DefaultComboBoxModel with: " + availableLoci.toArray().toString());
+		System.out.println("LocusModelKir.loci(): populating new DefaultComboBoxModel with: " + Arrays.toString(availableLoci.toArray()));
+		// System.out.println("LocusModel.loci(): populating new DefaultComboBoxModel with: " + Arrays.toString(availableLoci).toArray());
 
 		model = new DefaultComboBoxModel(availableLoci.toArray());
 		return model;

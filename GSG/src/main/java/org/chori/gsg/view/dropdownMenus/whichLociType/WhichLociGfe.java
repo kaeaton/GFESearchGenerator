@@ -71,13 +71,22 @@ public class WhichLociGfe extends WhichLoci {
 	}
 
 	protected void updateLocusAndVersionDropdowns(String lociType) {
-		GfeTab assembleGfeTab = GfeTab.getGfeTabInstance();
 
-
-		String whatLocus = "HLA-B";
 		newVersionModel = versionModelGfe.assembleVersionModel(lociType);
+		GfeTab.whatVersionGfe.setModel(newVersionModel);
+		GfeTab.whatVersionGfe.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_VERSION", 0));
+
+		String whatVersion = GfeTab.whatVersionGfe.getSelectedItem().toString();
+		LocusModel newLocusModelGenerator = locusModelFactory.createLocusModel(lociType);
+		newLocusModel = newLocusModelGenerator.assembleLocusModel(whatVersion);
+		GfeTab.whatLocusGfe.setModel(newLocusModel);
+		GfeTab.whatLocusGfe.setSelectedIndex(prefs.getInt("GSG_GFE_" + lociType + "_LOCUS", 0));
+
+
+		String whatLocus = GfeTab.whatLocusGfe.getSelectedItem().toString();
 		System.out.println("WhichLociGfe: updateLocusAndVersionDropdowns");
-		assembleGfeTab.updateTheGfePanel(whatLocus);
+		GfeTab gfeTab = GfeTab.getGfeTabInstance();
+		gfeTab.updateTheGfePanel(whatLocus);
 		// GfeTab.whatVersionBulk.setModel(newVersionModel);
 		// GSG.whatVersionBulk.setModel(newVersionModel);
 		// newLocusModel = 

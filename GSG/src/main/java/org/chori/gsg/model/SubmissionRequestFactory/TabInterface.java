@@ -27,6 +27,7 @@ public interface TabInterface {
 
 	public enum WhatToPrint {
 		GFE(GfeTab.fileFormatGfe),
+		// GFE(GfeTab.getFileFormatGfe()),
 		NAME(GSG.fileFormatName),
  		FEATURE(GSG.fileFormatFeature);
 

@@ -74,7 +74,6 @@ public class WhatVersionGfe extends WhatVersion {
 
 	private void updateGfePanel(String version, String lociType) {
 
-
 		String whatLocus = prefs.get("GSG_GFE_" + lociType + "_LOCUS_STRING", "HLA-B");
 		assembleGfeTab.updateTheGfePanel(whatLocus);
 
