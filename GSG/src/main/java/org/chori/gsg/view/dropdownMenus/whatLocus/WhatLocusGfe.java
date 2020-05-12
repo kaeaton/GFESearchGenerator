@@ -88,6 +88,9 @@ public class WhatLocusGfe extends WhatLocus {
 	 */
 	public void setNewGfePanel(String whatLocus) {
 		System.out.println("Triggered setNewGfePanel");
+
+		GfeTab gfeTab = GfeTab.getGfeTabInstance();
+		gfeTab.updateTheGfePanel(whatLocus);
 		// JPanel newPanel = updateGfePanel.updateTheGfePanel(whatLocus);
 		// JPanel oldPanel = findPanel(GSG.gfePanel, "GFE");
 

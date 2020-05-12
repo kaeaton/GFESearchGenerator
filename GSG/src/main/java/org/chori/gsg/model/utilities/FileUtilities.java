@@ -18,6 +18,8 @@ public class FileUtilities {
 
 	private DownloadRawDataFactory downloadRawDataFactory = DownloadRawDataFactory.getDownloadRawDataFactoryInstance();
 
+	private String specificFile = "";
+
 	public FileUtilities() { }
 
 	/**
@@ -36,10 +38,17 @@ public class FileUtilities {
 		// DownloadRawData downloadRawData = new DownloadRawData();
 		WhereTheDataLives whereTheDataLives = new WhereTheDataLives();
 
-		String specificFile = whereTheDataLives.getRawDataPath() + lociType 
-								+ System.getProperty("file.separator")
-								+ version + System.getProperty("file.separator") 
-								+ "neo4j_" + locus + "_" + version + "_download.csv";
+		if(lociType.equals("HLA")) {
+			specificFile = whereTheDataLives.getRawDataPath() + lociType 
+							+ System.getProperty("file.separator")
+							+ version + System.getProperty("file.separator") 
+							+ "neo4j_" + locus + "_" + version + "_download.csv";
+		} else if(lociType.equals("KIR")) {
+			specificFile = whereTheDataLives.getRawDataPath() + lociType 
+							+ System.getProperty("file.separator")
+							+ version + System.getProperty("file.separator") 
+							+ "neo4j_" + lociType + "_" + version + "_download.csv";
+		}
 
 		File theFile = new File(specificFile);
 		
