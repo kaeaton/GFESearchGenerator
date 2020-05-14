@@ -2,7 +2,7 @@ curlRequest.txt
 SharedHlaFeatureSequences.xlsx
 SharedDnaSequences.numbers
 featureCompTab.acorn
-GSG/src/main/java/org/chori/gsg/model/utilities/Passwords.java
+GSG/src/main/java/org/chori/gsg/utilities/Passwords.java
 .DS_Store
 pathing.txt
 Dropdowns.umdx
