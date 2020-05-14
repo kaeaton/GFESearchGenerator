@@ -11,7 +11,7 @@ import java.util.regex.*;
 import javax.swing.JTextArea;
 
 import org.chori.gsg.model.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.tabs.*;
 

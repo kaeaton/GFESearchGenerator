@@ -5,7 +5,7 @@ package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
 import javax.swing.DefaultComboBoxModel;
 
 import org.chori.gsg.model.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 
 

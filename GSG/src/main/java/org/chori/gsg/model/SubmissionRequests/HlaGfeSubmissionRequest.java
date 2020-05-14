@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.submissionRequestFactory.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 import org.chori.gsg.view.gfeSearchPanels.*;
 import org.chori.gsg.view.tabs.GfeTab;

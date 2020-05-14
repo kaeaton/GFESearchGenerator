@@ -7,7 +7,7 @@ import java.util.prefs.Preferences;
 // import org.chori.gsg.model.*;
 import org.chori.gsg.model.neo4j.*;
 import org.chori.gsg.model.processJson.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 
 public class VersionsAvailableOnline {

@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import org.chori.gsg.model.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 
 	

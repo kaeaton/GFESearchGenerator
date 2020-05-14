@@ -1,10 +1,10 @@
-package org.chori.gsg.model.utilities;
+package org.chori.gsg.utilities;
 
 import java.io.File;
 import java.nio.file.*;
 
 import org.chori.gsg.model.downloadData.*;
-import org.chori.gsg.model.utilities.WhereTheDataLives;
+import org.chori.gsg.utilities.WhereTheDataLives;
 
 
 /**

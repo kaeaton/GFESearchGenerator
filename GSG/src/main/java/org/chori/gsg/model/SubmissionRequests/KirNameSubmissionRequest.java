@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import org.chori.gsg.controller.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.submissionRequestFactory.*;
-import org.chori.gsg.model.utilities.*;
+import org.chori.gsg.utilities.*;
 import org.chori.gsg.view.*;
 
 public class KirNameSubmissionRequest extends SubmissionRequest implements LocusInterface, TabInterface {
