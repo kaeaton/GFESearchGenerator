@@ -1,4 +1,4 @@
-package org.chori.gsg.view.tabs;
+package org.chori.gsg.gui.tabs;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -19,13 +19,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 // import javax.swing.UIManager;
 
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.buttons.*;
-import org.chori.gsg.view.dropdownMenus.*;
-import org.chori.gsg.view.dropdownMenus.whichLociType.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.*;
-import org.chori.gsg.view.gfeSearchPanels.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.buttons.*;
+import org.chori.gsg.gui.dropdownMenus.*;
+import org.chori.gsg.gui.dropdownMenus.whichLociType.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.*;
+import org.chori.gsg.gui.gfeSearchPanels.*;
 
 public class GfeTab {
 

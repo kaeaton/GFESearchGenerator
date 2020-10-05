@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 // import package org.chori.gsg.view.GSG;
 
 /**
+
  * The class for the panel for selecting what format 
  * the data appears in and whether to write it to file
  * 

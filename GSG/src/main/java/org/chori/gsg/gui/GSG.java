@@ -1,11 +1,10 @@
-package org.chori.gsg.view;
+package org.chori.gsg.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.prefs.Preferences;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,26 +22,26 @@ import javax.swing.JTextField;
 import org.chori.gsg.exceptions.*;
 import org.chori.gsg.model.*;
 import org.chori.gsg.utilities.*;
-import org.chori.gsg.view.buttons.*;
-import org.chori.gsg.view.dropdownMenus.*;
-import org.chori.gsg.view.dropdownMenus.whichLociType.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.*;
-import org.chori.gsg.view.gfeSearchPanels.*;
-import org.chori.gsg.view.tabs.*;
+import org.chori.gsg.gui.buttons.*;
+import org.chori.gsg.gui.dropdownMenus.*;
+import org.chori.gsg.gui.dropdownMenus.whichLociType.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.*;
+import org.chori.gsg.gui.gfeSearchPanels.*;
+import org.chori.gsg.gui.tabs.*;
 
 public class GSG extends JFrame {
 
-	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+	// private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
 	// default locus settings
 	// private String gfeSelectedLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
 	// private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
-	private String nameSelectedLoci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
-	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
+	private String nameSelectedLoci = Prefs.get("GSG_NAME_LOCI_STRING", "HLA");
+	private String nameSelectedLocus = Prefs.get("GSG_NAME_VERSION", "HLA-A");
 	// private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
 	// private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
-	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
+	private String bulkSelectedLoci = Prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generator
 	// private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
