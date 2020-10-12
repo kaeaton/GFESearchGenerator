@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion;
+package org.chori.gsg.gui.dropdownMenus.whatVersion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,10 +8,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 // import org.chori.gsg.exceptions.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.GSG;
+import org.chori.gsg.gui.nameTab.NameTab;
 
 public class WhatVersionName extends WhatVersion { 
 
@@ -59,7 +60,7 @@ public class WhatVersionName extends WhatVersion {
     		@Override
             public void actionPerformed(ActionEvent evt) {
             	// if local version, update locus model to show available loci
-				String lociType = GSG.whichLociName.getSelectedItem().toString(); 
+				String lociType = NameTab.whichLociName.getSelectedItem().toString(); 
 				String version = whatVersionDropDown.getSelectedItem().toString();
                 System.out.println("Which name version listener triggered");
                 
@@ -68,10 +69,10 @@ public class WhatVersionName extends WhatVersion {
             	// create and assign appropriate locus model based on loci type
 				locusModel = locusModelFactory.createLocusModel(lociType);
 				comboBoxModel = locusModel.assembleLocusModel(version);
-            	GSG.whatLocusName.setModel(comboBoxModel);
+            	NameTab.whatLocusName.setModel(comboBoxModel);
 
             	// update the preferences
-            	prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", GSG.whatLocusName.getSelectedIndex());
+            	prefs.putInt("GSG_NAME_" + lociType + "_LOCUS", NameTab.whatLocusName.getSelectedIndex());
             	// prefs.put("GSG_NAME_" + lociType + "_LOCUS_STRING", whichLocus);
             }
         });

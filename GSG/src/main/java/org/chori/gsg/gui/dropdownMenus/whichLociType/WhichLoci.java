@@ -1,12 +1,12 @@
-package org.chori.gsg.view.dropdownMenus.whichLociType;
+package org.chori.gsg.gui.dropdownMenus.whichLociType;
 
 import java.util.prefs.Preferences;
 import javax.swing.JComboBox;
 
 import org.chori.gsg.exceptions.*;
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns

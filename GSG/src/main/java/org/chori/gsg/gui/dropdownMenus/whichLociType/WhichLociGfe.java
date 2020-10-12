@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whichLociType;
+package org.chori.gsg.gui.dropdownMenus.whichLociType;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,11 +6,11 @@ import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
-import org.chori.gsg.view.gfeSearchPanels.*;
-import org.chori.gsg.view.tabs.GfeTab;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.gfeTab.gfeSearchPanels.*;
+import org.chori.gsg.gui.gfeTab.GfeTab;
 
 /**
  * Creates the dropdowns to select the set of genes being used, and listeners for the dropdowns

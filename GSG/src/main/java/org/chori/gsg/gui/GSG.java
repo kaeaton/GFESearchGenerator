@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.prefs.Preferences;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -27,21 +28,21 @@ import org.chori.gsg.gui.dropdownMenus.*;
 import org.chori.gsg.gui.dropdownMenus.whichLociType.*;
 import org.chori.gsg.gui.dropdownMenus.whatLocus.*;
 import org.chori.gsg.gui.dropdownMenus.whatVersion.*;
-import org.chori.gsg.gui.gfeSearchPanels.*;
-import org.chori.gsg.gui.tabs.*;
+import org.chori.gsg.gui.gfeTab.gfeSearchPanels.*;
+import org.chori.gsg.gui.gfeTab.*;
 
 public class GSG extends JFrame {
 
-	// private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 
 	// default locus settings
 	// private String gfeSelectedLoci = prefs.get("GSG_GFE_LOCI_STRING", "HLA");
 	// private String gfeSelectedLocus = prefs.get("GSG_HLA_LOCUS_STRING", "HLA-A");
-	private String nameSelectedLoci = Prefs.get("GSG_NAME_LOCI_STRING", "HLA");
-	private String nameSelectedLocus = Prefs.get("GSG_NAME_VERSION", "HLA-A");
+	private String nameSelectedLoci = prefs.get("GSG_NAME_LOCI_STRING", "HLA");
+	private String nameSelectedLocus = prefs.get("GSG_NAME_VERSION", "HLA-A");
 	// private String featureSelectedLoci = prefs.get("GSG_FEATURE_LOCI_STRING", "HLA");
 	// private String featureSelectedLocus = prefs.get("GSG_KIR_LOCUS_STRING", "KIR2DL4");
-	private String bulkSelectedLoci = Prefs.get("GSG_BULK_LOCI_STRING", "HLA");
+	private String bulkSelectedLoci = prefs.get("GSG_BULK_LOCI_STRING", "HLA");
 
 	// the GFE panel generator
 	// private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
@@ -54,15 +55,15 @@ public class GSG extends JFrame {
 	private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
 	private static ExitButton exitButtonGenerator = new ExitButton();
 	private static SubmitButton submitButtonGenerator = new SubmitButton();
-	private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
-	private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
+	// private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
+	// private static BulkDownloadButton bulkDownloadButtonGenerator = new BulkDownloadButton();
 
 	private static GfeTab assembleGfeTab = GfeTab.getGfeTabInstance();
 
 	// need this to add at initialization
 	public static JTabbedPane parentTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
-	// the tabs, added initially so I can make them 
+	// the gfeTab, added initially so I can make them 
 	// public, static and update them
 	public static JPanel gfeTab = new JPanel();
 	public static JPanel nameTab = new JPanel();
@@ -72,10 +73,10 @@ public class GSG extends JFrame {
 	// the holder panel
 	// they're embedded in the layout, with contents to be changed
 	// public static JPanel gfePanel = new JPanel();
-	public static JPanel namePanel = new JPanel();
+	// public static JPanel namePanel = new JPanel();
 
 	// results text areas
-	// public static JTextArea resultsTextAreaGfe = new JTextArea();
+	public static JTextArea resultsTextAreaGfe = new JTextArea();
 	public static JTextArea resultsTextAreaName = new JTextArea();
 	public static JTextArea resultsTextAreaFeature = new JTextArea();
 	
@@ -91,11 +92,11 @@ public class GSG extends JFrame {
 	public static JComboBox whatLocus1Feature = new JComboBox();
 	public static JComboBox whatLocus2Feature = new JComboBox();
 	public static JComboBox whichLociFeature = new JComboBox();
-	public static JComboBox whatVersionBulk = new JComboBox();
-	public static JComboBox whichLociBulk = new JComboBox();
+	// public static JComboBox whatVersionBulk = new JComboBox();
+	// public static JComboBox whichLociBulk = new JComboBox();
 
 	// file format panels
-	// public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
+	public static JPanel fileFormatGfe = fileFormatPanelGenerator.getFileFormatPanel("GFE");
 	public static JPanel fileFormatName = fileFormatPanelGenerator.getFileFormatPanel("NAME");
 	public static JPanel fileFormatFeature = fileFormatPanelGenerator.getFileFormatPanel("FEATURE");
 
@@ -128,14 +129,14 @@ public class GSG extends JFrame {
 			// whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
 			// whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 			
-			whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
-			whatVersionName = whatVersionFactory.createWhatVersion("NAME").createWhatVersionComboBox();
-			whatLocusName = whatLocusFactory.createWhatLocus("NAME").createWhatLocusComboBox(whatVersionName.getSelectedItem().toString(), prefs.get("GSG_NAME_LOCI_STRING", "HLA"));
+			// whichLociName = whichLociFactory.createWhichLoci("NAME").createWhichLociComboBox();
+			// whatVersionName = whatVersionFactory.createWhatVersion("NAME").createWhatVersionComboBox();
+			// whatLocusName = whatLocusFactory.createWhatLocus("NAME").createWhatLocusComboBox(whatVersionName.getSelectedItem().toString(), prefs.get("GSG_NAME_LOCI_STRING", "HLA"));
 			
 			// whichLociFeature = whichLociFactory.createWhichLoci("FEATURE").createWhichLociComboBox();
 			
-			whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
-			whatVersionBulk = whatVersionFactory.createWhatVersion("BULK").createWhatVersionComboBox();
+			// whichLociBulk = whichLociFactory.createWhichLoci("BULK").createWhichLociComboBox();
+			// whatVersionBulk = whatVersionFactory.createWhatVersion("BULK").createWhatVersionComboBox();
 
 
 		} catch (NoInternetOrDataException ex) { 
@@ -170,83 +171,7 @@ public class GSG extends JFrame {
 	/* Name Search tab */
 		parentTabbedPane.addTab("Name Search", null, nameTab, "Name Search tool");
 		
-		// currentGfePanel.setName("NAME");
-		namePanel.add(nameSearchBox);
-		nameSearchBox.addActionListener(submitButtonGenerator.nameListener);
 		
-		// results textarea
-		JScrollPane resultsScrollPaneName = new JScrollPane(resultsTextAreaName);
-		resultsTextAreaName.setFont(new Font("Courier New", 0, 13));
-		resultsScrollPaneName.setPreferredSize(new Dimension(950, 400));
-
-		// buttons
-		JButton submitButtonName = submitButtonGenerator.createSubmitButton("NAME");
-		JButton exitButtonName = exitButtonGenerator.createExitButton();
-
-		// submit/cancel buttons panel
-		JPanel bottomButtonsName = new JPanel();
-		bottomButtonsName.add(submitButtonName);
-		bottomButtonsName.add(exitButtonName);
-
-		// version/loci dropdowns
-		JPanel versionLociPanelName = new JPanel();
-		versionLociPanelName.add(whatVersionName);
-		versionLociPanelName.add(whichLociName);
-
-		// layout / add them to the nameTab
-		nameTab.setLayout(new GridBagLayout());
-		GridBagConstraints e = new GridBagConstraints();
-		e.anchor = GridBagConstraints.NORTHWEST;
-		e.insets = new Insets(0,0,10,0);
-		e.weightx = 0.5;
-		
-		// line 0
-		e.gridx = 0;
-		e.gridy = 0;
-		nameTab.add(whatLocusName, e);
-		
-		// e.gridx = 1;
-		// nameTab.add(usageInstructions, e);
-
-		// line 1
-		// e.insets = new Insets(0,0,0,0);
-		// e.gridx = 0;
-		// e.gridy = 1;
-		// nameTab.add(selectAllLabel, e);
-
-		// line 2
-		e.gridy = 2;
-		e.gridwidth = 4;
-		nameTab.add(namePanel, e);
-
-		// line 3
-		e.anchor = GridBagConstraints.WEST;
-		// e.gridwidth = 1;
-		e.gridy = 3;
-		// nameTab.add(resetButtonName, e);
-
-		// e.gridx = 1;
-		nameTab.add(versionLociPanelName, e);
-
-		// line 4
-		e.anchor = GridBagConstraints.CENTER;
-		e.gridx = 0;
-		e.gridy = 4;
-		nameTab.add(fileFormatName, e);
-
-		// line 5
-		e.anchor = GridBagConstraints.NORTH;
-		e.weightx = 1;
-		e.weighty = 1;
-		e.gridy = 5;
-		nameTab.add(resultsScrollPaneName, e);
-
-		// line 6
-		e.weightx = 0;
-		e.weighty = 0;
-		e.gridy = 6;
-		nameTab.add(bottomButtonsName, e);
-
 	/* Features tab */
 		parentTabbedPane.addTab("Feature Comparison", null, featureTab, "Feature Comparison tool");
 
@@ -327,41 +252,7 @@ public class GSG extends JFrame {
 	/* Options tab */
 		parentTabbedPane.addTab("Options", null, optionsTab, "Options");
 
-		// local data only option/can java ping for internet access?
-
-		// buttons
-		JButton bulkDownloadButton = bulkDownloadButtonGenerator.createBulkDownloadButton();
-		JButton resetPrefsButton = resetPrefsButtonGenerator.createResetPrefsButton();
-		JButton exitButtonOptions = exitButtonGenerator.createExitButton();
-
-		// layout / add them to the optionsTab
-		optionsTab.setLayout(new GridBagLayout());
-		GridBagConstraints f = new GridBagConstraints();
-		f.anchor = GridBagConstraints.NORTHWEST;
-		f.insets = new Insets(0,0,10,0);
-		f.weightx = 0.5;
 		
-		// line 0
-		f.gridx = 0;
-		f.gridy = 0;
-		optionsTab.add(bulkDownloadButton, f);
-
-		f.gridx = 1;
-		optionsTab.add(whichLociBulk, f);
-
-		f.gridx = 2;
-		optionsTab.add(whatVersionBulk, f);
-		// line 1
-		f.gridx = 0;
-		f.gridy = 1;
-		optionsTab.add(resetPrefsButton, f);
-
-
-		// line 6
-		f.weightx = 0;
-		f.weighty = 0;
-		f.gridy = 6;
-		optionsTab.add(exitButtonOptions, f);
 
 
 	/* Get and set open tab */
@@ -380,7 +271,7 @@ public class GSG extends JFrame {
 
 	}
 
-	public static void main(String args[]) {
+	// public static void main(String args[]) {
 
 		// System.setProperty("apple.laf.useScreenMenuBar","true");
 		// System.setProperty("com.apple.mrj.application.apple.menu.about.name", "GFE Search Generator");
@@ -397,9 +288,9 @@ public class GSG extends JFrame {
 		// 	}
 		// } catch (Exception ex) { System.out.println(ex); }
 		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new GSG().setVisible(true);
+		// java.awt.EventQueue.invokeLater(new Runnable() {
+		// 	public void run() {
+		// 		new GSG().setVisible(true);
 				
 				// assign preference listeners for loci changes
 				// LociPrefsListeners prefsListener = new LociPrefsListeners();
@@ -413,7 +304,7 @@ public class GSG extends JFrame {
 				// 	resultsTextAreaName.append("No internet access available, local data only");
 				// 	resultsTextAreaFeature.append("No internet access available, local data only");
 				// }
-			}
-		});
-	}
+	// 		}
+	// 	});
+	// }
 }

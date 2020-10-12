@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
+package org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel;
 
 // import java.util.Arrays;
 // import java.util.prefs.Preferences;
@@ -6,7 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.utilities.*;
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 
 public class VersionModelBulk extends VersionModel{

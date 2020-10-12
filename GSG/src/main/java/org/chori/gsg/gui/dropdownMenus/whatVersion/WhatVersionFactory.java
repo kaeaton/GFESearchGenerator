@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion;
+package org.chori.gsg.gui.dropdownMenus.whatVersion;
 
 /**
  * The whatVersion dropdown factory.

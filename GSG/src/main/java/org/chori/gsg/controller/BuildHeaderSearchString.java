@@ -7,7 +7,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 public class BuildHeaderSearchString {
 

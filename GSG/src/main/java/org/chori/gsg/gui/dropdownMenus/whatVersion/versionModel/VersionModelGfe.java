@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
+package org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel;
 
 // import com.fasterxml.jackson.core.JsonFactory;
 // import java.io.BufferedReader;
@@ -26,7 +26,7 @@ import javax.swing.JTextArea;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.utilities.*;
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 
 public class VersionModelGfe extends VersionModel {

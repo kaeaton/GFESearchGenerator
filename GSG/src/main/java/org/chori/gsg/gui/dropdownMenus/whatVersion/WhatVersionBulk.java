@@ -1,10 +1,10 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion;
+package org.chori.gsg.gui.dropdownMenus.whatVersion;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
 
 public class WhatVersionBulk extends WhatVersion { 
 

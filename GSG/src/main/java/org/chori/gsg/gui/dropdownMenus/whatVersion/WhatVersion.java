@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion;
+package org.chori.gsg.gui.dropdownMenus.whatVersion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +9,10 @@ import javax.swing.JComboBox;
 // import javax.swing.JPanel;
 
 // import org.chori.gsg.exceptions.*;
-// import org.chori.gsg.view.gfeSearchPanels.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
-import org.chori.gsg.view.*;
+// import org.chori.gsg.gui.gfeTab.gfeSearchPanels.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.GSG;
 
 public abstract class WhatVersion { 
 

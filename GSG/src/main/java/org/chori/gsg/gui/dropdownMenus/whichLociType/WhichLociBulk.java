@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whichLociType;
+package org.chori.gsg.gui.dropdownMenus.whichLociType;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,8 +7,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import org.chori.gsg.exceptions.*;
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
+import org.chori.gsg.gui.optionsTab.OptionsTab;
 
 /**
  * Creates the dropdown to select the set of genes being used, and listener for the dropdown
@@ -65,7 +66,7 @@ public class WhichLociBulk extends WhichLoci {
 	protected void updateLocusAndVersionDropdowns(String lociType) {		
 
 		DefaultComboBoxModel newVersionModel = versionModelBulk.assembleVersionModel(lociType);
-		GSG.whatVersionBulk.setModel(newVersionModel);
+		OptionsTab.whatVersionBulk.setModel(newVersionModel);
 
 		// no locus for bulk download
 	}

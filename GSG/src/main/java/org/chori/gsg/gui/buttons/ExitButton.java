@@ -1,11 +1,11 @@
-package org.chori.gsg.view.buttons;
+package org.chori.gsg.gui.buttons;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 public class ExitButton { 
 

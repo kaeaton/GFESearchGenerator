@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 /**
  * Tests for an active internet connection

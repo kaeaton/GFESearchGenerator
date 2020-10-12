@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatVersion.versionModel;
+package org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel;
 
 /**
  * The Version Model factory. A model is the object used

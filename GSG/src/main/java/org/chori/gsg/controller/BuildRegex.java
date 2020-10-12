@@ -9,8 +9,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 // import org.chori.bsg.model;
-// import org.chori.gsg.view.*;
-import org.chori.gsg.view.tabs.*;
+// import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.gfeTab.*;
 
 
 public class BuildRegex {

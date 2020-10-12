@@ -3,7 +3,7 @@ package org.chori.gsg.exceptions;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.chori.gsg.view.buttons.ResetPrefsButton;
+import org.chori.gsg.gui.optionsTab.ResetPrefsButton;
 
 public class PrefProbException extends Exception{
 

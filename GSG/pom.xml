@@ -82,7 +82,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>org.chori.gsg.view.GSG</mainClass>
+                <mainClass>org.chori.gsg.Main</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>

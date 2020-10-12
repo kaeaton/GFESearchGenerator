@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatLocus.locusModel;
+package org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel;
 
 /**
  * The Locus Model factory. A model is the object used

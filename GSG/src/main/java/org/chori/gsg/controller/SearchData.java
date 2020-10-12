@@ -12,8 +12,8 @@ import javax.swing.JTextArea;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.utilities.*;
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.tabs.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.gfeTab.*;
 
 
 /**

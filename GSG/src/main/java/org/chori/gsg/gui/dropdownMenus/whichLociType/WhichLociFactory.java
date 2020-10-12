@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whichLociType;
+package org.chori.gsg.gui.dropdownMenus.whichLociType;
 
 /**
  * The whichLoci dropdown factory.

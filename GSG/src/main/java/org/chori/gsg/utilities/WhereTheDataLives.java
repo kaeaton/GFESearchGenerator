@@ -6,8 +6,8 @@ import java.util.prefs.Preferences;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.model.downloadData.*;
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;
 
 public class WhereTheDataLives {

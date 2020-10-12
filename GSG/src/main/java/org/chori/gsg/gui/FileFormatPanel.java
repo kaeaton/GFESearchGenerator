@@ -1,4 +1,4 @@
-package org.chori.gsg.view;
+package org.chori.gsg.gui;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,7 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPanel;
 
-// import package org.chori.gsg.view.GSG;
+// import package org.chori.gsg.gui.GSG;
 
 /**
 

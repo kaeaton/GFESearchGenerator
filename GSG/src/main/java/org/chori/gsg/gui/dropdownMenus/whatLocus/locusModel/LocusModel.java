@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatLocus.locusModel;
+package org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel;
 
 import java.io.File;
 import java.nio.file.*;
@@ -12,7 +12,7 @@ import javax.swing.JComboBox;
 
 import org.chori.gsg.model.*;
 import org.chori.gsg.utilities.*;
-import org.chori.gsg.view.*;
+import org.chori.gsg.gui.*;
 
 	
 

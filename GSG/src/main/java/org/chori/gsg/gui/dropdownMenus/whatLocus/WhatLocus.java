@@ -1,4 +1,4 @@
-package org.chori.gsg.view.dropdownMenus.whatLocus;
+package org.chori.gsg.gui.dropdownMenus.whatLocus;
 
 // import java.awt.Component;
 // import java.awt.event.ActionEvent;
@@ -10,9 +10,9 @@ import javax.swing.JComboBox;
 // import javax.swing.JPanel;
 
 // import org.chori.gsg.exceptions.*;
-// import org.chori.gsg.view.gfeSearchPanels.*;
-import org.chori.gsg.view.*;
-import org.chori.gsg.view.dropdownMenus.whatLocus.locusModel.*;
+// import org.chori.gsg.gui.gfeTab.gfeSearchPanels.*;
+import org.chori.gsg.gui.*;
+import org.chori.gsg.gui.dropdownMenus.whatLocus.locusModel.*;
 
 
 
