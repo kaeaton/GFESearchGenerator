@@ -30,7 +30,7 @@ public class Neo4jHttpCall {
 	public Neo4jHttpCall() { }
 	
 	/**
-	 * Opens the call to the Neo4j database housing the GFEs
+	 * Opens the call to the Neo4j database housing the GFEs.
 	 * 
 	 * @param lociType tells the program which url to use to connect to the appropriate database
 	 * @param request The json string submitted to the database to request data
