@@ -1,4 +1,4 @@
-package org.chori.gsg.model.neo4j;
+package org.chori.gsg.data.neo4j;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -8,8 +8,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import org.chori.gsg.model.processJson.*;
-import org.chori.gsg.model.*;
+import org.chori.gsg.data.processJson.*;
+import org.chori.gsg.data.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 

@@ -1,4 +1,4 @@
-package org.chori.gsg.model;
+package org.chori.gsg.data;
 
 public class GeneFeature {
 	public String sequence;

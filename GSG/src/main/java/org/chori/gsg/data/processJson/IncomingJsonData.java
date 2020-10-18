@@ -1,5 +1,5 @@
 
-package org.chori.gsg.model.processJson;
+package org.chori.gsg.data.processJson;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -25,8 +25,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.chori.gsg.controller.*;
-import org.chori.gsg.model.*;
-import org.chori.gsg.model.neo4j.*;
+import org.chori.gsg.data.*;
+import org.chori.gsg.data.neo4j.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 

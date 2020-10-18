@@ -1,4 +1,4 @@
-package org.chori.gsg.model;
+package org.chori.gsg.data;
 
 import java.io.File;
 import java.nio.file.*;
@@ -9,7 +9,7 @@ import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 
-// import org.chori.gsg.model.*;
+// import org.chori.gsg.data.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 

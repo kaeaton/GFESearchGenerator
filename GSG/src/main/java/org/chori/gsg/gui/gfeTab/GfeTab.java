@@ -71,7 +71,7 @@ public class GfeTab extends JPanel {
         // JPanel gfePanel = new JPanel();
         // JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
 
-        whichLociGfe = whichLociFactory.createWhichLoci("GFE").createWhichLociComboBox();
+        whichLociGfe = whichLociFactory.createWhichLoci("GFE"); //.createWhichLociComboBox();
         whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
         whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
     }

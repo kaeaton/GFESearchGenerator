@@ -15,7 +15,7 @@ import org.chori.gsg.gui.dropdownMenus.whatVersion.versionModel.*;
  * 
  */
 
-public abstract class WhichLoci { 
+public abstract class WhichLoci extends JComboBox { 
 
 	protected final String[] loci = {"HLA", "KIR"};
 	protected Preferences prefs = Preferences.userNodeForPackage(GSG.class);

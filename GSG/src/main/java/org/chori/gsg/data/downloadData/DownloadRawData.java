@@ -1,9 +1,9 @@
-package org.chori.gsg.model.downloadData;
+package org.chori.gsg.data.downloadData;
 
 import java.io.InputStream;
 
-import org.chori.gsg.model.neo4j.*;
-import org.chori.gsg.model.processJson.*;
+import org.chori.gsg.data.neo4j.*;
+import org.chori.gsg.data.processJson.*;
 
 public abstract class DownloadRawData {
 

@@ -1,4 +1,4 @@
-package org.chori.gsg.model.downloadData;
+package org.chori.gsg.data.downloadData;
 
 public class DownloadRawDataFactory {
 

@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import javax.swing.JTextArea;
 
-import org.chori.gsg.model.*;
+import org.chori.gsg.data.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 import org.chori.gsg.gui.gfeTab.*;

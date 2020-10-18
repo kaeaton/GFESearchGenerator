@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-import org.chori.gsg.model.submissionRequestFactory.*;
+import org.chori.gsg.data.submissionRequestFactory.*;
 import org.chori.gsg.gui.*;
 import org.chori.gsg.gui.gfeTab.GfeTab;
 

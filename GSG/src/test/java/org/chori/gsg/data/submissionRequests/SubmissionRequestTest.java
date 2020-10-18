@@ -1,8 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
+package org.chori.gsg.data.submissionRequests;
 
-import org.chori.gsg.model.submissionRequestFactory.*;
-import org.chori.gsg.model.submissionRequests.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import org.chori.gsg.data.submissionRequestFactory.*;
+import org.chori.gsg.data.submissionRequests.*;
 
 public class SubmissionRequestTest {
  

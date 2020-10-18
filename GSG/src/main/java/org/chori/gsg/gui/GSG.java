@@ -21,7 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.exceptions.*;
-import org.chori.gsg.model.*;
+import org.chori.gsg.data.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.buttons.*;
 import org.chori.gsg.gui.dropdownMenus.*;

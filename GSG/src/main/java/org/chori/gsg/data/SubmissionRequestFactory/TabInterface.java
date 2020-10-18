@@ -1,9 +1,9 @@
-package org.chori.gsg.model.submissionRequestFactory;
+package org.chori.gsg.data.submissionRequestFactory;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import org.chori.gsg.model.submissionRequests.*;
+import org.chori.gsg.data.submissionRequests.*;
 import org.chori.gsg.gui.GSG;
 import org.chori.gsg.gui.gfeTab.*;
 import org.chori.gsg.gui.nameTab.*;

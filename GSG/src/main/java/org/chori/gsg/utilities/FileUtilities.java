@@ -3,7 +3,7 @@ package org.chori.gsg.utilities;
 import java.io.File;
 import java.nio.file.*;
 
-import org.chori.gsg.model.downloadData.*;
+import org.chori.gsg.data.downloadData.*;
 import org.chori.gsg.utilities.WhereTheDataLives;
 
 

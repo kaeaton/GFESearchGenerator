@@ -24,7 +24,7 @@ import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 // import javax.swing.JTextArea;
 
-import org.chori.gsg.model.*;
+import org.chori.gsg.data.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.GSG;
 

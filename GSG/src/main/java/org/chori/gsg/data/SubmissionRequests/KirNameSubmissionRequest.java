@@ -1,4 +1,4 @@
-package org.chori.gsg.model.submissionRequests;
+package org.chori.gsg.data.submissionRequests;
 
 import java.io.File;
 
@@ -10,8 +10,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.chori.gsg.controller.*;
-import org.chori.gsg.model.*;
-import org.chori.gsg.model.submissionRequestFactory.*;
+import org.chori.gsg.data.*;
+import org.chori.gsg.data.submissionRequestFactory.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 

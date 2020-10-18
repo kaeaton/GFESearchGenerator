@@ -1,12 +1,12 @@
-package org.chori.gsg.model;
+package org.chori.gsg.data;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
-// import org.chori.gsg.model.*;
-import org.chori.gsg.model.neo4j.*;
-import org.chori.gsg.model.processJson.*;
+// import org.chori.gsg.data.*;
+import org.chori.gsg.data.neo4j.*;
+import org.chori.gsg.data.processJson.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.*;
 

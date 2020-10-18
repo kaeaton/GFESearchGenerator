@@ -56,7 +56,7 @@ public class WhichLociGfe extends WhichLoci {
 	}
 
 	protected void addWhichLociListener(JComboBox whichLociDropDown) {
-		whichLociDropDown.addActionListener(new ActionListener() {
+		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				String lociType = whichLociDropDown.getSelectedItem().toString();

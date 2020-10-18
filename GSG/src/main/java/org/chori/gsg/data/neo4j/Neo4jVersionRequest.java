@@ -1,10 +1,10 @@
-package org.chori.gsg.model.neo4j;
+package org.chori.gsg.data.neo4j;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import java.io.IOException;
 
-import org.chori.gsg.model.processJson.*;
-import org.chori.gsg.model.*;
+import org.chori.gsg.data.processJson.*;
+import org.chori.gsg.data.*;
 
 /**
  *

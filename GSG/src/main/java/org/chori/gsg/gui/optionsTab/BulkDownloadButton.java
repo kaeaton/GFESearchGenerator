@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 
-import org.chori.gsg.model.*;
-import org.chori.gsg.model.downloadData.*;
+import org.chori.gsg.data.*;
+import org.chori.gsg.data.downloadData.*;
 import org.chori.gsg.utilities.*;
 import org.chori.gsg.gui.dropdownMenus.*;
 import org.chori.gsg.gui.*;

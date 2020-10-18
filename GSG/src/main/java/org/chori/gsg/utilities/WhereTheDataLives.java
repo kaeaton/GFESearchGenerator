@@ -4,8 +4,8 @@ import java.io.File;
 import java.nio.file.*;
 import java.util.prefs.Preferences;
 
-import org.chori.gsg.model.*;
-import org.chori.gsg.model.downloadData.*;
+import org.chori.gsg.data.*;
+import org.chori.gsg.data.downloadData.*;
 import org.chori.gsg.gui.*;
 import org.chori.gsg.gui.dropdownMenus.*;
 import org.chori.gsg.exceptions.*;

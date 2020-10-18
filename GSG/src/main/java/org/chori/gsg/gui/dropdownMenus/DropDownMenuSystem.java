@@ -18,12 +18,12 @@ public abstract class DropDownMenuSystem {
     public DropDownMenuSystem() { }
 
     /**
-     * Returns the whatVersion JComboBox with Listener.
+     * Returns the whichLoci JComboBox with Listener.
      */
     public abstract JComboBox getWhichLociComboBox();
 
     /**
-     * Returns the whatVersion JComboBox with Listener.
+     * Returns the whatLocus JComboBox with Listener.
      */
     public abstract JComboBox getWhatLocusComboBox();
 

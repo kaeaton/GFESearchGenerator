@@ -1,6 +1,6 @@
-package org.chori.gsg.model.submissionRequestFactory;
+package org.chori.gsg.data.submissionRequestFactory;
 
-import org.chori.gsg.model.submissionRequests.*;
+import org.chori.gsg.data.submissionRequests.*;
 
 public class SubmissionRequestFactory {
 
