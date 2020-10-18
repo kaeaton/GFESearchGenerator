@@ -20,6 +20,14 @@ public class Neo4jGfeDataRequest {
 
 	public Neo4jGfeDataRequest() { }
 
+	/**
+	 * Creates the JSON request for the GFE data in the neo4j database.
+	 * 
+	 * @param lociType The loci to be requested
+	 * @param locus The specific locus to be requested
+	 * @param version The version of the release to be requested
+	 * @return The compiled JSON request string
+	 */
 	public String createNeo4jGfeDataRequest(String lociType, String locus, String version) {
 		String neo4jDataRequest;
 		String jsonNeo4jDataRequest = null;
