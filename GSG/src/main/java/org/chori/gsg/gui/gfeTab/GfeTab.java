@@ -37,14 +37,15 @@ public class GfeTab extends JPanel {
 
     // component generators
     private GfeSearchPanelAssembler gfePanelGenerator = new GfeSearchPanelAssembler();
-    private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
-    private static WhatVersionFactory whatVersionFactory = WhatVersionFactory.getWhatVersionFactoryInstance();
-    private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
+    // private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
+    // private static WhatVersionFactory whatVersionFactory = WhatVersionFactory.getWhatVersionFactoryInstance();
+    // private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
     private static ResetButton resetButtonGenerator = new ResetButton();
     private static FileFormatPanel fileFormatPanelGenerator = new FileFormatPanel();
     private static ExitButton exitButtonGenerator = new ExitButton();
     private static SubmitButton submitButtonGenerator = new SubmitButton();
     // private static ResetPrefsButton resetPrefsButtonGenerator = new ResetPrefsButton();
+
 
     // the JPanel to return
     private JPanel gfeTab = new JPanel();
@@ -61,7 +62,9 @@ public class GfeTab extends JPanel {
     public static JComboBox whatLocusGfe = new JComboBox();
     public static JComboBox whichLociGfe = new JComboBox();
 
-    private static final GfeTab instance = new GfeTab();
+    private static final GfeTab INSTANCE = new GfeTab();
+
+    private static final GfeMenuSystem gfeMenuSystem = GfeMenuSystem.getInstance();
 
     private GfeTab() { 
         // the JPanel to return
@@ -71,7 +74,11 @@ public class GfeTab extends JPanel {
         // JPanel gfePanel = new JPanel();
         // JPanel currentGfePanel = gfePanelGenerator.makeGfePanel("HLA-A");
 
-        whichLociGfe = whichLociFactory.createWhichLoci("GFE"); //.createWhichLociComboBox();
+        // whichLociGfe = whichLociFactory.createWhichLoci("GFE"); //.createWhichLociComboBox();
+        // whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
+        // whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
+
+        whichLociGfe = DropdownMenu.WHICH_LOCI.getComboBox();
         whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
         whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
     }

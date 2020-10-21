@@ -17,21 +17,45 @@ public abstract class DropDownMenuSystem {
 
     public DropDownMenuSystem() { }
 
-    /**
-     * Returns the whichLoci JComboBox with Listener.
-     */
-    public abstract JComboBox getWhichLociComboBox();
+    enum DropdownMenu {
+        WHICH_LOCI("loci") {
+            public JComboBox getComboBox (Tab tab) { return whichLociFactory.createWhichLoci(tab);}},
+        WHAT_LOCUS("locus") {
+            public JComboBox getComboBox (Tab tab) { return whatLocusFactory.createWhatLocus(tab);}},
+        WHAT_VERSION("version") {
+            public JComboBox getComboBox (Tab tab) { return whatVersionFactory.createWhatVersion(tab);}};
 
-    /**
-     * Returns the whatLocus JComboBox with Listener.
-     */
-    public abstract JComboBox getWhatLocusComboBox();
+        private static WhatLocusFactory whatLocusFactory = WhatLocusFactory.getWhatLocusFactoryInstance();
+        private static WhatVersionFactory whatVersionFactory = WhatVersionFactory.getWhatVersionFactoryInstance();
+        private static WhichLociFactory whichLociFactory = WhichLociFactory.getWhichLociFactoryInstance();
 
-    /**
-     * Returns the whatVersion JComboBox with Listener.
-     */
-    public abstract JComboBox getWhatVersionComboBox();
+        // combo boxes for locus and version selection
+        // private JComboBox whichLociGfe = whichLociFactory.createWhichLoci("GFE"); //.createWhichLociComboBox();
+        // private JComboBox whatVersionGfe = whatVersionFactory.createWhatVersion("GFE").createWhatVersionComboBox();
+        // private JComboBox whatLocusGfe = whatLocusFactory.createWhatLocus("GFE").createWhatLocusComboBox(whatVersionGfe.getSelectedItem().toString(), prefs.get("GSG_GFE_LOCI_STRING", "HLA"));
 
-    // protected abstract void addWhichLociListener(JComboBox whichLociDropDown);
-    // protected abstract void updateLocusAndVersionDropdowns(String lociType);
+
+        private JComboBox comboBox;
+
+        private DropdownMenu(JComboBox jComboBox) {
+            this.comboBox = jComboBox;
+        }
+
+        public JComboBox getComboBox() {
+            return comboBox;
+        }
+    }
+
+    enum Tab {
+        GFE(GfeMenuSystem.getInstance()),
+        NAME(GfeMenuSystem.getInstance());
+        // IDENTITY(GfeMenuSystem.class),
+        // BULK(GfeMenuSystem.class);
+
+        private final DropDownMenuSystem dropdownMenuSystem;
+
+        private Tab(DropDownMenuSystem ddms) {
+            this.dropdownMenuSystem = ddms;
+        }
+    }
 }

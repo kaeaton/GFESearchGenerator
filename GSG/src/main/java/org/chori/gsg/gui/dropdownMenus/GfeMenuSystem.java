@@ -22,18 +22,7 @@ public class GfeMenuSystem extends DropDownMenuSystem {
 		return INSTANCE;
 	}
 
-	@Override
-	public JComboBox getWhichLociComboBox() { 
-		return null;
-	}
 
-    @Override
-    public JComboBox getWhatLocusComboBox() {
-		return null;
-    }
+	
 
-    @Override
-    public JComboBox getWhatVersionComboBox() {
-		return null;
-    }
 }
