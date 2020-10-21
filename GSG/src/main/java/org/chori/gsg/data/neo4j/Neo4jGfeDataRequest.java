@@ -26,7 +26,7 @@ public class Neo4jGfeDataRequest {
 	 * @param lociType The loci to be requested
 	 * @param locus The specific locus to be requested
 	 * @param version The version of the release to be requested
-	 * @return The compiled JSON request string
+	 * @return The compiled JSON data request string
 	 */
 	public String createNeo4jGfeDataRequest(String lociType, String locus, String version) {
 		String neo4jDataRequest;

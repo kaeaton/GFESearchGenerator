@@ -45,7 +45,7 @@ public class VersionsAvailableOnline {
 		try {
 			// create the request and send it
 			InputStream incomingVersionData = neo4jHttpCall
-				.makeCall(lociType, neo4jVersionRequest.formNeo4jVersionRequest(lociType));
+				.makeCall(lociType, neo4jVersionRequest.createNeo4jVersionRequest(lociType));
 
 			// recieve the version data and parse it
 			downloadedVersions = incomingJsonData.parseVersion(incomingVersionData, lociType);
